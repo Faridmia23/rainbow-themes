@@ -1,0 +1,185 @@
+/*---------------------------
+    Error Styles Area  
+-----------------------------*/
+.error-inner {
+    text-align: center;
+    h1 {
+        font-size: 200px;
+        line-height: 1;
+        color: var(--color-primary);
+        font-weight: var(--p-bold);
+        @media #{$sm-layout} {
+            font-size: 100px;
+            line-height: 1;
+        }
+    }
+
+    .title {
+        line-height: 45px;
+        font-weight: var(--p-bold);
+    }
+
+    .description {
+        font-size: var(--font-size-b2);
+        line-height: 28px;
+        color: var(--color-body);
+        font-weight: var(--p-regular);
+        margin-bottom: 30px;
+    }
+    
+    .blog-search {
+        display: inline-block;
+        input {
+            min-width: 500px;
+        }
+    }
+
+    .view-more-button {
+        margin-top: 30px;
+    }
+}
+
+.blog-search, .widget_search {
+    position: relative;
+}
+
+.blog-search .search-button, 
+.blog-search .wp-block-search__button, 
+.widget_search .search-button, 
+.widget_search .wp-block-search__button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-primary);
+    height: 47px;
+    padding: 0 20px;
+    border-radius: 3px;
+    text-align: center;
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    border-width: 2px;
+    transition: 0.3s;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.blog-search input, 
+.blog-search .wp-block-search__input, 
+.widget_search input, 
+.widget_search .wp-block-search__input {
+    height: 60px;
+    padding: 0 20px;
+    color: var(--color-body);
+    padding-right: 112px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+}
+
+
+.rbt-single-widget .title,  
+.rbt-single-widget .wp-block-search__label, 
+.rbt-single-widget h2 {
+    color: #181818 !important;
+}
+
+.blog-search .wp-block-search__inside-wrapper, 
+.widget_search .wp-block-search__inside-wrapper {
+    position: relative;
+    margin-top: 20px;
+}
+
+.wp-block-search .wp-block-search__input {
+    border: 1px solid var(--color-border);
+    background: transparent;
+    outline: none;
+    color: var(--color-body);
+}
+
+.wp-block-search .wp-block-search__button {
+    padding: 0 14px;
+    border-radius: 4px;
+    color: var(--color-white);
+    border-color: transparent;
+}
+
+.rbt-single-widget {
+    border-radius: 4px;
+    padding: 20px 20px;
+    border: 1px solid var(--color-border);
+}
+.rbt-single-widget .wp-block-search__input {
+    width: 100%!important;
+}
+
+.rbt-single-widget .title, 
+.rbt-single-widget .wp-block-search__label, 
+.rbt-single-widget h2 {
+    line-height: 40px;
+    position: relative;
+    padding-bottom: 6px;
+    font-size: 30px;
+    font-weight: 700;
+    display: block;
+    width: auto;
+}
+
+.wp-block-latest-posts__list ,
+.wp-block-archives-list,
+.wp-block-group__inner-container,
+.wp-block-categories-list  {
+    padding: 0!important;
+    margin: 0!important;
+}
+
+.wp-block-latest-comments:last-child {
+    margin-bottom: 0;
+}
+
+.search-results .page-list ,
+.archive .page-list {
+    justify-content: center;
+}
+
+.search-results  .breadcrumb,
+.archive .breadcrumb {
+    padding-bottom: 120px;
+}
+
+.page-numbers {
+    color: var(--color-dark-1);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b2);
+    font-weight: var(--f-bold);
+    line-height: 125%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 41px;
+    width: 41px;
+    border: 1px solid var(--color-grayscale-10);
+    border-radius: 5px 4px;
+    transition: var(--transition-1);
+}
+
+.page-numbers.current, .page-numbers:hover {
+    border-color: var(--color-red-1);
+    background: var(--color-red-1);
+    color: var(--color-white);
+}
+
+
+.rainbowit-blog-area .rbt-single-widget:last-child {
+    margin-bottom: 0!important;
+}
+
+.search-results .blog-search-page {
+    margin-top: 120px;
+    margin-bottom: 120px;
+}
+
+.rbt-single-widget .wp-block-latest-comments {
+    padding-left: 0;
+}

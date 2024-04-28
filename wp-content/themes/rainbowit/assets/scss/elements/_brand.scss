@@ -1,0 +1,90 @@
+.rbt-brand-group {
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -15px;
+        top: 0;
+        height: 100%;
+        width: 200px;
+        background: linear-gradient(90deg, #FFF 0%, rgba(255, 255, 255, 0.20) 100%);
+        z-index: 2;
+
+        @media #{$extra-device} {
+            content: none;
+        }
+
+        @media #{$laptop-device} {
+            content: none;
+        }
+
+        @media #{$lg-layout} {
+            content: none;
+        }
+
+        @media #{$sm-layout} {
+            width: 75px;
+        }
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: -15px;
+        top: 0;
+        height: 100%;
+        width: 200px;
+        background: linear-gradient(270deg, #FFF 0%, rgba(255, 255, 255, 0.20) 100%);
+        z-index: 2;
+
+        @media #{$extra-device} {
+            content: none;
+        }
+
+        @media #{$laptop-device} {
+            content: none;
+        }
+
+        @media #{$lg-layout} {
+            content: none;
+        }
+
+        @media #{$sm-layout} {
+            width: 75px;
+        }
+    }
+
+    @media #{$sm-layout} {
+        margin-top: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+.brand-wrapper {
+    position: relative;
+
+    @media #{$sm-layout} {
+        padding-top: 0px;
+        padding-bottom: 40px;
+    }
+}
+
+.rbt-brand-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.brand-img {
+    @media #{$sm-layout} {
+        max-height: 36px;
+        width: auto;
+    }
+}

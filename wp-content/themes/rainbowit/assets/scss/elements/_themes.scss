@@ -1,0 +1,28 @@
+// .dec-top-space {
+//     position: relative;
+//     z-index: 2;
+
+//     @media #{$lg-layout} {
+//         margin-top: -85px;
+//     }
+
+//     @media #{$md-layout} {
+//         margin-top: -85px;
+//     }
+
+//     @media #{$sm-layout} {
+//         margin-top: -85px;
+//     }
+// }
+
+.single-item {
+    &:nth-last-child(-n+2) {
+        margin-bottom: 0px !important;
+    }
+
+    @media #{$sm-layout} {
+        &:nth-last-child(2) {
+            margin-bottom: 24px !important;
+        }
+    }
+}

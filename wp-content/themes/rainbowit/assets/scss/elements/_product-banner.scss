@@ -1,0 +1,106 @@
+.rbt-product-breadcrumb {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+
+    @media #{$small-mobile} {
+        gap: 12px;
+        align-items: start;
+    }
+}
+
+.product-thumbnail {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-sm);
+
+    @media #{$sm-layout} {
+        height: 56px;
+        width: 56px;
+    }
+}
+
+.rbt-product-name {
+    color: var(--color-dark-1);
+    font-family: var(--font-primary);
+    font-size: 29px;
+    font-weight: var(--f-extra-bold);
+    line-height: 117.241%;
+    margin: 0;
+
+    @media #{$sm-layout} {
+        font-size: 20px;
+    }
+}
+
+.rbt-product-for {
+    color: var(--color-dark-1);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b1);
+    font-weight: var(--f-medium);
+    line-height: 144.444%;
+    margin-left: 8px;
+}
+
+.rbt-preview-card {
+    padding: 0 8px 8px 8px;
+    background: var(--color-white);
+    border-radius: var(--radius-sm);
+
+    .card-top {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        height: 32px;
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--color-grayscale-7);
+            border-radius: var(--radius-full);
+        }
+    }
+}
+
+.rbt-preview-product {
+    position: relative;
+
+    &:hover {
+        .rbt-preview-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.product-preview-img {
+    width: 100%;
+    height: auto;
+}
+
+.rbt-preview-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: var(--color-black-opacity);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preview-btn {
+    display: flex;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b1);
+    font-weight: var(--f-bold);
+    line-height: 133.333%;
+}

@@ -1,0 +1,55 @@
+.rbt-theme-gallery {
+    background: url(../images/themes/theme-gallery-dot.png), var(--gradient-4);
+    position: relative;
+    padding-top: 236px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, #10224f1f 38.85%, #060E23 100%);
+        height: 60%;
+        width: 100%;
+    }
+}
+
+.rbt-masonary-wrapper {
+    position: relative;
+}
+
+.rbt-theme-masonary {
+    margin-top: -265px;
+}
+
+.rbt-masonary-item {
+
+    &:nth-child(1),
+    &:nth-child(3) {
+        margin-top: 32px;
+    }
+}
+
+.theme-gallery-img {
+    width: 100%;
+}
+
+.rbt-icon {
+    width: 56px;
+    height: 56px;
+
+    @media #{$sm-layout} {
+        width: 40px;
+        height: 40px;
+    }
+
+    @media #{$md-layout} {
+        width: 40px;
+        height: 40px;
+    }
+
+    @media #{$large-mobile} {
+        width: 32px;
+        height: 32px;
+    }
+}

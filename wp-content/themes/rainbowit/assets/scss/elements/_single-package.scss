@@ -1,0 +1,11 @@
+.product-review {
+    display: grid;
+    gap: 24px;
+}
+
+.rbt-sidebar-2 {
+    &.sticky-top {
+        top: 94px;
+        z-index: 333;
+    }
+}

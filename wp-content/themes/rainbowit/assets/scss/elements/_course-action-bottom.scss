@@ -1,0 +1,26 @@
+.rbt-course-action-bottom {
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-10);
+    position: fixed;
+    bottom: -200px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    overflow: hidden;
+    padding: 12px 0;
+    transition: var(--transition-1);
+
+    &.rbt-course-action-active {
+        bottom: 0;
+    }
+
+    .product-action-detail {
+        display: flex;
+        gap: 8px;
+    }
+
+    .rbt-cart {
+        padding: 0;
+        box-shadow: none;
+    }
+}

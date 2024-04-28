@@ -1,0 +1,51 @@
+/**************************************
+    Default Styles
+***************************************/
+@import 'default/variables';
+@import 'default/mixins';
+@import 'default/reset';
+@import 'default/typography';
+@import 'default/extend';
+@import 'default/shortcode';
+@import 'default/spacing';
+@import 'default/forms';
+
+/**************************************
+    Elements Styles
+***************************************/
+@import 'elements/header';
+@import 'elements/mobile-menu';
+@import 'elements/brand';
+@import 'elements/counter';
+@import 'elements/themes';
+@import 'elements/button';
+@import 'elements/banner';
+@import 'elements/banner-common';
+@import 'elements/card';
+@import 'elements/_section-title';
+@import 'elements/section-common';
+@import 'elements/top-items';
+@import 'elements/swiper-style';
+@import 'elements/theme-gallery';
+@import 'elements/reviews';
+@import 'elements/tabs';
+@import 'elements/team';
+@import 'elements/breadcrumb';
+@import 'elements/all-products';
+@import 'elements/product-banner';
+@import 'elements/product-info';
+@import 'elements/list-style';
+@import 'elements/modal';
+@import 'elements/form-style';
+@import 'elements/sidebar';
+@import 'elements/search-field';
+@import 'elements/single-package';
+@import 'elements/custom-services';
+@import 'elements/onepage-nav';
+@import 'elements/technologies';
+@import 'elements/faq';
+@import 'elements/single-blog';
+@import 'elements/about';
+@import 'elements/course-action-bottom';
+@import 'elements/back-top';
+@import 'elements/footer';

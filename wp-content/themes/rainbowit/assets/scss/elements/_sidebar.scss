@@ -1,0 +1,49 @@
+.rbt-sidebar-card {
+    padding: 40px 24px;
+    background: var(--color-white-6);
+    border-radius: var(--radius-lg);
+
+    @media #{$md-layout} {
+        flex-basis: 100%;
+    }
+
+    .title {
+        color: var(--color-dark-1);
+        font-family: var(--font-primary);
+        font-size: var(--h6);
+        font-weight: var(--f-extra-bold);
+        line-height: 140%;
+        margin-bottom: 16px;
+    }
+
+    .description {
+        color: #5A6F7F;
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-b2);
+        font-weight: var(--f-regular);
+        line-height: 150%;
+        margin-bottom: 24px;
+    }
+
+    .rbt-list {
+        a {
+            color: #5A6F7F;
+            font-size: var(--font-size-b1);
+        }
+    }
+
+}
+
+.side-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 287px;
+}
+
+.card-bg-shape {
+    background: url(../images/card-bg-shape.png), var(--color-white-6);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100% auto;
+}

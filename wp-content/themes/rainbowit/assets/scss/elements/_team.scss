@@ -1,0 +1,104 @@
+.rbt-team-wrapper {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: end;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    @media #{$lg-layout} {
+        gap: 16px;
+    }
+
+    @media #{$md-layout} {
+        gap: 16px;
+    }
+
+    @media #{$sm-layout} {
+        gap: 16px;
+        justify-content: center;
+    }
+}
+
+.rbt-team-member {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 120px;
+    max-height: 120px;
+    margin: 0;
+
+    @media #{$laptop-device} {
+        width: 116px;
+        max-height: 116px;
+    }
+
+    @media #{$lg-layout} {
+        width: 104px;
+        max-height: 104px;
+    }
+
+    @media #{$md-layout} {
+        width: 74px;
+        max-height: 74px;
+    }
+
+    @media #{$large-mobile} {
+        width: 100px;
+        max-height: 100px;
+    }
+
+    @media #{$small-mobile} {
+        width: 60px;
+        max-height: 60px;
+    }
+
+    img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.hide-lg-layout {
+    @media #{$lg-layout} {
+        display: none !important;
+    }
+}
+
+.hide-md-layout {
+    @media #{$md-layout} {
+        display: none !important;
+    }
+}
+
+.hide-sm-layout {
+    @media #{$sm-layout} {
+        display: none !important;
+    }
+}
+
+
+.impower-icon {
+    @media #{$lg-layout} {
+        display: none;
+    }
+
+    @media #{$md-layout} {
+        display: none;
+    }
+
+    @media #{$sm-layout} {
+        display: none;
+    }
+}
+
+.rbt-team-wrapper .sub-animate {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+}

@@ -1,0 +1,152 @@
+.backdrop {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(7.5px);
+    padding-right: 0px !important;
+}
+
+.rbt-modal-wrapper {
+    padding: 32px 40px;
+
+    @media #{$sm-layout} {
+        padding: 24px;
+    }
+}
+
+.modal-content {
+    width: 745px;
+    border-radius: var(--radius-lg);
+
+    &.w--fit {
+        width: fit-content;
+        max-width: 100%;
+    }
+}
+
+.modal-dialog {
+    max-width: fit-content;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -24px;
+    right: -24px;
+    display: inline-block;
+    background: var(--color-white);
+    border: 1px solid #E3E0F5;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+
+    @media #{$md-layout} {
+        top: 0;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: none;
+        font-size: var(--h6);
+    }
+
+    @media #{$sm-layout} {
+        top: 0;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: none;
+        font-size: var(--h6);
+    }
+}
+
+.rbt-modal-title {
+    color: var(--color-dark-1);
+    font-family: var(--font-primary);
+    font-size: var(--h5);
+    font-weight: var(--f-bold);
+    line-height: 141.667%;
+    border-bottom: 1px solid #E3E0F5;
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+
+    &.inner-title {
+        font-size: var(--font-size-b1);
+        line-height: 140%;
+        border: none;
+        margin-bottom: 0;
+    }
+}
+
+.rbt-product-changelog {
+    margin-bottom: 40px;
+}
+
+.changelog-info {
+    padding: 12px 16px;
+
+    @media #{$sm-layout} {
+        padding: 8px;
+    }
+
+    &:last-child {
+        border-radius: 0 0 8px 8px;
+    }
+
+    &.filled {
+        background: var(--color-grayscale-11);
+    }
+
+    .info-text {
+        color: var(--color-blue-2);
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-b2);
+        font-weight: var(--f-medium);
+        line-height: 150%;
+
+        @media #{$sm-layout} {
+            font-size: var(--font-size-b3);
+        }
+    }
+}
+
+.rbt-badge {
+    padding: 3px 6px;
+    border-radius: var(--radius-xxl);
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b4);
+    font-weight: var(--f-bold);
+    line-height: 100%;
+    letter-spacing: 0.6px;
+    background: var(--color-secondary);
+
+    @media #{$sm-layout} {
+        font-size: var(--font-size-b5);
+    }
+
+    &.badge-bg-2 {
+        background: var(--color-gray);
+    }
+
+    &.badge-bg-3 {
+        background: var(--color-success);
+    }
+
+    &.badge-bg-4 {
+        background: var(--color-primary);
+    }
+
+    &.badge-bg-5 {
+        background: var(--color-warning);
+    }
+}
+
+.inspired-badge {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+
+    @media #{$sm-layout} {
+        top: 8px;
+        right: 8px;
+    }
+}

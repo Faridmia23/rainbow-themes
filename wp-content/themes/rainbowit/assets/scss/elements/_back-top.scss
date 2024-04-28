@@ -1,0 +1,108 @@
+.rbt-progress-parent {
+
+    &.back-to-top-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: fit-content;
+        width: fit-content;
+        padding: 16px 0;
+        position: fixed;
+        right: 16px;
+        top: 40vh;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        cursor: pointer;
+        transform: translateY(15px);
+        transition: var(--transition-1);
+
+        @media #{$sm-layout} {
+            padding: 6px 12px;
+            right: 24px;
+            top: 85vh;
+
+            &::after {
+                position: absolute;
+                font-family: "Font Awesome 6 Pro" !important;
+                content: "\f062";
+                text-align: center;
+                line-height: 40px;
+                font-size: var(--font-size-b2);
+                color: var(--color-white);
+                height: 40px;
+                width: 40px;
+                cursor: pointer;
+                display: block;
+                z-index: 2;
+                -webkit-transition: all 200ms linear;
+                transition: all 200ms linear;
+                background: var(--gradient-primary);
+                border-radius: var(--radius-full);
+            }
+        }
+    }
+
+    svg {
+        path {
+            fill: none;
+        }
+
+        &.rbt-back-circle {
+            path {
+                stroke: var(--color-primary);
+                stroke-width: 4;
+                box-sizing: border-box;
+                -webkit-transition: all 200ms linear;
+                transition: all 200ms linear;
+                opacity: 0.6;
+            }
+        }
+    }
+
+    &.rbt-backto-top-active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0px);
+    }
+
+    .back-top-icon {
+        color: var(--color-dark-1);
+    }
+}
+
+.back-to-top-text {
+    color: var(--color-dark-1);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b3);
+    font-weight: var(--f-semi-bold);
+    line-height: 14px;
+    transform: rotate(-90deg);
+    margin-top: 40px;
+    margin-bottom: 48px;
+    background: #fff;
+    padding: 4px 9px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-5);
+}
+
+
+.back-top-bar {
+    position: relative;
+
+    svg {
+        position: relative;
+        z-index: 22;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 92%;
+        background: var(--color-border);
+    }
+}

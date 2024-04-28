@@ -1,0 +1,101 @@
+.rbt-section-wrapper {
+    &.sticky-top {
+        top: 64px;
+        background: var(--color-white);
+        z-index: 99;
+        padding: 10px 0 0px 0;
+
+        @media #{$laptop-device} {
+            top: 66px;
+        }
+    }
+}
+
+.rbt-onepage-nav {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    margin: 0;
+    padding: 2px 0 12px;
+    transition: var(--transition-1);
+
+    li {
+        margin: 0;
+    }
+
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
+
+    @media #{$md-layout} {
+        justify-content: start;
+    }
+
+    @media #{$sm-layout} {
+        justify-content: start;
+    }
+
+    a {
+        display: inline-block;
+        padding: 6px 18px;
+        border-radius: 50px;
+        color: var(--color-dark-1);
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-b2);
+        font-weight: var(--f-medium);
+        line-height: 162.5%;
+        background: transparent;
+        white-space: nowrap;
+        transition: var(--transition-1);
+
+        &::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: var(--gradient-primary);
+            z-index: -1;
+            opacity: 0;
+            border-radius: 50px;
+            transition: var(--transition-1);
+        }
+
+        &:hover {
+            color: var(--color-white);
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            transition: var(--transition-1);
+
+            &::after {
+                opacity: 1;
+            }
+        }
+    }
+
+    .current {
+        // background: var(--gradient-primary);
+        // border-radius: var(--radius-50);
+
+        a {
+            color: var(--color-white);
+            background: var(--color-primary);
+        }
+    }
+}
+
+.rbt-onepagenav {
+    .sidebar-title {
+        margin-top: 24px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .list-style-type {
+        padding: 0 12px 24px 32px;
+        margin-right: 16px;
+    }
+}

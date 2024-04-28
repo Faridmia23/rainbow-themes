@@ -228,3 +228,9 @@ a.rbt-btn.rbt-btn-cart.rbt-btn-sm.hover-effect-2.btn-border-secondary.button.add
     background: var(--color-secondary);
     transition: var(--transition-1);
 }
+
+.product-custom-service-tab .rbt-tab-item .card-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

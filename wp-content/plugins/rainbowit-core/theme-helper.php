@@ -571,6 +571,7 @@ add_filter( 'wpcf7_autop_or_not', '__return_false' );
 function rainbowit_core_setup() {
 
     add_image_size('rainbowit-product-grid', 420, 214, true);
+    add_image_size('rainbowit-product-order-grid', 324, 200, true);
 
 }
 

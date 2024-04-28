@@ -196,3 +196,35 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
     opacity: .5;
     display: inline-block;
 }
+
+.rbt-swiper-corousel-wrapper .swiper-wrapper .rbt-card img {
+    width: 100%;
+}
+
+
+.rbt-card-btn .add_to_cart_button  i.fa-check, 
+a.button.add_to_cart_button.ajax_add_to_cart.added .fa-cart-shopping,
+a.button.rbt-btn-cart.product_type_external i.fa-check {
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+}
+
+a.button.product_type_simple.add_to_cart_button.ajax_add_to_cart.added {
+    display: flex !important;
+    position: relative;
+}
+
+.rbt-card-btn .add_to_cart_button.added  i.fa-check {
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+}
+
+.added_to_cart.wc-forward {
+    display: none;
+}
+a.rbt-btn.rbt-btn-cart.rbt-btn-sm.hover-effect-2.btn-border-secondary.button.add_to_cart_button.ajax_add_to_cart.added:hover {
+    background: var(--color-secondary);
+    transition: var(--transition-1);
+}

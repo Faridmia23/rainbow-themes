@@ -3065,3 +3065,48 @@ Stack trace:
 #25 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
 #26 {main}
   thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\formatting.php on line 4494
+[28-Apr-2024 08:46:58 UTC] PHP Warning:  exif_read_data(vnech-tee-green-1.jpg): Incorrect APP1 Exif Identifier Code in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\image.php on line 912
+[28-Apr-2024 08:46:58 UTC] PHP Warning:  exif_read_data(vnech-tee-blue-1.jpg): Incorrect APP1 Exif Identifier Code in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\image.php on line 912
+[28-Apr-2024 08:46:59 UTC] PHP Warning:  exif_read_data(hoodie-blue-1.jpg): Incorrect APP1 Exif Identifier Code in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\image.php on line 912
+[28-Apr-2024 08:47:00 UTC] PHP Warning:  exif_read_data(hoodie-green-1.jpg): Incorrect APP1 Exif Identifier Code in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\image.php on line 912
+[28-Apr-2024 08:47:04 UTC] PHP Warning:  exif_read_data(single-1.jpg): Incorrect APP1 Exif Identifier Code in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\image.php on line 912
+[28-Apr-2024 10:08:24 UTC] PHP Warning:  include(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:08:24 UTC] PHP Warning:  include(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:09:54 UTC] PHP Warning:  include(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:09:54 UTC] PHP Warning:  include(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:11:12 UTC] PHP Warning:  include(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:11:12 UTC] PHP Warning:  include(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:15:19 UTC] PHP Warning:  include(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:15:19 UTC] PHP Warning:  include(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include/templates/single-product/add-to-cart/servic-product.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php on line 345
+[28-Apr-2024 10:39:33 UTC] PHP Warning:  Undefined variable $product in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 22
+[28-Apr-2024 10:39:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function is_type() on null in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php:22
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-template-functions.php(1670): wc_get_template('single-product/...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): woocommerce_template_single_price('')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\templates\content-single-product.php(60): do_action('woocommerce_sin...')
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template.php(812): require('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\Users\\HP\\Loc...', false)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\HP\\Loc...')
+#10 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(19): require_once('C:\\Users\\HP\\Loc...')
+#11 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#12 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 22
+[28-Apr-2024 10:41:33 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 39
+[28-Apr-2024 10:41:33 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 39
+[28-Apr-2024 10:43:10 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 43
+[28-Apr-2024 10:43:10 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 43
+[28-Apr-2024 10:43:36 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 47
+[28-Apr-2024 10:43:36 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 47
+[28-Apr-2024 10:44:15 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:44:15 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:44:15 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:45:04 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:45:04 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:45:04 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:46:22 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:46:22 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34
+[28-Apr-2024 10:46:22 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\single-product\price.php on line 34

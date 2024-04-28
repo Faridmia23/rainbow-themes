@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
-$btn_icon = '<span><i class="fa-regular fa-cart-shopping"></i></span>';
+$btn_icon = '<span><i class="fa-regular fa-cart-shopping"></i><i class="fa-solid fa-check"></i></span>';
 echo apply_filters(
 	'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
 	sprintf(

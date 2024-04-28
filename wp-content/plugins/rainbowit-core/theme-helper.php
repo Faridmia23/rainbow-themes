@@ -567,3 +567,11 @@ if (!function_exists('rbt_slugify')){
 
 // Use the following code to get ride of autop (automatic <p> tag) and line breaking tag (<br> tag).
 add_filter( 'wpcf7_autop_or_not', '__return_false' );
+
+function rainbowit_core_setup() {
+
+    add_image_size('rainbowit-product-grid', 420, 214, true);
+
+}
+
+add_action('after_setup_theme', 'rainbowit_core_setup');

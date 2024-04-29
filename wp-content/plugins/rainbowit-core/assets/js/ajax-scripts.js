@@ -17,28 +17,31 @@
             /**
              * Change product content value
              */
-
-            // Check if Gutenberg editor is active
-            if (typeof wp !== 'undefined' && wp.data && wp.data.select('core/select')) {
-               console.log('Please enable classic widget');
-            } else if (typeof tinymce !== 'undefined' && tinymce.activeEditor) {
-               // Fallback to retrieving description from HTML markup
-               var iframe = $('#postdivrich.woocommerce-product-description #content_ifr');
-                // Check if the iframe exists
-                if (iframe.length) {
-                    // Get the document object of the iframe
-                    var iframeDoc = iframe[0].contentWindow.document;
-
-                    // Check if the document object exists
-                    if (iframeDoc) {
-                        // Set the new content
-                        $(iframeDoc).find('body').html(product_desc_html);
+            if( $('div#wp-content-wrap').hasClass('tmce-active') ) {
+                 // Check if Gutenberg editor is active
+                if (typeof wp !== 'undefined' && wp.data && wp.data.select('core/select')) {
+                    console.log('Please enable classic widget');
+                } else if (typeof tinymce !== 'undefined' && tinymce.activeEditor) {
+                    // Fallback to retrieving description from HTML markup
+                    var iframe = $('#postdivrich.woocommerce-product-description #content_ifr');
+                    // Check if the iframe exists
+                    if (iframe.length) {
+                        // Get the document object of the iframe
+                        var iframeDoc = iframe[0].contentWindow.document;
+    
+                        // Check if the document object exists
+                        if (iframeDoc) {
+                            // Set the new content
+                            $(iframeDoc).find('body').html(product_desc_html);
+                        } else {
+                            console.error('Unable to access iframe document');
+                        }
                     } else {
-                        console.error('Unable to access iframe document');
+                        console.error('TinyMCE iframe not found');
                     }
-                } else {
-                    console.error('TinyMCE iframe not found');
                 }
+            } else {
+                $('div#wp-content-wrap textarea').text(product_desc_html);
             }
 
             /**
@@ -68,7 +71,7 @@
                 }
             }
             
-        } )
+        } );
         $(document).on("click", ".upload_image_button", function (e) {
            e.preventDefault();
            var $button = $(this);
@@ -97,5 +100,31 @@
            file_frame.open();
         });
      });
+
+     $('.ajax-order-now-product').on('click', function() {
+        const productId = $(this).data('product_id');
+        const redirect = $(this).data('redirect_url');
+        $.ajax({
+            type: 'post',
+            url: rainbowit_portfolio_ajax.ajax_url,
+            data: {
+                action: 'rbt_ajax_product_order_now',
+                productId: productId,
+                orderNonce: rainbowit_portfolio_ajax.ajax_nonce
+            },
+            beforeSend: () => {
+
+            },
+            success: (response) => {
+                // Redirect to the cart page
+               window.location.href = redirect;
+            },
+            complete: () => {
+            },
+            error: () => {
+
+            }
+        })
+    });
 
 }(jQuery));

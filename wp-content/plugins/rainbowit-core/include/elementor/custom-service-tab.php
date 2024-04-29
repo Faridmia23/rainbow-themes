@@ -35,52 +35,15 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
 
     public function category_dropdown()
     {
-        $args = array(
-            'post_type'             => 'product',
-            'post_status'           => 'publish',
-            'ignore_sticky_posts'   => 1,
-            'posts_per_page'        => -1,
-            'tax_query'             => array(
-                'relation' => 'AND', // Add this line to make sure both tax queries are applied
-                array(
-                    'taxonomy'      => 'product_visibility',
-                    'field'         => 'slug',
-                    'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
-                    'operator'      => 'NOT IN'
-                ),
-                array(
-                    'taxonomy'      => 'product_type',
-                    'field'         => 'slug',
-                    'terms'         => 'service_product',
-                    'operator'      => 'IN'
-                )
-            )
-        );
-    
+        $terms  = get_terms(array('taxonomy' => 'product_cat', 'fields' => 'id=>name'));
+        $category_dropdown = array('0' => esc_html__('Select Categories', 'rainbow-elements'));
 
-        $products_query = new \WP_Query($args);
-        $termsList[0] = 'Select Category';
-        while ( $products_query->have_posts() ) {
-            global $post;
-            $products_query->the_post();
-            $terms = get_the_terms ( $post->ID, 'product_cat' );
-
-            if ($terms && !is_wp_error($terms)) {
-                
-                foreach ($terms as $category) {
-                    if( isset($category->slug) ) {
-                        $termsList[$category->term_id] = $category->slug;
-                    }
-                }
-            } 
-
+        foreach ($terms as $id => $name) {
+            $category_dropdown[$id] = $name;
         }
-        // reset original post data
-        wp_reset_postdata();
-        return $termsList;
- 
-    }
 
+        return $category_dropdown;
+    }
 
     protected function register_controls()
     {
@@ -152,6 +115,8 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
             return;
         }
 
+        add_filter ('add_to_cart_redirect', [ $this, 'redirect_to_checkout' ] );
+
 ?>
         <div class="container mt--80 product-custom-service-tab">
             <div class="rbt-section-title text-center" data-sal="slide-up" data-sal-duration="400">
@@ -189,7 +154,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                 $active = 'active';
                             }
                     ?>
-                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $categoryName->name ) ); ?>"><?php echo esc_html( $categoryName->name ); ?> </li>
+                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $categoryName->slug ) ); ?>"><?php echo esc_html( $categoryName->name ); ?> </li>
                     <?php
                             $i++;
                         }
@@ -221,12 +186,6 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                             'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
                             'operator'      => 'NOT IN'
                         ),
-                        array(
-                            'taxonomy'      => 'product_type',
-                            'field'         => 'slug',
-                            'terms'         => 'service_product',
-                            'operator'      => 'IN'
-                        )
                     )
                 );
 
@@ -235,8 +194,9 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                 if ( $products_query->have_posts() ) {
                     while ( $products_query->have_posts() ) {
                         global $post;
+                        global $product;
                         $products_query->the_post();
-                        $product_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                        $product_img_url = get_the_post_thumbnail_url(get_the_ID(), '');
                         $terms = get_the_terms ( $post->ID, 'product_cat' );
 
                         if ( $terms && !is_wp_error( $terms )) {
@@ -245,7 +205,6 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                 if( isset($category->slug) ) {
                                     $termsList[] = $category->slug;
                                 }
-                               
                             }
                             $termsAssignedCat = join(" ", $termsList);
                         } 
@@ -253,23 +212,17 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                             $termsAssignedCat = '';
                         }
 
-                        $service_order_btn_title        = get_post_meta( $post->ID, '_service_order_btn_title', true );
-
-                        if( empty($service_order_btn_title)) {
-                            $service_order_btn_title = ( $rainbowit_options['order_btn_text'] ) ? $rainbowit_options['order_btn_text'] : '';
-                        }
-
+                        $service_order_btn_title        = ( $rainbowit_options['order_btn_text'] ) ? $rainbowit_options['order_btn_text'] : '';
                         $product_order_btn_url          = get_post_meta( $post->ID, '_service_product_order_btn_url', true );
-                        $product_details_button_text    = get_post_meta( $post->ID, '_service_product_details_button_text', true );
-
-                        if( empty($product_details_button_text)) {
-                            $product_details_button_text = ($rainbowit_options['details_btn_text']) ? $rainbowit_options['details_btn_text'] : '';
-                        }
-
+                        $product_details_button_text    = ($rainbowit_options['details_btn_text']) ? $rainbowit_options['details_btn_text'] : '';
                         $product_delivery_time          = get_post_meta( $post->ID, '_service_product_delivery_time', true );
                         $product_total_jobs             = get_post_meta( $post->ID, '_service_product_total_jobs', true );
                         $product_queue_item             = get_post_meta( $post->ID, '_service_product_queue_item', true );
                        
+
+
+                        
+                      
                 ?>
                     <div class="col-12 col-lg-6 mb--32 rbt-tab-item <?php echo esc_attr( strtolower( $termsAssignedCat ) ); ?>">
                         <div class="rbt-card-3">
@@ -293,7 +246,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                         </div>
                                     </div>
                                     <div class="rbt-btn-group btn-gap-12">
-                                        <a href="<?php echo esc_url(  $product_order_btn_url ); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1">
+                                        <a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;">
                                             <span><i class="fa-regular fa-cart-shopping"></i></span>
                                             <?php echo esc_html( $service_order_btn_title ); ?>
                                         </a>
@@ -327,11 +280,11 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                     </p>
                                     <?php  } ?>
                                     <div class="review single-meta woocommerce">
-                                        <?php woocommerce_template_loop_rating(); ?>
-                                        <span class="rating-count">
-                                            4.0
-                                            <span class="rbt-review-total">(Total 23)</span>
-                                        </span>
+                                        <?php 
+                                       
+                                            woocommerce_template_loop_rating(); 
+                                      
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -350,6 +303,14 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
             </div>
         </div>
 <?php
+    }
+
+    
+
+    function redirect_to_checkout() {
+        global $woocommerce;
+        $checkout_url = $woocommerce->cart->get_checkout_url();
+        return $checkout_url;
     }
 }
 

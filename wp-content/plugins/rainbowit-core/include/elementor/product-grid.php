@@ -213,12 +213,8 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
             );
         }
 
-
         $products_query = new \WP_Query($args);
 
-
-?>
-        <?php
         if ($layout_style == 'layout-1') {
         ?>
             <div class="themes-wrapper rbt-section-gapBottom">

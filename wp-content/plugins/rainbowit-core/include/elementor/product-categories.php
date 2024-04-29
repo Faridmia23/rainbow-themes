@@ -96,10 +96,6 @@ class Rainbowit_Product_Categories extends Widget_Base
 
         $settings = $this->get_settings_for_display();
 
-
-?>
-
-        <?php
         if (!empty($settings['list'])) {
             foreach ($settings['list'] as $key => $item) {
 

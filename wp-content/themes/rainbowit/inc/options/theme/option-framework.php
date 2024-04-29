@@ -1452,6 +1452,12 @@ if ( class_exists( 'WooCommerce' ) ) {
                 'title'    => esc_html__( 'Details Button Title', 'rainbowit' ),
                 'default'  => 'Details',
             ),
+            array(
+                'id'       => 'preview_btn_text',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Live Preview Text', 'rainbowit' ),
+                'default'  => 'Live Preview',
+            ),
         )
     ));
     /**

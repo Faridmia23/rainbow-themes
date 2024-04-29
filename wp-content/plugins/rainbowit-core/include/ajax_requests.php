@@ -19,6 +19,8 @@ class ajax_requests
         /** Add image url */
         add_action('wp_ajax_nopriv_upload_image_from_url', array($this, 'rainbow_upload_image_from_url'));
         add_action('wp_ajax_upload_image_from_url', array($this, 'rainbow_upload_image_from_url'));
+        add_action('wp_ajax_rbt_ajax_product_order_now', array($this, 'rbt_ajax_product_order_now_func'));
+        add_action('wp_ajax_nopriv_rbt_ajax_product_order_now', array($this, 'rbt_ajax_product_order_now_func'));
     }
     
     function rainbowit_ajax_enqueue()
@@ -36,6 +38,21 @@ class ajax_requests
         wp_enqueue_media();
         wp_enqueue_script( 'rainbowit-core-ajax', RAINBOWIT_ADDONS_URL . 'assets/js/media_admin.js', array('jquery'), null, true );
         
+    }
+
+    public function rbt_ajax_product_order_now_func() {
+
+        $nonce = isset( $_POST['orderNonce'] ) ? $_POST['orderNonce'] : 0;
+        if ( ! wp_verify_nonce( $nonce, 'rainbowit-feature-plugin' ) ) {
+            die( __( 'Security check', 'rainbowit' ) ); 
+        } 
+        $productId = isset($_POST['productId']) ? intval($_POST['productId']) : 0;
+        if ($productId > 0) {
+            WC()->cart->add_to_cart($productId, 1);
+        }
+        // Redirect to the cart page
+        return true;
+        die();
     }
 
     /* Portfolio Load More */

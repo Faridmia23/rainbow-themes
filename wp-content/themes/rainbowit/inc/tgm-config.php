@@ -22,13 +22,6 @@ class TGM_Config {
                 'required' => true,
 				'force_activation'   => true,
             ),
-			array(
-				'name'         => esc_html__('Rainbowit Core','rainbowit'),
-				'slug'         => 'rainbowit-core',
-				'source'       => 'rainbowit-core.1.4.zip',
-				'required'     =>  true,
-				'version'      => '1.4'
-			),
             array(
                 'name'         => esc_html__('Rainbowit Demo Importer','rainbowit'),
                 'slug'         => 'rainbowit-demo-importer',

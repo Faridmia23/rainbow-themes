@@ -1440,6 +1440,18 @@ if ( class_exists( 'WooCommerce' ) ) {
                 'title'    => esc_html__( 'Number of Products Per Page', 'rainbowit' ),
                 'default'  => '12',
             ),
+            array(
+                'id'       => 'order_btn_text',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Order Button Title', 'rainbowit' ),
+                'default'  => 'Order Now',
+            ),
+            array(
+                'id'       => 'details_btn_text',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Details Button Title', 'rainbowit' ),
+                'default'  => 'Details',
+            ),
         )
     ));
     /**

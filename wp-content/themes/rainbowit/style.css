@@ -234,3 +234,28 @@ a.rbt-btn.rbt-btn-cart.rbt-btn-sm.hover-effect-2.btn-border-secondary.button.add
     height: 100%;
     object-fit: cover;
 }
+
+.rainbowit-price-custom ins {
+    background: transparent;
+}
+
+.rainbowit-price-custom .woocommerce-Price-amount {
+    color: var(--color-dark-1);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-b);
+    font-weight: var(--f-extra-bold);
+    line-height: 145.455%;
+    margin-bottom: 16px
+}
+
+.rainbowit-price-custom del .woocommerce-Price-amount { 
+    /* text-decoration: line-through; */
+    color: var(--color-grayscale-1);
+    font-size: var(--font-size-b1);
+    font-weight: var(--f-medium);
+    line-height: 144.444%;
+}
+
+.rainbowit-price-custom del {
+    color: var(--color-grayscale-1);
+}

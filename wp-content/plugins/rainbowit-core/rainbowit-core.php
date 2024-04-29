@@ -578,7 +578,6 @@ add_filter( 'wpcf7_autop_or_not', '__return_false' );
         $encode_data = isset($_POST['product_other_info']) ?  $_POST['product_other_info']: '';
         $decode_data = base64_decode($encode_data);
         if(empty($encode_data)) {
-            die();
             return;
         }
         $porduct_info = unserialize($decode_data);

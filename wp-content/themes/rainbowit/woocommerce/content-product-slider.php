@@ -33,9 +33,11 @@ $add_to_cart_button_url 	    = get_post_meta( $post->ID, '_envato_product_add_to
 $product_preview_button_text 	= get_post_meta( $post->ID, '_envato_product_preview_button_text', true );
 $envatoproduct_template_type 	=  get_post_meta( $post->ID, '_envato_product_template_type', true );
 $review_count = $product->get_review_count();
+
 ?>
-<div <?php wc_product_class('col-12 col-md-6 col-xl-6 single-item mb--24', $product); ?> data-sal="slide-up" data-sal-duration="400">
-	<div class="rbt-card">
+<div <?php wc_product_class('swiper-slide', $product); ?> data-sal="slide-up" data-sal-duration="400">
+<div class="rbt-card">
+
 		<div>
 		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('rainbowit-product-grid'); ?></a>
 		</div>

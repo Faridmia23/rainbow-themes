@@ -568,11 +568,76 @@ if (!function_exists('rbt_slugify')){
 // Use the following code to get ride of autop (automatic <p> tag) and line breaking tag (<br> tag).
 add_filter( 'wpcf7_autop_or_not', '__return_false' );
 
-function rainbowit_core_setup() {
 
-    add_image_size('rainbowit-product-grid', 420, 214, true);
-    add_image_size('rainbowit-product-order-grid', 324, 200, true);
+/**
+ * For save post
+ */
 
-}
+ function rainbow_save_product_attributes($product_id) {
+    if(isset($_POST['product_other_info'])) {
+        $encode_data = isset($_POST['product_other_info']) ?  $_POST['product_other_info']: '';
+        $decode_data = base64_decode($encode_data);
+        if(empty($encode_data)) {
+            return;
+        }
+        $porduct_info = unserialize($decode_data);
+        $product_img = $porduct_info['product_img'];
+        $product_tags = $porduct_info['product_tags'];
+        /**
+         * Upload image
+         */
+        $upload_dir = wp_upload_dir();
+        $image_data = file_get_contents($product_img);
+        $filename = basename($product_img);
+        $filetype = wp_check_filetype($filename, null);
+        $attachment = array(
+            'post_mime_type' => $filetype['type'],
+            'post_title' => sanitize_file_name($filename),
+            'post_content' => '',
+            'post_status' => 'inherit'
+        );
+        $attachment_id = wp_insert_attachment($attachment, $upload_dir['path'] . '/' . $filename);
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_dir['path'] . '/' . $filename);
+        wp_update_attachment_metadata($attachment_id, $attachment_data);
 
-add_action('after_setup_theme', 'rainbowit_core_setup');
+        // Set the new image as the featured image for the product
+        if ($attachment_id) {
+            set_post_thumbnail($product_id, $attachment_id);
+            error_log("Product image updated successfully!");
+        } else {
+            error_log('failed to update image');
+        }
+
+        /**
+         * Upload tags
+         */
+        $tag_ids = array();
+        foreach ($product_tags as $tag_name) {
+            $tag_id = term_exists($tag_name, 'product_tag');
+            if ($tag_id !== 0 && $tag_id !== null) {
+                $tag_ids[] = $tag_id['term_id'];
+            } else {
+                // If the tag doesn't exist, you can create it
+                $tag_args = array(
+                    'description' => '',
+                    'slug' => sanitize_title($tag_name)
+                );
+                $tag_id = wp_insert_term($tag_name, 'product_tag', $tag_args);
+                if (!is_wp_error($tag_id)) {
+                    $tag_ids[] = $tag_id['term_id'];
+                }
+            }
+        }
+
+        // Update the post/product tags
+        $result = wp_set_post_terms($product_id, $tag_ids, 'product_tag');
+
+        if (!is_wp_error($result)) {
+            echo "Tags updated successfully!";
+        } else {
+            echo "Failed to update tags: " . $result->get_error_message();
+        }
+    }
+ }
+ add_action( 'save_post', 'rainbow_save_product_attributes' );

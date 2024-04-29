@@ -4,18 +4,23 @@ class ajax_requests
 {
 
     protected $ajax_onoce;
-
     public function __construct()
     {
+        
         $this->ajax_onoce = 'rainbowit-feature-plugin';
         add_action('wp_enqueue_scripts', array($this, 'rainbowit_ajax_enqueue'));
+        add_action('admin_enqueue_scripts', array($this, 'rainbowit_ajax_enqueue'));
 
         /* Get All Portfolio Load More */
         add_action('wp_ajax_nopriv_rainbowit_get_all_posts_content', array($this, 'rainbowit_get_all_posts_content'));
         add_action('wp_ajax_rainbowit_get_all_posts_content', array($this, 'rainbowit_get_all_posts_content'));
         add_action('admin_enqueue_scripts', array($this, 'rainbowit_scripts'));
+        
+        /** Add image url */
+        add_action('wp_ajax_nopriv_upload_image_from_url', array($this, 'rainbow_upload_image_from_url'));
+        add_action('wp_ajax_upload_image_from_url', array($this, 'rainbow_upload_image_from_url'));
     }
-
+    
     function rainbowit_ajax_enqueue()
     {
         wp_enqueue_script( 'rainbowit-core-ajax', RAINBOWIT_ADDONS_URL . 'assets/js/ajax-scripts.js', array('jquery'), null, true );
@@ -24,8 +29,6 @@ class ajax_requests
             'ajax_nonce' => wp_create_nonce($this->ajax_onoce),
         );
         wp_localize_script('rainbowit-core-ajax', 'rainbowit_portfolio_ajax', $params);
-
-        
     }
 
     function rainbowit_scripts() {

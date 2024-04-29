@@ -1,98 +1,77 @@
 (function ($) {
     "use strict";
-
-    var $document = $(document),
-        $ajax_nonce = rainbowit_portfolio_ajax.ajax_nonce,
-        $rainbowit_ajax_url = rainbowit_portfolio_ajax.ajax_url;
-
-
-    // Ajax Call
-    /**
-     * setTime
-     * @returns {number}
-     */
-    function setTime() {
-        return 100;
-    }
-
-    /**
-     * showTextLoading
-     * @param selector
-     */
-    function showTextLoading(selector) {
-        $('' + selector + '').addClass('text-loading');
-        $('' + selector + '').addClass('disabled');
-    }
-
-    /**
-     * hideTextLoading
-     * @param selector
-     */
-    function hideTextLoading(selector) {
-        $('' + selector + '').removeClass('text-loading');
-        $('' + selector + '').removeClass('disabled');
-    }
-
-    /* Load All Portfolio */
-    $document.on('click', '.load-more', function (e) {
-        e.preventDefault();
-        var _self = $(this);
-        showTextLoading('.load-more');
-        var $settings = _self.attr('data-settings');
-        var $query = _self.attr('data-query');
-
-        var settings = $.parseJSON($settings),
-            query = $.parseJSON($query),
-            paged = _self.attr('data-paged'),
-            post_count = _self.attr('data-post-count'),
-            $target = _self.data('target');
-
-        $.ajax({
-            url: $rainbowit_ajax_url,
-            dataType: "json",
-            method: 'post',
-            cache: false,
-            data: {
-                'action': 'rainbowit_get_all_posts_content',
-                'security': $ajax_nonce,
-                'query': query,
-                'settings': settings,
-                'paged': paged,
-                'post_count': post_count
-            },
-            success: function (resp) {
-                var $html = resp;
-
-                if (typeof($html.outputs) != "undefined" || ($html)) {
-                    var postsCount = parseInt($html.posts_count),
-                        total_posts = 0;
-                    _self.attr('data-paged', parseInt(paged) + 1);
-                    _self.attr('data-post-count', parseInt(postsCount));
-                    _self.parent('.view-more-btn').parent('.col-lg-12').parent('.row').siblings('.portfolio-content-wrap-row').append($html.outputs);
-
-                    setTimeout(function () {
-                        total_posts = $('.portfolio-content-wrap-row').find('.portfolio-tilthover').length;
-                        if ($html.outputs == "" || (total_posts === $html.posts_count)) {
-                            _self.parent('.view-more-btn').parent('.col-lg-12').parent('.row').remove();
-                        }
-                    }, setTime());
-                    hideTextLoading('.load-more');
-                }
-            },
-            error: function (errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-
-    });
-
     jQuery(document).ready(function ($) {
- 
+        const {ajax_nonce, ajax_url} = rainbowit_portfolio_ajax;
+
+
+        $('.rainbow-theme-envato-product-select').on( 'change', function() {
+            var selectedOption = $(this).find('option:selected');
+            const product_name = selectedOption.data('product_name');
+            const product_price = selectedOption.data('product_price');
+            const product_desc_html = selectedOption.data('product_desc_html');
+            const product_desc_raw = selectedOption.data('product_desc_raw');
+            $('input[name="product_other_info"').val(selectedOption.data('product_other_info'))
+            $('input[name="post_title"]').val(product_name);
+            $('input[name="_regular_price"]').val(product_price);
+            
+            /**
+             * Change product content value
+             */
+
+            // Check if Gutenberg editor is active
+            if (typeof wp !== 'undefined' && wp.data && wp.data.select('core/select')) {
+               console.log('Please enable classic widget');
+            } else if (typeof tinymce !== 'undefined' && tinymce.activeEditor) {
+               // Fallback to retrieving description from HTML markup
+               var iframe = $('#postdivrich.woocommerce-product-description #content_ifr');
+                // Check if the iframe exists
+                if (iframe.length) {
+                    // Get the document object of the iframe
+                    var iframeDoc = iframe[0].contentWindow.document;
+
+                    // Check if the document object exists
+                    if (iframeDoc) {
+                        // Set the new content
+                        $(iframeDoc).find('body').html(product_desc_html);
+                    } else {
+                        console.error('Unable to access iframe document');
+                    }
+                } else {
+                    console.error('TinyMCE iframe not found');
+                }
+            }
+
+            /**
+             * Change product excerpt value
+             */
+
+            // Check if Gutenberg editor is active
+            if (typeof wp !== 'undefined' && wp.data && wp.data.select('core/select')) {
+               console.log('Please enable classic widget');
+            } else if (typeof tinymce !== 'undefined' && tinymce.activeEditor) {
+               // Fallback to retrieving description from HTML markup
+               var iframe = $('#postexcerpt #excerpt_ifr');
+                // Check if the iframe exists
+                if (iframe.length) {
+                    // Get the document object of the iframe
+                    var iframeDoc = iframe[0].contentWindow.document;
+
+                    // Check if the document object exists
+                    if (iframeDoc) {
+                        // Set the new content
+                        $(iframeDoc).find('body').html(product_desc_raw);
+                    } else {
+                        console.error('Unable to access iframe document');
+                    }
+                } else {
+                    console.error('TinyMCE iframe not found');
+                }
+            }
+            
+        } )
         $(document).on("click", ".upload_image_button", function (e) {
            e.preventDefault();
            var $button = $(this);
-      
-      
            // Create the media frame.
            var file_frame = wp.media.frames.file_frame = wp.media({
               title: 'Select or upload image',
@@ -104,7 +83,6 @@
               },
               multiple: false  // Set to true to allow multiple files to be selected
            });
-      
            // When an image is selected, run a callback.
            file_frame.on('select', function () {
               // We set multiple to false so only get one image from the uploader

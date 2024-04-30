@@ -1,0 +1,179 @@
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:03 UTC] 1
+[30-Apr-2024 06:28:39 UTC] 1
+[30-Apr-2024 09:21:34 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\counter.php on line 3
+[30-Apr-2024 09:21:53 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\counter.php on line 3
+[30-Apr-2024 09:44:29 UTC] PHP Fatal error:  Cannot redeclare wc_get_star_rating_html() (previously declared in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:348) in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-template-functions.php on line 3701
+[30-Apr-2024 09:44:29 UTC] PHP Fatal error:  Cannot redeclare wc_get_star_rating_html() (previously declared in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:348) in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-template-functions.php on line 3701
+[30-Apr-2024 09:44:44 UTC] PHP Fatal error:  Cannot redeclare wc_get_star_rating_html() (previously declared in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:348) in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-template-functions.php on line 3701
+[30-Apr-2024 11:03:49 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_id() on null in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php:222
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2315): Elementor\rainbowit_Custom_Service_Tab->render()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(634): Elementor\Controls_Stack->render_by_mode()
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(775): Elementor\Widget_Base->render_content()
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Widget_Base->print_content()
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1375): Elementor\Element_Base->print_element()
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Element_Base->print_content()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1375): Elementor\Element_Base->print_element()
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Element_Base->print_content()
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(1795): Elementor\Element_Base->print_element()
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(1183): Elementor\Core\Base\Document->print_elements(Array)
+#10 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\frontend.php(1157): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#11 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\frontend.php(1052): Elementor\Frontend->get_builder_content(212)
+#12 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): Elementor\Frontend->apply_builder_in_content('<!-- banner sec...')
+#13 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<!-- banner sec...', Array)
+#14 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\post-template.php(256): apply_filters('the_content', '<!-- banner sec...')
+#15 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\module.php(190): the_content()
+#16 [internal function]: Elementor\Modules\PageTemplates\Module->print_callback()
+#17 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\module.php(207): call_user_func(Array)
+#18 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\templates\header-footer.php(19): Elementor\Modules\PageTemplates\Module->print_content()
+#19 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\HP\\Loc...')
+#20 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(19): require_once('C:\\Users\\HP\\Loc...')
+#21 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#22 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php on line 222
+[30-Apr-2024 11:04:33 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_id() on null in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php:223
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2315): Elementor\rainbowit_Custom_Service_Tab->render()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(634): Elementor\Controls_Stack->render_by_mode()
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(775): Elementor\Widget_Base->render_content()
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Widget_Base->print_content()
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1375): Elementor\Element_Base->print_element()
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Element_Base->print_content()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1375): Elementor\Element_Base->print_element()
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Element_Base->print_content()
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(1795): Elementor\Element_Base->print_element()
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(1183): Elementor\Core\Base\Document->print_elements(Array)
+#10 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\frontend.php(1157): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#11 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\frontend.php(1052): Elementor\Frontend->get_builder_content(212)
+#12 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): Elementor\Frontend->apply_builder_in_content('<!-- banner sec...')
+#13 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<!-- banner sec...', Array)
+#14 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\post-template.php(256): apply_filters('the_content', '<!-- banner sec...')
+#15 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\module.php(190): the_content()
+#16 [internal function]: Elementor\Modules\PageTemplates\Module->print_callback()
+#17 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\module.php(207): call_user_func(Array)
+#18 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\templates\header-footer.php(19): Elementor\Modules\PageTemplates\Module->print_content()
+#19 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\HP\\Loc...')
+#20 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(19): require_once('C:\\Users\\HP\\Loc...')
+#21 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#22 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php on line 223
+[30-Apr-2024 11:05:03 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_id() on null in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php:223
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2315): Elementor\rainbowit_Custom_Service_Tab->render()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(634): Elementor\Controls_Stack->render_by_mode()
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(775): Elementor\Widget_Base->render_content()
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Widget_Base->print_content()
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1375): Elementor\Element_Base->print_element()
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Element_Base->print_content()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(1375): Elementor\Element_Base->print_element()
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\element-base.php(464): Elementor\Element_Base->print_content()
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(1795): Elementor\Element_Base->print_element()
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(1183): Elementor\Core\Base\Document->print_elements(Array)
+#10 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\frontend.php(1157): Elementor\Core\Base\Document->print_elements_with_wrapper(Array)
+#11 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\frontend.php(1052): Elementor\Frontend->get_builder_content(212)
+#12 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): Elementor\Frontend->apply_builder_in_content('<!-- banner sec...')
+#13 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(205): WP_Hook->apply_filters('<!-- banner sec...', Array)
+#14 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\post-template.php(256): apply_filters('the_content', '<!-- banner sec...')
+#15 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\module.php(190): the_content()
+#16 [internal function]: Elementor\Modules\PageTemplates\Module->print_callback()
+#17 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\module.php(207): call_user_func(Array)
+#18 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\modules\page-templates\templates\header-footer.php(19): Elementor\Modules\PageTemplates\Module->print_content()
+#19 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\HP\\Loc...')
+#20 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(19): require_once('C:\\Users\\HP\\Loc...')
+#21 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#22 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php on line 223
+[30-Apr-2024 11:30:03 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\custom-service-tab.php on line 296
+[30-Apr-2024 11:31:46 UTC] PHP Warning:  Array to string conversion in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\shortcodes.php on line 433
+[30-Apr-2024 12:40:02 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php:46
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_options_product_tab_content('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-general.php(35): do_action('woocommerce_pro...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(42): include('C:\\Users\\HP\\Loc...')
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-panel.php(52): WC_Meta_Box_Product_Data::output_tabs()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(33): include('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\template.php(1456): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\edit-form-advanced.php(723): do_meta_boxes(Object(WP_Screen), 'normal', Object(WP_Post))
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\post.php(206): require('C:\\Users\\HP\\Loc...')
+#10 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php on line 46
+[30-Apr-2024 12:41:46 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php:46
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_options_product_tab_content('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-general.php(35): do_action('woocommerce_pro...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(42): include('C:\\Users\\HP\\Loc...')
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-panel.php(52): WC_Meta_Box_Product_Data::output_tabs()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(33): include('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\template.php(1456): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\edit-form-advanced.php(723): do_meta_boxes(Object(WP_Screen), 'normal', Object(WP_Post))
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\post.php(206): require('C:\\Users\\HP\\Loc...')
+#10 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php on line 46
+[30-Apr-2024 12:43:35 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php:46
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_options_product_tab_content('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-general.php(35): do_action('woocommerce_pro...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(42): include('C:\\Users\\HP\\Loc...')
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-panel.php(52): WC_Meta_Box_Product_Data::output_tabs()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(33): include('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\template.php(1456): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\edit-form-advanced.php(723): do_meta_boxes(Object(WP_Screen), 'normal', Object(WP_Post))
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\post.php(206): require('C:\\Users\\HP\\Loc...')
+#10 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php on line 46
+[30-Apr-2024 12:44:28 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php:46
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_options_product_tab_content('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-general.php(35): do_action('woocommerce_pro...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(42): include('C:\\Users\\HP\\Loc...')
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-panel.php(52): WC_Meta_Box_Product_Data::output_tabs()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(33): include('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\template.php(1456): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\edit-form-advanced.php(723): do_meta_boxes(Object(WP_Screen), 'normal', Object(WP_Post))
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\post.php(206): require('C:\\Users\\HP\\Loc...')
+#10 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php on line 46
+[30-Apr-2024 12:44:41 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php:46
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_options_product_tab_content('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-general.php(35): do_action('woocommerce_pro...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(42): include('C:\\Users\\HP\\Loc...')
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-panel.php(52): WC_Meta_Box_Product_Data::output_tabs()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(33): include('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\template.php(1456): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\edit-form-advanced.php(723): do_meta_boxes(Object(WP_Screen), 'normal', Object(WP_Post))
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\post.php(206): require('C:\\Users\\HP\\Loc...')
+#10 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php on line 46
+[30-Apr-2024 12:44:51 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php:46
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_options_product_tab_content('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-general.php(35): do_action('woocommerce_pro...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(42): include('C:\\Users\\HP\\Loc...')
+#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\views\html-product-data-panel.php(52): WC_Meta_Box_Product_Data::output_tabs()
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\admin\meta-boxes\class-wc-meta-box-product-data.php(33): include('C:\\Users\\HP\\Loc...')
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\includes\template.php(1456): WC_Meta_Box_Product_Data::output(Object(WP_Post), Array)
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\edit-form-advanced.php(723): do_meta_boxes(Object(WP_Screen), 'normal', Object(WP_Post))
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\post.php(206): require('C:\\Users\\HP\\Loc...')
+#10 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\custom-product-type.php on line 46

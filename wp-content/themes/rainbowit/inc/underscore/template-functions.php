@@ -29,7 +29,7 @@ function rainbowit_body_classes( $classes ) {
     // Scroll to top
     $classes[] = ($rainbowit_options['rainbowit_scroll_to_top_enable'] != 'no') ? "active-scroll-to-top" : "";
     $classes[] = ($rainbowit_options['rainbowit_preloader'] != 'no') ? "active-preloader" : "";
-    $classes[] = ($rainbowit_options['base_theme_css'] == '0') ? " base-theme-css" : "";
+    $classes[] = isset($rainbowit_options['base_theme_css']) == '0' ? " base-theme-css" : "";
 
     $menu_type = rainbowit_get_acf_data( "rainbowit_menu_type");
     if ($menu_type){

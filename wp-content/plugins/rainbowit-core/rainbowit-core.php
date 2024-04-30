@@ -581,40 +581,8 @@ add_filter( 'wpcf7_autop_or_not', '__return_false' );
             return;
         }
         $porduct_info = unserialize($decode_data);
-        $product_img = $porduct_info['product_img'];
+      //  $product_img = $porduct_info['product_img'];
         $product_tags = $porduct_info['product_tags'];
-        /**
-         * Upload image
-         */
-        $upload_dir = wp_upload_dir();
-        $filename = basename($product_img);
-        $filetype = wp_check_filetype($filename, null);
-        $attachment = array(
-            'post_mime_type' => $filetype['type'],
-            'post_title' => sanitize_file_name($filename),
-            'post_content' => '',
-            'post_status' => 'inherit'
-        );
-        $attachment_id = wp_insert_attachment($attachment, $upload_dir['path'] . '/' . $filename);
-        require_once(ABSPATH . 'wp-admin/includes/image.php');
-        $attachment_data = wp_generate_attachment_metadata($attachment_id, $upload_dir['path'] . '/' . $filename);
-        wp_update_attachment_metadata($attachment_id, $attachment_data);
-
-        // Set the new image as the featured image for the product
-        if ($attachment_id) {
-            error_log($product_id);
-            error_log($attachment_id);
-            $set_thumbnail = set_post_thumbnail($product_id, $attachment_id);
-            if( $set_thumbnail ) {
-                error_log('success');
-                error_log(print_r($set_thumbnail, true));
-            } else {
-                error_log('faile3d');
-                error_log(print_r($set_thumbnail, true));
-            }
-        } else {
-            error_log('failed to update image');
-        }
 
         /**
          * Upload tags

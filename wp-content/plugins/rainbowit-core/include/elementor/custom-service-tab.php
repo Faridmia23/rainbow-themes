@@ -101,21 +101,26 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
     protected function render($instance = [])
     {
 
-        $settings = $this->get_settings_for_display();
-
+        $settings         = $this->get_settings_for_display();
         $heading_title    = $settings['heading_title'] ?? '';
         $product_per_page = $settings['product_per_page'];
 
         // Check if the rainbowit_Helper class exists
         if (class_exists('Rainbowit_Helper')) {
-            $rainbowit_Helper = new \Rainbowit_Helper();
+
+            $rainbowit_Helper  = new \Rainbowit_Helper();
             $rainbowit_options = $rainbowit_Helper->rainbowit_get_options();
+
         } else {
             // Handle the case where the class doesn't exist
             return;
         }
 
         add_filter ('add_to_cart_redirect', [ $this, 'redirect_to_checkout' ] );
+
+        add_shortcode( 'reviews_count', [ $this, 'reviews_count_func'], 10, 1 );
+
+
 
 ?>
         <div class="container mt--80 product-custom-service-tab">
@@ -192,9 +197,11 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                 $products_query = new \WP_Query($args);
 
                 if ( $products_query->have_posts() ) {
+
                     while ( $products_query->have_posts() ) {
+
                         global $post;
-                        global $product;
+                       
                         $products_query->the_post();
                         $product_img_url = get_the_post_thumbnail_url(get_the_ID(), '');
                         $terms = get_the_terms ( $post->ID, 'product_cat' );
@@ -213,15 +220,13 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                         }
 
                         $service_order_btn_title        = ( $rainbowit_options['order_btn_text'] ) ? $rainbowit_options['order_btn_text'] : '';
-                        $product_order_btn_url          = get_post_meta( $post->ID, '_service_product_order_btn_url', true );
                         $product_details_button_text    = ($rainbowit_options['details_btn_text']) ? $rainbowit_options['details_btn_text'] : '';
                         $product_delivery_time          = get_post_meta( $post->ID, '_service_product_delivery_time', true );
                         $product_total_jobs             = get_post_meta( $post->ID, '_service_product_total_jobs', true );
                         $product_queue_item             = get_post_meta( $post->ID, '_service_product_queue_item', true );
-                       
-
-
-                        
+                        global $product;
+                        $product_id                     = $product->get_id();
+                        $rating                         = get_post_meta( $product_id, '_wc_average_rating', true );          
                       
                 ?>
                     <div class="col-12 col-lg-6 mb--32 rbt-tab-item <?php echo esc_attr( strtolower( $termsAssignedCat ) ); ?>">
@@ -281,10 +286,17 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                     <?php  } ?>
                                     <div class="review single-meta woocommerce">
                                         <?php 
-                                       
                                             woocommerce_template_loop_rating(); 
-                                      
                                         ?>
+                                        <?php if( $rating > 0 ) { ?>
+                                        <span class="rating-count">
+                                        <?php echo esc_html( $rating ); ?>
+                                        <span class="rbt-review-total">(Total<?php echo " ";?><?php 
+                                            echo do_shortcode( "[reviews_count id='".$product_id ."']");
+                                         ?>)</span>
+                                         
+                                        </span>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -302,16 +314,33 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                 ?>
             </div>
         </div>
-<?php
+    <?php
     }
 
-    
-
-    function redirect_to_checkout() {
+    public function redirect_to_checkout() {
         global $woocommerce;
         $checkout_url = $woocommerce->cart->get_checkout_url();
         return $checkout_url;
     }
+
+    
+    public function reviews_count_func( $atts = '') {
+        // Make sure an ID was passed,
+        if ( ! empty( $atts['id'] && function_exists( 'wc_get_product' ) ) ) {
+            // Get a WC_Product object for the product.
+            $product = wc_get_product( (int) $atts['id'] );
+            // Return the review count.
+            $total_rating = $product->get_review_count();
+
+            if( $total_rating < 10 ) {
+                $total_rating = '0'.$total_rating;
+                return $total_rating;
+            }
+
+            return $total_rating;
+        }
+    }
+
 }
 
 Plugin::instance()->widgets_manager->register(new rainbowit_Custom_Service_Tab());

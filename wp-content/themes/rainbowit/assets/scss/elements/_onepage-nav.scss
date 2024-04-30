@@ -3,10 +3,30 @@
         top: 64px;
         background: var(--color-white);
         z-index: 99;
-        padding: 10px 0 0px 0;
+        padding: 54px 0 0px 0;
 
-        @media #{$laptop-device} {
-            top: 66px;
+        // @media #{$extra-device} {
+        //     top: 22px;
+        // }
+
+        @media #{$lgtolp-device} {
+            top: 22px;
+        }
+
+        // @media only screen and (min-width: 1400px) {
+        //     top: 22px;
+        // }
+
+        @media #{$lg-layout} {
+            padding: 10px 0 0px 0;
+        }
+
+        @media #{$md-layout} {
+            padding: 10px 0 0px 0;
+        }
+
+        @media #{$sm-layout} {
+            padding: 10px 0 0px 0;
         }
     }
 }

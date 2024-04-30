@@ -327,7 +327,7 @@
 
 .megamenu-banner-bg {
     height: 100%;
-    background: url(../images/header/megamenu-banner-bg.png), linear-gradient(134deg, #162F6B 0%, #10224F 38.85%, #060E23 100%), #0B1417;
+    background:  linear-gradient(134deg, #162F6B 0%, #10224F 38.85%, #060E23 100%), #0B1417;
     background-repeat: no-repeat;
     background-position: bottom right;
     display: flex;
@@ -337,13 +337,11 @@
 .banner-content-wrapper {
     width: 100%;
     height: 100%;
-    background: url(../images/header/megamenu-banner-shape.png);
     background-repeat: no-repeat;
     background-position: right bottom;
 
     .content {
         width: 100%;
-        background: url(../images/header/megamenu-banner.png);
         background-repeat: no-repeat;
         background-position: right bottom;
         background-size: auto 100%;

@@ -46,8 +46,9 @@ function rainbowit_options_product_tab_content()
 		$product_info = isset($products['body']) ? json_decode($products['body']) : '';
 		$matches_products = isset($product_info) && !empty($product_info) ? $product_info->matches : '';
 		// echo "<pre>";
-		// 				print_r($matches_products);
-		// 				echo "</pre>";
+		// print_r($product_info);
+		// echo "</pre>";
+		// die;
 		?>
 		<p class='form-field _envato_product_in_stores'>
 			<label for='_envato_product_in_stores'><?php _e('Envato Product Select', 'rainbowit'); ?></label>
@@ -77,12 +78,7 @@ function rainbowit_options_product_tab_content()
 
 						$product_name = isset($product->name) ? $product->name : '';
 						$product_id = isset($product->id) ? $product->id : '';
-						$preview_url = isset($product->previews->live_site->url) ? $product->previews->live_site->url : '';
-
-						echo "<pre>";
-						print_r($preview_url);
-						echo "</pre>";
-
+						//$preview_url = isset($product->previews->live_site->url) ? $product->previews->live_site->url : '';
 
 						$product_desc_html = isset($product->description_html) ? $product->description_html : '';
 						$product_desc_raw = isset($product->description) ? $product->description : '';

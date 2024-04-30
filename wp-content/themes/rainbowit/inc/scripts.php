@@ -46,6 +46,7 @@ if (!function_exists('rainbowit_scripts')){
         wp_enqueue_script('jquery-serialshuffle', RAINBOWIT_JS_URL . 'vendor/jquery.serialshuffle.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('sal', RAINBOWIT_JS_URL . 'vendor/sal.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('rainbowit-main', RAINBOWIT_JS_URL . 'main.js', array('jquery'), RAINBOWIT_VERSION, true);
+        wp_enqueue_script('rainbowit-has-elementor', RAINBOWIT_JS_URL . 'has-elementor.js', array('jquery'), RAINBOWIT_VERSION, true);
 
 
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

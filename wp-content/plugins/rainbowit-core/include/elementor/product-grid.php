@@ -67,7 +67,6 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                     'layout-1' => esc_html__('layout 1', 'rainbowit'),
                     'layout-2' => esc_html__('layout 2', 'rainbowit'),
                     'layout-3' => esc_html__('layout 3', 'rainbowit'),
-                    'layout-4' => esc_html__('layout 4', 'rainbowit'),
                 ],
             ]
         );
@@ -163,9 +162,6 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
         $this->add_render_attribute('icon_image', 'alt', Control_Media::get_image_alt($settings['icon_image']));
         $this->add_render_attribute('icon_image', 'title', Control_Media::get_image_title($settings['icon_image']));
         $this->add_render_attribute('icon_image', 'class', 'impower-icon');
-        $this->add_render_attribute('icon_image', 'data-sal', 'slide-up');
-        $this->add_render_attribute('icon_image', 'data-sal-duration', '900');
-        $this->add_render_attribute('icon_image', 'data-sal-delay', '100');
 
         $layout_style = $settings['layout_style'];
 
@@ -249,6 +245,8 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                 if ($products_query->have_posts()) {
                                     while ($products_query->have_posts()) {
                                         $products_query->the_post();
+                                        global $product;
+                                        $product_id = $product->get_id();
                                         get_template_part('woocommerce/content-product', 'grid');
 
                                 ?>
@@ -275,11 +273,11 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                         <span class="subtitle"><?php echo esc_html($subtitle_title); ?></span>
                         <h3 class="title"><?php echo esc_html($heading_title); ?></h3>
                         <p class="description">
-                        <?php echo wp_kses_post($desc); ?>
+                            <?php echo wp_kses_post($desc); ?>
                         </p>
                         <div class="nav-btn-group">
                             <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3 mx-md-auto mx-xl-0 " <?php echo $attr; ?>>
-                            <?php echo esc_html($btn_title); ?>
+                                <?php echo esc_html($btn_title); ?>
                                 <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
                                 <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
                             </a>
@@ -296,18 +294,17 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                 </div>
                             </div>
                         </div>
-                        <img class="section-tech-logo" src="<?php echo esc_url( $settings['icon_image']['url']); ?>" alt="Background image">
+                        <img class="section-tech-logo" src="<?php echo esc_url($settings['icon_image']['url']); ?>" alt="Background image">
                     </div>
                     <div class="rbt-swiper-wrapper">
                         <div class="swiper rbt-swiper-carousel">
                             <!-- swiper wrapper -->
                             <div class="swiper-wrapper">
-                            <?php
+                                <?php
                                 if ($products_query->have_posts()) {
                                     while ($products_query->have_posts()) {
                                         $products_query->the_post();
                                         get_template_part('woocommerce/content-product', 'slider');
-
                                 ?>
                                 <?php
 
@@ -318,14 +315,61 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     // If no products found
                                     echo 'No products found';
                                 }
-                            ?>
+                                ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php } elseif ($layout_style == 'layout-3') { ?>
+            <div class="rbt-section-wrapper">
+                <div class="container">
+                    <div class="rbt-parent wider-section">
+                        <div class="rbt-parent-bg parent-bg-2 "></div>
+                        <div class="rbt-inner-img rbt-inner-img-2"></div>
+                        <div class="rbt-inner-content">
+                            <div class="inner pb-3 pb-md-0">
+                                <div class="rbt-section-title section-title-center">
+                                    <span class="subtitle"><?php echo esc_html($subtitle_title); ?></span>
+                                    <h3 class="title"><?php echo esc_html($heading_title); ?></h3>
+                                    <p class="description">
+                                    <?php echo wp_kses_post($desc); ?>
+                                    </p>
+                                    <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3" <?php echo $attr; ?>>
+                                        <?php echo esc_html($btn_title); ?>
+                                        <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
+                                        <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <?php if( isset( $settings['icon_image']['url'] ) && !empty( $settings['icon_image']['url'] ) ) { ?>
+                            <img class="tech-logo" src="<?php echo esc_url( $settings['icon_image']['url'] );?>" alt="Technology logo">
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="rbt-top-items">
+                        <div class="row row--12">
+                        <?php
+                            if ($products_query->have_posts()) {
+                                while ($products_query->have_posts()) {
 
+                                    $products_query->the_post();
+                                    get_template_part('woocommerce/content-product', 'grid2');
+
+                                }
+                                // reset original post data
+                                wp_reset_postdata();
+
+                            } else {
+                                // If no products found
+                                echo 'No products found';
+                            }
+                        ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
 <?php
 
     }

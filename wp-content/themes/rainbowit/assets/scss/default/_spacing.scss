@@ -59,6 +59,14 @@
     }
 }
 
+.rbt-section-gap3Bottom {
+    padding-bottom: 60px;
+
+    @media #{$md-layout} {
+        padding-bottom: 60px;
+    }
+}
+
 .rbt-section-gapTop {
     padding-top: 120px;
 

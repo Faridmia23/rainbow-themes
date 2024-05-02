@@ -194,7 +194,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
                                 </div>
                                 <?php if (isset($btn_link) && !empty($btn_link)) { ?>
                                     <a href="<?php echo esc_url($btn_link); ?>" class="rbt-btn rbt-btn-offwhite hover-effect-1 w-100 ">
-                                        <?php echo esc_html($btn_title); ?>
+                                        <?php echo $btn_title; ?>
                                     </a>
                                 <?php } ?>
                             </div>

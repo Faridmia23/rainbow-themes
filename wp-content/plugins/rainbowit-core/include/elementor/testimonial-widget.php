@@ -45,6 +45,22 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
             ]
         );
         $this->add_control(
+            'extra_class',
+            [
+                'label' => esc_html__('Extra Class', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('', 'rainbowit'),
+            ]
+        );
+        $this->add_control(
+            'section_id',
+            [
+                'label' => esc_html__('Section Id Name', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('customer-success', 'rainbowit'),
+            ]
+        );
+        $this->add_control(
             'sub_title',
             [
                 'label' => esc_html__('Sub Title', 'rainbowit'),
@@ -127,6 +143,8 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
 
         $btn_title      = $settings['btn_title'] ?? '';
         $desc           = $settings['desc'] ?? '';
+        $extra_class    = $settings['extra_class'] ?? '';
+        $section_id    = $settings['section_id'] ?? '';
 
         $attr = '';
         if (!empty($settings['btn_link']['url'])) {
@@ -147,7 +165,7 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
 
 ?>
 
-    <div class="rbt-section-wrapper rbt-section-gapTop rbt-section-shadow " id="custome-success">
+    <div class="rbt-section-wrapper rbt-section-gapTop rbt-section-shadow <?php echo esc_attr( $extra_class ); ?>" id="<?php echo esc_attr( $section_id ); ?>">
         <div class="container position-relative ">
             <div class="rbt-section-title section-title-center mb--40" data-sal="slide-up" data-sal-duration="400">
                 <div class="section-title-img">

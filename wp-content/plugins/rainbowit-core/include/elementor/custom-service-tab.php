@@ -340,7 +340,6 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
             return $total_rating;
         }
     }
-
 }
 
 Plugin::instance()->widgets_manager->register(new rainbowit_Custom_Service_Tab());

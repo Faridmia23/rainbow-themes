@@ -1,18 +1,18 @@
 <?php
 // Get Value
-$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
-$banner_layout = Rainbowit_Helper::rainbowit_banner_layout();
-$banner_area = $banner_layout['banner_area'];
-$banner_style = $banner_layout['banner_style'];
-$banner_title = rainbowit_get_acf_data("rainbowit_custom_title");
-$banner_sub_title = rainbowit_get_acf_data("rainbowit_custom_sub_title");
+$rainbowit_options  = Rainbowit_Helper::rainbowit_get_options();
+$banner_layout      = Rainbowit_Helper::rainbowit_banner_layout();
+$banner_area        = $banner_layout['banner_area'];
+$banner_style       = $banner_layout['banner_style'];
+$banner_title       = rainbowit_get_acf_data("rainbowit_custom_title");
+$banner_sub_title   = rainbowit_get_acf_data("rainbowit_custom_sub_title");
 // Get $post if you're inside a function.
 global $post;
 
-$default_banner_image = get_template_directory_uri() . "/assets/images/bg/bg-image-1.jpg";
-$thumbnail_url  = get_the_post_thumbnail_url( get_the_ID(), 'full' );
-$themeoption_banner_bg_image = (!empty($rainbowit_options['rainbowit_select_banner_image']['url'])) ? $rainbowit_options['rainbowit_select_banner_image']['url'] : $default_banner_image;
-$banner_bg_image = ($thumbnail_url) ? $thumbnail_url : $themeoption_banner_bg_image;
+$default_banner_image           = get_template_directory_uri() . "/assets/images/bg/bg-image-1.jpg";
+$thumbnail_url                  = get_the_post_thumbnail_url( get_the_ID(), 'full' );
+$themeoption_banner_bg_image    = (!empty($rainbowit_options['rainbowit_select_banner_image']['url'])) ? $rainbowit_options['rainbowit_select_banner_image']['url'] : $default_banner_image;
+$banner_bg_image                = ($thumbnail_url) ? $thumbnail_url : $themeoption_banner_bg_image;
 
 
 ?>

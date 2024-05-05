@@ -33,9 +33,6 @@
         },
         methods: function (e) {
           
-           
-          
-           
             rbt.bannerIconShuffle();
             rbt.counterUp();
             rbt.swiperSlider();

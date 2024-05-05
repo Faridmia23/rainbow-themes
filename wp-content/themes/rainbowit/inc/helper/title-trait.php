@@ -22,8 +22,8 @@ trait BannerTrait
         /**
          * Get Page Options value
          */
-        $banner_area = rainbowit_get_acf_data($theme_prefix .  '_title_wrapper_show');
-        $banner_style = rainbowit_get_acf_data( $theme_prefix . "_select_banner_style");
+        $banner_area = rainbowit_get_acf_data("rainbowit_title_wrapper_show");
+        $banner_style = rainbowit_get_acf_data( $theme_prefix . "_select_banner_style" );
 
         /**
          * Set Condition

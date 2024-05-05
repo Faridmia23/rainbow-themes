@@ -4,19 +4,19 @@ namespace Elementor;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-class Rainbowit_Custom_Web_Service extends Widget_Base
+class Rainbowit_Faq_Widget extends Widget_Base
 {
 
     use \Elementor\RainbowitElementCommonFunctions;
 
     public function get_name()
     {
-        return 'rainbowit-custom-web-service';
+        return 'rainbowit-faq-widget';
     }
 
     public function get_title()
     {
-        return esc_html__('Custom Web Service', 'rainbowit');
+        return esc_html__('Faq Widget', 'rainbowit');
     }
 
     public function get_icon()
@@ -31,7 +31,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
 
     public function get_keywords()
     {
-        return ['service', 'rainbowit'];
+        return ['faq', 'rainbowit'];
     }
 
     protected function register_controls()
@@ -40,7 +40,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__('Image Item', 'rainbowit'),
+                'label' => esc_html__('Faq Section', 'rainbowit'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -100,41 +100,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
             ]
         );
 
-        $repeater = new \Elementor\Repeater();
-        $repeater->add_control(
-            'main_title',
-            [
-                'label' => esc_html__('Main Title', 'rainbowit'),
-                'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Data Solution', 'rainbowit'),
-            ]
-        );
-
-        $repeater->add_control(
-            'desc',
-            [
-                'label' => esc_html__('Description', 'rainbowit'),
-                'type' => Controls_Manager::TEXTAREA,
-            ]
-        );
-
-        $repeater->add_control(
-            'service_title',
-            [
-                'label' => esc_html__('Service Title', 'rainbowit'),
-                'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Website Design', 'rainbowit'),
-            ]
-        );
-        $repeater->add_control(
-            'service_info',
-            [
-                'label' => esc_html__('Service Info', 'rainbowit'),
-                'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Start From', 'rainbowit'),
-            ]
-        );
-        $repeater->add_control(
+        $this->add_control(
             'btn_title',
             [
                 'label' => esc_html__('Button Title', 'rainbowit'),
@@ -142,7 +108,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
                 'default' => esc_html__('View Details', 'rainbowit'),
             ]
         );
-        $repeater->add_control(
+        $this->add_control(
             'btn_link',
             [
                 'label' => esc_html__('Button Link', 'rainbowit'),
@@ -156,22 +122,22 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
                 'label_block' => true,
             ]
         );
+
+        $repeater = new \Elementor\Repeater();
         $repeater->add_control(
-            'service_image',
+            'faq_title',
             [
-                'label' => esc_html__('Service Image', 'rainbowit'),
-                'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => \Elementor\Utils::get_placeholder_image_src(),
-                ],
+                'label' => esc_html__('Faq Title', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Do you offer e-commerce website design & development?', 'rainbowit'),
             ]
         );
+
         $repeater->add_control(
-            'price',
+            'faq_desc',
             [
-                'label' => esc_html__('Service Price', 'rainbowit'),
-                'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('$750.00', 'rainbowit'),
+                'label' => esc_html__('Description', 'rainbowit'),
+                'type' => Controls_Manager::TEXTAREA,
             ]
         );
 
@@ -194,122 +160,72 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
         $settings = $this->get_settings_for_display();
         $heading_title  = $settings['heading_title'] ?? '';
         $sub_title      = $settings['sub_title'] ?? '';
+        $btn_title      = $settings['btn_title'] ?? '';
+
+        $btn_link = $settings['btn_link']['url'];
 
 ?>
 
     <div class="rbt-section-gapTop rbt-section-gap2Bottom">
         <div class="container">
             <div class="rbt-section-title section-title-center" data-sal="slide-up" data-sal-duration="400">
-                <span class="subtitle"><?php echo esc_html( $sub_title ); ?></span>
+                <span class="subtitle"><?php echo esc_html($sub_title); ?></span>
                 <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
-                <a class="rbt-btn rbt-btn-round rbt-btn-xm rbt-outline-none hover-effect-3" href="#">
-                    Let's work together
-                    <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
-                    <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
-                </a>
+                <?php if (isset($btn_link) && !empty($btn_link)) { ?>
+                    <a class="rbt-btn rbt-btn-round rbt-btn-xm rbt-outline-none hover-effect-3" href="<?php echo esc_url($btn_link); ?>">
+                        <?php echo esc_html($btn_title); ?>
+                        <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
+                        <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
+                    </a>
+                <?php } ?>
             </div>
 
             <div class="row">
                 <div class="col-12 col-md-9 col-lg-6 mx-auto">
                     <div class="accordion " id="accordionExample">
                         <!-- FAQ item -->
-                        <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
-                            <h3 class="title">
-                                <button class="accordion-button rbt-accordion-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-1" aria-expanded="true" aria-controls="rbt-faq-1">
-                                    <span class="accordion-title">Do you offer e-commerce website design & development?</span>
-                                    <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
-                                </button>
-                            </h3>
-                            <div id="rbt-faq-1" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                <div class="rbt-accordion-body">
-                                    <p class="description">
-                                        Yes, we offer design and development services for eCommerce websites. Additionally,
-                                        we
-                                        provide of our clients achieve their goals by designing and developing eCommerce
-                                        websites.
-                                    </p>
+                        <?php
+                        if (!empty($settings['list'])) {
+                            $count = 1;
+                            foreach ($settings['list'] as $item) {
+
+                                $faq_title      = $item['faq_title'] ?? '';
+                                $faq_desc       = $item['faq_desc'] ?? '';
+                                $show = '';
+                                if( $count == 1 ) {
+                                    $show = 'show';
+                                }
+
+                        ?>
+                                <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
+                                    <h3 class="title">
+                                        <button class="accordion-button rbt-accordion-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-<?php echo $count; ?>" aria-expanded="true" aria-controls="rbt-faq-<?php echo $count; ?>">
+                                            <span class="accordion-title"><?php echo esc_html($faq_title); ?></span>
+                                            <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
+                                        </button>
+                                    </h3>
+                                    <div id="rbt-faq-<?php echo $count; ?>" class="accordion-collapse collapse <?php echo esc_attr($show); ?>" data-bs-parent="#accordionExample">
+                                        <div class="rbt-accordion-body">
+                                            <p class="description">
+                                                <?php echo wp_kses_post($faq_desc); ?>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- FAQ item -->
-                        <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
-                            <h3 class="title">
-                                <button class="accordion-button rbt-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-2" aria-expanded="false" aria-controls="rbt-faq-2">
-                                    <span class="accordion-title">What is your expected creating a website?</span>
-                                    <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
-                                </button>
-                            </h3>
-                            <div id="rbt-faq-2" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="rbt-accordion-body">
-                                    <p class="description">
-                                        Yes, we offer design and development services for eCommerce websites. Additionally,
-                                        we
-                                        provide of our clients achieve their goals by designing and developing eCommerce
-                                        websites.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ item -->
-                        <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
-                            <button class="accordion-button rbt-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-3" aria-expanded="false" aria-controls="rbt-faq-3">
-                                <span class="accordion-title">Do you offer e-commerce website design & development?</span>
-                                <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
-                            </button>
-                            <div id="rbt-faq-3" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="rbt-accordion-body">
-                                    <p class="description">
-                                        Yes, we offer design and development services for eCommerce websites. Additionally,
-                                        we
-                                        provide of our clients achieve their goals by designing and developing eCommerce
-                                        websites.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ item -->
-                        <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
-                            <button class="accordion-button rbt-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-4" aria-expanded="false" aria-controls="rbt-faq-4">
-                                <span class="accordion-title">Do you offer responsive design how it improves experience?</span>
-                                <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
-                            </button>
-                            <div id="rbt-faq-4" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="rbt-accordion-body">
-                                    <p class="description">
-                                        Yes, we offer design and development services for eCommerce websites. Additionally,
-                                        we
-                                        provide of our clients achieve their goals by designing and developing eCommerce
-                                        websites.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- FAQ item -->
-                        <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
-                            <button class="accordion-button rbt-accordion-btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-5" aria-expanded="false" aria-controls="rbt-faq-5">
-                                <span class="accordion-title">Can you redesign my outdated website?</span>
-                                <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
-                            </button>
-                            <div id="rbt-faq-5" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                <div class="rbt-accordion-body">
-                                    <p class="description">
-                                        Yes, we offer design and development services for eCommerce websites. Additionally,
-                                        we
-                                        provide of our clients achieve their goals by designing and developing eCommerce
-                                        websites.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                                <!-- FAQ item -->
+
+                        <?php
+                                $count++;
+                            }
+                        } ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 <?php
 
     }
 }
 
-Plugin::instance()->widgets_manager->register(new Rainbowit_Custom_Web_Service());
+Plugin::instance()->widgets_manager->register(new Rainbowit_Faq_Widget());

@@ -45,11 +45,23 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
             ]
         );
         $this->add_control(
+			'counter_on_off',
+			[
+				'label' => esc_html__( 'Counter ON/OFF', 'rainbowit' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Show', 'rainbowit' ),
+				'label_off' => esc_html__( 'Hide', 'rainbowit' ),
+				'return_value' => 'yes',
+				'default' => 'yes',
+			]
+		);
+        $this->add_control(
             'heading_title',
             [
                 'label' => esc_html__('Title', 'rainbowit'),
                 'type' => Controls_Manager::TEXT,
                 'default' => esc_html__('We Are Trusted by', 'rainbowit'),
+                'condition' => ['counter_on_off' => 'yes']
             ]
         );
         $this->add_control(
@@ -58,6 +70,7 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
                 'label' => esc_html__('Subtitle Title', 'rainbowit'),
                 'type' => Controls_Manager::TEXT,
                 'default' => esc_html__('Customers', 'rainbowit'),
+                'condition' => ['counter_on_off' => 'yes']
             ]
         );
         $this->add_control(
@@ -66,6 +79,7 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
                 'label' => esc_html__('Counter Number', 'rainbowit'),
                 'type' => Controls_Manager::TEXT,
                 'default' => esc_html__('16890', 'rainbowit'),
+                'condition' => ['counter_on_off' => 'yes']
             ]
         );
 
@@ -114,11 +128,14 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
         $subtitle_title = $settings['subtitle_title'] ?? '';
         $counter_number = $settings['counter_number'] ?? '';
 
+        $counter_on_off = $settings['counter_on_off'];
+
 
 ?>
 
     <div class="brand-wrapper rbt-section-gapTop rbt-section-gapBottom">
         <!-- trusted customer -->
+        <?php if( $counter_on_off == 'yes' ) { ?>
         <div class="rbt-counter d-none d-md-flex">
             <span class="count-info"><?php echo esc_attr($heading_title); ?></span>
             <div class="counter-wrapper">
@@ -126,6 +143,7 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
             </div>
             <span class="count-info"><?php echo esc_attr($subtitle_title); ?></span>
         </div>
+        <?php } ?>
         <div class="container overflow-hidden ">
             <div class="rbt-brand-group">
                 <div class="swiper-wrapper rbt-brand-wrapper">

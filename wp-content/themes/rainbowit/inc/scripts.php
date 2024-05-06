@@ -55,5 +55,4 @@ if (!function_exists('rainbowit_scripts')){
 
     }
 }
-add_action( 'wp_enqueue_scripts', 'rainbowit_scripts' );
-
+add_action( 'wp_enqueue_scripts', 'rainbowit_scripts' ); ?>

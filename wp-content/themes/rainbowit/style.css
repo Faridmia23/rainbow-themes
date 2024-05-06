@@ -205,6 +205,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 .rbt-card-btn .add_to_cart_button  i.fa-check, 
 a.button.add_to_cart_button.ajax_add_to_cart.added .fa-cart-shopping,
 a.button.rbt-btn-cart.product_type_external i.fa-check,
+a.button.rbt-btn-cart.product_type_variable  i.fa-check,
 a.button.rbt-btn-cart.product_type_grouped i.fa-check,
 a.button.rbt-btn-cart.product_type_simple i.fa-check {
     visibility: hidden;
@@ -274,4 +275,115 @@ a.rbt-btn.rbt-btn-cart.rbt-btn-sm.hover-effect-2.btn-border-secondary.button.add
     padding-bottom: 24px;
     margin-bottom: 24px;
     border-bottom: 1px solid var(--color-grayscale-4);
+}
+
+.page-numbers li a ,
+.page-numbers li span.current {
+    color: var(--color-dark-1);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b2);
+    font-weight: var(--f-bold);
+    line-height: 125%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 41px;
+    width: 41px;
+    border: 1px solid var(--color-grayscale-10);
+    border-radius: 5px 4px;
+    transition: var(--transition-1);
+}
+
+.page-numbers li span.current, 
+.page-numbers li a:hover {
+    border-color: var(--color-red-1);
+    background: var(--color-red-1);
+    color: var(--color-white);
+}
+
+
+.woocommerce-shop .rbt-section-bgCommon .breadcrumb  {
+    padding-bottom: 120px;
+}
+
+.woocommerce-shop .rbt-section-bgCommon .breadcrumb  .pages-info {
+    align-items: center;
+    justify-content: center;
+}
+
+.woocommerce-shop .rainbow-section-gap {
+    padding: 120px 0;
+}
+
+.woocommerce-shop .rn-pagination > .page-numbers {
+    justify-content: center;
+}
+
+.woocommerce-sort-list .woocommerce-ordering .orderby button {
+    border: 1px solid rgba(0, 0, 0, 0.1411764706);
+    padding: 10px 20px!important;
+    height: 52px!important;
+    line-height: 30px;
+    border-radius: 4px!important;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-body);
+    background: url(../images/icons/arrow-icon.png) 93% center no-repeat transparent;
+    outline: none;
+}
+
+.woocommerce-sort-list .woocommerce-ordering .orderby button:focus {
+    outline: none!important;
+}
+
+.woocommerce-sort-list .woocommerce-ordering .orderby .dropdown-menu {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-body);
+}
+
+.woocommerce-shop .bootstrap-select>.dropdown-toggle:after {
+    margin-top: 2px;
+}
+
+.woocommerce ul.products li.product .button, 
+.woocommerce ul.products li.product .added_to_cart {
+    border:none;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.woocommerce ul.products li.product .button:hover, 
+.woocommerce ul.products li.product .added_to_cart:hover {
+    border:none; 
+}
+
+.woocommerce-checkout .rbt-section-wrapper, 
+.woocommerce-cart .rbt-section-wrapper,
+.woocommerce-account .rbt-section-wrapper {
+    padding-bottom: 110px;
+    padding-top: 110px;
+    margin-top: 0;
+}
+
+.woocommerce-order-received .rbt-section-wrapper {
+    padding-top: 120px;
+    margin-top: 0;
+}
+
+.woocommerce-order-received .breadcrumb ,
+.woocommerce-checkout .breadcrumb ,
+.woocommerce-cart .breadcrumb,
+.woocommerce-account .breadcrumb {
+    padding-bottom: 110px;
+}
+
+.woocommerce-orders-table__cell a {
+    color: var(--color-white )!important;
+}
+
+.woocommerce-orders-table__cell a:hover  {
+    color: var(--color-primary)!important;
 }

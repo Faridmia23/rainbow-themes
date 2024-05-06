@@ -48,7 +48,7 @@ function rainbowit_options_product_tab_content()
 		// echo "<pre>";
 		// print_r($product_info);
 		// echo "</pre>";
-		// die;
+		//  die;
 		?>
 		<p class='form-field _envato_product_in_stores'>
 			<label for='_envato_product_in_stores'><?php _e('Envato Product Select', 'rainbowit'); ?></label>
@@ -68,21 +68,16 @@ function rainbowit_options_product_tab_content()
 						return number_format($usd, 2, '.', '');
 					}
 					foreach ($matches_products as $product) :
-					// echo "<pre>";
-					// print_r($product);
-					// echo "</pre>";
-						
-						//die;
-						// number_of_sales
-
 
 						$product_name = isset($product->name) ? $product->name : '';
 						$product_id = isset($product->id) ? $product->id : '';
-						//$preview_url = isset($product->previews->live_site->url) ? $product->previews->live_site->url : '';
+						$preview_url = isset($product->previews->live_site->url) ? $product->previews->live_site->url : '';
 
 						$product_desc_html = isset($product->description_html) ? $product->description_html : '';
 						$product_desc_raw = isset($product->description) ? $product->description : '';
 						$price_cents = isset($product->price_cents) ? $product->price_cents : '';
+						$url = isset($product->url) ? $product->url : '';
+						$number_of_sales = isset($product->number_of_sales) ? $product->number_of_sales : '';
 						$product_tags = isset($product->tags) ? $product->tags : '';
 						$product_image = isset($product->previews->icon_with_landscape_preview->landscape_url) ? $product->previews->icon_with_landscape_preview->landscape_url : '';
 						$product_price = centsToUSD($price_cents);
@@ -91,13 +86,39 @@ function rainbowit_options_product_tab_content()
 							'product_tags' => $product_tags
 						);
 					?>
-						<option data-product_other_info="<?php echo base64_encode(serialize($product_other_info)); ?>" data-product_image=<?php echo esc_url($product_image); ?> data-product_price="<?php echo esc_attr($product_price); ?>" data-product_name="<?php echo esc_attr($product_name); ?>" data-product_desc_raw="<?php echo esc_attr(($product_desc_raw)); ?> " data-product_desc_html="<?php echo esc_attr($product_desc_html) ?>" data-envato_product_id=<?php echo esc_attr($product_id); ?> value="<?php echo esc_attr($product_id); ?>"><?php echo esc_html($product_name); ?></option>
+						<option data-product_other_info="<?php echo base64_encode(serialize($product_other_info)); ?>" data-product_image=<?php echo esc_url($product_image); ?> data-product_price="<?php echo esc_attr($product_price); ?>" data-product_name="<?php echo esc_attr($product_name); ?>" data-product_desc_raw="<?php echo esc_attr(($product_desc_raw)); ?> " data-product_desc_html="<?php echo esc_attr($product_desc_html) ?>" data-envato_product_id="<?php echo esc_attr($product_id); ?>" value="<?php echo esc_attr($product_id); ?>" data-envato_preview_url="<?php echo esc_attr($preview_url); ?>" data-envato_product_sale="<?php echo esc_attr($number_of_sales);?>" data-envato_product_url="<?php echo esc_attr($url);?>">><?php echo esc_html($product_name); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
 			<img class='help_tip' data-tip="<?php _e('Select the stores where this envato product is redeemable.', 'rainbowit'); ?>" src='<?php echo esc_url(WC()->plugin_url()); ?>/assets/images/help.png' height='16' width='16'>
 		</p>
-		<?php
+		<?php 
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_total_sales',
+				'label'       => __('Total Sales', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_preview_url',
+				'label'       => __('Preview URL', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_template_type',
+				'label'       => __('Template Category', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+		
 		?>
 	</div>
 
@@ -106,12 +127,10 @@ function rainbowit_options_product_tab_content()
 
 
 
-add_action('woocommerce_product_data_panels', 'wcpt_gift_card_options_product_tab_content');
+add_action('woocommerce_product_data_panels', 'rainbowit_custom_service_options_product_tab_content');
 
-function wcpt_gift_card_options_product_tab_content()
+function rainbowit_custom_service_options_product_tab_content()
 {
-	// Dont forget to change the id in the div with your target of your product tab
-	// If is single product page and have the "engrave text option" enabled we display the field
 	global $post;
 ?>
 	<div id='service_product_options' class='panel woocommerce_options_panel'>
@@ -173,4 +192,17 @@ function save_envato_product_options_field($post_id)
 	if (isset($_POST['_service_product_queue_item'])) :
 		update_post_meta($post_id, '_service_product_queue_item', sanitize_text_field($_POST['_service_product_queue_item']));
 	endif;
+
+	if (isset($_POST['_envato_product_total_sales'])) :
+		update_post_meta($post_id, '_envato_product_total_sales', sanitize_text_field($_POST['_envato_product_total_sales']));
+	endif;
+
+	if (isset($_POST['_envato_product_preview_url'])) :
+		update_post_meta($post_id, '_envato_product_preview_url', sanitize_text_field($_POST['_envato_product_preview_url']));
+	endif;
+
+	if (isset($_POST['_envato_product_template_type'])) :
+		update_post_meta($post_id, '_envato_product_template_type', sanitize_text_field($_POST['_envato_product_template_type']));
+	endif;
+
 }

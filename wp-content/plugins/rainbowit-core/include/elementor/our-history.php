@@ -204,10 +204,14 @@ class Rainbowit_Our_History extends Widget_Base
             ]
         );
 
-        
-
-       
-
+        $repeater->add_control(
+            'animation_duration',
+            [
+                'label' => esc_html__('Animation duration', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('300', 'rainbowit'),
+            ]
+        );
         $this->add_control(
             'list2',
             [
@@ -292,8 +296,8 @@ class Rainbowit_Our_History extends Widget_Base
                             $item_title = $item['item_title'];
                             $users = $item['users'];
                             $icon_class = $item['icon_class'];
-                            
-
+                            $animation_duration = $item['animation_duration'];
+                        
                     ?>
                     <div class="rbt-profile-info" data-sal="slide-up" data-sal-duration="400">
                         <span class="icon">
@@ -312,7 +316,7 @@ class Rainbowit_Our_History extends Widget_Base
                     <?php
                         }
                     } ?>
-                    <a href="<?php echo esc_url($btn_link); ?>" class="rbt-btn rbt-btn-primary rbt-btn-icon-reverse w-100 mt--15" data-sal="slide-up" data-sal-duration="900">
+                    <a href="<?php echo esc_url($btn_link); ?>" class="rbt-btn rbt-btn-primary rbt-btn-icon-reverse w-100 mt--15" data-sal="slide-up" data-sal-duration="<?php echo esc_html( $animation_duration ); ?>">
                         <span class="btn-icon-reverse">
                         <span class="btn-icon-left"><i class="fa-regular fa-arrow-right"></i></span>
                         <span class="btn-text"><?php echo esc_html($button_title); ?></span>

@@ -7,12 +7,19 @@
         $('.rainbow-theme-envato-product-select').on( 'change', function() {
             var selectedOption = $(this).find('option:selected');
             const product_name = selectedOption.data('product_name');
+            const envato_preview_url = selectedOption.data('envato_preview_url');
+            const envato_product_sale = selectedOption.data('envato_product_sale');
+            const envato_product_url = selectedOption.data('envato_product_url');
+           // console.log(envato_product_url);
             const product_price = selectedOption.data('product_price');
             const product_desc_html = selectedOption.data('product_desc_html');
             const product_desc_raw = selectedOption.data('product_desc_raw');
             $('input[name="product_other_info"').val(selectedOption.data('product_other_info'))
             $('input[name="post_title"]').val(product_name);
             $('input[name="_regular_price"]').val(product_price);
+            $('input[name="_envato_product_preview_url"]').val(envato_preview_url);
+            $('input[name="_envato_product_total_sales"]').val(envato_product_sale);
+            $('input[name="_product_url"]').val(envato_product_url);
             
             /**
              * Change product content value

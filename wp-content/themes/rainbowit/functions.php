@@ -269,6 +269,10 @@ require get_template_directory() . '/inc/underscore/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/underscore/customizer.php';
+// woo others
+
+
+
 
 /**
  * Load Jetpack compatibility file.
@@ -319,6 +323,7 @@ require_once( RAINBOWIT_FREAMWORK_CUSTOMIZER . 'color.php');
 if (class_exists('WooCommerce')) {
     require_once(RAINBOWIT_WOOCMMERCE . "wooc-functions.php");
     require_once(RAINBOWIT_WOOCMMERCE . "wooc-hooks.php");
+    require_once(RAINBOWIT_WOOCMMERCE . "woo-single.php");
 }
 
 
@@ -333,7 +338,7 @@ function get_elementor_template_library()
         'posts_per_page' => -1,
     ));
 
-    $posts = array();
+    $posts[0] = "Select Template";
 
     if (!empty($posts_args) && !is_wp_error($posts_args)) {
         foreach ($posts_args as $post) {

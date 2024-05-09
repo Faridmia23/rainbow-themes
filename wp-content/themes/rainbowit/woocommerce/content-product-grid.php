@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The template for displaying product content within loops
  *
@@ -25,17 +24,15 @@ if (empty($product) || !$product->is_visible()) {
 	return;
 }
 global $post;
-$rainbowit_options          	= Rainbowit_Helper::rainbowit_get_options();
-$enable_envato_product 			=  get_post_meta( $post->ID, '_enable_envato_product', true );
-$envato_product 				=  get_post_meta( $post->ID, '_envato_product_in_stores', true );
-$envato_product_price 			=  get_post_meta( $post->ID, '_envato_product_price', true );
-$envato_product_preview_url 	= get_post_meta( $post->ID, '_envato_product_preview_url', true );
-$add_to_cart_button_url 	    = get_post_meta( $post->ID, '_envato_product_add_to_cart_button_url', true );
-
+$rainbowit_options          	=  Rainbowit_Helper::rainbowit_get_options();
+$envato_product_preview_url 	=  get_post_meta( $post->ID, '_envato_product_preview_url', true );
 $envatoproduct_template_type 	=  get_post_meta( $post->ID, '_envato_product_template_type', true );
-$review_count = $product->get_review_count();
+$envato_product_total_sales 	=  get_post_meta( $post->ID, '_envato_product_total_sales', true );
+$review_count 					=  $product->get_review_count();
+$preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
 
-$preview_btn_text =	isset( $rainbowit_options['preview_btn_text'] ) ?  $rainbowit_options['preview_btn_text'] : '';
+$envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+
 ?>
 <div <?php wc_product_class('col-12 col-md-6 col-xl-6 single-item mb--24', $product); ?> data-sal="slide-up" data-sal-duration="400">
 	<div class="rbt-card">
@@ -51,26 +48,36 @@ $preview_btn_text =	isset( $rainbowit_options['preview_btn_text'] ) ?  $rainbowi
 			<div class="rbt-card-meta woocommerce">
 				<?php if( isset( $envatoproduct_template_type ) && !empty( $envatoproduct_template_type ) ) { ?>
 				<a  class="category"><?php echo esc_html( $envatoproduct_template_type );?></a>
-				<?php } ?>
-				<?php woocommerce_template_loop_rating(); ?>
+				<?php } 
+				if(  $product->is_type('external') && $envato_product_total_rating > 3 ) { ?>
+				<div class="review">
+					<div class="rating">
+						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+					</div>
+					<span class="rating-count">(<?php echo esc_html( $envato_product_total_rating ); ?>)</span>
+				</div>
+				<?php } else { 
+				 woocommerce_template_loop_rating(); 
+				}
+				?>
 			</div>
 			<div class="rbt-card-bottom">
 				<div class="sales">
 					<?php woocommerce_template_loop_price(); ?>
-					<span class="sales-count">62 Sales</span>
+					<?php if(!empty($envato_product_total_sales)) { ?>
+					<span class="sales-count"><?php echo esc_html( $envato_product_total_sales );?> <?php echo esc_html__("sales","rainbowit"); ?></span>
+					<?php } ?>
 				</div>
 				<div class="rbt-card-btn">
 					<a href="<?php echo esc_url( $envato_product_preview_url );?>" target="_blank" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary">
 						<span><i class="fa-sharp fa-regular fa-eye"></i></span>
 						<?php echo esc_html( $preview_btn_text ); ?>
 					</a>
-					<?php if( $enable_envato_product == 'yes' ) { ?>
-					<a href="<?php echo esc_url( $add_to_cart_button_url );?>" class="rbt-btn rbt-btn-cart rbt-btn-sm hover-effect-2 btn-border-secondary">
-						<span><i class="fa-regular fa-cart-shopping"></i></span>
-					</a>
-					<?php } else { ?>
 					<?php woocommerce_template_loop_add_to_cart(); ?>
-					<?php } ?>
 				</div>
 			</div>
 		</div>

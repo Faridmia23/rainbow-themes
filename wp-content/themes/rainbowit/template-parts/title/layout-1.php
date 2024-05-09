@@ -20,7 +20,7 @@ $page_breadcrumb_enable         = $page_breadcrumb['breadcrumbs'];
 
 ?>
 
-<div class="rbt-section-bgCommon faridmia">
+<div class="rbt-section-bgCommon">
     <div class="container">
         <div class="row">
             <div class="col-12">

@@ -111,9 +111,6 @@ function rainbowit_shop_hide_product_data_tab( $tabs ){
     if ( empty( $rainbowit_options['wc_description'] ) ) {
         unset( $tabs['description'] );
     }
-    if ( empty( $rainbowit_options['wc_reviews'] ) ) {
-        unset( $tabs['reviews'] );
-    }
     if ( empty( $rainbowit_options['wc_additional_info'] ) ) {
         unset( $tabs['additional_information'] );
     }
@@ -162,10 +159,10 @@ function rainbowit_shop_show_or_hide_cross_sells(){
  */
 function rainbowit_change_breadcrumb_delimiter( $defaults ) {
     $separator          = '';
-    $defaults['delimiter'] = '<li class="separator"> ' . esc_html($separator) . ' </li>';
-    $defaults['wrap_before'] = '<ul class="page-list shop-breadcrumb">';
+    $defaults['delimiter'] = '<li class="rbt-breadcrumb-item icon"><i class="fa-regular fa-chevron-right"></i></li>';
+    $defaults['wrap_before'] = '<ul class="page-list shop-breadcrumb pages-info mb--5">';
     $defaults['wrap_after'] = '</ul>';
-    $defaults['before'] = '<li>';
+    $defaults['before'] = '<li class="rbt-breadcrumb-item">';
     $defaults['after'] = '</li>';
     $defaults['home'] = esc_html__('Home', 'rainbowit');
     return $defaults;
@@ -194,3 +191,22 @@ function rainbowit_woocommerce_header_add_to_cart_fragment( $fragments ) {
     $fragments['span.rbt-cart-count'] = ob_get_clean();
     return $fragments;
 }
+
+function reviews_count_func( $atts = '') {
+	// Make sure an ID was passed,
+	if ( ! empty( $atts['id'] && function_exists( 'wc_get_product' ) ) ) {
+		// Get a WC_Product object for the product.
+		$product = wc_get_product( (int) $atts['id'] );
+		// Return the review count.
+		$total_rating = $product->get_review_count();
+
+		if( $total_rating < 10 ) {
+			$total_rating = '0'.$total_rating;
+			return $total_rating;
+		}
+
+		return $total_rating;
+	}
+}
+
+add_shortcode( 'reviews_count', 'reviews_count_func', 10, 1 );

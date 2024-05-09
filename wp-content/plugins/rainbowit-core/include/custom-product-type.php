@@ -21,7 +21,7 @@ function rainbowit_options_product_tab_content()
 
 	// Dont forget to change the id in the div with your target of your product tab
 	global $post;
-	$envato_product = (array) get_post_meta($post->ID, '_envato_product_in_stores', true);
+	
 ?>
 	<input type="hidden" name="product_other_info">
 	<div class='options_group'>
@@ -33,26 +33,28 @@ function rainbowit_options_product_tab_content()
 		 * 
 		 * @return void
 		 */
-		// Set your Envato API token
-		$apiToken = 'AxNy23RTmWIlDXO3E0Cad6075IHpEciQ';
-		$page = 1;
-		$page_size = 100;
-		$products = wp_remote_get('https://api.envato.com/v1/discovery/search/search/item?site=themeforest.net&username=rainbow-themes', array(
-			'headers' => array(
-				'timeout' => 30,
-				'Authorization' => 'Bearer ' . $apiToken
-			)
-		));
-		$product_info = isset($products['body']) ? json_decode($products['body']) : '';
-		$matches_products = isset($product_info) && !empty($product_info) ? $product_info->matches : '';
+
+		$get_option = get_option( 'rainbowit_envato_product_save_update', true );
+
+		global $post;
+
+		$product_id = $post->ID;
+
+		$matches_products = json_decode($get_option,true);
+
 		// echo "<pre>";
-		// print_r($product_info);
+		// print_r($matches_products);
 		// echo "</pre>";
-		//  die;
+
+		$product = wc_get_product( $product_id  );
+
+		$product_title = $product->get_title();
 		?>
 		<p class='form-field _envato_product_in_stores'>
 			<label for='_envato_product_in_stores'><?php _e('Envato Product Select', 'rainbowit'); ?></label>
-			<?php if (!empty($matches_products)) : ?>
+			<?php if (!empty($matches_products)) : 
+			
+				?>
 				<select name='_envato_product_in_stores[]' class='wc-enhanced-select rainbow-theme-envato-product-select' style='width: 80%;'>
 					<option value="" selected><?php echo esc_html_x('Select Product', 'This will be by default', 'rainbowit'); ?></option>
 					<?php
@@ -69,24 +71,30 @@ function rainbowit_options_product_tab_content()
 					}
 					foreach ($matches_products as $product) :
 
-						$product_name = isset($product->name) ? $product->name : '';
-						$product_id = isset($product->id) ? $product->id : '';
-						$preview_url = isset($product->previews->live_site->url) ? $product->previews->live_site->url : '';
-
-						$product_desc_html = isset($product->description_html) ? $product->description_html : '';
-						$product_desc_raw = isset($product->description) ? $product->description : '';
-						$price_cents = isset($product->price_cents) ? $product->price_cents : '';
-						$url = isset($product->url) ? $product->url : '';
-						$number_of_sales = isset($product->number_of_sales) ? $product->number_of_sales : '';
-						$product_tags = isset($product->tags) ? $product->tags : '';
-						$product_image = isset($product->previews->icon_with_landscape_preview->landscape_url) ? $product->previews->icon_with_landscape_preview->landscape_url : '';
-						$product_price = centsToUSD($price_cents);
+						$product_name 		= isset($product['name']) ? $product['name'] : '';
+						$updated_at 		= isset($product['updated_at']) ? $product['updated_at'] : '';
+						$published_at 		= isset($product['published_at']) ? $product['published_at'] : '';
+						$columns 			= isset($product['attributes'][0]['value']) ? $product['attributes'][0]['value'] : '';
+						$avg_rating 		= isset($product['rating']['rating']) ? $product['rating']['rating'] : '';
+						$total_rating 		= isset($product['rating']['count']) ? $product['rating']['count'] : '';
+						$product_id 		= isset($product['id']) ? $product['id'] : '';
+						$preview_url 		= isset($product['previews']['live_site']['url']) ? $product['previews']['live_site']['url'] : '';
+						$icon_url 		= isset($product['previews']['icon_with_landscape_preview']['icon_url']) ? $product['previews']['icon_with_landscape_preview']['icon_url'] : '';
+						$product_desc_html  = isset($product['description_html']) ? $product['description_html'] : '';
+						$product_desc_raw 	= isset($product['description']) ? $product['description'] : '';
+						$price_cents 		= isset($product['price_cents']) ? $product['price_cents'] : '';
+						$url 				= isset($product['url']) ? $product['url'] : '';
+						$number_of_sales 	= isset($product['number_of_sales']) ? $product['number_of_sales'] : '';
+						$product_tags 		= isset($product['tags']) ? $product['tags'] : '';
+						$product_image 		= isset($product['previews']['icon_with_landscape_preview']['landscape_url']) ? $product['previews']['icon_with_landscape_preview']['landscape_url'] : '';
+						$product_price 		= centsToUSD($price_cents);
+						
 						$product_other_info = array(
 							'product_img' => $product_image,
 							'product_tags' => $product_tags
 						);
 					?>
-						<option data-product_other_info="<?php echo base64_encode(serialize($product_other_info)); ?>" data-product_image=<?php echo esc_url($product_image); ?> data-product_price="<?php echo esc_attr($product_price); ?>" data-product_name="<?php echo esc_attr($product_name); ?>" data-product_desc_raw="<?php echo esc_attr(($product_desc_raw)); ?> " data-product_desc_html="<?php echo esc_attr($product_desc_html) ?>" data-envato_product_id="<?php echo esc_attr($product_id); ?>" value="<?php echo esc_attr($product_id); ?>" data-envato_preview_url="<?php echo esc_attr($preview_url); ?>" data-envato_product_sale="<?php echo esc_attr($number_of_sales);?>" data-envato_product_url="<?php echo esc_attr($url);?>">><?php echo esc_html($product_name); ?></option>
+						<option <?php if ( $product_name == $product_title  ) echo ' selected="selected"'; ?> data-product_other_info="<?php echo base64_encode(serialize($product_other_info)); ?>" data-product_image=<?php echo esc_url($product_image); ?> data-product_price="<?php echo esc_attr($product_price); ?>" data-product_name="<?php echo esc_attr($product_name); ?>" data-product_desc_raw="<?php echo esc_attr(($product_desc_raw)); ?> " data-product_desc_html="<?php echo esc_attr($product_desc_html) ?>" data-envato_product_id="<?php echo esc_attr($product_id); ?>" value="<?php echo esc_attr($product_id); ?>" data-envato_preview_url="<?php echo esc_attr($preview_url); ?>" data-envato_product_sale="<?php echo esc_attr($number_of_sales);?>" data-envato_product_url="<?php echo esc_attr($url);?>" data-updated_at="<?php echo esc_attr($updated_at);?>" data-published_at="<?php echo esc_attr($published_at);?>" data-columns="<?php echo esc_attr($columns);?>" data-avg_rating="<?php echo esc_attr($avg_rating);?>" data-total_rating="<?php echo esc_attr($total_rating);?>" data-icon_url="<?php echo esc_attr($icon_url);?>">><?php echo esc_html($product_name); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>
@@ -114,6 +122,69 @@ function rainbowit_options_product_tab_content()
 			array(
 				'id'          => '_envato_product_template_type',
 				'label'       => __('Template Category', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_last_update',
+				'label'       => __('Last Update', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_published_date',
+				'label'       => __('Published Date', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_compatable_with',
+				'label'       => __('Compatable With', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_column',
+				'label'       => __('Column', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_avg_rating',
+				'label'       => __('Average Rating', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_total_rating',
+				'label'       => __('Total Rating', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envato_product_preview_icon_url',
+				'label'       => __('Preview Icon URL', 'rainbowit'),
 				'placeholder' => '',
 				'desc_tip'    => 'true',
 			)
@@ -147,6 +218,7 @@ function rainbowit_custom_service_options_product_tab_content()
 					'description' => __('Please Total Queue Item', 'rainbowit'),
 				)
 			);
+
 			woocommerce_wp_text_input(
 				array(
 					'id'          => '_service_product_delivery_time',
@@ -205,4 +277,86 @@ function save_envato_product_options_field($post_id)
 		update_post_meta($post_id, '_envato_product_template_type', sanitize_text_field($_POST['_envato_product_template_type']));
 	endif;
 
+	if (isset($_POST['_envato_product_last_update'])) :
+		update_post_meta($post_id, '_envato_product_last_update', sanitize_text_field($_POST['_envato_product_last_update']));
+	endif;
+
+	if (isset($_POST['_envato_product_published_date'])) :
+		update_post_meta($post_id, '_envato_product_published_date', sanitize_text_field($_POST['_envato_product_published_date']));
+	endif;
+
+	if (isset($_POST['_envato_product_compatable_with'])) :
+		update_post_meta($post_id, '_envato_product_compatable_with', sanitize_text_field($_POST['_envato_product_compatable_with']));
+	endif;
+
+	if (isset($_POST['_envato_product_column'])) :
+		update_post_meta($post_id, '_envato_product_column', sanitize_text_field($_POST['_envato_product_column']));
+	endif;
+
+	if (isset($_POST['_envato_product_avg_rating'])) :
+		update_post_meta($post_id, '_envato_product_avg_rating', sanitize_text_field($_POST['_envato_product_avg_rating']));
+	endif;
+
+	if (isset($_POST['_envato_product_total_rating'])) :
+		update_post_meta($post_id, '_envato_product_total_rating', sanitize_text_field($_POST['_envato_product_total_rating']));
+	endif;
+
+	if (isset($_POST['_envato_product_preview_icon_url'])) :
+		update_post_meta($post_id, '_envato_product_preview_icon_url', sanitize_text_field($_POST['_envato_product_preview_icon_url']));
+	endif;
+
+
+	
+}
+
+
+// Schedule the event on plugin activation
+register_activation_hook( __FILE__, 'rainbowit_weekly_query_activation' );
+
+function rainbowit_weekly_query_activation() {
+    // Schedule the event with a delay of 10 minutes
+    if ( ! wp_next_scheduled( 'rainbowit_run_envato_product_api' ) ) {
+        $timestamp = time() + 300; // 10 minutes in seconds
+        wp_schedule_single_event( $timestamp, 'rainbowit_run_envato_product_api' );
+    }
+}
+
+// Define api call envato product
+function rainbowit_run_envato_product_api() {
+    /**
+	 * Fetch Products from Envato
+	 * 
+	 * @since 1.0.0
+	 * 
+	 * @return void
+	*/
+	$apiToken = 'AxNy23RTmWIlDXO3E0Cad6075IHpEciQ';
+	$products = wp_remote_get('https://api.envato.com/v1/discovery/search/search/item?site=themeforest.net&username=rainbow-themes', array(
+		'headers' => array(
+			'timeout' => 30,
+			'Authorization' => 'Bearer ' . $apiToken
+		)
+	));
+	$product_info = isset($products['body']) ? json_decode($products['body']) : '';
+	$matches_products = isset($product_info) && !empty($product_info) ? $product_info->matches : '';
+
+	$set_option = json_encode($matches_products);
+
+	$check = update_option( 'rainbowit_envato_product_save_update', $set_option );
+
+	if( $check ) {
+		echo "success";
+	} else {
+		return false;
+	}
+
+	exit();
+}
+
+// Schedule cleanup on plugin deactivation
+register_deactivation_hook( __FILE__, 'rainbowit_weekly_query_deactivation' );
+
+function rainbowit_weekly_query_deactivation() {
+    // Clear the scheduled event
+    wp_clear_scheduled_hook( 'rainbowit_run_envato_product_api' );
 }

@@ -617,3 +617,27 @@ add_filter( 'wpcf7_autop_or_not', '__return_false' );
  }
  
  add_action( 'save_post', 'rainbow_save_product_attributes' );
+
+// Add submenu page for WooCommerce products
+function add_custom_submenu_page() {
+    add_submenu_page(
+        'edit.php?post_type=product', // parent_slug
+        'Envato Product',         // page_title
+        'Envato Product',              // menu_title
+        'manage_options',              // capability
+        'envato-product-menu-slug',         // menu_slug
+        'envato_product_submenu_page_content'  // function
+    );
+}
+add_action('admin_menu', 'add_custom_submenu_page');
+
+// Callback function to display content on the submenu page
+function envato_product_submenu_page_content() {
+    echo '<div class="wrap">';
+    echo '<h2>Envato Product Update</h2>';
+    ?>
+    <button type="submit" class="envato-product-update"><?php echo esc_html__("Envato Product","rainbowit");?></button>
+    <?php 
+    
+    echo '</div>';
+}

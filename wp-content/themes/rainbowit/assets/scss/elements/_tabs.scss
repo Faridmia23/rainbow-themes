@@ -1,10 +1,10 @@
 .rbt-tabs-wrapper {
     display: flex;
     justify-content: center;
-    overflow-x: scroll;
-    scrollbar-color: var(--color-gray-5) transparent;
     margin: 0 auto;
     padding: 0;
+    overflow-x: auto;
+    scrollbar-color: var(--color-gray-5) transparent;
 
     @media #{$md-layout} {
         justify-content: start;

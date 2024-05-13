@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Template part for displaying results in search pages
  *
@@ -7,27 +6,26 @@
  *
  * @package rainbowit
  */
-$images = rainbowit_get_acf_data('rainbowit_gallery_image');
-$audio_url = rainbowit_get_acf_data("rainbowit_upload_audio");
-$custom_link = rainbowit_get_acf_data('rainbowit_custom_link');
-$link = !empty($custom_link) ? $custom_link : get_the_permalink();
-$rainbowit_quote_author_name = rainbowit_get_acf_data('rainbowit_quote_author_name');
-$rainbowit_quote_author = !empty($rainbowit_quote_author_name) ? $rainbowit_quote_author_name : get_the_author();
+$images                                  = rainbowit_get_acf_data('rainbowit_gallery_image');
+$audio_url                               = rainbowit_get_acf_data("rainbowit_upload_audio");
+$custom_link                             = rainbowit_get_acf_data('rainbowit_custom_link');
+$link                                    = !empty($custom_link) ? $custom_link : get_the_permalink();
+$rainbowit_quote_author_name             = rainbowit_get_acf_data('rainbowit_quote_author_name');
+$rainbowit_quote_author                  = !empty($rainbowit_quote_author_name) ? $rainbowit_quote_author_name : get_the_author();
 $rainbowit_quote_author_name_designation = rainbowit_get_acf_data('rainbowit_quote_author_name_designation');
-$video_url = rainbowit_get_acf_data("rainbowit_video_link");
+$video_url                               = rainbowit_get_acf_data("rainbowit_video_link");
+$page_breadcrumb                         = Rainbowit_Helper::rainbowit_page_breadcrumb();
+$page_breadcrumb_enable                  = $page_breadcrumb['breadcrumbs'];
+$featured_img_url                        = get_the_post_thumbnail_url(get_the_ID(), 'full');
 
-$page_breadcrumb = Rainbowit_Helper::rainbowit_page_breadcrumb();
-$page_breadcrumb_enable = $page_breadcrumb['breadcrumbs'];
-$featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
 if (has_post_thumbnail()) {
     $style = 'style="background-image: url(' . $featured_img_url . ')"';
 } else {
     $style = '';
 }
 
-$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
+$rainbowit_options              = Rainbowit_Helper::rainbowit_get_options();
 $blog_bottom_client_template_id = ($rainbowit_options['blog_bottom_client_template_id']) ? $rainbowit_options['blog_bottom_client_template_id'] : '';
-
 
 ?>
 
@@ -83,7 +81,6 @@ $blog_bottom_client_template_id = ($rainbowit_options['blog_bottom_client_templa
         </div>
     </div>
 </div>
-
 <?php
 global $post;
 $related = new WP_Query(
@@ -95,15 +92,15 @@ $related = new WP_Query(
 );
 
 
-$post_categories = get_the_category();
-$readmore_btn = ( $rainbowit_options['rainbowit_enable_readmore_btn'] ) ? $rainbowit_options['rainbowit_enable_readmore_btn'] : 'no';
-$post_author_meta = ( $rainbowit_options['rainbowit_show_post_author_meta'] ) ? $rainbowit_options['rainbowit_show_post_author_meta'] : 'no';
-$readmore_text = ( $rainbowit_options['rainbowit_readmore_text'] ) ? $rainbowit_options['rainbowit_readmore_text'] : '';
-$related_post_subtitle = ( $rainbowit_options['rainbowit_related_post_subtitle'] ) ? $rainbowit_options['rainbowit_related_post_subtitle'] : '';
-$related_post_title = ( $rainbowit_options['rainbowit_related_post_title'] ) ? $rainbowit_options['rainbowit_related_post_title'] : '';
-$related_post_desc = ( $rainbowit_options['rainbowit_related_post_desc'] ) ? $rainbowit_options['rainbowit_related_post_desc'] : '';
-?>
-<?php
+$post_categories        = get_the_category();
+$readmore_btn           = ( $rainbowit_options['rainbowit_enable_readmore_btn'] ) ? $rainbowit_options['rainbowit_enable_readmore_btn'] : 'no';
+$post_author_meta       = ( $rainbowit_options['rainbowit_show_post_author_meta'] ) ? $rainbowit_options['rainbowit_show_post_author_meta'] : 'no';
+$readmore_text          = ( $rainbowit_options['rainbowit_readmore_text'] ) ? $rainbowit_options['rainbowit_readmore_text'] : '';
+$related_post_subtitle  = ( $rainbowit_options['rainbowit_related_post_subtitle'] ) ? $rainbowit_options['rainbowit_related_post_subtitle'] : '';
+$related_post_title     = ( $rainbowit_options['rainbowit_related_post_title'] ) ? $rainbowit_options['rainbowit_related_post_title'] : '';
+$related_post_desc      = ( $rainbowit_options['rainbowit_related_post_desc'] ) ? $rainbowit_options['rainbowit_related_post_desc'] : '';
+
+
 if ($related->have_posts()) {  ?>
     <div class="rbt-section-wrapper-4 rbt-section-gapTop rbt-section-gapBottom">
         <div class="container">
@@ -177,9 +174,7 @@ if ($related->have_posts()) {  ?>
     </div>
 <?php
 }
-?>
 
-<?php
 if (class_exists("\\Elementor\\Plugin")) {
     $pluginElementor = \Elementor\Plugin::instance();
     $contentElementor2 = $pluginElementor->frontend->get_builder_content($blog_bottom_client_template_id);

@@ -1,12 +1,13 @@
 (function ($) {
     "use strict";
-    jQuery(document).ready(function ($) {
-        const {ajax_nonce, ajax_url} = rainbowit_portfolio_ajax;
 
+    jQuery(document).ready(function ($) {
+        // const {ajax_nonce, ajax_url} = rainbowit_portfolio_ajax;
 
         $('.rainbow-theme-envato-product-select').on( 'change', function() {
-            
+
             var selectedOption = $(this).find('option:selected');
+
             const product_name          = selectedOption.data('product_name');
             const envato_preview_url    = selectedOption.data('envato_preview_url');
             const envato_product_sale   = selectedOption.data('envato_product_sale');
@@ -19,7 +20,7 @@
             const columns               = selectedOption.data('columns');
             const avg_rating            = selectedOption.data('avg_rating');
             const total_rating          = selectedOption.data('total_rating');
-            const icon_url          = selectedOption.data('icon_url');
+            const icon_url              = selectedOption.data('icon_url');
 
 
             $('input[name="product_other_info"').val(selectedOption.data('product_other_info'))
@@ -34,7 +35,7 @@
             $('input[name="_envato_product_avg_rating"]').val(avg_rating);
             $('input[name="_envato_product_total_rating"]').val(total_rating);
             $('input[name="_envato_product_preview_icon_url"]').val(icon_url);
-            
+
             /**
              * Change product content value
              */
@@ -49,7 +50,7 @@
                     if (iframe.length) {
                         // Get the document object of the iframe
                         var iframeDoc = iframe[0].contentWindow.document;
-    
+
                         // Check if the document object exists
                         if (iframeDoc) {
                             // Set the new content
@@ -91,7 +92,7 @@
                     console.error('TinyMCE iframe not found');
                 }
             }
-            
+
         } );
         $(document).on("click", ".upload_image_button", function (e) {
            e.preventDefault();
@@ -110,19 +111,23 @@
            // When an image is selected, run a callback.
            file_frame.on('select', function () {
               // We set multiple to false so only get one image from the uploader
-      
+
               var attachment = file_frame.state().get('selection').first().toJSON();
-      
+
               $button.siblings('input').val(attachment.url);
-      
+
            });
-      
+
            // Finally, open the modal
            file_frame.open();
         });
-     });
 
-     $('.ajax-order-now-product').on('click', function() {
+        // Function to execute your code
+       
+    });
+
+
+    $('.ajax-order-now-product').on('click', function () {
         const productId = $(this).data('product_id');
         const redirect = $(this).data('redirect_url');
         $.ajax({
@@ -138,7 +143,7 @@
             },
             success: (response) => {
                 // Redirect to the cart page
-               window.location.href = redirect;
+                window.location.href = redirect;
             },
             complete: () => {
             },
@@ -148,7 +153,7 @@
         })
     });
 
-    $('.envato-product-update').on('click', function() {
+    $('.envato-product-update').on('click', function () {
         $.ajax({
             type: 'post',
             url: rainbowit_portfolio_ajax.ajax_url,

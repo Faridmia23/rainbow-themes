@@ -740,3 +740,29 @@ button.envato-product-update {
     font-weight: 400;
     color: var(--color-body);
 }
+
+.single-open-job-position .rbt-section-bgCommon .breadcrumb {
+    padding-bottom: 110px;
+}
+
+.product-custom-service-tab .card-body .card-left {
+    flex: 0 0 50%;
+}
+
+.product-custom-service-tab .card-body .card-right {
+    flex: 0 0 50%;
+    padding: 24px 16px;
+}
+
+.tax-product_cat .breadcrumb  {
+    padding-bottom: 120px;
+}
+
+.tax-product_cat .breadcrumb .page-list {
+    justify-content: center;
+}
+
+.tax-product_cat .rainbow-section-gap {
+    padding-top: 120px;
+    padding-bottom: 50px;
+}

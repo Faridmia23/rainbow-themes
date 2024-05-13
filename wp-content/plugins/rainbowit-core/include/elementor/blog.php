@@ -34,6 +34,18 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
         return ['blog', 'news', 'post', 'rainbowit'];
     }
 
+    public function category_dropdown()
+    {
+        $terms  = get_terms(array('taxonomy' => 'category', 'fields' => 'id=>name','hide_empty' => true ));
+        $category_dropdown = array('0' => esc_html__('All Categories', 'rainbow-elements'));
+
+        foreach ($terms as $id => $name) {
+            $category_dropdown[$id] = $name;
+        }
+
+        return $category_dropdown;
+    }
+
     protected function register_controls()
     {
 
@@ -81,6 +93,19 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
 
             ]
         );
+
+        $this->add_control(
+            'category',
+            [
+                'label' => __('Categories', 'rainbow-elements'),
+                'type' => Controls_Manager::SELECT2,
+                'default' => '0',
+                'multiple' => true,
+                'options' => $this->category_dropdown(),
+            ]
+        );
+
+
         $this->add_control(
             'blog_filter_all_button_label',
             [
@@ -167,20 +192,39 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
         }
 
 
-        /**
-         * Setup the post arguments.
-         */
-        $query_args = RBT_Helper::get_query_args('post', 'category', $this->get_settings());
-
-        // The Query
-        $query = new \WP_Query($query_args);
-
         $this->add_render_attribute('rainbowit-blog', 'class', 'rn-blog-area rn-section-gap bg_color--1');
         $this->add_render_attribute('rainbowit-blog', 'id', 'rainbowit-blog-' . esc_attr($this->get_id()));
         $post_author_meta = ($rainbowit_options['rainbowit_show_post_author_meta']) ? $rainbowit_options['rainbowit_show_post_author_meta'] : 'no';
 
-        $blog_filter = $settings['blog_filter'];
-        $heading_title = $settings['heading_title'];
+        $blog_filter        = $settings['blog_filter'];
+        $heading_title      = $settings['heading_title'];
+        $posts_per_page     = $settings['posts_per_page'];
+        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        $category = $settings['category'];
+
+        if( isset( $settings['category'] ) && !empty( $settings['category'] ) ) {
+            $args = array(
+                'post_type'             => 'post',
+                'post_status'           => 'publish',
+                'ignore_sticky_posts'   => 1,
+                'posts_per_page'        => $posts_per_page,
+                'page'                  => $paged,
+                'category'              => $settings['category'],
+            );
+        } else {
+            $args = array(
+                'post_type'             => 'post',
+                'post_status'           => 'publish',
+                'ignore_sticky_posts'   => 1,
+                'posts_per_page'        => $posts_per_page,
+                'page'                  => $paged,
+            );
+        }
+        
+
+        $query = new \WP_Query( $args );
+
 
 ?>
 
@@ -198,7 +242,7 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
 
                 if ($blog_filter == 'yes') {
                 ?>
-                    <?php if ($category_list_value && !is_wp_error($category_list_value)) : ?>
+                    <?php if ( $category_list_value && !is_wp_error( $category_list_value ) ) : ?>
                         <div class="rbt-tabs-wrapper justify-content-between">
                             <ul class="rbt-tabs tabs-3">
                                 <?php if (!empty($settings['blog_filter_all_button_label'])) {
@@ -208,20 +252,22 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
                                     <li class="rbt-tab-link3 <?php echo esc_attr($active); ?>" data-filter2="*">
                                         <button class="filter-btn"><?php echo esc_html($settings['blog_filter_all_button_label']); ?></button>
                                     </li>
-                                <?php } ?>
-                                <?php if (!empty($settings['category'])) {
+                                <?php } 
+                                if (!empty($settings['category'])) {
                                     $i = 1;
                                     foreach ($category_list_value as $category) {
-                                        $categoryName = get_term_by('slug', $category, 'category');
+                                       // $categoryName = get_term_by('slug', $category, 'category');
+                                        $categoryName = get_the_category_by_ID($category);
 
                                         $active = '';
                                         if (empty($settings['blog_filter_all_button_label']) && $i == 1) {
                                             $active = 'active';
                                         }
+
                                         ?>
 
-                                            <li class="rbt-tab-link3 <?php echo esc_attr($active); ?>" data-filter2=".<?php echo esc_attr($category); ?>">
-                                                <button class="filter-btn"><?php echo esc_html($categoryName->name); ?></button>
+                                            <li class="rbt-tab-link3 <?php echo esc_attr($active); ?>" data-filter2=".<?php echo esc_attr(strtolower( $categoryName ) ); ?>">
+                                                <button class="filter-btn"><?php echo esc_html($categoryName); ?></button>
                                             </li>
                                             <?php }
                                         $i++;
@@ -229,7 +275,7 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
                                 } else {
                                     $terms = get_terms(array(
                                         'taxonomy' => 'category',
-                                        'hide_empty' => true,
+                                        'hide_empty' => false,
                                     ));
                                     if ($terms && !is_wp_error($terms)) {
                                         $m = 1;
@@ -274,7 +320,7 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
 
                         ?>
                             <!-- single blog -->
-                            <div class="col-md-<?php echo esc_attr($settings['rbt_blog_columns_for_laptop']); ?> col-sm-<?php echo esc_attr($settings['rbt_blog_columns_for_tablet']); ?> col-<?php echo esc_attr($settings['rbt_blog_columns_for_mobile']); ?> col-xl-<?php echo esc_attr($settings['rbt_blog_columns_for_desktop']); ?> mb--25 rbt-tab-item-2 <?php echo esc_attr($termsAssignedCat); ?>">
+                            <div class="col-md-<?php echo esc_attr($settings['rbt_blog_columns_for_laptop']); ?> col-sm-<?php echo esc_attr($settings['rbt_blog_columns_for_tablet']); ?> col-<?php echo esc_attr($settings['rbt_blog_columns_for_mobile']); ?> col-xl-<?php echo esc_attr($settings['rbt_blog_columns_for_desktop']); ?> mb--25 rbt-tab-item-2 <?php echo esc_attr( strtolower( $termsAssignedCat ) ); ?>">
                                 <div class="rbt-card-6 pt--25 pb--25 ">
                                     <?php if (has_post_thumbnail()) { ?>
                                         <div class="card-thumbnail">
@@ -342,18 +388,12 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
                             <?php
                             $big = 999999999; // need an unlikely integer
 
-                            if (get_query_var('paged')) {
-                                $paged = get_query_var('paged');
-                            } else if (get_query_var('page')) {
-                                $paged = get_query_var('page');
-                            } else {
-                                $paged = 1;
-                            }
+                            $current_page = max(1, get_query_var('paged'));
 
                             echo paginate_links(array(
                                 'base'       => str_replace($big, '%#%', get_pagenum_link($big)),
                                 'format'     => '?paged=%#%',
-                                'current'    => $paged,
+                                'current'    => $current_page,
                                 'total'      => $query->max_num_pages,
                                 'type'       => 'page-numbers',
                                 'prev_text'  => '<i class="fa-solid fa-chevron-left"></i>',

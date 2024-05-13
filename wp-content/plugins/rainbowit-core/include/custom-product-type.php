@@ -42,10 +42,6 @@ function rainbowit_options_product_tab_content()
 
 		$matches_products = json_decode($get_option,true);
 
-		// echo "<pre>";
-		// print_r($matches_products);
-		// echo "</pre>";
-
 		$product = wc_get_product( $product_id  );
 
 		$product_title = $product->get_title();
@@ -310,39 +306,29 @@ function save_envato_product_options_field($post_id)
 }
 
 
-// Schedule the event on plugin activation
-register_activation_hook( __FILE__, 'rainbowit_weekly_query_activation' );
+// cron job
 
-function rainbowit_weekly_query_activation() {
-    // Schedule the event with a delay of 10 minutes
-    if ( ! wp_next_scheduled( 'rainbowit_run_envato_product_api' ) ) {
-        $timestamp = time() + 300; // 10 minutes in seconds
-        wp_schedule_single_event( $timestamp, 'rainbowit_run_envato_product_api' );
-    }
-}
-
-// Define api call envato product
-function rainbowit_run_envato_product_api() {
-    /**
+function rainbowit_envato_api_call() {
+	/**
 	 * Fetch Products from Envato
 	 * 
 	 * @since 1.0.0
 	 * 
 	 * @return void
 	*/
-	$apiToken = 'AxNy23RTmWIlDXO3E0Cad6075IHpEciQ';
-	$products = wp_remote_get('https://api.envato.com/v1/discovery/search/search/item?site=themeforest.net&username=rainbow-themes', array(
+
+	$apiToken 	= 'AxNy23RTmWIlDXO3E0Cad6075IHpEciQ';
+	$products 	= wp_remote_get('https://api.envato.com/v1/discovery/search/search/item?site=themeforest.net&username=rainbow-themes', array(
 		'headers' => array(
 			'timeout' => 30,
 			'Authorization' => 'Bearer ' . $apiToken
 		)
 	));
-	$product_info = isset($products['body']) ? json_decode($products['body']) : '';
-	$matches_products = isset($product_info) && !empty($product_info) ? $product_info->matches : '';
 
-	$set_option = json_encode($matches_products);
-
-	$check = update_option( 'rainbowit_envato_product_save_update', $set_option );
+	$product_info 		= isset($products['body']) ? json_decode($products['body']) : '';
+	$matches_products 	= isset($product_info) && !empty($product_info) ? $product_info->matches : '';
+	$set_option 		= json_encode($matches_products);
+	$check 				= update_option( 'rainbowit_envato_product_save_update', $set_option );
 
 	if( $check ) {
 		echo "success";
@@ -350,13 +336,31 @@ function rainbowit_run_envato_product_api() {
 		return false;
 	}
 
+	// weekly run js enqueue
+
+	wp_enqueue_script('rainbowit-envato-api-run', RAINBOWIT_ADDONS_URL . 'assets/js/envato-apirun.js', array('jquery'), '1.0', true);
+
 	exit();
 }
 
-// Schedule cleanup on plugin deactivation
-register_deactivation_hook( __FILE__, 'rainbowit_weekly_query_deactivation' );
+/**
+ * wordpress cron job schedule init function
+ * 
+ * @since 1.0.0
+ * 
+ * @return void
+*/
+  
+add_action( 'init', 'schedule_daily_api_call' );
+  
+function schedule_daily_api_call() {
 
-function rainbowit_weekly_query_deactivation() {
-    // Clear the scheduled event
-    wp_clear_scheduled_hook( 'rainbowit_run_envato_product_api' );
+	if ( ! wp_next_scheduled( 'rainbowit_envato_api_hook_run' ) ) {
+
+		wp_schedule_event( time(), 'weekly', 'rainbowit_envato_api_hook_run' );
+
+	}
+
 }
+
+add_action( 'rainbowit_envato_api_hook_run', 'rainbowit_envato_api_call' );

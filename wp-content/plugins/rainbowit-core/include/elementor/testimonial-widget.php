@@ -146,12 +146,9 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
         $extra_class    = $settings['extra_class'] ?? '';
         $section_id    = $settings['section_id'] ?? '';
 
-        $attr = '';
-        if (!empty($settings['btn_link']['url'])) {
-            $attr  = 'href="' . $settings['btn_link']['url'] . '"';
-            $attr .= !empty($settings['btn_link']['is_external']) ? ' target="_blank"' : '';
-            $attr .= !empty($settings['btn_link']['nofollow']) ? ' rel="nofollow"' : '';
-        }
+        if ( ! empty( $settings['btn_link']['url'] ) ) {
+			$this->add_link_attributes( 'btn_link', $settings['btn_link'] );
+		}
 
         $args = array(
             'post_type'             => 'testimonial',
@@ -245,7 +242,7 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
                 ?>
             </div>
             <div class="rbt-btn-group btn-position-abosolute z-3 ">
-                <a <?php echo esc_attr($attr); ?> class="rbt-btn rbt-btn-primary show-more"><?php echo esc_html($btn_title); ?></a>
+                <a <?php $this->print_render_attribute_string( 'btn_link' ); ?> class="rbt-btn rbt-btn-primary show-more"><?php echo esc_html($btn_title); ?></a>
             </div>
         </div>
     </div>

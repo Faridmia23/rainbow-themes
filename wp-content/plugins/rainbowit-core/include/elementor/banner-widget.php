@@ -73,6 +73,45 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
             ]
         );
         $this->add_control(
+            'sec_title_tag',
+            [
+                'label' => __('Title HTML Tag', 'rainbowit'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'h1' => [
+                        'title' => __('H1', 'rainbowit'),
+                        'icon' => 'eicon-editor-h1'
+                    ],
+                    'h2' => [
+                        'title' => __('H2', 'rainbowit'),
+                        'icon' => 'eicon-editor-h2'
+                    ],
+                    'h3' => [
+                        'title' => __('H3', 'rainbowit'),
+                        'icon' => 'eicon-editor-h3'
+                    ],
+                    'h4' => [
+                        'title' => __('H4', 'rainbowit'),
+                        'icon' => 'eicon-editor-h4'
+                    ],
+                    'h5' => [
+                        'title' => __('H5', 'rainbowit'),
+                        'icon' => 'eicon-editor-h5'
+                    ],
+                    'h6' => [
+                        'title' => __('H6', 'rainbowit'),
+                        'icon' => 'eicon-editor-h6'
+                    ],
+                    'div' => [
+                        'title' => __('div', 'rainbowit'),
+                        'icon' => 'eicon-font'
+                    ]
+                ],
+                'default' => 'h1',
+                'separator' => 'before',
+            ]
+        );
+        $this->add_control(
             'desc',
             [
                 'label' => esc_html__('Description', 'rainbowit'),
@@ -181,17 +220,16 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
         $btn_title = $settings['btn_title'] ?? '';
         $btn_2title = $settings['btn_2_title'] ?? '';
 
-        if (!empty($settings['btn_link']['url'])) {
-            $attr  = 'href="' . $settings['btn_link']['url'] . '"';
-            $attr .= !empty($settings['btn_link']['is_external']) ? ' target="_blank"' : '';
-            $attr .= !empty($settings['btn_link']['nofollow']) ? ' rel="nofollow"' : '';
-        }
 
-        if (!empty($settings['btn__2_link']['url'])) {
-            $attr2  = 'href="' . $settings['btn__2_link']['url'] . '"';
-            $attr2 .= !empty($settings['btn__2_link']['is_external']) ? ' target="_blank"' : '';
-            $attr2 .= !empty($settings['btn__2_link']['nofollow']) ? ' rel="nofollow"' : '';
-        }
+        if ( ! empty( $settings['btn_link']['url'] ) ) {
+			$this->add_link_attributes( 'btn_link', $settings['btn_link'] );
+		}
+
+        if ( ! empty( $settings['btn__2_link']['url'] ) ) {
+			$this->add_link_attributes( 'btn__2_link', $settings['btn__2_link'] );
+		}
+
+
 ?>
         <!-- banner second design -->
         <div class="rbt-main-banner">
@@ -225,20 +263,20 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
                             </i>
                             <?php echo esc_html($subtitle_title); ?>
                         </div>
-                        <h1 class="title">
+                        <<?php echo esc_html($settings['sec_title_tag']); ?> class="title">
                             <?php echo wp_kses_post($heading_title); ?>
                             <?php echo Group_Control_Image_Size::get_attachment_image_html($settings, 'full', 'icon_image'); ?>
                             </span>
-                        </h1>
+                        </<?php echo $settings['sec_title_tag']; ?>>
                         <p class="description">
                             <?php echo wp_kses_post($desc); ?>
                         </p>
                         <div class="rbt-btn-group">
-                            <a <?php echo esc_attr($attr); ?> class="rbt-btn rbt-btn-primary">
+                            <a <?php $this->print_render_attribute_string( 'btn_link' ); ?> class="rbt-btn rbt-btn-primary">
                                 <span><i class="fa-regular fa-objects-column"></i></span>
                                 <?php echo esc_html($btn_title); ?>
                             </a>
-                            <a <?php echo esc_attr($attr2); ?> class="rbt-btn hover-effect-4"><?php echo esc_html($btn_2title); ?></a>
+                            <a <?php $this->print_render_attribute_string( 'btn__2_link' ); ?> class="rbt-btn hover-effect-4"><?php echo esc_html($btn_2title); ?></a>
                         </div>
                     </div>
                 </div>

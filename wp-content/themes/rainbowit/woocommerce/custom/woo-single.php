@@ -31,7 +31,7 @@ function rainbowit_before_main_content()
 		$last_update_date 				  = new DateTime($envato_product_last_update);
 		$envato_product_last_update 	  = $last_update_date->format('j F y');
 
-		if ($product->is_type('external')) {
+		if ($product->is_type('external') && is_product() ) {
 ?>
 			<!--End Banner Section -->
 

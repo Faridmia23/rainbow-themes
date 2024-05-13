@@ -7952,7 +7952,7 @@ input[disabled] {
 
 .megamenu-banner-bg {
   height: 100%;
-  background: linear-gradient(134deg, #162F6B 0%, #10224F 38.85%, #060E23 100%), #0B1417;
+  background: url(../images/header/megamenu-banner-bg.png), linear-gradient(134deg, #162F6B 0%, #10224F 38.85%, #060E23 100%), #0B1417;
   background-repeat: no-repeat;
   background-position: bottom right;
   display: flex;
@@ -7962,11 +7962,13 @@ input[disabled] {
 .banner-content-wrapper {
   width: 100%;
   height: 100%;
+  background: url(../images/header/megamenu-banner-shape.png);
   background-repeat: no-repeat;
   background-position: right bottom;
 }
 .banner-content-wrapper .content {
   width: 100%;
+  background: url(../images/header/megamenu-banner.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: auto 100%;
@@ -12091,10 +12093,10 @@ input[disabled] {
 .rbt-tabs-wrapper {
   display: flex;
   justify-content: center;
-  overflow-x: scroll;
-  scrollbar-color: var(--color-gray-5) transparent;
   margin: 0 auto;
   padding: 0;
+  overflow-x: auto;
+  scrollbar-color: var(--color-gray-5) transparent;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .rbt-tabs-wrapper {
@@ -14443,7 +14445,7 @@ input[disabled] {
   .rbt-progress-parent.back-to-top-btn {
     padding: 6px 12px;
     right: 24px;
-    top: 85vh;
+    top: 85svh;
   }
   .rbt-progress-parent.back-to-top-btn::after {
     position: absolute;
@@ -14688,5 +14690,4 @@ input[disabled] {
   font-size: var(--font-size-b2);
   color: var(--color-blue-3);
 }
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=../maps/style.css.map */

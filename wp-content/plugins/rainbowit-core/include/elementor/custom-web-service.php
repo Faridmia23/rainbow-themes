@@ -53,6 +53,46 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'sec_title_tag',
+            [
+                'label' => __('Title HTML Tag', 'rainbowit'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'h1' => [
+                        'title' => __('H1', 'rainbowit'),
+                        'icon' => 'eicon-editor-h1'
+                    ],
+                    'h2' => [
+                        'title' => __('H2', 'rainbowit'),
+                        'icon' => 'eicon-editor-h2'
+                    ],
+                    'h3' => [
+                        'title' => __('H3', 'rainbowit'),
+                        'icon' => 'eicon-editor-h3'
+                    ],
+                    'h4' => [
+                        'title' => __('H4', 'rainbowit'),
+                        'icon' => 'eicon-editor-h4'
+                    ],
+                    'h5' => [
+                        'title' => __('H5', 'rainbowit'),
+                        'icon' => 'eicon-editor-h5'
+                    ],
+                    'h6' => [
+                        'title' => __('H6', 'rainbowit'),
+                        'icon' => 'eicon-editor-h6'
+                    ],
+                    'div' => [
+                        'title' => __('div', 'rainbowit'),
+                        'icon' => 'eicon-font'
+                    ]
+                ],
+                'default' => 'h4',
+                'separator' => 'before',
+            ]
+        );
+
         $repeater = new \Elementor\Repeater();
         $repeater->add_control(
             'main_title',
@@ -150,7 +190,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
 ?>
         
             <div class="rbt-section-title section-title-center" data-sal="slide-up" data-sal-duration="400">
-                <h4 class="title title-xl"><?php echo esc_html($heading_title); ?></h4>
+                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title title-xl"><?php echo esc_html($heading_title); ?><<?php echo esc_html($settings['sec_title_tag']); ?>>
             </div>
             <div class="rbt-card-group-2 mt--50">
                 <?php

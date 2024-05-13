@@ -285,3 +285,289 @@ Stack trace:
 [09-May-2024 11:46:58 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php:684) in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\pluggable.php on line 1438
 [09-May-2024 11:47:04 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php:684) in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\pluggable.php on line 1435
 [09-May-2024 11:47:04 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php:684) in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\pluggable.php on line 1438
+[12-May-2024 05:26:08 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:12 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:12 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:16 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:16 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:16 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:26 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:26 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:26:26 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 249
+[12-May-2024 05:29:43 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 252
+[12-May-2024 05:29:43 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 252
+[12-May-2024 05:29:43 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 252
+[12-May-2024 05:31:22 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:31:22 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:31:22 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:18 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:18 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:18 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:36 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:38 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:38 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:39 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:39 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:39 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:42 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:42 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:42 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:43 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:43 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:32:43 UTC] PHP Warning:  Attempt to read property "name" on bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 253
+[12-May-2024 05:34:56 UTC] PHP Warning:  Attempt to read property "name" on string in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 254
+[12-May-2024 05:34:56 UTC] PHP Warning:  Attempt to read property "name" on string in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 254
+[12-May-2024 05:34:56 UTC] PHP Warning:  Attempt to read property "name" on string in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php on line 254
+[12-May-2024 05:54:28 UTC] PHP Fatal error:  Uncaught TypeError: Unsupported operand types: string * int in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\common-functions.php:1530
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\blog.php(197): Elementor\RBT_Helper::get_query_args('post', 'category', Array)
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\controls-stack.php(2315): Elementor\rainbowit_Elementor_Widget_Blog->render()
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\base\widget-base.php(634): Elementor\Controls_Stack->render_by_mode()
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\base\document.php(372): Elementor\Widget_Base->render_content()
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\includes\managers\widgets.php(461): Elementor\Core\Base\Document->render_element(Array)
+#5 [internal function]: Elementor\Widgets_Manager->ajax_render_widget(Array, Object(Elementor\Core\Common\Modules\Ajax\Module))
+#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\elementor\core\common\modules\ajax\module.php(176): call_user_func(Array, Array, Object(Elementor\Core\Common\Modules\Ajax\Module))
+#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): Elementor\Core\Common\Modules\Ajax\Module->handle_ajax_request('')
+#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#10 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(192): do_action('wp_ajax_element...')
+#11 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\common-functions.php on line 1530
+[13-May-2024 05:55:44 UTC] PHP Deprecated:  Function print_emoji_styles is deprecated since version 6.4.0! Use wp_enqueue_emoji_styles instead. in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\functions.php on line 6078
+[13-May-2024 06:26:23 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:26:23 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:26:23 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:26:23 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:26:54 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:26:54 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:27:10 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:27:10 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:27:23 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:27:23 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:27:23 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:27:23 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:24 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:24 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:24 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:24 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:55 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:55 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:28:55 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:28:55 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:320
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:28:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-recovery-mode-email-service.php on line 367
+[13-May-2024 06:28:55 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-recovery-mode-email-service.php on line 368
+[13-May-2024 06:29:11 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:29:11 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:29:11 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:29:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:320
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:29:24 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:29:24 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:29:24 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:29:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:320
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:30:25 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:30:25 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:30:25 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:30:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:320
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:30:56 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:30:56 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:30:56 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:30:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:320
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:31:12 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:12 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:12 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:31:12 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:320
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 320
+[13-May-2024 06:31:25 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:25 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:25 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:31:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:31:56 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:56 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:56 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:31:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:31:57 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:57 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:31:57 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:31:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:26 UTC] PHP Warning:  include_once(C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:32:26 UTC] PHP Warning:  include_once(): Failed opening 'C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core/include/custom-texanomy.php' for inclusion (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\rainbowit-core.php on line 27
+[13-May-2024 06:32:26 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:54 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:54 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:57 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:32:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:33:13 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:33:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/lab/class-tgm-plugin-activation.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:310
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 310
+[13-May-2024 06:33:26 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 317
+[13-May-2024 06:33:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:317
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 317
+[13-May-2024 06:34:27 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:316
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:55 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:55 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:316
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:55 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:55 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:316
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:57 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:316
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:57 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:316
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(13): require_once('C:\\Users\\HP\\Loc...')
+#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
+#5 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:58 UTC] PHP Warning:  require_once(C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php): Failed to open stream: No such file or directory in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 06:34:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\Users\HP\Local Sites\rainbow-themes\app\public/wp-content/themes/rainbowit/inc/customizer/color.php' (include_path='.:/usr/share/php:/www/wp-content/pear') in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php:316
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-settings.php(663): include()
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-config.php(107): require_once('C:\\Users\\HP\\Loc...')
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-load.php(50): require_once('C:\\Users\\HP\\Loc...')
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(22): require_once('C:\\Users\\HP\\Loc...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\functions.php on line 316
+[13-May-2024 12:34:16 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\mega-menu-template.php on line 288
+[13-May-2024 12:34:16 UTC] PHP Warning:  Undefined array key 0 in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\elementor\mega-menu-template.php on line 330

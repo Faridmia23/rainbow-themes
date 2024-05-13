@@ -66,6 +66,46 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
         );
 
         $this->add_control(
+            'sec_title_tag',
+            [
+                'label' => __('Title HTML Tag', 'rainbowit'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'h1' => [
+                        'title' => __('H1', 'rainbowit'),
+                        'icon' => 'eicon-editor-h1'
+                    ],
+                    'h2' => [
+                        'title' => __('H2', 'rainbowit'),
+                        'icon' => 'eicon-editor-h2'
+                    ],
+                    'h3' => [
+                        'title' => __('H3', 'rainbowit'),
+                        'icon' => 'eicon-editor-h3'
+                    ],
+                    'h4' => [
+                        'title' => __('H4', 'rainbowit'),
+                        'icon' => 'eicon-editor-h4'
+                    ],
+                    'h5' => [
+                        'title' => __('H5', 'rainbowit'),
+                        'icon' => 'eicon-editor-h5'
+                    ],
+                    'h6' => [
+                        'title' => __('H6', 'rainbowit'),
+                        'icon' => 'eicon-editor-h6'
+                    ],
+                    'div' => [
+                        'title' => __('div', 'rainbowit'),
+                        'icon' => 'eicon-font'
+                    ]
+                ],
+                'default' => 'h4',
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
             'product_filter_all_button_label',
             [
                 'label' => esc_html__('All Button Label', 'rainbowit'),
@@ -125,7 +165,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
 ?>
         <div class="container mt--80 product-custom-service-tab">
             <div class="rbt-section-title text-center" data-sal="slide-up" data-sal-duration="400">
-                <h4 class="title title-md"><?php echo wp_kses_post($heading_title); ?></h4>
+                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title title-md"><?php echo wp_kses_post($heading_title); ?><<?php echo esc_html($settings['sec_title_tag']); ?>>
             </div>
             <!-- tabs -->
             <?php
@@ -159,7 +199,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                 $active = 'active';
                             }
                     ?>
-                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $categoryName->slug ) ); ?>"><?php echo esc_html( $categoryName->name ); ?> </li>
+                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $categoryName->slug ) ); ?>"><?php echo esc_html( ucwords( $categoryName->name ) ); ?> </li>
                     <?php
                             $i++;
                         }
@@ -323,7 +363,6 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
         return $checkout_url;
     }
 
-    
     public function reviews_count_func( $atts = '') {
         // Make sure an ID was passed,
         if ( ! empty( $atts['id'] && function_exists( 'wc_get_product' ) ) ) {
@@ -342,4 +381,4 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
     }
 }
 
-Plugin::instance()->widgets_manager->register(new rainbowit_Custom_Service_Tab());
+Plugin::instance()->widgets_manager->register( new rainbowit_Custom_Service_Tab() );

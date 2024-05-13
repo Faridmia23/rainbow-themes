@@ -10,7 +10,7 @@ class Rainbow_Contact_Form extends Widget_Base
 
   public function get_name()
   {
-    return 'rainbow-contact-form';
+    return 'rainbow-contact-form2';
   }
 
   public function get_title()

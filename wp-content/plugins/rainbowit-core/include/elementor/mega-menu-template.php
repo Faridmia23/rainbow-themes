@@ -255,18 +255,14 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
         $purchase_btn_title = $settings['purchase_btn_title'] ?? '';
         $allowed_html = wp_kses_allowed_html('post');
 
-        $attr = '';
-        if (!empty($settings['btn_link']['url'])) {
-            $attr  = 'href="' . $settings['btn_link']['url'] . '"';
-            $attr .= !empty($settings['btn_link']['is_external']) ? ' target="_blank"' : '';
-            $attr .= !empty($settings['btn_link']['nofollow']) ? ' rel="nofollow"' : '';
-        }
-        $attr2 = '';
-        if (!empty($settings['purchase_btn_link']['url'])) {
-            $attr2  = 'href="' . $settings['purchase_btn_link']['url'] . '"';
-            $attr2 .= !empty($settings['purchase_btn_link']['is_external']) ? ' target="_blank"' : '';
-            $attr2 .= !empty($settings['purchase_btn_link']['nofollow']) ? ' rel="nofollow"' : '';
-        }
+
+        if ( ! empty( $settings['btn_link']['url'] ) ) {
+			$this->add_link_attributes( 'btn_link', $settings['btn_link'] );
+		}
+
+        if ( ! empty( $settings['purchase_btn_link']['url'] ) ) {
+			$this->add_link_attributes( 'purchase_btn_link', $settings['purchase_btn_link'] );
+		}
 
 
 
@@ -393,7 +389,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
 
                                         </ul>
                                         <div class="tab-product-btn">
-                                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3" <?php echo esc_attr($attr); ?>>
+                                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3" <?php $this->print_render_attribute_string( 'btn_link' ); ?>>
                                                 <?php echo esc_html($btn_title); ?>
                                                 <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
                                                 <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
@@ -418,7 +414,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                             <h3 class="title">
                                 <?php echo esc_html($banner_title); ?>
                             </h3>
-                            <a <?php echo esc_attr($attr2); ?> class="rbt-btn rbt-btn-secondary rbt-btn-round rbt-btn-xm">
+                            <a <?php $this->print_render_attribute_string( 'purchase_btn_link' ); ?> class="rbt-btn rbt-btn-secondary rbt-btn-round rbt-btn-xm">
                                 <?php echo esc_html($purchase_btn_title); ?>
                                 <span><i class="fa-solid fa-arrow-up-right"></i></span>
                             </a>

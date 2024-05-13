@@ -302,22 +302,14 @@ require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'menu-options.php');
 require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'page-options.php');
 require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'post-format-options.php');
 require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'user-extra-meta.php');
-require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'portfolio-meta.php');
 
-/**
- * Lab
- */
-require_once( RAINBOWIT_FREAMWORK_LAB . 'class-tgm-plugin-activation.php');
+
 // -- Nav Walker
 require_once( RAINBOWIT_FREAMWORK_LAB . 'nav-menu-walker.php');
 require_once( RAINBOWIT_FREAMWORK_LAB . 'mobile-menu-walker.php');
 require_once( RAINBOWIT_FREAMWORK_LAB . 'onepage-nav-menu-walker.php');
 require_once( RAINBOWIT_FREAMWORK_TP . 'title/breadcrumb.php');
 
-/**
- * Customizer
- */
-require_once( RAINBOWIT_FREAMWORK_CUSTOMIZER . 'color.php');
 
 // WooCommerce
 if (class_exists('WooCommerce')) {

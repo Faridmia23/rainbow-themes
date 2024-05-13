@@ -73,8 +73,4 @@ trait BannerTrait
         return $breadcrumbs_enable;
 
     }
-
-
-
-
 }

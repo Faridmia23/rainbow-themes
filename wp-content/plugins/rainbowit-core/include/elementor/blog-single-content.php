@@ -118,7 +118,7 @@ class Blog_Single_Content extends Widget_Base
         );
         
         $this->add_control(
-            'desc',
+            'descdetails',
             [
                 'label' => esc_html__('Description', 'rainbowit'),
                 'type' => Controls_Manager::TEXTAREA,
@@ -186,7 +186,7 @@ class Blog_Single_Content extends Widget_Base
         $coursecontent_desc_1 = $settings['coursecontent_desc_1'] ?? '';
         $coursecontent_desc_2 = $settings['coursecontent_desc_2'] ?? '';
         $single_title = $settings['single_title'] ?? '';
-        $desc = $settings['desc'] ?? '';
+        $descdetails = $settings['descdetails'] ?? '';
         $list_content = $settings['list_content'] ?? '';
         $instructor_desc_1 = $settings['instructor_desc_1'] ?? '';
         $instructor_desc_2 = $settings['instructor_desc_2'] ?? '';
@@ -220,14 +220,13 @@ class Blog_Single_Content extends Widget_Base
 
         <!-- single contect -->
         <div class="mb--40" id="details">
-            <?php echo Group_Control_Image_Size::get_attachment_image_html($settings, 'full', 'single_image'); ?>
+            <img class="mb--40" src="<?php echo esc_url($settings['single_image']['url']);?>" alt="Blog Image">
             <h4 class="title">
             <?php echo esc_html($single_title );?>
             </h4>
             <p class="description">
-            <?php echo esc_html($desc );?>
+                <?php echo wp_kses_post($descdetails );?>
             </p>
-            <?php echo wp_kses_post($coursecontent_desc_1);?>
             <?php echo wp_kses_post($list_content);?>
             <img class="mt--25" src="<?php echo esc_url($settings['single_bottom_image']['url']);?>" alt="Blog Image">
             

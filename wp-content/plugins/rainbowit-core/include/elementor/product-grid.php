@@ -88,6 +88,45 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
             ]
         );
         $this->add_control(
+            'sec_title_tag',
+            [
+                'label' => __('Title HTML Tag', 'rainbowit'),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'h1' => [
+                        'title' => __('H1', 'rainbowit'),
+                        'icon' => 'eicon-editor-h1'
+                    ],
+                    'h2' => [
+                        'title' => __('H2', 'rainbowit'),
+                        'icon' => 'eicon-editor-h2'
+                    ],
+                    'h3' => [
+                        'title' => __('H3', 'rainbowit'),
+                        'icon' => 'eicon-editor-h3'
+                    ],
+                    'h4' => [
+                        'title' => __('H4', 'rainbowit'),
+                        'icon' => 'eicon-editor-h4'
+                    ],
+                    'h5' => [
+                        'title' => __('H5', 'rainbowit'),
+                        'icon' => 'eicon-editor-h5'
+                    ],
+                    'h6' => [
+                        'title' => __('H6', 'rainbowit'),
+                        'icon' => 'eicon-editor-h6'
+                    ],
+                    'div' => [
+                        'title' => __('div', 'rainbowit'),
+                        'icon' => 'eicon-font'
+                    ]
+                ],
+                'default' => 'h3',
+                'separator' => 'before',
+            ]
+        );
+        $this->add_control(
             'desc',
             [
                 'label' => esc_html__('Description', 'rainbowit'),
@@ -224,7 +263,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     <div class="inner">
                                         <div class="rbt-section-title section-title-left">
                                             <span class="subtitle"><?php echo esc_html($subtitle_title); ?></span>
-                                            <h3 class="title"><?php echo esc_html($heading_title); ?></h3>
+                                            <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
                                             <p class="description">
                                                 <?php echo wp_kses_post($desc); ?>
                                             </p>
@@ -271,7 +310,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                 <div class="ml-container swiper-carousel">
                     <div class="rbt-section-title section-title-left">
                         <span class="subtitle"><?php echo esc_html($subtitle_title); ?></span>
-                        <h3 class="title"><?php echo esc_html($heading_title); ?></h3>
+                        <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
                         <p class="description">
                             <?php echo wp_kses_post($desc); ?>
                         </p>
@@ -331,7 +370,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                             <div class="inner pb-3 pb-md-0">
                                 <div class="rbt-section-title section-title-center">
                                     <span class="subtitle"><?php echo esc_html($subtitle_title); ?></span>
-                                    <h3 class="title"><?php echo esc_html($heading_title); ?></h3>
+                                    <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
                                     <p class="description">
                                     <?php echo wp_kses_post($desc); ?>
                                     </p>

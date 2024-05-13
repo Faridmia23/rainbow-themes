@@ -36,12 +36,6 @@
             rbt.bannerIconShuffle();
             rbt.counterUp();
             rbt.swiperSlider();
-            rbt.themesGallery();
-            rbt.stickyElementModiy();
-            rbt.reviewsLayout();
-            rbt.tabActivation();
-            rbt.tabActivationTwo();
-            rbt.tabActivationThree();
             rbt.showTeamMember();
             rbt.stopInputAutofill();
             rbt.selectPicker();
@@ -206,108 +200,6 @@
             });
         },
 
-        // masonary and image load
-        themesGallery: function () {
-            var masonary = $('.rbt-theme-masonary');
-            masonary.each(function () {
-                $('.rbt-theme-masonary').imagesLoaded(() => {
-                    $('.rbt-theme-masonary').masonry({
-                        itemSelector: '.rbt-masonary-item',
-                        horizontalOrder: true,
-                    });
-                })
-            })
-        },
-
-        // themes gallery sticky element
-        stickyElementModiy: function () {
-            var stickyElement = $('.rbt-sticky-section');
-            stickyElement.each(function () {
-                $('.rbt-sticky-section').appear(function (e) {
-                    var offset = stickyElement.offset().top;
-
-                    $(window).scroll(function () {
-                        if ($(window).scrollTop() >= offset) {
-                            stickyElement.addClass('scaled');
-                        } else {
-                            stickyElement.removeClass('scaled');
-                        }
-                    });
-                })
-            })
-        },
-
-        // isotope mationary for reviews section
-        reviewsLayout: function () {
-            $('.rbt-layout').isotope({
-                itemSelector: '.rbt-layout-item',
-                percentPosition: true,
-                horizontalOrder: true,
-                masonry: {
-                    columnWidth: '.rbt-layout-item',
-                }
-            });
-        },
-
-        // tab activation 1 (this tab in home page)
-        tabActivation: function () {
-            $('.rbt-tabs-active-2').imagesLoaded(() => {
-                $('.rbt-tabs-active').isotope({
-                    itemSelector: '.rbt-tab-item',
-                });
-
-                $('.rbt-tabs li').click(function () {
-                    $('.rbt-tabs li').removeClass('active');
-                    $(this).addClass('active');
-
-                    var selector = $(this).attr('data-filter');
-                    $('.rbt-tabs-active').isotope({
-                        filter: selector
-                    });
-                    return false;
-                });
-            })
-        },
-
-        // tab activation 2 (this tab in blog page)
-        tabActivationTwo: function () {
-            $('.rbt-tabs-active-2').imagesLoaded(() => {
-                $('.rbt-tabs-active-2').isotope({
-                    itemSelector: '.rbt-tab-item-2',
-                });
-
-                $('.tabs-3 li').click(function () {
-                    $('.tabs-3 li').removeClass('active');
-                    $(this).addClass('active');
-
-                    var selector = $(this).attr('data-filter2');
-                    $('.rbt-tabs-active-2').isotope({
-                        filter: selector
-                    });
-                    return false;
-                })
-            })
-        },
-
-        // tab activation 3 (this tab in premium products page)
-        tabActivationThree: function () {
-            $('.rbt-tabs-active-2').imagesLoaded(() => {
-                $('.rbt-tabs-active-2').isotope({
-                    itemSelector: '.rbt-tab-item-2',
-                });
-
-                $('.tabs-2 li').click(function () {
-                    $('.tabs-2 li').removeClass('active');
-                    $(this).addClass('active');
-
-                    var selector = $(this).attr('data-filter2');
-                    $('.rbt-tabs-active-2').isotope({
-                        filter: selector
-                    });
-                    return false;
-                })
-            })
-        },
 
         // random team member img to show
         showTeamMember: () => {

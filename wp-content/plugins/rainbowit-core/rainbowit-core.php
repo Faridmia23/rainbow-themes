@@ -24,7 +24,6 @@ define('RAINBOWIT_ELEMENTS_PATH', RAINBOWIT_ADDONS_DIR . '/include/elementor');
  */
 include_once(RAINBOWIT_ADDONS_DIR . '/include/ajax_requests.php');
 include_once(RAINBOWIT_ADDONS_DIR . '/include/custom-post.php');
-include_once(RAINBOWIT_ADDONS_DIR . '/include/custom-texanomy.php');
 include_once(RAINBOWIT_ADDONS_DIR . '/include/social-share.php');
 include_once(RAINBOWIT_ADDONS_DIR . '/include/widgets/custom-widget-register.php');
 include_once(RAINBOWIT_ADDONS_DIR . '/include/common-functions.php');
@@ -68,29 +67,6 @@ if (in_array('elementor/elementor.php', apply_filters('active_plugins', get_opti
 
     add_action('elementor/elements/categories_registered', 'rainbowit_elementor_category');
 }
-/**
- * Register controls
- *
- * @param Controls_Manager $controls_Manager
- */
-if (in_array('elementor/elementor.php', apply_filters('active_plugins', get_option('active_plugins')))) {
-
-    function register_controls(Controls_Manager $controls_Manager)
-    {
-        include_once(RAINBOWIT_ADDONS_DIR . '/controls/rbtgradient.php');
-        $rbtgradient = 'RainbowitCore\Elementor\Controls\Group_Control_RBTGradient';
-        $controls_Manager->add_group_control($rbtgradient::get_type(), new $rbtgradient());
-
-
-        include_once(RAINBOWIT_ADDONS_DIR . '/controls/rbtbggradient.php');
-        $rbtbggradient = 'RainbowitCore\Elementor\Controls\Group_Control_RBTBGGradient';
-        $controls_Manager->add_group_control($rbtbggradient::get_type(), new $rbtbggradient());
-    }
-
-    // Register custom controls
-    add_action('elementor/controls/controls_registered', 'register_controls');
-}
-
 
 /**
  * Escapeing
@@ -531,39 +507,6 @@ if ( !function_exists('rainbowit_getEmbedUrl') ){
     }
 }
 
-
-/**
- * Slugify
- */
-if (!function_exists('rbt_slugify')){
-    function rbt_slugify($text){
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-
-        // transliterate
-        if (function_exists('iconv')) {
-            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-        }
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        // trim
-        $text = trim($text, '-');
-
-        // remove duplicate -
-        $text = preg_replace('~-+~', '-', $text);
-
-        // lowercase
-        $text = strtolower($text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
-    }
-}
 
 // Use the following code to get ride of autop (automatic <p> tag) and line breaking tag (<br> tag).
 add_filter( 'wpcf7_autop_or_not', '__return_false' );

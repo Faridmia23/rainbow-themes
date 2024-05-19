@@ -11,7 +11,6 @@
 $rainbowit_options              = Rainbowit_Helper::rainbowit_get_options();
 $banner_layout                  = Rainbowit_Helper::rainbowit_banner_layout();
 $banner_area                    = $banner_layout['banner_area'];
-$banner_style                   = $banner_layout['banner_style'];
 $banner_title                   = rainbowit_get_acf_data("rainbowit_custom_title");
 $banner_sub_title               = rainbowit_get_acf_data("rainbowit_custom_sub_title");
 $rainbowit_breadcrumbs_enable   = rainbowit_get_acf_data("rainbowit_breadcrumbs_enable");
@@ -32,7 +31,7 @@ $page_breadcrumb_enable         = $page_breadcrumb['breadcrumbs'];
                         <?php the_title( '<h2 class="title title-xl">', '</h2>' ); ?>
                     <?php  }  ?>
                     <?php if ("no" !== $page_breadcrumb_enable && "0" !== $page_breadcrumb_enable) {
-                        rainbowit_breadcrumbs();
+                        //rainbowit_breadcrumbs();
                     } ?>
 
                     </div>

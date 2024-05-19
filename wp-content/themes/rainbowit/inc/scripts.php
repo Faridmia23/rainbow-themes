@@ -33,7 +33,7 @@ if (!function_exists('rainbowit_scripts')){
         // Scripts
         wp_enqueue_script('modernizr', RAINBOWIT_JS_URL . 'vendor/modernizr.min.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('bootstrap', RAINBOWIT_JS_URL . 'vendor/bootstrap.min.js', array('jquery'), RAINBOWIT_VERSION, true);
-       // wp_enqueue_script('backtotop', RAINBOWIT_JS_URL . 'vendor/backtotop.js', array('jquery'), RAINBOWIT_VERSION, true);
+        wp_enqueue_script('backtotop', RAINBOWIT_JS_URL . 'vendor/backtotop.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('jquery-appear', RAINBOWIT_JS_URL . 'vendor/jquery-appear.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('odometer', RAINBOWIT_JS_URL . 'vendor/odometer.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('imagesloaded-pkgd', RAINBOWIT_JS_URL . 'vendor/imagesloaded.pkgd.min.js', array('jquery'), RAINBOWIT_VERSION, true);
@@ -45,7 +45,7 @@ if (!function_exists('rainbowit_scripts')){
         wp_enqueue_script('bootstrap-select', RAINBOWIT_JS_URL . 'vendor/bootstrap-select.min.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('jquery-serialshuffle', RAINBOWIT_JS_URL . 'vendor/jquery.serialshuffle.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('sal', RAINBOWIT_JS_URL . 'vendor/sal.js', array('jquery'), RAINBOWIT_VERSION, true);
-        wp_enqueue_script('rainbowit-main', RAINBOWIT_JS_URL . 'main.js', array('jquery'), RAINBOWIT_VERSION, true);
+        wp_enqueue_script('rainbowit-main', RAINBOWIT_JS_URL . 'main.js', array('jquery'), time(), true);
         wp_enqueue_script('rainbowit-has-elementor', RAINBOWIT_JS_URL . 'has-elementor.js', array('jquery'), RAINBOWIT_VERSION, true);
 
 

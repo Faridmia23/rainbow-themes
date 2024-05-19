@@ -64,23 +64,24 @@ class ajax_requests
         } 
 
         $apiToken = 'AxNy23RTmWIlDXO3E0Cad6075IHpEciQ';
-		$page = 1;
-		$page_size = 100;
 		$products = wp_remote_get('https://api.envato.com/v1/discovery/search/search/item?site=themeforest.net&username=rainbow-themes', array(
 			'headers' => array(
 				'timeout' => 30,
 				'Authorization' => 'Bearer ' . $apiToken
 			)
 		));
+
 		$product_info = isset($products['body']) ? json_decode($products['body']) : '';
 		$matches_products = isset($product_info) && !empty($product_info) ? $product_info->matches : '';
 
         $set_option = json_encode($matches_products);
 
         $check = update_option( 'rainbowit_envato_product_save_update', $set_option );
+        wp_enqueue_script('rainbowit-envato-api-run', RAINBOWIT_ADDONS_URL . 'assets/js/envato-apirun2.js', array('jquery'), time() , true);
 
         if( $check ) {
             echo "success";
+
         } else {
             return false;
         }

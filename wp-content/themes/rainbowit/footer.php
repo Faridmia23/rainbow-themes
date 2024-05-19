@@ -107,7 +107,7 @@ $rainbowit_footer_subscribe_title = ($rainbowit_options['rainbowit_footer_subscr
                 <p class="copyright"><?php echo wp_kses_post($rainbowit_options['rainbowit_copyright_contact']); ?></p>
                 <?php } ?>
                 <?php if($rainbowit_options['rainbowit_scroll_to_top_enable'] != 'no'){ ?>
-                <div class="rbt-progress-parent rbt-backto-top-active">
+                <div class="rbt-progress-parent">
                         <span class="back-to-top">
                         <?php echo esc_html__("Back To Top","rainbowit"); ?>
                         <span><i class="fa-regular fa-circle-chevron-up"></i></span>

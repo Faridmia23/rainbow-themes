@@ -47,8 +47,12 @@ if ( $product->is_in_stock() ) : ?>
 		?>
 
 		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="rbt-btn rbt-btn-primary w-100  single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-
-		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
+		<?php if ($product->is_virtual('yes')) { ?>
+		<a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;">
+			<?php  esc_attr_e("Quick Checkout","rainbowit"); ?>
+		</a>
+		<?php } 
+		 do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>
 
 	<?php do_action( 'woocommerce_after_add_to_cart_form' ); ?>

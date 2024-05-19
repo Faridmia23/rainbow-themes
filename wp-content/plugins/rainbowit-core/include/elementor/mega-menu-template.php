@@ -247,13 +247,13 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
 
 
 
-        $category_title = $settings['category_title'] ?? '';
-        $product_title = $settings['product_title'] ?? '';
-        $btn_title = $settings['btn_title'] ?? '';
-        $banner_title = $settings['banner_title'] ?? '';
-        $banner_badge = $settings['banner_badge'] ?? '';
+        $category_title     = $settings['category_title'] ?? '';
+        $product_title      = $settings['product_title'] ?? '';
+        $btn_title          = $settings['btn_title'] ?? '';
+        $banner_title       = $settings['banner_title'] ?? '';
+        $banner_badge       = $settings['banner_badge'] ?? '';
         $purchase_btn_title = $settings['purchase_btn_title'] ?? '';
-        $allowed_html = wp_kses_allowed_html('post');
+        $allowed_html       = wp_kses_allowed_html('post');
 
 
         if ( ! empty( $settings['btn_link']['url'] ) ) {
@@ -263,9 +263,6 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
         if ( ! empty( $settings['purchase_btn_link']['url'] ) ) {
 			$this->add_link_attributes( 'purchase_btn_link', $settings['purchase_btn_link'] );
 		}
-
-
-
 ?>
 
         <div class="row">
@@ -291,6 +288,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                             $category_name = $category->name;
                                         }
 
+
                                         $active = '';
                                         if ($key == 0) {
                                             $active = 'active';
@@ -299,7 +297,8 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                 ?>
                                         <li class="single-item">
                                             <a class="rbt-nav-link <?php echo esc_attr($active); ?>" id="pill<?php echo strtolower($category_name); ?>" href="#<?php echo strtolower($category_name); ?>" role="tab" aria-selected="true">
-                                                <?php echo Group_Control_Image_Size::get_attachment_image_html($item, 'full', 'cat_image'); ?>
+                                                
+                                                <img class="tech-icon" src="<?php echo esc_url( $item['cat_image']['url'] ); ?>" alt="NextJs Icon">
                                                 <?php
                                                 if ($category && !is_wp_error($category)) { ?>
                                                     <span><?php echo esc_html($category_name); ?></span>
@@ -360,12 +359,22 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                             );
 
                                             $products_query = new \WP_Query($args);
+                                          
+                                            
 
 
                                             if ($products_query->have_posts()) {
                                                 while ($products_query->have_posts()) {
                                                     $products_query->the_post();
                                                     $product_img_url = get_the_post_thumbnail_url(get_the_ID(),'full'); 
+
+                                                    $product_title = get_the_title();
+
+                                                    $max_length = 35; 
+                                                
+                                                    if (strlen($product_title) > $max_length) {
+                                                        $product_title = substr($product_title, 0, $max_length) . '...';
+                                                    }
                                             ?>
                                                     <li class="product-item">
                                                         <a href="<?php the_permalink(); ?>" class="rbt-nav-link">
@@ -373,7 +382,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                                             if( isset($product_img_url) && !empty($product_img_url) ) { ?>
                                                             <img class="tech-icon" src="<?php echo esc_url($product_img_url);?>" alt="hiStudy tempalte Logo">
                                                             <?php  } ?>
-                                                            <span><?php the_title();?></span>
+                                                            <span><?php echo wp_kses_post( $product_title );?></span>
                                                         </a>
                                                     </li>
                                             <?php

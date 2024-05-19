@@ -516,53 +516,72 @@ add_filter( 'wpcf7_autop_or_not', '__return_false' );
  * For save post
  */
 
- function rainbow_save_product_attributes($product_id) {
+ function rainbow_save_product_attributes( $product_id ) {
+
     if(isset($_POST['product_other_info'])) {
+
         $encode_data = isset($_POST['product_other_info']) ?  $_POST['product_other_info']: '';
         $decode_data = base64_decode($encode_data);
+
         if(empty($encode_data)) {
             return;
         }
-        $porduct_info = unserialize($decode_data);
-      //  $product_img = $porduct_info['product_img'];
-        $product_tags = $porduct_info['product_tags'];
+        
+        $porduct_info = unserialize( $decode_data );
+        $image_url    = $porduct_info['product_img'];
 
-        /**
-         * Upload tags
-         */
-        $tag_ids = array();
-        foreach ($product_tags as $tag_name) {
-            $tag_id = term_exists($tag_name, 'product_tag');
-            if ($tag_id !== 0 && $tag_id !== null) {
-                $tag_ids[] = $tag_id['term_id'];
-            } else {
-                // If the tag doesn't exist, you can create it
-                $tag_args = array(
-                    'description' => '',
-                    'slug' => sanitize_title($tag_name)
-                );
-                $tag_id = wp_insert_term($tag_name, 'product_tag', $tag_args);
-                if (!is_wp_error($tag_id)) {
-                    $tag_ids[] = $tag_id['term_id'];
-                }
-            }
+        // Validate image URL
+        if (empty( $image_url ) || !filter_var( $image_url, FILTER_VALIDATE_URL ) ) {
+            return 'Invalid image URL';
         }
 
-        // Update the post/product tags
-        $result = wp_set_post_terms($product_id, $tag_ids, 'product_tag');
-
-        if (!is_wp_error($result)) {
-            echo "Tags updated successfully!";
-        } else {
-            echo "Failed to update tags: " . $result->get_error_message();
+        // Download the image data
+        $image_data = @file_get_contents( $image_url );
+        if ($image_data === false) {
+            return 'Failed to download image';
         }
+
+        $upload_dir = wp_upload_dir();
+
+        $filename = wp_unique_filename( $upload_dir['path'], basename( $image_url ) );
+
+        // Construct the full file path
+        $file_path = $upload_dir['path'] . '/' . $filename;
+
+        // Save the image data to the file
+        file_put_contents( $file_path, $image_data );
+
+        // Get the file type
+        $wp_filetype = wp_check_filetype( $filename, null );
+
+        // Prepare an array of post data for the attachment
+        $attachment = array(
+            'post_mime_type' => $wp_filetype['type'],
+            'post_title'     => sanitize_file_name($filename),
+            'post_content'   => '',
+            'post_status'    => 'inherit'
+        );
+
+        // Insert the attachment into the WordPress media library
+        $attach_id = wp_insert_attachment( $attachment, $file_path, $product_id );
+
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+        // Generate the metadata for the attachment and update the database record
+        $attach_data = wp_generate_attachment_metadata( $attach_id, $file_path );
+        wp_update_attachment_metadata( $attach_id, $attach_data );
+
+        // Set the image as the product's featured image
+        set_post_thumbnail( $product_id, $attach_id );
+
     }
- }
+}
  
- add_action( 'save_post', 'rainbow_save_product_attributes' );
+add_action( 'save_post', 'rainbow_save_product_attributes' );
 
 // Add submenu page for WooCommerce products
 function add_custom_submenu_page() {
+
     add_submenu_page(
         'edit.php?post_type=product', // parent_slug
         'Envato Product',         // page_title
@@ -571,7 +590,9 @@ function add_custom_submenu_page() {
         'envato-product-menu-slug',         // menu_slug
         'envato_product_submenu_page_content'  // function
     );
+
 }
+
 add_action('admin_menu', 'add_custom_submenu_page');
 
 // Callback function to display content on the submenu page
@@ -583,4 +604,19 @@ function envato_product_submenu_page_content() {
     <?php 
     
     echo '</div>';
+}
+
+
+add_action('wp_enqueue_scripts', 'enqueue_custom_woocommerce_checkout_script');
+
+function enqueue_custom_woocommerce_checkout_script() {
+    if (is_checkout()) {
+        wp_enqueue_script(
+            'custom-woocommerce-checkout',
+            RAINBOWIT_ADDONS_URL . 'assets/js/custom-checkout.js',
+            array('wp-blocks', 'wp-element', 'wp-components', 'wc-blocks-checkout'),
+            time(),
+            true
+        );
+    }
 }

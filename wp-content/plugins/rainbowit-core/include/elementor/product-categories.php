@@ -158,7 +158,7 @@ class Rainbowit_Product_Categories extends Widget_Base
                                             <img src="<?php echo esc_url($product_img_url); ?>" alt="hiStudy tempalte Logo">
 
                                         <?php  } ?>
-                                        <span><?php the_title(); ?></span>
+                                        <span><?php echo wp_trim_words( get_the_title(), '5',' '); ?></span>
                                     </a>
                                 </li>
                         <?php

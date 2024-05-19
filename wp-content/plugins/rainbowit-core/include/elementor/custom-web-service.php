@@ -188,7 +188,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
         $heading_title = $settings['heading_title'] ?? '';
 
 ?>
-        
+        <div class="container">
             <div class="rbt-section-title section-title-center" data-sal="slide-up" data-sal-duration="400">
                 <<?php echo esc_html($settings['sec_title_tag']); ?> class="title title-xl"><?php echo esc_html($heading_title); ?><<?php echo esc_html($settings['sec_title_tag']); ?>>
             </div>
@@ -243,6 +243,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
                     }
                 } ?>
             </div>
+        </div>
         
 <?php
 

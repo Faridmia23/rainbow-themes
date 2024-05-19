@@ -18,7 +18,7 @@
             const avg_rating                = selectedOption.data('avg_rating');
             const total_rating              = selectedOption.data('total_rating');
             const icon_url                  = selectedOption.data('icon_url');
-
+            const template_type             = selectedOption.data('template_type');
             $('input[name="product_other_info"]').val(selectedOption.data('product_other_info'));
             $('input[name="post_title"]').val(product_name);
             $('input[name="_regular_price"]').val(product_price);
@@ -31,6 +31,7 @@
             $('input[name="_envato_product_avg_rating"]').val(avg_rating);
             $('input[name="_envato_product_total_rating"]').val(total_rating);
             $('input[name="_envato_product_preview_icon_url"]').val(icon_url);
+            $('input[name="_envato_product_template_type"]').val(template_type);
 
             if ($('div#wp-content-wrap').hasClass('tmce-active')) {
                 // Check if Gutenberg editor is active

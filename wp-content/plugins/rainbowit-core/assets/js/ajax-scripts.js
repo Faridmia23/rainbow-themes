@@ -21,9 +21,10 @@
             const avg_rating            = selectedOption.data('avg_rating');
             const total_rating          = selectedOption.data('total_rating');
             const icon_url              = selectedOption.data('icon_url');
+            const template_type         = selectedOption.data('template_type');
 
 
-            $('input[name="product_other_info"').val(selectedOption.data('product_other_info'))
+            $('input[name="product_other_info"').val(selectedOption.data('product_other_info'));
             $('input[name="post_title"]').val(product_name);
             $('input[name="_regular_price"]').val(product_price);
             $('input[name="_envato_product_preview_url"]').val(envato_preview_url);
@@ -35,6 +36,7 @@
             $('input[name="_envato_product_avg_rating"]').val(avg_rating);
             $('input[name="_envato_product_total_rating"]').val(total_rating);
             $('input[name="_envato_product_preview_icon_url"]').val(icon_url);
+            $('input[name="_envato_product_template_type"]').val(template_type);
 
             /**
              * Change product content value
@@ -94,6 +96,7 @@
             }
 
         } );
+        
         $(document).on("click", ".upload_image_button", function (e) {
            e.preventDefault();
            var $button = $(this);

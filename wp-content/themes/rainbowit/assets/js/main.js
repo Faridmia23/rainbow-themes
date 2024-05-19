@@ -126,7 +126,7 @@
                         'icon22.png',
                         'icon23.png',
                     ],
-                    speed: 400,
+                    speed: 1000,
                 });
             })
         },
@@ -486,6 +486,7 @@
     rbt.i();
 
 })(window, document, jQuery);
+
 
 
 

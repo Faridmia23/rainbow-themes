@@ -57,6 +57,7 @@ if( !class_exists('Rainbowit_Recent_Post') ){
                     'ignore_sticky_posts' => 1
                 );
                 $posts = new WP_Query( $posts );
+                
 
                 ?>
                     <nav>

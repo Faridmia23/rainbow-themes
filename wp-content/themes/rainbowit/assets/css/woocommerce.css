@@ -1828,11 +1828,7 @@ a.components-button.wc-block-components-button.wp-element-button.wc-block-cart__
     font-weight: 600;
 }
 
-.wc-block-cart .wc-block-cart__submit-container:hover {
-    background: transparent!important;
-    border-radius: 6px;
-    border: 1px solid var(--color-primary);
-}
+
 
 a.components-button.wc-block-components-button.wp-element-button.wc-block-cart__submit-button.contained:hover {
     color: var(--color-primary);
@@ -1865,12 +1861,7 @@ body:not(.woocommerce-block-theme-has-button-styles) .wc-block-components-button
     margin-bottom: 15px;
 }
 
-.wc-block-cart__sidebar.wp-block-woocommerce-cart-totals-block {
-    background: var(--color-white);
-    padding: 20px 30px 30px!important;
-    height: 100%;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-}
+
 
 .wc-block-cart__sidebar.wp-block-woocommerce-cart-totals-block  .wc-block-cart__submit {
     margin: 0;
@@ -1892,14 +1883,6 @@ table.wc-block-cart-items .wc-block-cart-items__header .wc-block-cart-items__hea
     margin-right: 0;
 }
 
-.wc-block-components-sidebar-layout.wc-block-cart .wc-block-components-main {
-    background: var(--color-white);
-    padding: 30px 30px 30px;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    width: 61%;
-    margin-right: 40px;
-    border-radius: 10px;
-}
 
 .wc-block-cart .wc-block-cart-items .wc-block-cart-item__image {
     padding-left: 0;
@@ -2074,24 +2057,12 @@ body:not(.woocommerce-block-theme-has-button-styles) .wc-block-components-button
     border: 1px solid rgba(0, 0, 0, 0.1411764706)!important;
 }
 
-.wp-block-woocommerce-checkout-order-summary-block {
-    background: var(--color-white);
-    padding: 10px 30px 10px !important;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 6px;
-}
 
 .wc-block-components-totals-wrapper:first-child {
     border-top: none;
 }
 
-.wc-block-components-sidebar-layout .wc-block-checkout__main {
-    background: var(--color-white);
-    padding: 30px 30px 10px !important;
-    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
-    border-radius: 6px;
-}
- 
+
 
 
 

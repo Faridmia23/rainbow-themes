@@ -32,23 +32,15 @@ function rainbowit_body_classes( $classes ) {
     $classes[] = isset($rainbowit_options['base_theme_css']) == '0' ? " base-theme-css" : "";
 
     $menu_type = rainbowit_get_acf_data( "rainbowit_menu_type");
+    
     if ($menu_type){
         $classes[] = ($menu_type == 'onepage') ? "spybody rainbowit-active-onepage-navigation" : "";
     }
 
-
-    // Add dark / light body class conditions
-    $global_dark_light_options = $rainbowit_options['active_dark_mode'];
-    $client_cookie_key = $global_dark_light_options == 1 ? 'client_dark_mode_style_cookie' : 'client_light_mode_style_cookie';
-    if (isset($_COOKIE[$client_cookie_key])) {
-        $styleModeClass = $_COOKIE[$client_cookie_key] == 'dark' ? 'active-dark-mode':'active-light-mode';
-    } else {
-        $styleModeClass = $global_dark_light_options == 1 ? 'active-dark-mode':'active-light-mode';
-    }
-    $classes[] = $styleModeClass;
-
 	return $classes;
 }
+
+
 add_filter( 'body_class', 'rainbowit_body_classes' );
 
 

@@ -121,15 +121,6 @@ Redux::setSection($opt_name, array(
     'icon' => 'el el-adjust-alt',
     'subsection' => true,
     'fields' => array(
-
-        array(
-            'id' => 'active_dark_mode',
-            'type' => 'switch',
-            'title' => esc_html__('Switch to Dark Mode', 'rainbowit'),
-            'on' => esc_html__('Yes', 'rainbowit'),
-            'off' => esc_html__('No', 'rainbowit'),
-            'default' => true,
-        ),
         array(
             'id' => 'base_theme_css',
             'type' => 'switch',
@@ -500,52 +491,13 @@ Redux::setSection($opt_name, array(
             'default' => true,
         ),
         // Header Custom Style
-        array(
-            'id' => 'rainbowit_select_banner_template',
-            'type' => 'image_select',
-            'title' => esc_html__('Select banner Layout', 'rainbowit'),
-            'options' => array(
-                '1' => array(
-                    'alt' => esc_html__('Banner Layout 1', 'rainbowit'),
-                    'title' => esc_html__('Banner Layout 1', 'rainbowit'),
-                    'img' => get_template_directory_uri() . '/assets/images/optionframework/banner/1.png',
-                ),
-                '2' => array(
-                    'alt' => esc_html__('Banner Layout 2', 'rainbowit'),
-                    'title' => esc_html__('Banner Layout 2', 'rainbowit'),
-                    'img' => get_template_directory_uri() . '/assets/images/optionframework/banner/2.png',
-                ),
-            ),
-            'default' => '1',
-            'required' => array('rainbowit_banner_enable', 'equals', true),
-        ),
+       
         array(
             'id' => 'rainbowit_breadcrumb_enable',
             'type' => 'switch',
             'title' => esc_html__('Breadcrumb', 'rainbowit'),
             'subtitle' => esc_html__('Enable or disable the breadcrumb area.', 'rainbowit'),
             'default' => true,
-            'required' => array('rainbowit_select_banner_template', 'equals', '1'),
-        ),
-        array(
-            'id' => 'rainbowit_select_banner_image',
-            'title' => esc_html__('Upload Banner Background Image', 'rainbowit'),
-            'subtitle' => esc_html__('Upload the banner background image of your banner layout one & two.', 'rainbowit'),
-            'type' => 'media',
-            'required' => array('rainbowit_banner_enable', 'equals', true),
-        ),
-        array(
-            'id'       => 'rainbowit_banner_image_overlay_gradient_color_opt',
-            'type'     => 'color_gradient',
-            'title'    => esc_html__('Banner Background Image Overlay', 'rainbowit'),
-            'validate' => 'color',
-            'output'  =>  array('.breadcrumb-area:before, .rn-page-title-area:before'),
-            'default'        => array(
-                'preview' => false,
-                'from'           => '',
-                'to'             => '',
-            ),
-            'required' => array('rainbowit_banner_enable', 'equals', true),
         ),
 
     )

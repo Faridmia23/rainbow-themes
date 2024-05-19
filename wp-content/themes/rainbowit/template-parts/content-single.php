@@ -57,15 +57,15 @@ $blog_bottom_client_template_id = ($rainbowit_options['blog_bottom_client_templa
         </div>
     </div>
 </div>
-<div class="rbt-section-wrapper pt--40  rbt-section-gap2Bottom">
+<div class="rbt-section-wrapper pt--40  rbt-section-gap2Bottom rbt-blogs-details">
     <div class="container">
         <div class="row">
         <?php if (is_active_sidebar('blog-single-left-sidebar')) { ?>
             <div class="col-12 col-lg-4 col-xxl-2">
-                <div class="rbt-sidebar sticky-top">
+               <div class="rbt-sidebar sticky-top">
                     <?php dynamic_sidebar('blog-single-left-sidebar'); ?>
                     <?php rbt_sharing_icon_links();?>
-                </div>
+                </div> 
             </div>
             <?php } ?>
             <div class="col-12 col-lg-8 col-xxl-8 ">
@@ -74,7 +74,7 @@ $blog_bottom_client_template_id = ($rainbowit_options['blog_bottom_client_templa
             <?php if (is_active_sidebar('blog-single-right-sidebar')) { ?>
             <div class="col-12 col-xxl-2 d-xl-none d-xxl-block">
                 <div class="rbt-sidebar sticky-top">
-                <?php dynamic_sidebar('blog-single-right-sidebar'); ?>
+                    <?php dynamic_sidebar('blog-single-right-sidebar'); ?>
                 </div>
             </div>
             <?php } ?>

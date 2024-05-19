@@ -316,6 +316,7 @@ if (class_exists('WooCommerce')) {
     require_once(RAINBOWIT_WOOCMMERCE . "wooc-functions.php");
     require_once(RAINBOWIT_WOOCMMERCE . "wooc-hooks.php");
     require_once(RAINBOWIT_WOOCMMERCE . "woo-single.php");
+    require_once(RAINBOWIT_WOOCMMERCE . "woo-checkout.php");
 }
 
 
@@ -341,3 +342,11 @@ function get_elementor_template_library()
     return $posts;
 }
 
+add_filter( 'woocommerce_default_address_fields' , 'custom_override_default_address_fields' );
+
+// Our hooked in function - $address_fields is passed via the filter!
+function custom_override_default_address_fields( $address_fields ) {
+    $address_fields['address_1']['required'] = false;
+
+    return $address_fields;
+}

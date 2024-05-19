@@ -114,6 +114,7 @@ function rainbowit_before_main_content()
 										<?php echo esc_html__("Preview", "rainbowit"); ?>
 									</a>
 								</div>
+								<?php if( $envato_product_total_rating >= 3 ) { ?>
 								<div class="cart-bottom">
 									<div class="review">
 										<span class="review-text"><?php echo esc_html__("Reviews", "rainbowit"); ?></span>
@@ -128,6 +129,7 @@ function rainbowit_before_main_content()
 										<span class="rating-count badge"><?php echo esc_attr($envato_product_total_rating); ?> <?php echo esc_html__("(Total)", "rainbowit"); ?></span>
 									</div>
 								</div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
@@ -481,6 +483,7 @@ function rainbowit_woocommerce_before_single_product()
 													<?php echo esc_html__("Preview", "rainbowit"); ?>
 												</a>
 											</div>
+											<?php if( $envato_product_total_rating > 3 ) { ?>
 											<div class="cart-bottom">
 												<div class="review">
 													<span class="review-text"><?php echo esc_html__("Reviews", "rainbowit"); ?></span>
@@ -495,6 +498,7 @@ function rainbowit_woocommerce_before_single_product()
 													<span class="rating-count badge"><?php echo esc_attr($envato_product_total_rating); ?> <?php echo esc_html__("(Total)", "rainbowit"); ?></span>
 												</div>
 											</div>
+											<?php } ?>
 										</div>
 									<?php } ?>
 								</div>

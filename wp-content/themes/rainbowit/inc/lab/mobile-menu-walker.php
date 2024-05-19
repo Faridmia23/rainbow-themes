@@ -130,9 +130,14 @@ class RainbowitMobileWalker extends Walker_Nav_Menu
     $badge = '';
 
     if (class_exists('acf')) {
-      $badge = get_field('badge', $item);
-      $enable_mega_menu = get_field('rainbowit_enable_mobile_mega_menu', $item);
-      $mega_menu_template = get_field('rainbowit_select_mobile_mega_menu', $item);
+
+      $badge                  = get_field('badge', $item);
+      $enable_mega_menu       = get_field('rainbowit_enable_mobile_mega_menu', $item);
+      $mega_menu_template     = get_field('rainbowit_select_mobile_mega_menu', $item);
+      $enable_menu_image      = get_field('rainbowit_enable_menu_image', $item );
+      $rainbowit_menu_image   = get_field('rainbowit_menu_image', $item);
+      $icon_img_url           = isset($rainbowit_menu_image['url']) ? $rainbowit_menu_image['url'] : '';
+
     }
 
     global $post;
@@ -296,10 +301,21 @@ class RainbowitMobileWalker extends Walker_Nav_Menu
     $item_output  = $args->before;
     $item_output .= '<a' . $attributes . '>';
 
-    $item_output .= $args->link_before . $span_start . $title . $span_end . $args->link_after;
+    if (!empty($enable_menu_image)) {
+      $item_output .= $args->link_before;
+    } else {
+      $item_output .= $args->link_before . $span_start . $title . $span_end . $args->link_after;
+    }
+
     if (!empty($badge)) {
       $item_output .= '<span class="nav-badge"> ' . $badge . ' </span>';
     }
+    if (!empty($enable_menu_image)) {
+      $item_output .= "<img class='tech-icon' src='$icon_img_url' alt='Wordpress Icon'>
+    <span>$title</span>";
+    $item_output .= $args->link_after;
+  }
+
     $item_output .= '</a>';
     // Mega menu
     if (defined('ELEMENTOR_PATH') && class_exists('Elementor\Widget_Base')) {

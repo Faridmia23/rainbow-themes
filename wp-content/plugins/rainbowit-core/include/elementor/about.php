@@ -37,9 +37,6 @@ class Rainbowit_Elementor_Widget_Employee_Info extends Widget_Base
     protected function register_controls()
     {
 
-
-
-
         $this->start_controls_section(
             '_about_thumbnail',
             [
@@ -187,7 +184,7 @@ class Rainbowit_Elementor_Widget_Employee_Info extends Widget_Base
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <div class="content">
+                        <div class="content icon-image-employee">
                             <?php echo Group_Control_Image_Size::get_attachment_image_html($settings, 'full', 'icon_image'); ?>
                             <div class="rbt-section-title section-title-left text-start">
                                 <h3 class="title title-xxl mb--25" data-sal="slide-up" data-sal-duration="400"><?php echo esc_html($heading_title);?></h3>

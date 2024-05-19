@@ -53,7 +53,6 @@ function rainbowit_breadcrumbs() {
             echo '<li class="active item-archive rbt-breadcrumb-item"><span class="bread-current bread-archive">' . esc_html($custom_tax_name) . '</span></li>';
 
         } else if ( is_single() && empty($term_axil->name)) {
-            ///echo 999;
             // If post is a custom post type
             $post_type = get_post_type();
 

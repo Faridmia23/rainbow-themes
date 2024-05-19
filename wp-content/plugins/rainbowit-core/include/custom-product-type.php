@@ -75,22 +75,30 @@ function rainbowit_options_product_tab_content()
 						$total_rating 		= isset($product['rating']['count']) ? $product['rating']['count'] : '';
 						$product_id 		= isset($product['id']) ? $product['id'] : '';
 						$preview_url 		= isset($product['previews']['live_site']['url']) ? $product['previews']['live_site']['url'] : '';
-						$icon_url 		= isset($product['previews']['icon_with_landscape_preview']['icon_url']) ? $product['previews']['icon_with_landscape_preview']['icon_url'] : '';
+						$icon_url 			= isset($product['previews']['icon_with_landscape_preview']['icon_url']) ? $product['previews']['icon_with_landscape_preview']['icon_url'] : '';
 						$product_desc_html  = isset($product['description_html']) ? $product['description_html'] : '';
 						$product_desc_raw 	= isset($product['description']) ? $product['description'] : '';
 						$price_cents 		= isset($product['price_cents']) ? $product['price_cents'] : '';
+						
 						$url 				= isset($product['url']) ? $product['url'] : '';
 						$number_of_sales 	= isset($product['number_of_sales']) ? $product['number_of_sales'] : '';
 						$product_tags 		= isset($product['tags']) ? $product['tags'] : '';
 						$product_image 		= isset($product['previews']['icon_with_landscape_preview']['landscape_url']) ? $product['previews']['icon_with_landscape_preview']['landscape_url'] : '';
 						$product_price 		= centsToUSD($price_cents);
+
+						$classification     = isset($product['classification']) ? $product['classification'] : '';
+						$classification 	= explode("/", $classification);
+						$template_cat       = isset($classification['2']) ? $classification['2'] : '';
+
+						$template_type 		= $classification['1'] . " ". $template_cat;
+
 						
 						$product_other_info = array(
 							'product_img' => $product_image,
 							'product_tags' => $product_tags
 						);
 					?>
-						<option <?php if ( $product_name == $product_title  ) echo ' selected="selected"'; ?> data-product_other_info="<?php echo base64_encode(serialize($product_other_info)); ?>" data-product_image=<?php echo esc_url($product_image); ?> data-product_price="<?php echo esc_attr($product_price); ?>" data-product_name="<?php echo esc_attr($product_name); ?>" data-product_desc_raw="<?php echo esc_attr(($product_desc_raw)); ?> " data-product_desc_html="<?php echo esc_attr($product_desc_html) ?>" data-envato_product_id="<?php echo esc_attr($product_id); ?>" value="<?php echo esc_attr($product_id); ?>" data-envato_preview_url="<?php echo esc_attr($preview_url); ?>" data-envato_product_sale="<?php echo esc_attr($number_of_sales);?>" data-envato_product_url="<?php echo esc_attr($url);?>" data-updated_at="<?php echo esc_attr($updated_at);?>" data-published_at="<?php echo esc_attr($published_at);?>" data-columns="<?php echo esc_attr($columns);?>" data-avg_rating="<?php echo esc_attr($avg_rating);?>" data-total_rating="<?php echo esc_attr($total_rating);?>" data-icon_url="<?php echo esc_attr($icon_url);?>">><?php echo esc_html($product_name); ?></option>
+						<option <?php if ( $product_name == $product_title  ) echo ' selected="selected"'; ?> data-product_other_info="<?php echo base64_encode(serialize($product_other_info)); ?>" data-product_image=<?php echo esc_url($product_image); ?> data-product_price="<?php echo esc_attr($product_price); ?>" data-product_name="<?php echo esc_attr($product_name); ?>" data-product_desc_raw="<?php echo esc_attr(($product_desc_raw)); ?> " data-product_desc_html="<?php echo esc_attr($product_desc_html) ?>" data-envato_product_id="<?php echo esc_attr($product_id); ?>" value="<?php echo esc_attr($product_id); ?>" data-envato_preview_url="<?php echo esc_attr($preview_url); ?>" data-envato_product_sale="<?php echo esc_attr($number_of_sales);?>" data-envato_product_url="<?php echo esc_attr($url);?>" data-updated_at="<?php echo esc_attr($updated_at);?>" data-published_at="<?php echo esc_attr($published_at);?>" data-columns="<?php echo esc_attr($columns);?>" data-avg_rating="<?php echo esc_attr($avg_rating);?>" data-total_rating="<?php echo esc_attr($total_rating);?>" data-icon_url="<?php echo esc_attr($icon_url);?>" data-template_type="<?php echo esc_attr( $template_type );?>">><?php echo esc_html($product_name); ?></option>
 					<?php endforeach; ?>
 				</select>
 			<?php endif; ?>

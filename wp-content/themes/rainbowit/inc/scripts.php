@@ -29,7 +29,7 @@ if (!function_exists('rainbowit_scripts')){
         
         wp_enqueue_style('rainbowit-style', get_stylesheet_uri() );
         wp_style_add_data( 'rainbowit-style', 'rtl', 'replace' );
-
+        
         // Scripts
         wp_enqueue_script('modernizr', RAINBOWIT_JS_URL . 'vendor/modernizr.min.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('bootstrap', RAINBOWIT_JS_URL . 'vendor/bootstrap.min.js', array('jquery'), RAINBOWIT_VERSION, true);
@@ -41,12 +41,15 @@ if (!function_exists('rainbowit_scripts')){
         wp_enqueue_script('masonry-pkgd', RAINBOWIT_JS_URL . 'vendor/masonry.pkgd.min.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('swiper-bundle', RAINBOWIT_JS_URL . 'vendor/swiper-bundle.min.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('jquery-one-page-nav', RAINBOWIT_JS_URL . 'vendor/jquery-one-page-nav.js', array('jquery'), RAINBOWIT_VERSION, true);
-       // wp_enqueue_script('paralax-scroll', RAINBOWIT_JS_URL . 'vendor/paralax-scroll.js', array('jquery'), time(), true);
+        wp_enqueue_script('paralax-scroll', RAINBOWIT_JS_URL . 'vendor/paralax-scroll.js', array('jquery'), time(), true);
         wp_enqueue_script('bootstrap-select', RAINBOWIT_JS_URL . 'vendor/bootstrap-select.min.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('jquery-serialshuffle', RAINBOWIT_JS_URL . 'vendor/jquery.serialshuffle.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('sal', RAINBOWIT_JS_URL . 'vendor/sal.js', array('jquery'), RAINBOWIT_VERSION, true);
+        wp_enqueue_script('text-type', RAINBOWIT_JS_URL . 'vendor/text-type.js', array('jquery'), RAINBOWIT_VERSION, true);
         wp_enqueue_script('rainbowit-main', RAINBOWIT_JS_URL . 'main.js', array('jquery'), time(), true);
         wp_enqueue_script('rainbowit-has-elementor', RAINBOWIT_JS_URL . 'has-elementor.js', array('jquery'), RAINBOWIT_VERSION, true);
+
+       
 
 
         if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -55,4 +58,9 @@ if (!function_exists('rainbowit_scripts')){
 
     }
 }
-add_action( 'wp_enqueue_scripts', 'rainbowit_scripts' ); ?>
+add_action( 'wp_enqueue_scripts', 'rainbowit_scripts' ); 
+
+
+
+
+?>

@@ -36,8 +36,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
     public function category_dropdown()
     {
         $terms  = get_terms(array('taxonomy' => 'product_cat', 'fields' => 'id=>name'));
-        $category_dropdown = array('0' => esc_html__('Select Categories', 'rainbow-elements'));
-
+        $category_dropdown[0] = 'All Category';
         foreach ($terms as $id => $name) {
             $category_dropdown[$id] = $name;
         }
@@ -135,15 +134,25 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'product_title_limit',
+            [
+                'label' => esc_html__('Product Title Limit', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('5', 'rainbowit'),
+            ]
+        );
+
         $this->end_controls_section();
     }
 
     protected function render($instance = [])
     {
 
-        $settings         = $this->get_settings_for_display();
-        $heading_title    = $settings['heading_title'] ?? '';
-        $product_per_page = $settings['product_per_page'];
+        $settings              = $this->get_settings_for_display();
+        $heading_title         = $settings['heading_title'] ?? '';
+        $product_per_page      = $settings['product_per_page'];
+        $product_title_limit   = $settings['product_title_limit'];
 
         // Check if the rainbowit_Helper class exists
         if (class_exists('Rainbowit_Helper')) {
@@ -157,15 +166,14 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
         }
 
         add_filter ('add_to_cart_redirect', [ $this, 'redirect_to_checkout' ] );
-
         add_shortcode( 'reviews_count', [ $this, 'reviews_count_func'], 10, 1 );
 
-
+       
 
 ?>
         <div class="container mt--80 product-custom-service-tab">
             <div class="rbt-section-title text-center" data-sal="slide-up" data-sal-duration="400">
-                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title title-md"><?php echo wp_kses_post($heading_title); ?><<?php echo esc_html($settings['sec_title_tag']); ?>>
+                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title mb--0"><?php echo wp_kses_post($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
             </div>
             <!-- tabs -->
             <?php
@@ -176,6 +184,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
             }
 
             $category_list_value = explode(" ", $category_list);
+
 
             ?>
             <?php 
@@ -198,13 +207,34 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                             if ( empty( $settings['product_filter_all_button_label'] ) && $i == 1 ) {
                                 $active = 'active';
                             }
+
+                            if( !empty($categoryName->slug)) {
                     ?>
                             <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $categoryName->slug ) ); ?>"><?php echo esc_html( ucwords( $categoryName->name ) ); ?> </li>
                     <?php
+                            }
                             $i++;
                         }
-                    } ?>
+                    } 
 
+                    else {
+                        $terms = get_terms(array(
+                            'taxonomy' => 'product_cat',
+                            'hide_empty' => true,
+                        ));
+                        if ($terms && !is_wp_error($terms)) {
+                            $i = 1;
+                            foreach ($terms as $term) { 
+                                $active = '';
+                                if ( empty( $settings['product_filter_all_button_label'] ) && $i == 1 ) {
+                                    $active = 'active';
+                                }
+                                ?>
+                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $term->slug ) ); ?>"><?php echo esc_html( ucwords( $term->name ) ); ?> </li>
+                            <?php
+                           $i++; }
+                        }
+                    } ?>
                 </ul>
             </div>
             <?php endif; ?>
@@ -212,27 +242,37 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
             <div class="row row--12 rbt-tabs-active">
                 <!-- single card -->
                 <?php
-                $args = array(
-                    'post_type'             => 'product',
-                    'post_status'           => 'publish',
-                    'ignore_sticky_posts'   => 1,
-                    'posts_per_page'        => $product_per_page,
-                    'tax_query'             => array(
-                        'relation' => 'AND', // Add this line to make sure both tax queries are applied
-                        array(
-                            'taxonomy'      => 'product_cat',
-                            'field'         => 'term_id',
-                            'terms'         => $settings['cat_single_list'],
-                            'operator'      => 'IN'
-                        ),
-                        array(
-                            'taxonomy'      => 'product_visibility',
-                            'field'         => 'slug',
-                            'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
-                            'operator'      => 'NOT IN'
-                        ),
-                    )
-                );
+                if( !empty($settings['cat_single_list'] ) ) {
+                    $args = array(
+                        'post_type'             => 'product',
+                        'post_status'           => 'publish',
+                        'ignore_sticky_posts'   => 1,
+                        'posts_per_page'        => $product_per_page,
+                        'tax_query'             => array(
+                            'relation' => 'AND', // Add this line to make sure both tax queries are applied
+                            array(
+                                'taxonomy'      => 'product_cat',
+                                'field'         => 'term_id',
+                                'terms'         => $settings['cat_single_list'],
+                                'operator'      => 'IN'
+                            ),
+                            array(
+                                'taxonomy'      => 'product_visibility',
+                                'field'         => 'slug',
+                                'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
+                                'operator'      => 'NOT IN'
+                            ),
+                        )
+                    );
+                } else {
+                    $args = array(
+                        'post_type'             => 'product',
+                        'post_status'           => 'publish',
+                        'ignore_sticky_posts'   => 1,
+                        'posts_per_page'        => $product_per_page,
+                    );
+                }
+                
 
                 $products_query = new \WP_Query($args);
 
@@ -283,7 +323,7 @@ class rainbowit_Custom_Service_Tab extends Widget_Base
                                     <div class="card-content">
                                         <h6 class="title title-xm">
                                             <a href="<?php the_permalink();?>">
-                                                <?php the_title(); ?>
+                                                <?php echo wp_trim_words( get_the_title(), $product_title_limit,'... '); ?>
                                             </a>
                                         </h6>
                                         <div class="price rainbowit-price-custom">

@@ -8,9 +8,9 @@
  */
 
 // Get Value
-$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
-$footer_bottom_menu_args = Rainbowit_Helper::footer_bottom_menu_args();
-$rainbowit_socials = Rainbowit_Helper::rainbow_socials();
+$rainbowit_options          = Rainbowit_Helper::rainbowit_get_options();
+$footer_bottom_menu_args    = Rainbowit_Helper::footer_bottom_menu_args();
+$rainbowit_socials          = Rainbowit_Helper::rainbow_socials();
 ?>
 <footer class="footer-style-3">
     <?php if(!empty($rainbowit_options['cta_pre_title']) || !empty($rainbowit_options['cta_title']) || !empty($rainbowit_options['cta_btn_title'])){ ?>

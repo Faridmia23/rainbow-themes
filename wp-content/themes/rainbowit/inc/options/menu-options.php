@@ -126,7 +126,7 @@ acf_add_local_field_group(array(
         ),
         array(
             'key' => 'field_menu_image_enable',
-            'label' => 'Enable Mobile Mega Menu',
+            'label' => 'Enable Menu Image',
             'name' => 'rainbowit_enable_menu_image',
             'type' => 'true_false',
             'instructions' => '',

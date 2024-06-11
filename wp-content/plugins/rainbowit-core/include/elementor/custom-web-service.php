@@ -190,7 +190,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
 ?>
         <div class="container">
             <div class="rbt-section-title section-title-center" data-sal="slide-up" data-sal-duration="400">
-                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title title-xl"><?php echo esc_html($heading_title); ?><<?php echo esc_html($settings['sec_title_tag']); ?>>
+                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title title-xl"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
             </div>
             <div class="rbt-card-group-2 mt--50">
                 <?php
@@ -206,6 +206,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
                         $service_title  = $item['service_title'] ?? '';
                         $btn_title      = $item['btn_title'] ?? '';
                         $main_title     = $item['main_title'] ?? '';
+                        $price     = $item['price'] ?? '';
                         $desc           = $item['desc'] ?? '';
                         $btn_link       = $item['btn_link']['url'];
 
@@ -228,7 +229,7 @@ class Rainbowit_Custom_Web_Service extends Widget_Base
                                         <p class="meta-info"><?php echo esc_html($service_info); ?></p>
                                     </div>
                                     <p class="price">
-                                        <?php echo wp_kses_post($service_info); ?>
+                                        <?php echo wp_kses_post($price); ?>
                                         <span>*</span>
                                     </p>
                                 </div>

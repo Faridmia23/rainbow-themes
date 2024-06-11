@@ -33,10 +33,8 @@
         },
         methods: function (e) {
           
-            rbt.bannerIconShuffle();
             rbt.counterUp();
             rbt.swiperSlider();
-            rbt.showTeamMember();
             rbt.stopInputAutofill();
             rbt.selectPicker();
             rbt.onePageNav();
@@ -47,41 +45,6 @@
             rbt.progressReadTime();
         },
 
-        // banner icon shuffle active
-        bannerIconShuffle: () => {
-            var teamMemberWrapper = $('.banner-icon-wrapper');
-            teamMemberWrapper.each(function () {
-                $('.banner-icon-wrapper').serialshuffle({
-                    folder: '/wp-content/themes/rainbowit/assets/images/banner2/',
-                    shuffle: [
-                        'icon1.png',
-                        'icon2.png',
-                        'icon3.png',
-                        'icon4.png',
-                        'icon5.png',
-                        'icon6.png',
-                        'icon7.png',
-                        'icon8.png',
-                        'icon9.png',
-                        'icon10.png',
-                        'icon11.png',
-                        'icon12.png',
-                        'icon13.png',
-                        'icon14.png',
-                        'icon15.png',
-                        'icon16.png',
-                        'icon17.png',
-                        'icon18.png',
-                        'icon19.png',
-                        'icon20.png',
-                        'icon21.png',
-                        'icon22.png',
-                        'icon23.png',
-                    ],
-                    speed: 1000,
-                });
-            })
-        },
 
         // odometer for customer count
         counterUp: function () {
@@ -201,34 +164,6 @@
         },
 
 
-        // random team member img to show
-        showTeamMember: () => {
-            var teamMemberWrapper = $('.rbt-team-wrapper');
-            teamMemberWrapper.each(function () {
-                $('.rbt-team-wrapper').serialshuffle({
-                    folder: '/wp-content/themes/rainbowit/assets/images/we-are/',
-                    shuffle: [
-                        '1.png',
-                        '2.png',
-                        '3.png',
-                        '4.png',
-                        '5.png',
-                        '6.png',
-                        '7.png',
-                        '8.png',
-                        '9.png',
-                        '10.png',
-                        '11.png',
-                        '12.png',
-                        '13.png',
-                        '14.png',
-                        '15.png',
-                        '16.png',
-                    ],
-                    speed: 1000,
-                });
-            })
-        },
 
         // function for stop default browser input autofill style 
         stopInputAutofill: () => {

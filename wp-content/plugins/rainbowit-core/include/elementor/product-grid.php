@@ -188,6 +188,15 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                 'default' => esc_html__('-1', 'rainbowit'),
             ]
         );
+        $this->add_control(
+            'product_title_length',
+            [
+                'label' => esc_html__('Title Length', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('5', 'rainbowit'),
+            ]
+        );
+        
 
         $this->end_controls_section();
     }
@@ -206,6 +215,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
 
         $heading_title = $settings['heading_title'] ?? '';
         $subtitle_title = $settings['subtitle_title'] ?? '';
+        $title_length2 = $settings['product_title_length'] ?? '';
         $desc = $settings['desc'] ?? '';
         $btn_title = $settings['btn_title'] ?? '';
         $attr = '';
@@ -214,6 +224,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
             $attr .= !empty($settings['btn_link']['is_external']) ? ' target="_blank"' : '';
             $attr .= !empty($settings['btn_link']['nofollow']) ? ' rel="nofollow"' : '';
         }
+
 
         $cat_single_list  = $settings['cat_single_list'];
         $product_per_page = $settings['product_per_page'];
@@ -274,7 +285,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                             </a>
                                         </div>
                                     </div>
-                                    <?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html($settings, 'full', 'icon_image')); ?>
+                                    <?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html( $settings, 'full', 'icon_image') ); ?>
                                 </div>
                             </div>
                         </div>
@@ -286,10 +297,10 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                         $products_query->the_post();
                                         global $product;
                                         $product_id = $product->get_id();
-                                        get_template_part('woocommerce/content-product', 'grid');
-
-                                ?>
-                                <?php
+                                        $located = locate_template('woocommerce/content-product-grid.php', false, false);
+                                        if ($located) {
+                                             include($located);
+                                        }
 
                                     }
                                     // reset original post data
@@ -299,7 +310,6 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     echo 'No products found';
                                 }
                                 ?>
-
                             </div>
                         </div>
                     </div>
@@ -315,7 +325,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                             <?php echo wp_kses_post($desc); ?>
                         </p>
                         <div class="nav-btn-group">
-                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3 mx-md-auto mx-xl-0 " <?php echo $attr; ?>>
+                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3 mx-md-auto mx-xl-0 " <?php echo esc_attr($attr); ?>>
                                 <?php echo esc_html($btn_title); ?>
                                 <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
                                 <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
@@ -344,8 +354,6 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     while ($products_query->have_posts()) {
                                         $products_query->the_post();
                                         get_template_part('woocommerce/content-product', 'slider');
-                                ?>
-                                <?php
 
                                     }
                                     // reset original post data
@@ -393,7 +401,10 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                 while ($products_query->have_posts()) {
 
                                     $products_query->the_post();
-                                    get_template_part('woocommerce/content-product', 'grid2');
+                                    $located = locate_template('woocommerce/content-product-grid2.php', false, false);
+                                    if ($located) {
+                                            include($located);
+                                    }
 
                                 }
                                 // reset original post data

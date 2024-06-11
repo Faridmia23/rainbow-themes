@@ -7,7 +7,7 @@
 // Get Value
 $rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
 
-if (isset($rainbowit_options['rainbowit_logo_type'])): ?>
+if ( isset($rainbowit_options['rainbowit_logo_type']) ): ?>
     <a href="<?php echo esc_url(home_url('/')); ?>"
        title="<?php echo esc_attr(get_bloginfo('name')); ?>" rel="home">
 

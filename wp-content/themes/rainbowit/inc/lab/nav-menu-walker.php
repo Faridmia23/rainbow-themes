@@ -291,6 +291,10 @@ class RainbowitNavWalker extends Walker_Nav_Menu
      * @param int      $depth Depth of menu item. Used for padding.
      */
     $title = apply_filters('nav_menu_item_title', $title, $item, $args, $depth);
+    $arrow_class = '';
+    if ( in_array('menu-item-has-children', $classes) && empty( $badge ) || 1 == $enable_mega_menu ) {
+      $arrow_class .= '<span><i class="fa-regular fa-chevron-down"></i></span>';
+    }
 
     $item_output  = $args->before;
     $item_output .= '<a' . $attributes . ' class="rbt-nav-link">';
@@ -311,7 +315,7 @@ class RainbowitNavWalker extends Walker_Nav_Menu
       $item_output .= $args->link_after;
     }
    
-    $item_output .= '</a>';
+    $item_output .= "$arrow_class</a>";
 
     // Mega menu
     if (defined('ELEMENTOR_PATH') && class_exists('Elementor\Widget_Base')) {

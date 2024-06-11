@@ -233,7 +233,7 @@ class Blog_Single_Content extends Widget_Base
         </div>
         
         <!-- single contect -->
-        <div class="mb--40" id="intructor">
+        <div  id="intructor">
             <p class="description">
                <?php echo wp_kses_post($instructor_desc_1);
                ?>

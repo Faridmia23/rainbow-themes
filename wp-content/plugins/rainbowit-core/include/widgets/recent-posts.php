@@ -49,35 +49,44 @@ if( !class_exists('Rainbowit_Recent_Post') ){
             echo $args['after_title']; 
             endif; 
 
-                $posts = array(
-                    'post_type' => 'product',
-                    'meta_key' => 'total_sales',
+                $postsarg = array(
+                    'post_type'      => 'product',
                     'orderby' => 'meta_value_num',
                     'posts_per_page' => $show_item,
-                    'ignore_sticky_posts' => 1
+                    'ignore_sticky_posts' => 1,
+                    'meta_query'     => array(
+                        array(
+                            'key'     => '_product_url',
+                            'compare' => 'EXISTS',
+                        ),
+                    ),
+                    'tax_query'      => array(
+                        array(
+                            'taxonomy' => 'product_type',
+                            'field'    => 'slug',
+                            'terms'    => 'external',
+                        ),
+                    ),
                 );
-                $posts = new WP_Query( $posts );
-                
 
+                $posts = new WP_Query( $postsarg );
                 ?>
-                    <nav>
-        <ul class="rbt-list has-link has-img">
-               
-                    <?php
-
-                    while($posts->have_posts()) : $posts->the_post();  ?>
-
+                <nav>
+                    <ul class="rbt-list has-link has-img">
+                        <?php
+                        while($posts->have_posts()) : $posts->the_post();  
+                        $envato_product_preview_icon_url  =  get_post_meta(get_the_ID(), '_envato_product_preview_icon_url', true);
+                        ?>
                         <li>
                             <a href="<?php the_permalink(); ?>">
-                            <?php the_post_thumbnail( 'thumbnail' ); ?>
+                            <img src="<?php echo esc_url( $envato_product_preview_icon_url ); ?>" alt="dot icon">
                             <?php echo wp_trim_words( get_the_title(), $num_title_word,' '); ?>
                                 <i class="fa-solid fa-arrow-up-right"></i>
                             </a>
                         </li>
-
-                    <?php endwhile; ?>
+                        <?php endwhile; ?>
                     </ul>
-    </nav>
+                </nav>
 
             <?php echo $args['after_widget']; ?>
             

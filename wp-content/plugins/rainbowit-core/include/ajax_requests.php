@@ -58,6 +58,7 @@ class ajax_requests
     }
 
     public function rbt_ajax_envato_api_product_func() {
+
         $nonce = isset( $_POST['orderNonce'] ) ? $_POST['orderNonce'] : 0;
         if ( ! wp_verify_nonce( $nonce, 'rainbowit-feature-plugin' ) ) {
             die( __( 'Security check', 'rainbowit' ) ); 
@@ -77,16 +78,93 @@ class ajax_requests
         $set_option = json_encode($matches_products);
 
         $check = update_option( 'rainbowit_envato_product_save_update', $set_option );
-        wp_enqueue_script('rainbowit-envato-api-run', RAINBOWIT_ADDONS_URL . 'assets/js/envato-apirun2.js', array('jquery'), time() , true);
 
-        if( $check ) {
+        $args = array(
+            'post_type'      => 'product',
+            'posts_per_page' => -1,
+            'meta_query'     => array(
+                array(
+                    'key'     => '_product_url',
+                    'compare' => 'EXISTS',
+                ),
+            ),
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'product_type',
+                    'field'    => 'slug',
+                    'terms'    => 'external',
+                ),
+            ),
+        );
+
+        // Custom query to get external products
+        $query = new WP_Query($args);
+
+        $get_option = get_option('rainbowit_envato_product_save_update', true);
+
+        $matches_products = json_decode($get_option, true);
+
+        // Check if we have products
+        if ($query->have_posts()) {
+            // Loop through the products
+            while ($query->have_posts()) {
+                $query->the_post();
+                $woo_product_id =  get_the_ID();
+                $envato_product_preview_url = get_post_meta( $woo_product_id, '_envato_product_preview_url', true);
+
+                if (!empty($matches_products)) :
+                    foreach ($matches_products as $product) :
+                        $avg_rating           = isset($product['rating']['rating']) ? $product['rating']['rating'] : '';
+                        $total_rating         = isset($product['rating']['count']) ? $product['rating']['count'] : '';
+                        $preview_url          = isset($product['previews']['live_site']['url']) ? $product['previews']['live_site']['url'] : '';
+                        $price_cents          = isset($product['price_cents']) ? $product['price_cents'] : '';
+                        $number_of_sales      = isset($product['number_of_sales']) ? $product['number_of_sales'] : '';
+                        $product_price        = $this->centsToUSD($price_cents);
+                        $updated_at 		  = isset($product['updated_at']) ? $product['updated_at'] : '';
+
+                        if ($envato_product_preview_url == $preview_url) {
+
+                            update_post_meta( $woo_product_id, '_envato_product_total_sales', $number_of_sales);
+                            update_post_meta( $woo_product_id, '_envato_product_last_update', $updated_at );
+                            update_post_meta( $woo_product_id, '_envato_product_avg_rating', $avg_rating );
+                            update_post_meta( $woo_product_id, '_envato_product_total_rating', $total_rating );
+                            update_post_meta( $woo_product_id, '_regular_price', $product_price );
+
+                        }
+
+                    endforeach;
+
+                endif;
+
+                $product = wc_get_product(get_the_ID());
+                $product->save();
+            }
+        } else {
+            echo '<p>No external products found.</p>';
+        }
+
+        // Reset post data
+        wp_reset_postdata();
+       
+        if( $set_option ) {
             echo "success";
-
         } else {
             return false;
         }
 
         exit();
+    }
+
+    public function centsToUSD($cents)
+    {
+        // Validate input to ensure it's a number
+        if (!is_numeric($cents)) {
+            throw new InvalidArgumentException('Input must be a number');
+        }
+        // Convert cents to USD by dividing by 100
+        $usd = $cents / 100;
+        // Format the USD value with two decimal places
+        return number_format($usd, 2, '.', '');
     }
 
 }

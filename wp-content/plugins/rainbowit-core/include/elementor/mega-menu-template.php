@@ -49,9 +49,6 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
     protected function register_controls()
     {
 
-
-
-
         $this->start_controls_section(
             '_about_thumbnail',
             [
@@ -134,6 +131,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                 'default' => esc_html__('Purchase Now', 'rainbowit'),
             ]
         );
+
         $this->add_control(
             'purchase_btn_link',
             [
@@ -156,6 +154,15 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
             [
                 'label' => esc_html__('Image Item', 'rainbowit'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+        $this->add_control(
+            'product_per_page',
+            [
+                'label' => esc_html__('Product Per Page', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('5', 'rainbowit'),
             ]
         );
 
@@ -242,18 +249,17 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
     protected function render($instance = [])
     {
 
-        $settings = $this->get_settings_for_display();
-
-
-
-
+        $settings           = $this->get_settings_for_display();
         $category_title     = $settings['category_title'] ?? '';
         $product_title      = $settings['product_title'] ?? '';
         $btn_title          = $settings['btn_title'] ?? '';
         $banner_title       = $settings['banner_title'] ?? '';
         $banner_badge       = $settings['banner_badge'] ?? '';
         $purchase_btn_title = $settings['purchase_btn_title'] ?? '';
+        $product_per_page   = $settings['product_per_page'] ?? '5';
         $allowed_html       = wp_kses_allowed_html('post');
+
+        $btn_link = $settings['btn_link']['url'];
 
 
         if ( ! empty( $settings['btn_link']['url'] ) ) {
@@ -263,6 +269,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
         if ( ! empty( $settings['purchase_btn_link']['url'] ) ) {
 			$this->add_link_attributes( 'purchase_btn_link', $settings['purchase_btn_link'] );
 		}
+
 ?>
 
         <div class="row">
@@ -288,11 +295,12 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                             $category_name = $category->name;
                                         }
 
-
                                         $active = '';
+
                                         if ($key == 0) {
                                             $active = 'active';
                                         }
+                                       
 
                                 ?>
                                         <li class="single-item">
@@ -341,7 +349,7 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                                 'post_type'             => 'product',
                                                 'post_status'           => 'publish',
                                                 'ignore_sticky_posts'   => 1,
-                                                'posts_per_page'        => -1,
+                                                'posts_per_page'        => $product_per_page,
                                                 'tax_query'             => array(
                                                     array(
                                                         'taxonomy'      => 'product_cat',
@@ -359,9 +367,6 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                             );
 
                                             $products_query = new \WP_Query($args);
-                                          
-                                            
-
 
                                             if ($products_query->have_posts()) {
                                                 while ($products_query->have_posts()) {
@@ -369,18 +374,16 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                                     $product_img_url = get_the_post_thumbnail_url(get_the_ID(),'full'); 
 
                                                     $product_title = get_the_title();
+                                                   
+                                                    $envato_product_preview_icon_url  =  get_post_meta(get_the_ID(), '_envato_product_preview_icon_url', true);
 
-                                                    $max_length = 35; 
-                                                
-                                                    if (strlen($product_title) > $max_length) {
-                                                        $product_title = substr($product_title, 0, $max_length) . '...';
-                                                    }
+
                                             ?>
                                                     <li class="product-item">
                                                         <a href="<?php the_permalink(); ?>" class="rbt-nav-link">
                                                             <?php 
-                                                            if( isset($product_img_url) && !empty($product_img_url) ) { ?>
-                                                            <img class="tech-icon" src="<?php echo esc_url($product_img_url);?>" alt="hiStudy tempalte Logo">
+                                                            if( isset( $envato_product_preview_icon_url ) && !empty( $envato_product_preview_icon_url ) ) { ?>
+                                                            <img class="tech-icon" src="<?php echo esc_url( $envato_product_preview_icon_url );?>" alt="hiStudy tempalte Logo">
                                                             <?php  } ?>
                                                             <span><?php echo wp_kses_post( $product_title );?></span>
                                                         </a>
@@ -395,10 +398,9 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                                 echo 'No products found';
                                             }
                                             ?>
-
                                         </ul>
                                         <div class="tab-product-btn">
-                                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3" <?php $this->print_render_attribute_string( 'btn_link' ); ?>>
+                                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3" href="<?php echo esc_url( $btn_link ); ?>?category=<?php echo strtolower($category_name); ?>">
                                                 <?php echo esc_html($btn_title); ?>
                                                 <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
                                                 <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>

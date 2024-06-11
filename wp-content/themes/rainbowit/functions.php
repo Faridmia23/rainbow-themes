@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Rainbowit functions and definitions
  *
@@ -85,10 +86,10 @@ if (!function_exists('rainbowit_setup')) :
             'width'                => 400,
             'flex-height'          => true,
             'flex-width'           => true,
-            'header-text'          => array( 'site-title', 'site-description' ),
-            'unlink-homepage-logo' => true, 
+            'header-text'          => array('site-title', 'site-description'),
+            'unlink-homepage-logo' => true,
         );
-        add_theme_support( 'custom-logo', $defaults );
+        add_theme_support('custom-logo', $defaults);
 
         // Add theme support for selective refresh for widgets.
         add_theme_support('customize-selective-refresh-widgets');
@@ -100,80 +101,80 @@ if (!function_exists('rainbowit_setup')) :
 
 
         add_theme_support('responsive-embeds');
-        
+
         // Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
+        add_theme_support('customize-selective-refresh-widgets');
 
-		// Fonts Support for block editor
-        add_editor_style( array( 'style-editor.css', rainbowit_fonts_url() ) );
+        // Fonts Support for block editor
+        add_editor_style(array('style-editor.css', rainbowit_fonts_url()));
 
-		// Add support for Block Styles.
-		add_theme_support( 'wp-block-styles' );
+        // Add support for Block Styles.
+        add_theme_support('wp-block-styles');
 
-		// Add support for full and wide align images.
-		add_theme_support( 'align-wide' );
+        // Add support for full and wide align images.
+        add_theme_support('align-wide');
 
-		// Add support for editor styles.
-		add_theme_support( 'editor-styles' );
+        // Add support for editor styles.
+        add_theme_support('editor-styles');
 
-		// Enqueue editor styles.
-		add_editor_style( 'style-editor.css' );
+        // Enqueue editor styles.
+        add_editor_style('style-editor.css');
 
-        add_theme_support( 'editor-color-palette', array(
+        add_theme_support('editor-color-palette', array(
             array(
-                'name' => esc_html__( 'primary', 'rainbowit' ),
+                'name' => esc_html__('primary', 'rainbowit'),
                 'slug' => 'primary',
                 'color' => '#f9004d',
             ),
             array(
-                'name' => esc_html__( 'Secondary', 'rainbowit' ),
+                'name' => esc_html__('Secondary', 'rainbowit'),
                 'slug' => 'secondary',
                 'color' => '#00D09C',
             ),
             array(
-                'name' => esc_html__( 'Dark', 'rainbowit' ),
+                'name' => esc_html__('Dark', 'rainbowit'),
                 'slug' => 'dark',
                 'color' => '#1f1f25',
             ),
             array(
-                'name' => esc_html__( 'Gray', 'rainbowit' ),
+                'name' => esc_html__('Gray', 'rainbowit'),
                 'slug' => 'gray',
                 'color' => '#717173',
             ),
             array(
-                'name' => esc_html__( 'Light', 'rainbowit' ),
+                'name' => esc_html__('Light', 'rainbowit'),
                 'slug' => 'light',
                 'color' => '#f8f9fc',
             ),
             array(
-                'name' => esc_html__( 'White', 'rainbowit' ),
+                'name' => esc_html__('White', 'rainbowit'),
                 'slug' => 'white',
                 'color' => '#ffffff',
             ),
-        ) );
+        ));
 
-        add_theme_support( 'editor-font-sizes', array(
+        add_theme_support('editor-font-sizes', array(
             array(
-                'name' => esc_html__( 'Small', 'rainbowit' ),
+                'name' => esc_html__('Small', 'rainbowit'),
                 'size' => 12,
                 'slug' => 'small'
             ),
             array(
-                'name' => esc_html__( 'Normal', 'rainbowit' ),
+                'name' => esc_html__('Normal', 'rainbowit'),
                 'size' => 16,
                 'slug' => 'normal'
             ),
             array(
-                'name' => esc_html__( 'Large', 'rainbowit' ),
+                'name' => esc_html__('Large', 'rainbowit'),
                 'size' => 36,
                 'slug' => 'large'
             ),
             array(
-                'name' => esc_html__( 'Huge', 'rainbowit' ),
+                'name' => esc_html__('Huge', 'rainbowit'),
                 'size' => 50,
                 'slug' => 'huge'
             )
-        ) );
+        ));
 
         /**
          * Add Custom Image Size
@@ -183,7 +184,6 @@ if (!function_exists('rainbowit_setup')) :
         add_image_size('rainbowit-thumbnail-lg', 830, 430, true);
         add_image_size('rainbowit-thumbnail-portrait', 700, 1000, true);
         add_image_size('rainbowit-thumbnail-single', 1270, 950, true);
-
     }
 endif;
 add_action('after_setup_theme', 'rainbowit_setup');
@@ -234,26 +234,22 @@ add_action('after_setup_theme', 'rainbowit_content_width', 0);
 /**
  * Enqueue scripts and styles.
  */
-require_once( RAINBOWIT_FREAMWORK_DIRECTORY . 'scripts.php');
+require_once(RAINBOWIT_FREAMWORK_DIRECTORY . 'scripts.php');
 /**
  * Global Functions
  */
-require_once( RAINBOWIT_FREAMWORK_DIRECTORY . 'global-functions.php');
+require_once(RAINBOWIT_FREAMWORK_DIRECTORY . 'global-functions.php');
 
 /**
  * Register Custom Widget Area
  */
-require_once( RAINBOWIT_FREAMWORK_DIRECTORY . 'widget-area-register.php');
+require_once(RAINBOWIT_FREAMWORK_DIRECTORY . 'widget-area-register.php');
 
 /**
  * Register Custom Fonts
  */
-require_once( RAINBOWIT_FREAMWORK_DIRECTORY . 'register-custom-fonts.php');
+require_once(RAINBOWIT_FREAMWORK_DIRECTORY . 'register-custom-fonts.php');
 
-/**
- * TGM
- */
-require_once( RAINBOWIT_FREAMWORK_DIRECTORY . 'tgm-config.php');
 
 /**
  * Custom template tags for this theme.
@@ -285,30 +281,31 @@ if (defined('JETPACK__VERSION')) {
 /**
  * Rainbowit_Helper Template
  */
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'menu-area-trait.php');
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'layout-trait.php');
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'option-trait.php');
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'meta-trait.php');
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'title-trait.php');
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'social-trait.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'menu-area-trait.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'layout-trait.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'option-trait.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'meta-trait.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'title-trait.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'social-trait.php');
 // Rainbowit_Helper
-require_once( RAINBOWIT_FREAMWORK_HELPER . 'helper.php');
+require_once(RAINBOWIT_FREAMWORK_HELPER . 'helper.php');
 
 /**
  * Options
  */
-require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'theme/option-framework.php');
-require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'menu-options.php');
-require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'page-options.php');
-require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'post-format-options.php');
-require_once( RAINBOWIT_FREAMWORK_OPTIONS . 'user-extra-meta.php');
+require_once(RAINBOWIT_FREAMWORK_OPTIONS . 'theme/option-framework.php');
+require_once(RAINBOWIT_FREAMWORK_OPTIONS . 'menu-options.php');
+require_once(RAINBOWIT_FREAMWORK_OPTIONS . 'page-options.php');
+require_once(RAINBOWIT_FREAMWORK_OPTIONS . 'post-format-options.php');
+require_once(RAINBOWIT_FREAMWORK_OPTIONS . 'user-extra-meta.php');
 
 
 // -- Nav Walker
-require_once( RAINBOWIT_FREAMWORK_LAB . 'nav-menu-walker.php');
-require_once( RAINBOWIT_FREAMWORK_LAB . 'mobile-menu-walker.php');
-require_once( RAINBOWIT_FREAMWORK_LAB . 'onepage-nav-menu-walker.php');
-require_once( RAINBOWIT_FREAMWORK_TP . 'title/breadcrumb.php');
+require_once(RAINBOWIT_FREAMWORK_LAB . 'nav-menu-walker.php');
+require_once(RAINBOWIT_FREAMWORK_LAB . 'mobile-menu-walker.php');
+require_once(RAINBOWIT_FREAMWORK_LAB . 'onepage-nav-menu-walker.php');
+require_once(RAINBOWIT_FREAMWORK_LAB . 'footer-menu-walker.php');
+require_once(RAINBOWIT_FREAMWORK_TP . 'title/breadcrumb.php');
 
 
 // WooCommerce
@@ -316,10 +313,9 @@ if (class_exists('WooCommerce')) {
     require_once(RAINBOWIT_WOOCMMERCE . "wooc-functions.php");
     require_once(RAINBOWIT_WOOCMMERCE . "wooc-hooks.php");
     require_once(RAINBOWIT_WOOCMMERCE . "woo-single.php");
-    require_once(RAINBOWIT_WOOCMMERCE . "woo-checkout.php");
 }
 
-
+// Elementor template library function
 function get_elementor_template_library()
 {
 
@@ -340,13 +336,4 @@ function get_elementor_template_library()
     }
 
     return $posts;
-}
-
-add_filter( 'woocommerce_default_address_fields' , 'custom_override_default_address_fields' );
-
-// Our hooked in function - $address_fields is passed via the filter!
-function custom_override_default_address_fields( $address_fields ) {
-    $address_fields['address_1']['required'] = false;
-
-    return $address_fields;
 }

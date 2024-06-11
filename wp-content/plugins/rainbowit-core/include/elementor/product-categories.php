@@ -1,5 +1,4 @@
 <?php
-
 namespace Elementor;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
@@ -57,6 +56,24 @@ class Rainbowit_Product_Categories extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'post_per_page',
+            [
+                'label' => esc_html__('Product Per Page', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('5', 'rainbowit'),
+            ]
+        );
+        $this->add_control(
+            'title_limit',
+            [
+                'label' => esc_html__('Title Length', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('5', 'rainbowit'),
+            ]
+        );
+
+
         $repeater = new \Elementor\Repeater();
         $repeater->add_control(
             'cat_image',
@@ -94,7 +111,9 @@ class Rainbowit_Product_Categories extends Widget_Base
     protected function render($instance = [])
     {
 
-        $settings = $this->get_settings_for_display();
+        $settings       = $this->get_settings_for_display();
+        $post_per_page  = $settings['post_per_page'] ?? '5';
+        $title_limit = $settings['title_limit'];
 
         if (!empty($settings['list'])) {
             foreach ($settings['list'] as $key => $item) {
@@ -126,11 +145,11 @@ class Rainbowit_Product_Categories extends Widget_Base
                             'post_type'             => 'product',
                             'post_status'           => 'publish',
                             'ignore_sticky_posts'   => 1,
-                            'posts_per_page'        => -1,
+                            'posts_per_page'        => $post_per_page,
                             'tax_query'             => array(
                                 array(
                                     'taxonomy'      => 'product_cat',
-                                    'field' => 'term_id', //This is optional, as it defaults to 'term_id'
+                                    'field'         => 'term_id', //This is optional, as it defaults to 'term_id'
                                     'terms'         => $cat_id,
                                     'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
                                 ),
@@ -150,15 +169,16 @@ class Rainbowit_Product_Categories extends Widget_Base
                             while ($products_query->have_posts()) {
                                 $products_query->the_post();
                                 $product_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                                $envato_product_preview_icon_url  =  get_post_meta(get_the_ID(), '_envato_product_preview_icon_url', true);
                         ?>
                                 <li>
                                     <a href="<?php the_permalink();?>">
                                         <?php
-                                        if (isset($product_img_url) && !empty($product_img_url)) { ?>
-                                            <img src="<?php echo esc_url($product_img_url); ?>" alt="hiStudy tempalte Logo">
+                                        if (isset($envato_product_preview_icon_url) && !empty($envato_product_preview_icon_url)) { ?>
+                                            <img src="<?php echo esc_url($envato_product_preview_icon_url); ?>" alt="hiStudy tempalte Logo">
 
                                         <?php  } ?>
-                                        <span><?php echo wp_trim_words( get_the_title(), '5',' '); ?></span>
+                                        <span><?php echo wp_trim_words( get_the_title(), $title_limit,' '); ?></span>
                                     </a>
                                 </li>
                         <?php

@@ -99,6 +99,15 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
         );
 
         $this->add_control(
+            'product_title_length',
+            [
+                'label' => esc_html__('Title Length', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('5', 'rainbowit'),
+            ]
+        );
+
+        $this->add_control(
             'product_blog_pagination',
             [
                 'label' => esc_html__('Show Filter?', 'rainbowit'),
@@ -119,6 +128,8 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
         $settings = $this->get_settings_for_display();
         $product_per_page = $settings['product_per_page'];
         $cat_single_list = $settings['cat_single_list'];
+
+        $title_length2 = $settings['product_title_length'] ?? '';
 
         // Check if the rainbowit_Helper class exists
         if (class_exists('Rainbowit_Helper')) {
@@ -178,9 +189,13 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                                     $products_arg2 = new \WP_Query($args2);
 
-
+                                    $get_cat = isset( $_GET['category'] ) ? $_GET['category'] : '';
+                                    $active = '';
+                                    if( empty( $get_cat ) ) {
+                                        $active = 'active';
+                                    }
                                 ?>
-                                    <li class="rbt-tab-link active" data-filter2="*">
+                                    <li class="rbt-tab-link <?php echo esc_attr($active);?>" data-filter2="*">
                                         <?php echo esc_html($settings['filter_label_text']); ?>
                                         <span class="count"><?php echo esc_html($products_arg2->found_posts); ?></span>
                                     </li>
@@ -210,15 +225,24 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                                 )
                                             )
                                         );
-                                        $products_arg = new \WP_Query($product_arg);
 
+                                        $products_arg  = new \WP_Query($product_arg);
+                                        $get_cat       = isset( $_GET['category'] ) ? $_GET['category'] : '';
+                                        $cat_name      = isset( $categoryName->name  ) ? strtolower($categoryName->name) : '';
                                         
+                                        $active = '';
+                                        if(  $get_cat == $cat_name ) {
+                                            $active = 'active';
+                                        }
+
+                                        if( isset( $categoryName->name ) ) {
                                 ?>
-                                            <li class="rbt-tab-link " data-filter2=".<?php echo esc_attr(strtolower($categoryName->name)); ?>">
+                                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->name)); ?>">
                                                 <?php echo esc_html($categoryName->name); ?>
                                                 <span class="count"><?php echo esc_html($products_arg->found_posts); ?></span>
                                             </li>
                                 <?php
+                                        }
                                         
                                     }
                                 } ?>
@@ -291,6 +315,8 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                             $envatoproduct_template_type    =  get_post_meta($post->ID, '_envato_product_template_type', true);
                             $envato_product_preview_url     = get_post_meta($post->ID, '_envato_product_preview_url', true);
                             $preview_btn_text               = isset($rainbowit_options['preview_btn_text']) ?  $rainbowit_options['preview_btn_text'] : '';
+                            $envato_product_total_sales 	=  get_post_meta( $post->ID, '_envato_product_total_sales', true );
+                            $envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
                         ?>
                             <div class="col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 <?php echo esc_attr(strtolower($termsAssignedCat)); ?> <?php echo esc_attr(strtolower($parentCat)); ?>">
                                 <div class="rbt-card">
@@ -300,7 +326,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                     <div class="rbt-card-body p--24">
                                         <h3 class="title">
                                             <a href="<?php the_permalink(); ?>">
-                                                <?php the_title(); ?>
+                                            <?php echo wp_trim_words( get_the_title(), $title_length2,'... '); ?>
                                             </a>
                                         </h3>
                                         <div class="rbt-card-meta woocommerce">
@@ -309,26 +335,43 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                                     <a class="category"><?php echo esc_html($envatoproduct_template_type); ?></a>
                                                 <?php } ?>
                                             </div>
+                                            
+                                            <?php 
+                                            if(  $product->is_type('external') && $envato_product_total_rating > 3 ) { ?>
                                             <div class="review">
-                                                <?php
-                                                woocommerce_template_loop_rating();
-                                                ?>
-                                                <?php if ($rating > 0) { ?>
-                                                    <span class="rating-count">
-
-                                                        (<?php echo " "; ?>
-                                                        <?php
-                                                        echo do_shortcode("[reviews_count id='" . $product_id . "']");
-                                                        ?>)
-
-                                                    </span>
-                                                <?php } ?>
+                                                <div class="rating">
+                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
+                                                </div>
+                                                <span class="rating-count">(<?php echo esc_html( $envato_product_total_rating ); ?>)</span>
                                             </div>
-                                        </div>
+                                            <?php } else { 
+                                            woocommerce_template_loop_rating(); 
+                                            }
+                                            ?>
+                                            </div>
+                                       
                                         <div class="rbt-card-bottom">
                                             <div class="sales">
-                                                <?php woocommerce_template_loop_price(); ?>
-                                                <span class="sales-count">27 Sales</span>
+                                            <div class="price">
+                                                <?php
+                                                $regular_price = $product->get_regular_price();
+                                                $sale_price = $product->get_sale_price();
+                                                if ( $sale_price ) {
+                                                    echo '<div class="off-price">' . wc_price( $sale_price ) . '</div>';
+                                                    echo '<div class="current-price">' . wc_price( $regular_price ) . '</div>';
+                                                    } else {
+                                                    echo '<div class="current-price">' . wc_price( $regular_price ) . '</div>';
+                                                } 
+                                                ?>
+                                            </div>
+                                                
+                                                <?php if(!empty($envato_product_total_sales)) { ?>
+                                                <span class="sales-count"><?php echo esc_html( $envato_product_total_sales );?> <?php echo esc_html__("sales","rainbowit"); ?></span>
+                                                <?php } ?>
                                             </div>
                                             <div class="rbt-card-btn">
                                                 <a href="<?php echo esc_url($envato_product_preview_url); ?>" target="_blank" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary">
@@ -382,7 +425,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                 ?>
             </div>
         </div>
-
 <?php
 
     }

@@ -19,7 +19,7 @@
             rbt.megamenuHover();
             rbt.mobileMenuActive();
             rbt.backdropVisible();
-            rbt.bannerIconShuffle();
+          // rbt.bannerIconShuffle();
             rbt.counterUp();
             rbt.swiperSlider();
             rbt.themesGallery();
@@ -95,41 +95,41 @@
             })
         },
 
-        // banner icon shuffle active
-        bannerIconShuffle: () => {
-            var teamMemberWrapper = $('.banner-icon-wrapper');
-            teamMemberWrapper.each(function () {
-                $('.banner-icon-wrapper').serialshuffle({
-                    folder: '/wp-content/themes/rainbowit/assets/images/banner2/',
-                    shuffle: [
-                        'icon1.png',
-                        'icon2.png',
-                        'icon3.png',
-                        'icon4.png',
-                        'icon5.png',
-                        'icon6.png',
-                        'icon7.png',
-                        'icon8.png',
-                        'icon9.png',
-                        'icon10.png',
-                        'icon11.png',
-                        'icon12.png',
-                        'icon13.png',
-                        'icon14.png',
-                        'icon15.png',
-                        'icon16.png',
-                        'icon17.png',
-                        'icon18.png',
-                        'icon19.png',
-                        'icon20.png',
-                        'icon21.png',
-                        'icon22.png',
-                        'icon23.png',
-                    ],
-                    speed: 1000,
-                });
-            })
-        },
+       // banner icon shuffle active
+        // bannerIconShuffle: () => {
+        //     var teamMemberWrapper = $('.banner-icon-wrapper');
+        //     teamMemberWrapper.each(function () {
+        //         $('.banner-icon-wrapper').serialshuffle({
+        //             folder: '/wp-content/themes/rainbowit/assets/images/banner2/',
+        //             shuffle: [
+        //                 'icon1.webp',
+        //                 'icon2.webp',
+        //                 'icon3.webp',
+        //                 'icon4.webp',
+        //                 'icon5.webp',
+        //                 'icon6.webp',
+        //                 'icon7.webp',
+        //                 'icon8.webp',
+        //                 'icon9.webp',
+        //                 'icon10.webp',
+        //                 'icon11.webp',
+        //                 'icon12.webp',
+        //                 'icon13.webp',
+        //                 'icon14.webp',
+        //                 'icon15.webp',
+        //                 'icon16.webp',
+        //                 'icon17.webp',
+        //                 'icon18.webp',
+        //                 'icon19.webp',
+        //                 'icon20.webp',
+        //                 'icon21.webp',
+        //                 'icon22.webp',
+        //                 'icon23.webp',
+        //             ],
+        //             speed: 1000,
+        //         });
+        //     })
+        // },
 
         // odometer for customer count
         counterUp: function () {
@@ -347,7 +347,31 @@
                         filter: selector
                     });
                     return false;
-                })
+                });
+
+                // Initialize Isotope
+                $('.rbt-tabs-active-2').isotope({
+                    itemSelector: '.rbt-tab-item-2'
+                });
+                
+                function checkForActiveTab() {
+                    var activeTab = $('.tabs-2 li.active');
+                    if (activeTab.length > 0) {
+                        var category = activeTab.attr('data-filter2');
+                        filterIsotopeItems(category);
+                    }
+                }
+
+                function filterIsotopeItems(category) {
+                    $('.tabs-2 li').removeClass('active');
+                    $('.tabs-2 li[data-filter2="' + category + '"]').addClass('active');
+                
+                    $('.rbt-tabs-active-2').isotope({
+                        filter: category
+                    });
+                }
+
+                checkForActiveTab();
             })
         },
 
@@ -358,22 +382,22 @@
                 $('.rbt-team-wrapper').serialshuffle({
                     folder: '/wp-content/themes/rainbowit/assets/images/we-are/',
                     shuffle: [
-                        '1.png',
-                        '2.png',
-                        '3.png',
-                        '4.png',
-                        '5.png',
-                        '6.png',
-                        '7.png',
-                        '8.png',
-                        '9.png',
-                        '10.png',
-                        '11.png',
-                        '12.png',
-                        '13.png',
-                        '14.png',
-                        '15.png',
-                        '16.png',
+                        '1.webp',
+                        '2.webp',
+                        '3.webp',
+                        '4.webp',
+                        '5.webp',
+                        '6.webp',
+                        '7.webp',
+                        '8.webp',
+                        '9.webp',
+                        '10.webp',
+                        '11.webp',
+                        '12.webp',
+                        '13.webp',
+                        '14.webp',
+                        '15.webp',
+                        '16.webp',
                     ],
                     speed: 1000,
                 });
@@ -484,6 +508,11 @@
     }
     
     rbt.i();
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
 
 })(window, document, jQuery);
 

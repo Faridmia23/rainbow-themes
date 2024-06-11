@@ -313,7 +313,7 @@ class Rainbowit_Offer_Service extends Widget_Base
                 </div>
             </div>
             <!-- Modal end -->
-            <div class="rbt-section-title section-title-center mb--30" data-sal="slide-up" data-sal-duration="400">
+            <div class="rbt-section-title section-title-center mb--30">
                 <span class="subtitle"><?php echo esc_html($sub_title); ?></span>
                 <<?php echo esc_html($settings['sec_title_tag']); ?> class="title mb--0"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
             </div>
@@ -337,7 +337,7 @@ class Rainbowit_Offer_Service extends Widget_Base
                                 $service_image  = $item['service_image']['url'];
 
                         ?>
-                                <div class="rbt-card-4 card-wider" data-sal="slide-up" data-sal-duration="400">
+                                <div class="rbt-card-4 card-wider">
                                     <div class="content-wrapper">
                                         <div class="rbt-card-content order-2 order-lg-1">
                                             <div class="rbt-section-title">

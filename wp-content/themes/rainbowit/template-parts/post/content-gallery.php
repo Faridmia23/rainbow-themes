@@ -6,9 +6,9 @@
  *
  * @package rainbowit
  */
-$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
-$images = rainbowit_get_acf_data('rainbowit_gallery_image');
-$rainbowit_blog_thumb = ( is_active_sidebar( 'sidebar-1' ) && $rainbowit_options['rainbowit_blog_sidebar'] != 'no') ? 'rainbowit-thumbnail-lg':'rainbowit-thumbnail-single';
+$rainbowit_options          = Rainbowit_Helper::rainbowit_get_options();
+$images                     = rainbowit_get_acf_data('rainbowit_gallery_image');
+$rainbowit_blog_thumb       = is_active_sidebar( 'sidebar-1' ) ? 'rainbowit-thumbnail-lg':'rainbowit-thumbnail-single';
 ?>
 <!-- Start Single Blog  -->
 <div id="post-<?php the_ID(); ?>" <?php post_class('rainbowit-blog-list gallery-post mt--50 mt_md--30 mt_sm--30 mt_lg--50'); ?>>

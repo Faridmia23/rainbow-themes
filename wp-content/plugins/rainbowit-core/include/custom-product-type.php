@@ -10,6 +10,11 @@ function envato_product_tab($tabs)
 		'target' => 'service_product_options',
 		'class'  => ('show_if_simple_product hide_if_external'),
 	);
+	$tabs['own_product'] = array(
+		'label'	 => __('Own Product', 'rainbowit'),
+		'target' => 'own_product_options',
+		'class'  => ('show_if_simple_product hide_if_external'),
+	);
 
 	return $tabs;
 }
@@ -193,6 +198,23 @@ function rainbowit_options_product_tab_content()
 				'desc_tip'    => 'true',
 			)
 		);
+
+
+		$field2 = array(
+			'id' => '_envato_featured_product_checkbox_item',
+			'label' => __( 'Enable Featured Product', 'rainbowit' ),
+			'cbvalue' => 'yes', // Submits 'enabled' when checked
+		);
+		woocommerce_wp_checkbox( $field2 );
+
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_envator_product_documentation_link',
+				'label'       => __('Documentation LInk', 'rainbowit'),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+			)
+		);
 		
 		?>
 	</div>
@@ -207,12 +229,21 @@ add_action('woocommerce_product_data_panels', 'rainbowit_custom_service_options_
 function rainbowit_custom_service_options_product_tab_content()
 {
 	global $post;
+	global $product;
 ?>
 	<div id='service_product_options' class='panel woocommerce_options_panel'>
 		<div class='options_group'>
 			<?php
 			// Custom Product Checkbox Field
 
+			$field = array(
+				'id' => 'rainbowit_service_product_checkbox',
+				'label' => __( 'Enable Service Product', 'rainbowit' ),
+				'cbvalue' => 'yes', // Submits 'enabled' when checked
+			);
+			woocommerce_wp_checkbox( $field );
+			
+	
 			woocommerce_wp_text_input(
 				array(
 					'id'          => '_service_product_queue_item',
@@ -242,7 +273,110 @@ function rainbowit_custom_service_options_product_tab_content()
 					'description' => __('Please Input Total jobs', 'rainbowit'),
 				)
 			);
+			
 
+			?>
+		</div>
+	</div>
+	<div id='own_product_options' class='panel woocommerce_options_panel'>
+		<div class='options_group'>
+			<?php
+			// Custom Product Checkbox Field
+			$field = array(
+				'id' => 'rainbowit_own_product_checkbox',
+				'label' => __( 'Enable Main Website Product', 'rainbowit' ),
+				'cbvalue' => 'yes', // Submits 'enabled' when checked
+			);
+			woocommerce_wp_checkbox( $field );
+			woocommerce_wp_text_input(
+				array(
+					'id'          => '_own_product_total_sales',
+					'label'       => __('Total Sale', 'rainbowit'),
+					'placeholder' => '',
+					'desc_tip'    => 'true',
+				)
+			);
+
+			woocommerce_wp_text_input(
+				array(
+					'id'          => '_own_product_preview_url',
+					'label'       => __('Preview Url', 'rainbowit'),
+					'placeholder' => '',
+					'desc_tip'    => 'true',
+				)
+			);
+
+			woocommerce_wp_text_input( array(
+				'id'          => '_own_product_published_date',
+				'label'       => __( 'Product Published Date', 'rainbowit' ),
+				'placeholder' => 'YYYY-MM-DD',
+				'description' => __( 'Enter a custom date for this product.', 'rainbowit' ),
+				'type'        => 'date',
+			) );
+
+			woocommerce_wp_text_input( array(
+				'id'          => '_own_product_last_update',
+				'label'       => __( 'Product Last Update Date', 'rainbowit' ),
+				'placeholder' => 'YYYY-MM-DD',
+				'description' => __( 'Enter a custom date for this product.', 'rainbowit' ),
+				'type'        => 'date',
+			) );
+
+			
+			woocommerce_wp_text_input(
+				array(
+					'id'          => '_own_product_compatable_with',
+					'label'       => __('Compatable With', 'rainbowit'),
+					'placeholder' => '',
+					'desc_tip'    => 'true',
+				)
+			);
+			woocommerce_wp_text_input(
+				array(
+					'id'          => '_onw_product_column',
+					'label'       => __('Column With', 'rainbowit'),
+					'placeholder' => '',
+					'desc_tip'    => 'true',
+				)
+			);
+
+			woocommerce_wp_text_input(
+				array(
+					'id'          => '_onw_product_documentation_link',
+					'label'       => __('Documentation LInk', 'rainbowit'),
+					'placeholder' => '',
+					'desc_tip'    => 'true',
+				)
+			);
+
+			woocommerce_wp_textarea_input( 
+				array( 
+					'id'          => 'own_product_feature_list', 
+					'label'       => __('Product Feature List', 'woocommerce'), 
+					'placeholder' => __('Enter custom text here', 'woocommerce'),
+					'description' => __('This is a feature item input here.', 'woocommerce'),
+					'default' => '',
+				)
+			);
+
+			echo '<div class="options_group">';
+
+			woocommerce_wp_text_input( array(
+				'id'          => '_own_product_image_file',
+				'label'       => __( 'Product Icon Thumbnail Image', 'rainbowit' ),
+				'description' => __( 'Upload an image and enter the URL here.', 'rainbowit' ),
+				'desc_tip'    => true,
+				'type'        => 'text',
+			) );
+
+			echo '<p class="form-field">
+					<label for="main_website_sale_product">' . __( 'Upload Image', 'rainbowit' ) . '</label>
+					<button id="main_website_sale_product" class="button">' . __( 'Upload', 'rainbowit' ) . '</button>
+				</p>';
+
+			echo '</div>';
+			
+			
 			?>
 		</div>
 	</div>
@@ -256,6 +390,18 @@ function save_envato_product_options_field($post_id)
 {
 
 	// service post meta update
+
+	if ( isset( $_POST['_own_product_image_file'] ) ) {
+        update_post_meta( $post_id, '_own_product_image_file', esc_url_raw( $_POST['_own_product_image_file'] ) );
+    }
+
+	if (isset($_POST['_onw_product_documentation_link'])) :
+		update_post_meta($post_id, '_onw_product_documentation_link', sanitize_text_field($_POST['_onw_product_documentation_link']));
+	endif;
+
+	if (isset($_POST['_envator_product_documentation_link'])) :
+		update_post_meta($post_id, '_envator_product_documentation_link', sanitize_text_field($_POST['_envator_product_documentation_link']));
+	endif;
 
 	if (isset($_POST['_service_product_delivery_time'])) :
 		update_post_meta($post_id, '_service_product_delivery_time', sanitize_text_field($_POST['_service_product_delivery_time']));
@@ -309,13 +455,73 @@ function save_envato_product_options_field($post_id)
 		update_post_meta($post_id, '_envato_product_preview_icon_url', sanitize_text_field($_POST['_envato_product_preview_icon_url']));
 	endif;
 
+	if ( isset( $_POST['_envato_featured_product_checkbox_item'] ) ) {
+        $feature_product = $_POST['_envato_featured_product_checkbox_item'];
+        update_post_meta( $post_id, '_envato_featured_product_checkbox_item', $feature_product );
+    } else {
+        // Checkbox not checked, store a default value (optional)
+        update_post_meta( $post_id, '_envato_featured_product_checkbox_item', 'no' );
+    }
+
+
+	if ( isset( $_POST['rainbowit_service_product_checkbox'] ) ) {
+        $special_feature_enabled = $_POST['rainbowit_service_product_checkbox'];
+        update_post_meta( $post_id, 'rainbowit_service_product_checkbox', $special_feature_enabled );
+		update_post_meta( $post_id, 'rainbowit_own_product_checkbox', 'no' );
+    } else {
+        // Checkbox not checked, store a default value (optional)
+        update_post_meta( $post_id, 'rainbowit_service_product_checkbox', 'no' );
+    }
+
+	if ( isset( $_POST['rainbowit_own_product_checkbox'] ) ) {
+        $rainbowit_own_product_checkbox = $_POST['rainbowit_own_product_checkbox'];
+        update_post_meta( $post_id, 'rainbowit_own_product_checkbox', $rainbowit_own_product_checkbox );
+		update_post_meta( $post_id, 'rainbowit_service_product_checkbox', 'no' );
+    } else {
+        // Checkbox not checked, store a default value (optional)
+        update_post_meta( $post_id, 'rainbowit_own_product_checkbox', 'no' );
+    }
+
+	if (isset($_POST['_own_product_total_sales'])) :
+		update_post_meta($post_id, '_own_product_total_sales', sanitize_text_field($_POST['_own_product_total_sales']));
+	endif;
+
+	if (isset($_POST['_own_product_preview_url'])) :
+		update_post_meta($post_id, '_own_product_preview_url', sanitize_text_field($_POST['_own_product_preview_url']));
+	endif;
+
+	if (isset($_POST['_own_product_last_update'])) :
+		update_post_meta($post_id, '_own_product_last_update', sanitize_text_field($_POST['_own_product_last_update']));
+	endif;
+
+	if (isset($_POST['_own_product_published_date'])) :
+		update_post_meta($post_id, '_own_product_published_date', sanitize_text_field($_POST['_own_product_published_date']));
+	endif;
+
+	if (isset($_POST['_own_product_compatable_with'])) :
+		update_post_meta($post_id, '_own_product_compatable_with', sanitize_text_field($_POST['_own_product_compatable_with']));
+	endif;
+
+	if (isset($_POST['_onw_product_column'])) :
+		update_post_meta($post_id, '_onw_product_column', sanitize_text_field($_POST['_onw_product_column']));
+	endif;
+
+
+	if (isset($_POST['_own_product_preview_icon_url'])) :
+		update_post_meta($post_id, '_own_product_preview_icon_url', sanitize_text_field($_POST['_own_product_preview_icon_url']));
+	endif;
+
+	if (isset($_POST['own_product_feature_list'])) :
+		update_post_meta($post_id, 'own_product_feature_list', custom_sanitize_html($_POST['own_product_feature_list']));
+	endif;
 
 	
+
+	
+
 }
 
-
 // cron job
-
 function rainbowit_envato_api_call() {
 	/**
 	 * Fetch Products from Envato
@@ -336,17 +542,93 @@ function rainbowit_envato_api_call() {
 	$product_info 		= isset($products['body']) ? json_decode($products['body']) : '';
 	$matches_products 	= isset($product_info) && !empty($product_info) ? $product_info->matches : '';
 	$set_option 		= json_encode($matches_products);
-	$check 				= update_option( 'rainbowit_envato_product_save_update', $set_option );
 
-	if( $check ) {
+	update_option( 'rainbowit_envato_product_save_update', $set_option );
+
+	$args = array(
+		'post_type'      => 'product',
+		'posts_per_page' => -1,
+		'meta_query'     => array(
+			array(
+				'key'     => '_product_url',
+				'compare' => 'EXISTS',
+			),
+		),
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'product_type',
+				'field'    => 'slug',
+				'terms'    => 'external',
+			),
+		),
+	);
+
+	// Custom query to get external products
+	$query = new WP_Query($args);
+
+	$get_option = get_option('rainbowit_envato_product_save_update', true);
+
+	$matches_products = json_decode($get_option, true);
+
+	function centsToUSD($cents)
+	{
+		// Validate input to ensure it's a number
+		if (!is_numeric($cents)) {
+			throw new InvalidArgumentException('Input must be a number');
+		}
+		// Convert cents to USD by dividing by 100
+		$usd = $cents / 100;
+		// Format the USD value with two decimal places
+		return number_format($usd, 2, '.', '');
+	}
+
+	// Check if we have products
+	if ($query->have_posts()) {
+		// Loop through the products
+		while ($query->have_posts()) {
+			$query->the_post();
+			$woo_product_id =  get_the_ID();
+			$envato_product_preview_url = get_post_meta( $woo_product_id, '_envato_product_preview_url', true);
+
+			if (!empty($matches_products)) :
+				foreach ($matches_products as $product) :
+					$avg_rating           = isset($product['rating']['rating']) ? $product['rating']['rating'] : '';
+					$total_rating         = isset($product['rating']['count']) ? $product['rating']['count'] : '';
+					$preview_url          = isset($product['previews']['live_site']['url']) ? $product['previews']['live_site']['url'] : '';
+					$price_cents          = isset($product['price_cents']) ? $product['price_cents'] : '';
+					$number_of_sales      = isset($product['number_of_sales']) ? $product['number_of_sales'] : '';
+					$product_price        = centsToUSD($price_cents);
+					$updated_at 		  = isset($product['updated_at']) ? $product['updated_at'] : '';
+
+					if ($envato_product_preview_url == $preview_url) {
+
+						update_post_meta( $woo_product_id, '_envato_product_total_sales', $number_of_sales);
+						update_post_meta( $woo_product_id, '_envato_product_last_update', $updated_at );
+						update_post_meta( $woo_product_id, '_envato_product_avg_rating', $avg_rating );
+						update_post_meta( $woo_product_id, '_envato_product_total_rating', $total_rating );
+						update_post_meta( $woo_product_id, '_regular_price', $product_price );
+
+					}
+
+				endforeach;
+
+			endif;
+
+			$product = wc_get_product(get_the_ID());
+			$product->save();
+		}
+	} else {
+		echo '<p>No external products found.</p>';
+	}
+
+	// Reset post data
+	wp_reset_postdata();
+
+	if( $set_option ) {
 		echo "success";
 	} else {
 		return false;
 	}
-
-	// weekly run js enqueue
-
-	wp_enqueue_script('rainbowit-envato-api-run', RAINBOWIT_ADDONS_URL . 'assets/js/envato-apirun.js', array('jquery'), '1.0', true);
 
 	exit();
 }
@@ -362,13 +644,70 @@ function rainbowit_envato_api_call() {
 add_action( 'init', 'schedule_daily_api_call' );
   
 function schedule_daily_api_call() {
+	
+	$data = get_option("choose_schedule_rainbowit", true );
+	$value = isset($data) && !empty($data) ? $data : 'daily';
 
 	if ( ! wp_next_scheduled( 'rainbowit_envato_api_hook_run' ) ) {
-
-		wp_schedule_event( time(), 'weekly', 'rainbowit_envato_api_hook_run' );
-
+		wp_schedule_event( time(), $value, 'rainbowit_envato_api_hook_run' );
 	}
 
 }
 
 add_action( 'rainbowit_envato_api_hook_run', 'rainbowit_envato_api_call' );
+
+
+// Add the JavaScript for the upload button
+add_action( 'admin_footer', 'rainbowit_main_website_sale_product_image_script' );
+
+function rainbowit_main_website_sale_product_image_script() {
+    ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            var file_frame;
+            $('#main_website_sale_product').on('click', function(event) {
+                event.preventDefault();
+
+                // If the media frame already exists, reopen it.
+                if ( file_frame ) {
+                    file_frame.open();
+                    return;
+                }
+
+                // Create the media frame.
+                file_frame = wp.media.frames.file_frame = wp.media({
+                    title: '<?php _e( 'Select or Upload an Image', 'rainbowit' ); ?>',
+                    button: {
+                        text: '<?php _e( 'Use this image', 'rainbowit' ); ?>',
+                    },
+                    multiple: false
+                });
+
+                // When an image is selected, run a callback.
+                file_frame.on( 'select', function() {
+                    var attachment = file_frame.state().get('selection').first().toJSON();
+                    $('#_own_product_image_file').val(attachment.url);
+                });
+
+                // Finally, open the modal.
+                file_frame.open();
+            });
+        });
+    </script>
+    <?php
+}
+
+function custom_sanitize_html($input) {
+    $allowed_tags = array(
+        'a' => array(
+            'href' => array(),
+            'title' => array()
+        ),
+        'strong' => array(),
+        'em' => array(),
+        'ul' => array(),
+        'li' => array()
+    );
+
+    return wp_kses($input, $allowed_tags);
+}

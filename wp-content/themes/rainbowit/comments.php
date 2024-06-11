@@ -74,7 +74,7 @@ if( post_password_required() ){
             echo '</div>';
         endif;
         ?>
-        <div class="rainbowit-comment-form mt--40 mt_md--40 mt_sm--30">
+        <div class="rainbowit-comment-form mt--30 mt_md--30 mt_sm--20">
             <div class="comment-box-inner">
                 <?php
                 $commenter = wp_get_current_commenter();
@@ -95,7 +95,7 @@ if( post_password_required() ){
                 );
 
                 $args = array(
-                    'class_submit' => 'rainbowit-button btn-large btn-transparent',
+                    'class_submit' => 'rbt-btn rbt-btn-md rbt-btn-primary sal-animate',
                     'label_submit' => esc_html__( 'Post Comment', 'rainbowit' ),
                     'comment_field' =>
                         '<div class="row"><div class="col-12 col-md-12"><div class="form-group"><textarea id="comment" name="comment" rows="5" placeholder="'.esc_attr__('Write your comment here… ', 'rainbowit').' '. $aria_req_star .'" required aria-required="true"></textarea></div></div></div>',

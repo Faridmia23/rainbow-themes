@@ -2,26 +2,26 @@
     "use strict";
 
     jQuery(document).ready(function ($) {
-        // const {ajax_nonce, ajax_url} = rainbowit_portfolio_ajax;
+        const {ajax_nonce, ajax_url} = rainbowit_portfolio_ajax;
 
-        $('.rainbow-theme-envato-product-select').on( 'change', function() {
+        $('.rainbow-theme-envato-product-select').on('change', function () {
 
             var selectedOption = $(this).find('option:selected');
 
-            const product_name          = selectedOption.data('product_name');
-            const envato_preview_url    = selectedOption.data('envato_preview_url');
-            const envato_product_sale   = selectedOption.data('envato_product_sale');
-            const envato_product_url    = selectedOption.data('envato_product_url');
-            const product_price         = selectedOption.data('product_price');
-            const product_desc_html     = selectedOption.data('product_desc_html');
-            const product_desc_raw      = selectedOption.data('product_desc_raw');
-            const updated_at            = selectedOption.data('updated_at');
-            const published_at          = selectedOption.data('published_at');
-            const columns               = selectedOption.data('columns');
-            const avg_rating            = selectedOption.data('avg_rating');
-            const total_rating          = selectedOption.data('total_rating');
-            const icon_url              = selectedOption.data('icon_url');
-            const template_type         = selectedOption.data('template_type');
+            const product_name = selectedOption.data('product_name');
+            const envato_preview_url = selectedOption.data('envato_preview_url');
+            const envato_product_sale = selectedOption.data('envato_product_sale');
+            const envato_product_url = selectedOption.data('envato_product_url');
+            const product_price = selectedOption.data('product_price');
+            const product_desc_html = selectedOption.data('product_desc_html');
+            const product_desc_raw = selectedOption.data('product_desc_raw');
+            const updated_at = selectedOption.data('updated_at');
+            const published_at = selectedOption.data('published_at');
+            const columns = selectedOption.data('columns');
+            const avg_rating = selectedOption.data('avg_rating');
+            const total_rating = selectedOption.data('total_rating');
+            const icon_url = selectedOption.data('icon_url');
+            const template_type = selectedOption.data('template_type');
 
 
             $('input[name="product_other_info"').val(selectedOption.data('product_other_info'));
@@ -41,8 +41,8 @@
             /**
              * Change product content value
              */
-            if( $('div#wp-content-wrap').hasClass('tmce-active') ) {
-                 // Check if Gutenberg editor is active
+            if ($('div#wp-content-wrap').hasClass('tmce-active')) {
+                // Check if Gutenberg editor is active
                 if (typeof wp !== 'undefined' && wp.data && wp.data.select('core/select')) {
                     console.log('Please enable classic widget');
                 } else if (typeof tinymce !== 'undefined' && tinymce.activeEditor) {
@@ -74,10 +74,10 @@
 
             // Check if Gutenberg editor is active
             if (typeof wp !== 'undefined' && wp.data && wp.data.select('core/select')) {
-               console.log('Please enable classic widget');
+                console.log('Please enable classic widget');
             } else if (typeof tinymce !== 'undefined' && tinymce.activeEditor) {
-               // Fallback to retrieving description from HTML markup
-               var iframe = $('#postexcerpt #excerpt_ifr');
+                // Fallback to retrieving description from HTML markup
+                var iframe = $('#postexcerpt #excerpt_ifr');
                 // Check if the iframe exists
                 if (iframe.length) {
                     // Get the document object of the iframe
@@ -95,38 +95,38 @@
                 }
             }
 
-        } );
-        
+        });
+
         $(document).on("click", ".upload_image_button", function (e) {
-           e.preventDefault();
-           var $button = $(this);
-           // Create the media frame.
-           var file_frame = wp.media.frames.file_frame = wp.media({
-              title: 'Select or upload image',
-              library: { // remove these to show all
-                 type: 'image' // specific mime
-              },
-              button: {
-                 text: 'Select'
-              },
-              multiple: false  // Set to true to allow multiple files to be selected
-           });
-           // When an image is selected, run a callback.
-           file_frame.on('select', function () {
-              // We set multiple to false so only get one image from the uploader
+            e.preventDefault();
+            var $button = $(this);
+            // Create the media frame.
+            var file_frame = wp.media.frames.file_frame = wp.media({
+                title: 'Select or upload image',
+                library: { // remove these to show all
+                    type: 'image' // specific mime
+                },
+                button: {
+                    text: 'Select'
+                },
+                multiple: false  // Set to true to allow multiple files to be selected
+            });
+            // When an image is selected, run a callback.
+            file_frame.on('select', function () {
+                // We set multiple to false so only get one image from the uploader
 
-              var attachment = file_frame.state().get('selection').first().toJSON();
+                var attachment = file_frame.state().get('selection').first().toJSON();
 
-              $button.siblings('input').val(attachment.url);
+                $button.siblings('input').val(attachment.url);
 
-           });
+            });
 
-           // Finally, open the modal
-           file_frame.open();
+            // Finally, open the modal
+            file_frame.open();
         });
 
         // Function to execute your code
-       
+
     });
 
 
@@ -155,7 +155,7 @@
             }
         })
     });
-
+   
     $('.envato-product-update').on('click', function () {
         $.ajax({
             type: 'post',
@@ -168,9 +168,9 @@
 
             },
             success: (response) => {
-                // Redirect to the cart page
             },
             complete: () => {
+                console.log("completed task");
             },
             error: () => {
 
@@ -179,3 +179,7 @@
     });
 
 }(jQuery));
+
+
+
+

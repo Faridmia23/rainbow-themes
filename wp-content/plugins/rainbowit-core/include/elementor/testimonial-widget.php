@@ -205,9 +205,14 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
                         <div class="rbt-layout-item" data-sal="slide-up" data-sal-duration="400">
                             <div class="rbt-review-card">
                                 <h5 class="user"><?php the_title(); ?></h5>
+                                <?php 
+                                if (!empty($post->post_excerpt)) { ?>
                                 <p class="opinion">
                                     <?php echo wp_trim_words(get_the_excerpt(), '400'); ?>
                                 </p>
+                                <?php } else { 
+                                    the_content();
+                                } ?>
                                 <div class="marketplace">
                                     <?php echo get_the_post_thumbnail(); ?>
                                     <div class="market-name">

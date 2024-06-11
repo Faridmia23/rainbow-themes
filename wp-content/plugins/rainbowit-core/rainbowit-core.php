@@ -595,17 +595,49 @@ function add_custom_submenu_page() {
 
 add_action('admin_menu', 'add_custom_submenu_page');
 
-// Callback function to display content on the submenu page
-function envato_product_submenu_page_content() {
-    echo '<div class="wrap">';
-    echo '<h2>Envato Product Update</h2>';
-    ?>
-    <button type="submit" class="envato-product-update"><?php echo esc_html__("Envato Product","rainbowit");?></button>
-    <?php 
+add_action( 'admin_post_rainbowit_schedule_event_start', 'rainbowit_schedule_event_func' );
+
+function rainbowit_schedule_event_func() {
+    check_admin_referer( 'rainbowit-schedule-event' );
+
+    $choose_schedule_rainbowit = isset( $_POST['choose_schedule_rainbowit'] ) ? $_POST['choose_schedule_rainbowit'] : '';
     
-    echo '</div>';
+    update_option('choose_schedule_rainbowit',$choose_schedule_rainbowit );
+
+    wp_safe_redirect(admin_url( 'admin.php?edit.php?post_type=product&page=envato-product-menu-slug') );
 }
 
+// Callback function to display content on the submenu page
+function envato_product_submenu_page_content() { 
+    $choose_schedule = get_option("choose_schedule_rainbowit", true );
+    ?>
+   <div class="rainbow-themes-envato-product">
+        <div class="rainbowit-api-left-part">
+            <h2><?php echo esc_html__("Envato Product Update",'rainbowit'); ?></h2>
+            <button type="submit" class="envato-product-update"><?php echo esc_html__("Envato Product","rainbowit");?></button>
+        </div>
+        <div class="rainbowit-api-right-part">
+            <h2><?php echo esc_html__("Product Schedule Update Automatically",'rainbowit'); ?></h2>
+            <form action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
+                <input type="hidden" name="action" value="rainbowit_schedule_event_start"/>
+                
+                <div class="schedule-form-wrap">
+                <label for="message"><?php esc_html_e("Schedule Select:","rainbowit"); ?></label>
+                <select name="choose_schedule_rainbowit">
+                    <option value=""><?php esc_html_e("Select Schedule","rainbowit"); ?></option>
+                    <option value="hourly" <?php selected( $choose_schedule, 'hourly' ); ?>><?php esc_html_e("Hourly","rainbowit"); ?></option>
+                    <option value="daily" <?php selected( $choose_schedule, 'daily' ); ?>><?php esc_html_e("Daily","rainbowit"); ?></option>
+                    <option value="twicedaily" <?php selected( $choose_schedule, 'twicedaily' ); ?>><?php esc_html_e("Twicedaily","rainbowit"); ?></option>
+                    <option value="weekly" <?php selected( $choose_schedule, 'weekly' ); ?>><?php esc_html_e("Weekly","rainbowit"); ?></option>
+                </select>
+                <?php wp_nonce_field( 'rainbowit-schedule-event' ); ?>
+                <?php submit_button('Schedule Active'); ?>
+                </div>
+            </form>
+        </div>
+    </div>
+    <?php
+}
 
 add_action('wp_enqueue_scripts', 'enqueue_custom_woocommerce_checkout_script');
 

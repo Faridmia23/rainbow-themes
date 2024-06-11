@@ -7,8 +7,8 @@
  * @package rainbowit
  */
 
-$rainbowit_quote_author_name = rainbowit_get_acf_data('rainbowit_quote_author_name');
-$rainbowit_quote_author = !empty($rainbowit_quote_author_name) ? $rainbowit_quote_author_name : get_the_author();
+$rainbowit_quote_author_name             = rainbowit_get_acf_data('rainbowit_quote_author_name');
+$rainbowit_quote_author                  = !empty($rainbowit_quote_author_name) ? $rainbowit_quote_author_name : get_the_author();
 $rainbowit_quote_author_name_designation = rainbowit_get_acf_data('rainbowit_quote_author_name_designation');
 ?>
 <!-- Start Single Blog  -->

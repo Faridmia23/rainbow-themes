@@ -8,7 +8,7 @@
  */
 
 // Get Value
-$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
+$rainbowit_options       = Rainbowit_Helper::rainbowit_get_options();
 $footer_bottom_menu_args = Rainbowit_Helper::footer_bottom_menu_args();
 
 ?>

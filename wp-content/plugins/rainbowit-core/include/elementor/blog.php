@@ -275,7 +275,7 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
                                 } else {
                                     $terms = get_terms(array(
                                         'taxonomy' => 'category',
-                                        'hide_empty' => false,
+                                        'hide_empty' => true,
                                     ));
                                     if ($terms && !is_wp_error($terms)) {
                                         $m = 1;

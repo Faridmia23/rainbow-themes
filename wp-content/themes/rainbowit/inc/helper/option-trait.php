@@ -36,7 +36,7 @@ trait OptionsTrait {
     $rainbowit_options = json_decode( $predefined_data, true );
     if ( class_exists( 'Redux' ) ) {  
        global $options;
-    $rainbowit_options = wp_parse_args( $GLOBALS['rainbowit_options'], $options );
+        $rainbowit_options = wp_parse_args( $GLOBALS['rainbowit_options'], $options );
     }
     return $rainbowit_options;
   }

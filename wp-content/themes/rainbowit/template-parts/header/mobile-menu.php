@@ -3,13 +3,13 @@
 $rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
 
 // Menu
-$nav_menu_args = Rainbowit_Helper::nav_menu_args();
-$onepage_menu_args = Rainbowit_Helper::onepage_menu_args();
-$nav_menu = rainbowit_get_acf_data( "rainbowit_select_nav_menu");
-$menu_type = rainbowit_get_acf_data( "rainbowit_menu_type");
+$nav_menu_args          = Rainbowit_Helper::nav_menu_args();
+$onepage_menu_args      = Rainbowit_Helper::onepage_menu_args();
+$nav_menu               = rainbowit_get_acf_data( "rainbowit_select_nav_menu");
+$menu_type              = rainbowit_get_acf_data( "rainbowit_menu_type");
 
 $select_menu = $nav_menu_args;
-if ($menu_type == "onepage"){
+if ( $menu_type == "onepage" ){
     $select_menu = $onepage_menu_args;
 } else {
     $select_menu = $nav_menu_args;

@@ -142,12 +142,32 @@ Redux::setSection($opt_name, array(
            
         ),
         array(
+            'id' => 'rainbowit_head_logo_large',
+            'title' => esc_html__('Large Logo', 'rainbowit'),
+            'subtitle' => esc_html__('Upload the main logo of your site. Note: Its work for header layout 1', 'rainbowit'),
+            'type' => 'media',
+            'default' => array(
+                'url' => RAINBOWIT_IMG_URL . 'logo2x.png'
+            ),
+           
+        ),
+        array(
             'id' => 'rainbowit_mobile_logo',
             'title' => esc_html__('Mobile Logo', 'rainbowit'),
             'subtitle' => esc_html__('Upload the mobile Logo of your site.', 'rainbowit'),
             'type' => 'media',
             'default' => array(
                 'url' => RAINBOWIT_IMG_URL . 'rbt-logo-icon.png'
+            ),
+            
+        ),
+        array(
+            'id' => 'rainbowit_mobile_large_logo',
+            'title' => esc_html__('Mobile Large Logo', 'rainbowit'),
+            'subtitle' => esc_html__('Upload the mobile Logo of your site.', 'rainbowit'),
+            'type' => 'media',
+            'default' => array(
+                'url' => RAINBOWIT_IMG_URL . 'rbt-logo-icon2x.png'
             ),
             
         ),
@@ -364,14 +384,6 @@ Redux::setSection($opt_name, array(
                 'default' => esc_html__('Log In', 'rainbowit'),
                 'required' => array('rainbowit_header_btn', 'equals', true),
             ),
-            array(
-                'id' => 'rainbowit_header_buttonUrl',
-                'type' => 'text',
-                'default' => '#',
-                'title' => esc_html__('Button Url', 'rainbowit'),
-                'required' => array('rainbowit_header_btn', 'equals', true),
-
-            ),
 
             array(
                 'id' => 'rainbowit_header_hire_us_btn_text',
@@ -491,6 +503,25 @@ Redux::setSection($opt_name, array(
             'default' => true,
         ),
         // Header Custom Style
+         array(
+            'id' => 'rainbowit_select_banner_template',
+            'type' => 'image_select',
+            'title' => esc_html__('Select banner Layout', 'rainbowit'),
+            'options' => array(
+                '1' => array(
+                    'alt' => esc_html__('Banner Layout 1', 'rainbowit'),
+                    'title' => esc_html__('Banner Layout 1', 'rainbowit'),
+                    'img' => get_template_directory_uri() . '/assets/images/optionframework/banner/1.png',
+                ),
+                '2' => array(
+                    'alt' => esc_html__('Banner Layout 2', 'rainbowit'),
+                    'title' => esc_html__('Banner Layout 2', 'rainbowit'),
+                    'img' => get_template_directory_uri() . '/assets/images/optionframework/banner/2.png',
+                ),
+            ),
+            'default' => '1',
+            'required' => array('rainbowit_banner_enable', 'equals', true),
+        ),
        
         array(
             'id' => 'rainbowit_breadcrumb_enable',
@@ -526,30 +557,6 @@ Redux::setSection($opt_name, array(
                 'title' => esc_html__('Default Title', 'rainbowit'),
                 'subtitle' => esc_html__('Controls the Default title of the page which is displayed on the page title are on the blog page.', 'rainbowit'),
                 'default' => esc_html__('Blog', 'rainbowit'),
-            ),
-            array(
-                'id' => 'rainbowit_blog_sidebar',
-                'type' => 'image_select',
-                'title' => esc_html__('Select Blog Sidebar', 'rainbowit'),
-                'subtitle' => esc_html__('Choose your favorite blog layout', 'rainbowit'),
-                'options' => array(
-                    'left' => array(
-                        'alt' => esc_html__('Left Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/left-sidebar.png',
-                        'title' => esc_html__('Left Sidebar', 'rainbowit'),
-                    ),
-                    'right' => array(
-                        'alt' => esc_html__('Right Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/right-sidebar.png',
-                        'title' => esc_html__('Right Sidebar', 'rainbowit'),
-                    ),
-                    'no' => array(
-                        'alt' => esc_html__('No Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/no-sidebar.png',
-                        'title' => esc_html__('No Sidebar', 'rainbowit'),
-                    ),
-                ),
-                'default' => 'right',
             ),
             array(
                 'id' => 'rainbowit_show_post_author_meta',
@@ -780,364 +787,7 @@ Redux::setSection($opt_name, array(
         )
     )
 );
-/**
- * Portfolio Panel
- */
-Redux::setSection($opt_name, array(
-    'title' => esc_html__('Portfolio', 'rainbowit'),
-    'id' => 'rainbowit_portfolio',
-    'icon' => 'el el-th',
-));
-/**
- * Single Archive
- */
-Redux::setSection($opt_name, array(
-        'title' => esc_html__('Archive', 'rainbowit'),
-        'id' => 'rainbowit_portfolio_archive_id',
-        'icon' => 'el el-folder-open',
-        'subsection' => true,
-        'fields' => array(
-            // Client Name
 
-            array(
-                'id' => 'rainbowit_show_project_category',
-                'type' => 'button_set',
-                'title' => esc_html__('Category', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the category of blog post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            array(
-                'id' => 'rainbowit_enable_case_study_button',
-                'type' => 'button_set',
-                'title' => esc_html__('Portfolio Button (View Details)', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the portfolio case study (View Details) button of portfolio archive and addons', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'no',
-            ),
-            array(
-                'id' => 'rainbowit_enable_case_study_button_text',
-                'type' => 'text',
-                'title' => esc_html__('Portfolio Button Text', 'rainbowit'),
-                'default' => esc_html__('Case Study', 'rainbowit'),
-                'required' => array('rainbowit_enable_case_study_button', 'equals', 'yes'),
-            ),
-            array(
-                'id' => 'rainbowit_project_image_size',
-                'type' => 'select',
-                'title' => esc_html__('Select Thumbnail Size', 'rainbowit'),
-                'options' => rainbowit_get_thumbnail_sizes(),
-                'default' => 'rainbowit-thumbnail-sm',
-            ),
-            array(
-                'id' => 'rainbowit_project_archive_sidebar',
-                'type' => 'image_select',
-                'title' => esc_html__('Select Project Archive Sidebar', 'rainbowit'),
-                'subtitle' => esc_html__('Choose your favorite layout', 'rainbowit'),
-                'options' => array(
-                    'left' => array(
-                        'alt' => esc_html__('Left Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/left-sidebar.png',
-                        'title' => esc_html__('Left Sidebar', 'rainbowit'),
-                    ),
-                    'right' => array(
-                        'alt' => esc_html__('Right Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/right-sidebar.png',
-                        'title' => esc_html__('Right Sidebar', 'rainbowit'),
-                    ),
-                    'no' => array(
-                        'alt' => esc_html__('No Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/no-sidebar.png',
-                        'title' => esc_html__('No Sidebar', 'rainbowit'),
-                    ),
-                ),
-                'default' => 'no',
-            ),
-            array(
-                'id'       => 'rainbowit_project_archive_col_lg',
-                'type'     => 'select',
-                'title'    => esc_html__('Select Column for Desktops', 'rainbowit'),
-                'subtitle' => esc_html__('Desktops: ≥ 1200px', 'rainbowit'),
-                'options'  => array(
-                    '12' => esc_html__('1 Col', 'rainbowit'),
-                    '6' => esc_html__('2 Col', 'rainbowit'),
-                    '4' => esc_html__('3 Col', 'rainbowit'),
-                    '3' => esc_html__('4 Col', 'rainbowit'),
-                ),
-                'default'  => '4',
-            ),
-            array(
-                'id'       => 'rainbowit_project_archive_col_md',
-                'type'     => 'select',
-                'title'    => esc_html__('Select Column for Tabs', 'rainbowit'),
-                'subtitle'    => esc_html__('Tabs: ≥ 992px', 'rainbowit'),
-                'options'  => array(
-                    '12' => esc_html__('1 Col', 'rainbowit'),
-                    '6' => esc_html__('2 Col', 'rainbowit'),
-                    '4' => esc_html__('3 Col', 'rainbowit'),
-                    '3' => esc_html__('4 Col', 'rainbowit'),
-                ),
-                'default'  => '6',
-            ),
-            array(
-                'id'       => 'rainbowit_project_archive_col_sm',
-                'type'     => 'select',
-                'title'    => esc_html__('Select Column for Large Mobiles', 'rainbowit'),
-                'subtitle'    => esc_html__('Large Mobiles: ≥ 576px', 'rainbowit'),
-                'options'  => array(
-                    '12' => esc_html__('1 Col', 'rainbowit'),
-                    '6' => esc_html__('2 Col', 'rainbowit'),
-                    '4' => esc_html__('3 Col', 'rainbowit'),
-                    '3' => esc_html__('4 Col', 'rainbowit'),
-                ),
-                'default'  => '12',
-            ),
-            array(
-                'id'       => 'rainbowit_project_archive_col',
-                'type'     => 'select',
-                'title'    => esc_html__('Select Column for Small Mobiles', 'rainbowit'),
-                'subtitle'    => esc_html__('Small Mobiles: < 576px', 'rainbowit'),
-                'options'  => array(
-                    '12' => esc_html__('1 Col', 'rainbowit'),
-                    '6' => esc_html__('2 Col', 'rainbowit'),
-                    '4' => esc_html__('3 Col', 'rainbowit'),
-                    '3' => esc_html__('4 Col', 'rainbowit'),
-                ),
-                'default'  => '12',
-            ),
-            array(
-                'id' => 'projects_slug',
-                'type' => 'text',
-                'title' => esc_html__('Project Slug', 'rainbowit'),
-                'subtitle' => esc_html__('Change the project url slug', 'rainbowit'),
-                'description' => esc_html__('After saving your custom portfolio slug, flush the permalinks from "Wordpress Settings > Permalinks" for the changes to take effect.', 'rainbowit'),
-                'default' => 'portfolio',
-            ),
-            array(
-                'id' => 'projects_cat_slug',
-                'type' => 'text',
-                'title' => esc_html__('Projects Categories Slug', 'rainbowit'),
-                'subtitle' => esc_html__('Change the projects Categories url slug', 'rainbowit'),
-                'description' => esc_html__('After saving your custom portfolio slug, flush the permalinks from "Wordpress Settings > Permalinks" for the changes to take effect.', 'rainbowit'),
-                'default' => 'portfolio-cat',
-            ),
-
-        )
-    )
-);
-/**
- * Single Portfolio
- */
-Redux::setSection($opt_name, array(
-        'title' => esc_html__('Single', 'rainbowit'),
-        'id' => 'rainbowit_portfolio_details_id',
-        'icon' => 'el el-website',
-        'subsection' => true,
-        'fields' => array(
-            array(
-                'id'       => 'select_title_bellow_content',
-                'type'     => 'select',
-                'title'    => esc_html__('Select Title Bellow Content', 'rainbowit'),
-                'desc'     => esc_html__('Select Excerpt or Breadcrumbs. If you want to empty this please select none.', 'rainbowit'),
-                // Must provide key => value pairs for select options
-                'options'  => array(
-                    'excerpt' => 'Excerpt',
-                    'breadcrumbs' => 'Breadcrumbs',
-                    'both' => 'Excerpt and Breadcrumbs',
-                    'none' => 'None'
-                ),
-                'default'  => 'excerpt',
-            ),
-
-            array(
-                'id' => 'rainbowit_project_single_image_size',
-                'type' => 'select',
-                'title' => esc_html__('Select Thumbnail Size', 'rainbowit'),
-                'options' => rainbowit_get_thumbnail_sizes(),
-                'default' => 'rainbowit-thumbnail-single',
-            ),
-
-
-            // Client Name
-            array(
-                'id' => 'rainbowit_enable_client_name_meta',
-                'type' => 'button_set',
-                'title' => esc_html__('Client Name', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the portfolio client name of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            array(
-                'id' => 'rainbowit_client_name_text',
-                'type' => 'text',
-                'title' => esc_html__('Client Name Text', 'rainbowit'),
-                'default' => esc_html__('Client Name', 'rainbowit'),
-                'required' => array('rainbowit_enable_client_name_meta', 'equals', 'yes'),
-            ),
-
-            // Release Date
-            array(
-                'id' => 'rainbowit_enable_release_date_meta',
-                'type' => 'button_set',
-                'title' => esc_html__('Release Date', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the portfolio release date of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            array(
-                'id' => 'rainbowit_release_date_text',
-                'type' => 'text',
-                'title' => esc_html__('Release Date Text', 'rainbowit'),
-                'default' => esc_html__('Release Date', 'rainbowit'),
-                'required' => array('rainbowit_enable_release_date_meta', 'equals', 'yes'),
-            ),
-
-            // Project Types
-            array(
-                'id' => 'rainbowit_enable_project_types_meta',
-                'type' => 'button_set',
-                'title' => esc_html__('Project Types', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the portfolio project types of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            array(
-                'id' => 'rainbowit_project_types_text',
-                'type' => 'text',
-                'title' => esc_html__('Project Types Text', 'rainbowit'),
-                'default' => esc_html__('Project Types', 'rainbowit'),
-                'required' => array('rainbowit_enable_project_types_meta', 'equals', 'yes'),
-            ),
-
-            // Live Preview
-            array(
-                'id' => 'rainbowit_enable_live_preview_meta',
-                'type' => 'button_set',
-                'title' => esc_html__('Live Preview', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the portfolio live preview of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            array(
-                'id' => 'rainbowit_live_preview_text',
-                'type' => 'text',
-                'title' => esc_html__('Live Preview Text', 'rainbowit'),
-                'default' => esc_html__('Live Preview', 'rainbowit'),
-                'required' => array('rainbowit_enable_live_preview_meta', 'equals', 'yes'),
-            ),
-            array(
-                'id' => 'rainbowit_live_preview_button_text',
-                'type' => 'text',
-                'title' => esc_html__('Live Preview Button Text', 'rainbowit'),
-                'default' => esc_html__('Visit Live Site', 'rainbowit'),
-                'required' => array('rainbowit_enable_live_preview_meta', 'equals', 'yes'),
-            ),
-
-
-            /**
-             * Portfolio Share option
-             */
-            array(
-                'id' => 'rainbowit_enable_portfolio_share',
-                'type' => 'button_set',
-                'title' => esc_html__('Share options', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the social share button of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            // Facebook
-            array(
-                'id' => 'rainbowit_enable_portfolio_share_facebook',
-                'type' => 'button_set',
-                'title' => esc_html__('Facebook', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the facebook share button of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-                'required' => array('rainbowit_enable_portfolio_share', 'equals', 'yes'),
-            ),
-            // Twitter
-            array(
-                'id' => 'rainbowit_enable_portfolio_share_twitter',
-                'type' => 'button_set',
-                'title' => esc_html__('Twitter', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the twitter share button of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-                'required' => array('rainbowit_enable_portfolio_share', 'equals', 'yes'),
-            ),
-            // Linkedin
-            array(
-                'id' => 'rainbowit_enable_portfolio_share_linkedin',
-                'type' => 'button_set',
-                'title' => esc_html__('Linkedin', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the linkedin share button of portfolio single post.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-                'required' => array('rainbowit_enable_portfolio_share', 'equals', 'yes'),
-            ),
-
-            /**
-             * Related portfolio
-             */
-            array(
-                'id' => 'rainbowit_enable_related_portfolio',
-                'type' => 'button_set',
-                'title' => esc_html__('Related Portfolio', 'rainbowit'),
-                'subtitle' => esc_html__('Show or hide the related portfolio area of portfolio single post bellow section.', 'rainbowit'),
-                'options' => array(
-                    'yes' => esc_html__('Show', 'rainbowit'),
-                    'no' => esc_html__('Hide', 'rainbowit'),
-                ),
-                'default' => 'yes',
-            ),
-            array(
-                'id' => 'rainbowit_related_portfolio_section_title_before_text',
-                'type' => 'text',
-                'title' => esc_html__('Section Title Before Text', 'rainbowit'),
-                'default' => esc_html__('Related Work', 'rainbowit'),
-                'required' => array('rainbowit_enable_related_portfolio', 'equals', 'yes'),
-            ),
-            array(
-                'id' => 'rainbowit_related_portfolio_section_title_text',
-                'type' => 'text',
-                'title' => esc_html__('Section Title Text', 'rainbowit'),
-                'default' => esc_html__('Our More Projects', 'rainbowit'),
-                'required' => array('rainbowit_enable_related_portfolio', 'equals', 'yes'),
-            ),
-
-        )
-    )
-);
 /**
  * Typography
  */
@@ -1364,17 +1014,17 @@ if ( class_exists( 'WooCommerce' ) ) {
                 'options' => array(
                     'left' => array(
                         'alt' => esc_html__('Left Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/left-sidebar.png',
+                        'img' => get_template_directory_uri() . '/assets/images/optionframework/left-sidebar.png',
                         'title' => esc_html__('Left Sidebar', 'rainbowit'),
                     ),
                     'right' => array(
                         'alt' => esc_html__('Right Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/right-sidebar.png',
+                        'img' => get_template_directory_uri() . '/assets/images/optionframework/right-sidebar.png',
                         'title' => esc_html__('Right Sidebar', 'rainbowit'),
                     ),
                     'no' => array(
                         'alt' => esc_html__('No Sidebar', 'rainbowit'),
-                        'img' => get_template_directory_uri() . '/assets/images/optionframework/layout/no-sidebar.png',
+                        'img' => get_template_directory_uri() . '/assets/images/optionframework/no-sidebar.png',
                         'title' => esc_html__('No Sidebar', 'rainbowit'),
                     ),
                 ),
@@ -1409,6 +1059,13 @@ if ( class_exists( 'WooCommerce' ) ) {
                 'type'     => 'text',
                 'title'    => esc_html__( 'Live Preview Text', 'rainbowit' ),
                 'default'  => 'Live Preview',
+            ),
+
+            array(
+                'id'       => 'my_account_registration_page_link',
+                'type'     => 'text',
+                'title'    => esc_html__( 'My Account Registration Page LInk', 'rainbowit' ),
+                'default'  => '#',
             ),
         )
     ));
@@ -1445,6 +1102,12 @@ if ( class_exists( 'WooCommerce' ) ) {
                 'type'     => 'text',
                 'title'    => esc_html__( 'Button LInk', 'rainbowit' ),
                 'default'  => '#',
+            ),
+
+            array(
+                'id'       => 'single_product_vat_text_change',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Vat Text Single Product', 'rainbowit' ),
             ),
 
             array(

@@ -132,6 +132,15 @@ class Rainbowit_Our_History extends Widget_Base
             ]
         );
 
+        $repeater->add_control(
+            'tooltip_text',
+            [
+                'label' => esc_html__('Tooltip Title', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('', 'rainbowit'),
+            ]
+        );
+
         $this->add_control(
             'list',
             [
@@ -255,7 +264,7 @@ class Rainbowit_Our_History extends Widget_Base
         $description2        = $settings['description2'] ?? '';
         $achivement_title    = $settings['achivement_title'] ?? '';
         $btn_link            = $settings['btn_link']['url'];
-        $button_title = $settings['button_title'] ?? '';
+        $button_title        = $settings['button_title'] ?? '';
 ?>
 
 <div class="rbt-section-bgCommon about-page-wrapper">
@@ -277,9 +286,10 @@ class Rainbowit_Our_History extends Widget_Base
                     if (!empty($settings['list'])) {
                         foreach ($settings['list'] as $item) {
                             $achievement_image     = $item['achievement_image']['url'];
+                            $tooltip_text          = $item['tooltip_text'] ?? '';
 
                     ?>
-                        <li data-sal="slide-up" data-sal-duration="700"><img class="icon" src="<?php echo esc_url( $achievement_image ); ?>" alt="icon"></li>
+                        <li data-sal="slide-up" data-toggle="tooltip" data-placement="top" title="<?php echo esc_attr( $tooltip_text );?>" data-sal-duration="700"><img class="icon" src="<?php echo esc_url( $achievement_image ); ?>" alt="icon"></li>
                         <?php
                         }
                     } ?>

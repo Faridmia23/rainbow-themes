@@ -7,10 +7,10 @@
  * @package rainbowit
  */
 $rbt_options            = Rainbowit_Helper::rainbowit_get_options();
-$rainbowit_blog_thumb   = ( is_active_sidebar( 'sidebar-1' ) && $rbt_options['rainbowit_blog_sidebar'] != 'no') ? 'rainbowit-thumbnail-lg':'rainbowit-thumbnail-single';
-$readmore_btn           = ( $rbt_options['rainbowit_enable_readmore_btn'] ) ? $rbt_options['rainbowit_enable_readmore_btn'] : 'no';
-$post_author_meta       = ( $rbt_options['rainbowit_show_post_author_meta'] ) ? $rbt_options['rainbowit_show_post_author_meta'] : 'no';
-$readmore_text          = ( $rbt_options['rainbowit_readmore_text'] ) ? $rbt_options['rainbowit_readmore_text'] : '';
+$rainbowit_blog_thumb   = is_active_sidebar( 'sidebar-1' ) ? 'rainbowit-thumbnail-lg':'rainbowit-thumbnail-single';
+$readmore_btn           = isset( $rbt_options['rainbowit_enable_readmore_btn'] ) ? $rbt_options['rainbowit_enable_readmore_btn'] : 'no';
+$post_author_meta       = isset( $rbt_options['rainbowit_show_post_author_meta'] ) ? $rbt_options['rainbowit_show_post_author_meta'] : 'no';
+$readmore_text          = isset( $rbt_options['rainbowit_readmore_text'] ) ? $rbt_options['rainbowit_readmore_text'] : '';
 $post_categories        = get_the_category();
 
 ?>

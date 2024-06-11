@@ -171,7 +171,7 @@ class Rainbowit_Team_Member extends Widget_Base
 
                 ?>
                         <!-- single member -->
-                        <div class="rbt-team-card" data-sal="slide-up" data-sal-duration="400">
+                        <div class="rbt-team-card">
                             <div class="rbt-member-img">
                                 <img src="<?php echo esc_url($team_image); ?>" alt="Team member image">
                                 <div class="member-img-bg"></div>

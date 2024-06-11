@@ -2249,3 +2249,37 @@ span.select2-selection.select2-selection--single {
 .rbt-card .rbt-card-body .sales .price {
     display: flex;
 }
+
+.summary.entry-summary .product-info img {
+	margin-bottom: 10px;
+}
+
+.summary.entry-summary .product-info h3,
+.summary.entry-summary .product-info h2 {
+	font-size: 24px;
+}
+
+.summary.entry-summary .product-info blockquote {
+	border:none;
+	padding: 0;
+}
+
+.summary.entry-summary .product-info blockquote a {
+	color: #1e48ea;
+	font-weight: 500;
+	font-size: 18px;
+}
+
+.summary.entry-summary .product-info blockquote{
+	margin-top: 0!important;
+	line-height: 0;
+}
+
+.summary.entry-summary .product-info ul li {
+		color: var(--color-dark-2);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b2);
+    font-weight: var(--f-regular);
+    line-height: 168.75%;
+    margin: 0;
+}

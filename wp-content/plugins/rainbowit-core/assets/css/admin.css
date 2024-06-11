@@ -1,4 +1,66 @@
+.rainbow-themes-envato-product {
+    padding: 40px 32px 40px;
+    border-radius: 6px;
+    background: linear-gradient(270deg, #EBE6FA 0%, #F3F5F9 50.09%, #DCE5F9 100%);
+    color: #04122B;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 100%;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 100px;
+}
+
+.rainbow-themes-envato-product h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
 button.envato-product-update {
     cursor: pointer;
     display: inline-block;
+    background: linear-gradient(94deg, #FE2A5E 1.16%, #FFA61B 216.18%);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    transition: all 0.3s ease;
+    padding: 12px 25px;
+    font-size: 16px;
+}
+
+.rainbowit-api-right-part .submit .button {
+    cursor: pointer;
+    display: inline-block;
+    background: linear-gradient(94deg, #FE2A5E 1.16%, #FFA61B 216.18%);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 4px;
+    border: none;
+    transition: all 0.3s ease;
+    padding: 6px 25px;
+    font-size: 15px;
+}
+
+.rainbowit-api-right-part .submit .button:focus {
+    border: none;
+    outline: none;
+}
+
+.schedule-form-wrap {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.schedule-form-wrap label {
+    font-size: 20px;
+}
+
+.rainbowit-api-right-part p.submit {
+    margin: 0;
+    padding: 0;
 }

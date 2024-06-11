@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="rbt-btn-group btn-gap-12">
-                    <a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;">
+                    <a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;" aria-describedby="some text">
                         <span><i class="fa-regular fa-cart-shopping"></i></span>
                         <?php echo esc_html($service_order_btn_title); ?>
                     </a>

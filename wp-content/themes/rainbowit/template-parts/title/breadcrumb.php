@@ -85,7 +85,11 @@ function rainbowit_breadcrumbs() {
                 }
 
             }
-
+            
+            if(is_product() ) {
+                $custom_taxonomy    = 'product_cat';
+            }
+            
             // If it's a custom post type within a custom taxonomy
             $taxonomy_exists = taxonomy_exists($custom_taxonomy);
             if(empty($last_category) && !empty($custom_taxonomy) && $taxonomy_exists) {
@@ -107,12 +111,16 @@ function rainbowit_breadcrumbs() {
             } else if(!empty($cat_id)) {
 
                 echo '<li class="rbt-breadcrumb-item item-cat item-cat-' . $cat_id . ' item-cat-' . $cat_nicename . '"><a class="bread-cat bread-cat-' . $cat_id . ' bread-cat-' . $cat_nicename . '" href="' . esc_url($cat_link) . '" title="' . esc_attr($cat_name) . '">' . esc_html($cat_name) . '</a></li>';
+                if( !is_product() ) {
                 echo '<li class="separator rbt-breadcrumb-item icon"> <i class="fa-regular fa-chevron-right"></i>' . esc_html($separator) . ' </li>';
-                echo '<li class="rbt-breadcrumb-item active item-' . $post->ID . '"><span class="bread-current bread-' . $post->ID . '" title="' . esc_attr( get_the_title() ) . '">' . rainbowit_short_title(get_the_title()) . '</span></li>';
+                
+                    echo '<li class="rbt-breadcrumb-item active item-' . $post->ID . '"><span class="bread-current bread-' . $post->ID . '" title="' . esc_attr( get_the_title() ) . '">' . rainbowit_short_title(get_the_title()) . '</span></li>';
+                }
 
             } else {
-
-                echo '<li class="rbt-breadcrumb-item active item-' . $post->ID . '"><span class="bread-current bread-' . $post->ID . '" title="' . esc_attr( get_the_title() ) . '">' . rainbowit_short_title(get_the_title()) . '</span></li>';
+                if( !is_product() ) {
+                    echo '<li class="rbt-breadcrumb-item active item-' . $post->ID . '"><span class="bread-current bread-' . $post->ID . '" title="' . esc_attr( get_the_title() ) . '">' . rainbowit_short_title(get_the_title()) . '</span></li>';
+                }
 
             }
 

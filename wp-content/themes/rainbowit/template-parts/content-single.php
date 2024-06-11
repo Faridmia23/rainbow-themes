@@ -25,7 +25,7 @@ if (has_post_thumbnail()) {
 }
 
 $rainbowit_options              = Rainbowit_Helper::rainbowit_get_options();
-$blog_bottom_client_template_id = ($rainbowit_options['blog_bottom_client_template_id']) ? $rainbowit_options['blog_bottom_client_template_id'] : '';
+$blog_bottom_client_template_id = isset( $rainbowit_options['blog_bottom_client_template_id']) ? $rainbowit_options['blog_bottom_client_template_id'] : '';
 
 ?>
 
@@ -93,12 +93,12 @@ $related = new WP_Query(
 
 
 $post_categories        = get_the_category();
-$readmore_btn           = ( $rainbowit_options['rainbowit_enable_readmore_btn'] ) ? $rainbowit_options['rainbowit_enable_readmore_btn'] : 'no';
-$post_author_meta       = ( $rainbowit_options['rainbowit_show_post_author_meta'] ) ? $rainbowit_options['rainbowit_show_post_author_meta'] : 'no';
-$readmore_text          = ( $rainbowit_options['rainbowit_readmore_text'] ) ? $rainbowit_options['rainbowit_readmore_text'] : '';
-$related_post_subtitle  = ( $rainbowit_options['rainbowit_related_post_subtitle'] ) ? $rainbowit_options['rainbowit_related_post_subtitle'] : '';
-$related_post_title     = ( $rainbowit_options['rainbowit_related_post_title'] ) ? $rainbowit_options['rainbowit_related_post_title'] : '';
-$related_post_desc      = ( $rainbowit_options['rainbowit_related_post_desc'] ) ? $rainbowit_options['rainbowit_related_post_desc'] : '';
+$readmore_btn           = isset( $rainbowit_options['rainbowit_enable_readmore_btn'] ) ? $rainbowit_options['rainbowit_enable_readmore_btn'] : 'no';
+$post_author_meta       = isset( $rainbowit_options['rainbowit_show_post_author_meta'] ) ? $rainbowit_options['rainbowit_show_post_author_meta'] : 'no';
+$readmore_text          = isset( $rainbowit_options['rainbowit_readmore_text'] ) ? $rainbowit_options['rainbowit_readmore_text'] : '';
+$related_post_subtitle  = isset( $rainbowit_options['rainbowit_related_post_subtitle'] ) ? $rainbowit_options['rainbowit_related_post_subtitle'] : '';
+$related_post_title     = isset( $rainbowit_options['rainbowit_related_post_title'] ) ? $rainbowit_options['rainbowit_related_post_title'] : '';
+$related_post_desc      = isset( $rainbowit_options['rainbowit_related_post_desc'] ) ? $rainbowit_options['rainbowit_related_post_desc'] : '';
 
 
 if ($related->have_posts()) {  ?>
@@ -118,7 +118,7 @@ if ($related->have_posts()) {  ?>
                     $related->the_post();
                 ?>
                     <!-- single blog -->
-                    <div class="col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 finance" data-sal="slide-up" data-sal-duration="400">
+                    <div class="col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 finance" >
                         <div class="rbt-card-6 p-5 ">
                             <?php if (has_post_thumbnail()) { ?>
                                 <div class="card-thumbnail">

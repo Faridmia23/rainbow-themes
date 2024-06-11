@@ -18,9 +18,16 @@
 defined( 'ABSPATH' ) || exit;
 
 global $product;
-
+global $post;
 if ( ! $product->is_purchasable() ) {
 	return;
+}
+
+
+$service_product_checkbox = get_post_meta(get_the_ID(), "rainbowit_service_product_checkbox", true);
+$custom_class ='custom-checkout-btn';
+if($service_product_checkbox == 'yes' ){
+	$custom_class ='';
 }
 
 echo wc_get_stock_html( $product ); // WPCS: XSS ok.
@@ -29,12 +36,14 @@ if ( $product->is_in_stock() ) : ?>
 
 	<?php do_action( 'woocommerce_before_add_to_cart_form' ); ?>
 
-	<form class="cart" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
+	<form class="cart <?php echo esc_attr( $custom_class  ); ?>" action="<?php echo esc_url( apply_filters( 'woocommerce_add_to_cart_form_action', $product->get_permalink() ) ); ?>" method="post" enctype='multipart/form-data'>
 		<?php do_action( 'woocommerce_before_add_to_cart_button' ); ?>
 
 		<?php
 		do_action( 'woocommerce_before_add_to_cart_quantity' );
+		if( $service_product_checkbox  == 'yes' ){
 
+		
 		woocommerce_quantity_input(
 			array(
 				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
@@ -43,15 +52,23 @@ if ( $product->is_in_stock() ) : ?>
 			)
 		);
 
+	}
+
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
-
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="rbt-btn rbt-btn-primary w-100  single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-		<?php if ($product->is_virtual('yes')) { ?>
-		<a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;">
-			<?php  esc_attr_e("Quick Checkout","rainbowit"); ?>
+		<?php if ($service_product_checkbox == 'yes') { ?>
+		<a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;" aria-describedby="some text">
+			<?php  esc_attr_e("Order Now","rainbowit"); ?>
 		</a>
-		<?php } 
+		<?php } ?>
+		<?php if( $service_product_checkbox == 'yes') { ?>
+		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="service-product-normal rbt-btn rbt-btn-primary w-100  single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+		<?php } else { ?>
+			<a  data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-md rbt-btn-success woocommerce-own-product ajax-order-now-product"><span><span><i class="fa-regular fa-cart-shopping"></i></span>
+				Buy Now
+			</a>
+			<?php } 
+		
 		 do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>
 

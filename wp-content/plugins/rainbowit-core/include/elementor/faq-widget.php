@@ -168,9 +168,14 @@ class Rainbowit_Faq_Widget extends Widget_Base
 
     <div class="rbt-section-gapTop rbt-section-gap2Bottom">
         <div class="container">
+        <?php if( !empty( $sub_title ) || !empty( $heading_title ) || !empty( $btn_link ) ) { ?>
             <div class="rbt-section-title section-title-center" data-sal="slide-up" data-sal-duration="400">
+                <?php if( !empty( $sub_title ) ) { ?>
                 <span class="subtitle"><?php echo esc_html($sub_title); ?></span>
-                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
+                <?php } ?>
+                <?php if( !empty( $heading_title ) ) { ?>
+                <<?php echo esc_html( $settings['sec_title_tag'] ); ?> class="title"><?php echo esc_html( $heading_title ); ?></<?php echo esc_html( $settings['sec_title_tag'] ); ?>>
+                <?php } ?>
                 <?php if (isset($btn_link) && !empty($btn_link)) { ?>
                     <a class="rbt-btn rbt-btn-round rbt-btn-xm rbt-outline-none hover-effect-3" href="<?php echo esc_url($btn_link); ?>">
                         <?php echo esc_html($btn_title); ?>
@@ -179,7 +184,7 @@ class Rainbowit_Faq_Widget extends Widget_Base
                     </a>
                 <?php } ?>
             </div>
-
+            <?php } ?>
             <div class="row">
                 <div class="col-12 col-md-9 col-lg-6 mx-auto">
                     <div class="accordion " id="accordionExample">

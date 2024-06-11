@@ -47,16 +47,6 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
             ]
         );
         $this->add_control(
-            'icon_image',
-            [
-                'label' => esc_html__('Title Image', 'rainbowit'),
-                'type' => \Elementor\Controls_Manager::MEDIA,
-                'default' => [
-                    'url' => \Elementor\Utils::get_placeholder_image_src(),
-                ],
-            ]
-        );
-        $this->add_control(
             'subtitle_title',
             [
                 'label' => esc_html__('Subtitle Title', 'rainbowit'),
@@ -70,6 +60,62 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
                 'label' => esc_html__('Title', 'rainbowit'),
                 'type' => Controls_Manager::TEXT,
                 'default' => esc_html__('12+ Professionals are waiting for you', 'rainbowit'),
+            ]
+        );
+        $this->add_control(
+            'highlight_text',
+            [
+                'label' => esc_html__('Hightlight Text', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('', 'rainbowit'),
+            ]
+        );
+        $this->add_control(
+            'rbt_clips_show',
+            [
+                'label' => esc_html__('Clip Content', 'rainbowit'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Show', 'rainbowit'),
+                'label_off' => esc_html__('Hide', 'rainbowit'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+
+        $repeater2 = new Repeater();
+
+        $repeater2->add_control(
+            'cd_clip_title',
+            [
+                'label' => esc_html__('Slide List Title', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Item.', 'rainbowit'),
+                'label_block' => true,
+            ]
+        );
+        $this->add_control(
+            'cd_option_list',
+            [
+                'label' => esc_html__('Slide List', 'rainbowit'),
+                'type' => Controls_Manager::REPEATER,
+                'fields' => $repeater2->get_controls(),
+                'default' => [
+                    [
+                        'cd_clip_title' => esc_html__('Item 1', 'rainbowit'),
+                    ],
+                    [
+                        'cd_clip_title' => esc_html__('Item 2', 'rainbowit'),
+                    ],
+                    [
+                        'cd_clip_title' => esc_html__('Item 3', 'rainbowit'),
+                    ],
+
+                ],
+                'title_field' => '{{{ cd_clip_title }}}',
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
             ]
         );
         $this->add_control(
@@ -199,6 +245,164 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
 
 
         $this->end_controls_section();
+        $this->start_controls_section(
+            'animation_control_section',
+            [
+                'label' => esc_html__('Clip Content Animation', 'rainbowit'),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+
+        $this->add_control(
+            'rbt_clips_type',
+            [
+                'label' => esc_html__('Animation Style', 'rainbowit'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    'rotate-1' => esc_html__('Rotate 1', 'rainbowit'),
+                    'loading-bar' => esc_html__('loading-bar', 'rainbowit'),
+                    'slide' => esc_html__('slide', 'doob'),
+                    'zoom' => esc_html__('zoom', 'rainbowit'),
+                    'push' => esc_html__('push', 'rainbowit'),
+                ],
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_animationdelay',
+            [
+                'label' => esc_html__('Animation Delay', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '2500',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_letter_delay',
+            [
+                'label' => esc_html__('Letter Delay', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '50',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_typelettersdelay',
+            [
+                'label' => esc_html__('Type Letter Delay', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '150',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_selectionduration',
+            [
+                'label' => esc_html__('Selection Duration', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '500',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_revealduration',
+            [
+                'label' => esc_html__('Reveal Duration', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '600',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_revealanimationdelay',
+            [
+                'label' => esc_html__('Reveal animationdelay', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '1500',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'rbt_barAnimationDelay',
+            [
+                'label' => esc_html__('Bar Animation Delay', 'rainbowit'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '1500',
+                'label_block' => true,
+                'condition' => [
+                    'rbt_clips_show' => 'yes'
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+			'section_style',
+			[
+				'label' => esc_html__( 'Style', 'rainbowit' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'heading_highlight_color',
+			[
+				'label' => esc_html__( 'Color', 'rainbowit' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .rbt-main-banner .title span .cd-words-wrapper b' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'content_typography',
+				'selector' => '{{WRAPPER}} .rbt-main-banner .title span .cd-words-wrapper b',
+			]
+		);
+
+        $this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name' => 'bg_background',
+				'types' => [ 'classic', 'gradient' ],
+				'selector' => '{{WRAPPER}} .cd-headline.clip .cd-words-wrapper::after',
+			]
+		);
+
+		$this->end_controls_section();
     }
 
     protected function render($instance = [])
@@ -206,29 +410,44 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
 
         $settings = $this->get_settings_for_display();
 
-        $this->add_render_attribute('icon_image', 'src', $settings['icon_image']['url']);
-        $this->add_render_attribute('icon_image', 'alt', Control_Media::get_image_alt($settings['icon_image']));
-        $this->add_render_attribute('icon_image', 'title', Control_Media::get_image_title($settings['icon_image']));
-        $this->add_render_attribute('icon_image', 'class', 'impower-icon');
-        $this->add_render_attribute('icon_image', 'data-sal', 'slide-up');
-        $this->add_render_attribute('icon_image', 'data-sal-duration', '900');
-        $this->add_render_attribute('icon_image', 'data-sal-delay', '100');
+        $heading_title      = $settings['heading_title'] ?? '';
+        $subtitle_title     = $settings['subtitle_title'] ?? '';
+        $desc               = $settings['desc'] ?? '';
+        $btn_title          = $settings['btn_title'] ?? '';
+        $btn_2title         = $settings['btn_2_title'] ?? '';
+        $highlight_text     = $settings['highlight_text'] ?? '';
 
-        $heading_title = $settings['heading_title'] ?? '';
-        $subtitle_title = $settings['subtitle_title'] ?? '';
-        $desc = $settings['desc'] ?? '';
-        $btn_title = $settings['btn_title'] ?? '';
-        $btn_2title = $settings['btn_2_title'] ?? '';
+        $letter_delay           = $settings['rbt_letter_delay'];
+        $typelettersdelay       = $settings['rbt_typelettersdelay'];
+        $selectionduration      = $settings['rbt_selectionduration'];
+        $revealduration         = $settings['rbt_revealduration'];
+        $revealanimationdelay   = $settings['rbt_revealanimationdelay'];
+        $animationdelay         = $settings['rbt_animationdelay'];
+        $barAnimationDelay      = $settings['rbt_barAnimationDelay'];
+        $clip_type              = $settings['rbt_clips_type'];
+        $clips_show             = $settings['rbt_clips_show'];
+
+        $animation_atts = [
+            'letter_delay'          => $letter_delay,
+            'typelettersdelay'      => $typelettersdelay,
+            'selectionduration'     => $selectionduration,
+            'revealduration'        => $revealduration,
+            'revealanimationdelay'  => $revealanimationdelay,
+            'animationdelay'        => $animationdelay,
+            'barAnimationDelay'     => $barAnimationDelay,
+
+        ];
 
 
-        if ( ! empty( $settings['btn_link']['url'] ) ) {
-			$this->add_link_attributes( 'btn_link', $settings['btn_link'] );
-		}
+        if (!empty($settings['btn_link']['url'])) {
+            $this->add_link_attributes('btn_link', $settings['btn_link']);
+        }
 
-        if ( ! empty( $settings['btn__2_link']['url'] ) ) {
-			$this->add_link_attributes( 'btn__2_link', $settings['btn__2_link'] );
-		}
-
+        if (!empty($settings['btn__2_link']['url'])) {
+            $this->add_link_attributes('btn__2_link', $settings['btn__2_link']);
+        }
+        
+        $unique_id = $this->get_id();
 
 ?>
         <!-- banner second design -->
@@ -236,19 +455,20 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
             <div class="container">
                 <div class="content">
                     <ul class="banner-icon-wrapper d-none d-xxl-block">
-                        <?php 
+                        <?php
                         $count = 1;
                         if (!empty($settings['list'])) {
                             foreach ($settings['list'] as $item) {
                                 $client_image = $item['client_image']['url'];
                         ?>
-                                <li class="banner-tech-icon icon-<?php echo esc_attr($count);?>">
-                                    <img data-sal="flip-down" data-sal-duration="400" src="<?php echo esc_url($client_image ); ?>" alt="Technology icon">
+                                <li class="banner-tech-icon icon-<?php echo esc_attr($count); ?>">
+                                    <img src="<?php echo esc_url($client_image); ?>" alt="Technology icon">
                                 </li>
-                        <?php $count++; }
+                        <?php $count++;
+                            }
                         } ?>
                     </ul>
-                    <div class="inner">
+                    <div id="banner_sliding_text_animation-<?php echo esc_attr($unique_id); ?>" class="inner get-animation-unique-id" data-rainbowit_banner="<?php echo esc_attr(wp_json_encode($animation_atts)); ?>">
                         <div class="subtitle">
                             <i>
                                 <svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -265,18 +485,40 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
                         </div>
                         <<?php echo esc_html($settings['sec_title_tag']); ?> class="title">
                             <?php echo wp_kses_post($heading_title); ?>
-                            <?php echo Group_Control_Image_Size::get_attachment_image_html($settings, 'full', 'icon_image'); ?>
+                            <span>
+                            <?php echo esc_html($highlight_text); ?>
+                            <?php if ($clips_show  == 'yes') { ?>
+                                <span class="header-caption">
+                                    <span class="cd-headline <?php echo esc_attr($clip_type); ?>">
+                                        <span class="cd-words-wrapper">
+                                            <?php
+
+                                            $i = 0;
+                                            foreach ($settings['cd_option_list'] as $cd_option_list) :
+                                                $vihi = $i == 0 ? 'visible' : 'hidden';
+                                                $i++;
+                                                $slide_title = $cd_option_list['cd_clip_title'];
+                                            ?>
+                                                <b class="is-<?php echo esc_attr($vihi); ?> theme-gradient"><?php echo esc_html($slide_title); ?></b>
+                                            <?php
+                                            endforeach;
+                                            ?>
+                                        </span>
+                                    </span>
+                                </span>
+                            <?php } ?>
+                            
                             </span>
                         </<?php echo $settings['sec_title_tag']; ?>>
                         <p class="description">
                             <?php echo wp_kses_post($desc); ?>
                         </p>
                         <div class="rbt-btn-group">
-                            <a <?php $this->print_render_attribute_string( 'btn_link' ); ?> class="rbt-btn rbt-btn-primary">
+                            <a <?php $this->print_render_attribute_string('btn_link'); ?> class="rbt-btn rbt-btn-primary">
                                 <span><i class="fa-regular fa-objects-column"></i></span>
                                 <?php echo esc_html($btn_title); ?>
                             </a>
-                            <a <?php $this->print_render_attribute_string( 'btn__2_link' ); ?> class="rbt-btn hover-effect-4"><?php echo esc_html($btn_2title); ?></a>
+                            <a <?php $this->print_render_attribute_string('btn__2_link'); ?> class="rbt-btn hover-effect-4"><?php echo esc_html($btn_2title); ?></a>
                         </div>
                     </div>
                 </div>

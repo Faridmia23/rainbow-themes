@@ -10,17 +10,12 @@
 get_header();
 // Get Value
 $rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
-$rainbowit_blog_sidebar_class = ($rainbowit_options['rainbowit_blog_sidebar'] === 'no') || !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10 offset-lg-1 col-md-12 col-12':'col-lg-8 col-md-12 col-12';
+$rainbowit_blog_sidebar_class = !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10 offset-lg-1 col-md-12 col-12':'col-lg-8 col-md-12 col-12';
 ?>
     <!-- Start Blog Area  -->
     <div class="rainbowit-blog-area mt--120 mb--120">
         <div class="container">
             <div class="row row--40">
-                <?php if ( is_active_sidebar( 'sidebar-1' ) && $rainbowit_options['rainbowit_blog_sidebar'] == 'left') { ?>
-                    <div class="col-lg-4 col-md-12 col-12 mt_md--40 mt_sm--40">
-                        <?php dynamic_sidebar(); ?>
-                    </div>
-                <?php } ?>
                 <div class="<?php echo esc_attr($rainbowit_blog_sidebar_class); ?>">
 
                     <?php
@@ -48,7 +43,7 @@ $rainbowit_blog_sidebar_class = ($rainbowit_options['rainbowit_blog_sidebar'] ==
                     endif;
                     ?>
                 </div>
-                <?php if ( is_active_sidebar( 'sidebar-1' ) && $rainbowit_options['rainbowit_blog_sidebar'] == 'right') { ?>
+                <?php if ( is_active_sidebar( 'sidebar-1' )) { ?>
                     <div class="col-lg-4 col-md-12 col-12 mt_md--40 mt_sm--40">
                         <?php dynamic_sidebar(); ?>
                     </div>

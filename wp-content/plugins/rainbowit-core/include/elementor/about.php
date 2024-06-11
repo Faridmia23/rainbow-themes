@@ -139,6 +139,20 @@ class Rainbowit_Elementor_Widget_Employee_Info extends Widget_Base
 			]
 		);
 
+        $repeater->add_control(
+			'animation_select',
+			[
+				'label' => esc_html__( 'Animation Select', 'rainbowit' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'slide-up',
+				'options' => [
+					'slide-up' => esc_html__( 'Slide Up', 'rainbowit' ),
+					'slide-down' => esc_html__( 'Slide Down', 'rainbowit' ),
+					'zoom-out'  => esc_html__( 'Zoom Out', 'rainbowit' ),
+				],
+			]
+		);
+
 		$this->add_control(
 			'list',
 			[
@@ -201,19 +215,17 @@ class Rainbowit_Elementor_Widget_Employee_Info extends Widget_Base
                     </div>
                     <div class="col-12 col-md-6">
                         <ul class="rbt-team-wrapper">
-                            <?php if(!empty($settings['list'])) { 
+                            <?php 
+                            if(!empty($settings['list'])) { 
                                 foreach( $settings['list'] as $item ) { 
-                                    $triangle = $item['triangle'] == 'yes' ? 'triangle' : '';
-                                    $hide_sm = $item['sm_layout_show_hide'] == 'yes' ? 'hide-sm-layout' : '';
-
-                                    $client_image = $item['client_image']['url'];
-
-                                    
+                                    $triangle           = $item['triangle'] == 'yes' ? 'triangle' : '';
+                                    $hide_sm            = $item['sm_layout_show_hide'] == 'yes' ? 'hide-sm-layout' : '';
+                                    $client_image       = $item['client_image']['url'];
+                                    $animation_select   = $item['animation_select'] ?? 'slide-up';
 
                                     ?>
                             <li class="rbt-team-member <?php echo esc_attr($triangle);?> <?php echo esc_attr($hide_sm);?>">
-                               
-                                <img src="<?php echo esc_url($client_image);?>" alt="team" data-sal="slide-up" data-sal-duration="400">
+                                <img src="<?php echo esc_url($client_image);?>" alt="team" data-sal="<?php echo esc_attr( $animation_select ); ?>" data-sal-duration="400">
                             </li>
                             <?php } } ?>
                         </ul>
@@ -227,3 +239,5 @@ class Rainbowit_Elementor_Widget_Employee_Info extends Widget_Base
 }
 
 Plugin::instance()->widgets_manager->register(new Rainbowit_Elementor_Widget_Employee_Info());
+
+?>

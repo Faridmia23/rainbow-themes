@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
+$registration_link = $rainbowit_options['my_account_registration_page_link'];
+
 do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
@@ -28,38 +31,39 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 	<div class="u-column1 col-lg-6">
 
 <?php endif; ?>
+<form class="woocommerce-form woocommerce-form-login login" method="post">
+		<h4 class="title title-sm"><?php esc_html_e( 'Login to your account', 'rainbowit' ); ?></h4>
+		<?php do_action( 'woocommerce_login_form_start' ); ?>
 
-		<h3><?php esc_html_e( 'Login', 'rainbowit' ); ?></h3>
+		<div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide single-field mb--30">
+			<input type="text" class="woocommerce-Input woocommerce-Input--text input-text input-field" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
+			<label for="username"><?php esc_html_e( 'Username or email address', 'rainbowit' ); ?>&nbsp;<span class="required">*</span></label>
+		</div>
+		<div class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide single-field mb--30">
+			<input class="woocommerce-Input woocommerce-Input--text input-text input-field" type="password" name="password" id="password" autocomplete="current-password" />
+			<label for="password"><?php esc_html_e( 'Password', 'rainbowit' ); ?>&nbsp;<span class="required">*</span></label>
+		</div>
 
-		<form class="woocommerce-form woocommerce-form-login login" method="post">
-
-			<?php do_action( 'woocommerce_login_form_start' ); ?>
-
-			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-				<label for="username"><?php esc_html_e( 'Username or email address', 'rainbowit' ); ?>&nbsp;<span class="required">*</span></label>
-				<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
-			</p>
-			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-				<label for="password"><?php esc_html_e( 'Password', 'rainbowit' ); ?>&nbsp;<span class="required">*</span></label>
-				<input class="woocommerce-Input woocommerce-Input--text input-text" type="password" name="password" id="password" autocomplete="current-password" />
-			</p>
-
-			<?php do_action( 'woocommerce_login_form' ); ?>
-
-			<p class="form-row">
-				<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
-					<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'rainbowit' ); ?></span>
-				</label>
-				<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
-				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Log in', 'rainbowit' ); ?>"><?php esc_html_e( 'Log in', 'rainbowit' ); ?></button>
-			</p>
-			<p class="woocommerce-LostPassword lost_password">
+		<?php do_action( 'woocommerce_login_form' ); ?>
+		<!-- checkbox -->
+		
+		<div class="form-row rbt-checkbox d-flex justify-content-between align-items-center">
+			<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme rbt-checkbox">
+				<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" id="rememberme" value="forever" /> <span><?php esc_html_e( 'Remember me', 'rainbowit' ); ?></span>
+			</label>
+			<div class="woocommerce-LostPassword lost_password rbt-forgot-pass">
 				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'rainbowit' ); ?></a>
-			</p>
+			</div>
+		</div>
+		<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
+		<button type="submit" class="woocommerce-button button woocommerce-form-login__submit rbt-btn rbt-btn-primary w-100" name="login" value="<?php esc_attr_e( 'Log in', 'rainbowit' ); ?>"><?php esc_html_e( 'Log in', 'rainbowit' ); ?></button>
 
-			<?php do_action( 'woocommerce_login_form_end' ); ?>
+		<?php do_action( 'woocommerce_login_form_end' ); ?>
 
-		</form>
+	</form>
+	<div class="form-bottom">
+				<span class="form-bottom-text"><?php echo esc_html_e("New to Rainbow-Themes?","rainbowit"); ?> <a href="<?php echo esc_url( $registration_link ); ?>"><?php echo esc_html_e("Create an Account","rainbowit"); ?></a></span>
+			</div>
 
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
@@ -75,7 +79,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 
 			<?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
 
-				<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
+				<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide single-field mb--30">
 					<label for="reg_username"><?php esc_html_e( 'Username', 'rainbowit' ); ?>&nbsp;<span class="required">*</span></label>
 					<input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="username" id="reg_username" autocomplete="username" value="<?php echo ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : ''; ?>" /><?php // @codingStandardsIgnoreLine ?>
 				</p>

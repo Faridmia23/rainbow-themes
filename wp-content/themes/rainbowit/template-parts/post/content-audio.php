@@ -6,9 +6,9 @@
  *
  * @package rainbowit
  */
-$rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
-$audio_url = rainbowit_get_acf_data( "rainbowit_upload_audio" );
-$rainbowit_blog_thumb = ( is_active_sidebar( 'sidebar-1' ) && $rainbowit_options['rainbowit_blog_sidebar'] != 'no') ? 'rainbowit-thumbnail-lg':'rainbowit-thumbnail-single';
+$rainbowit_options       = Rainbowit_Helper::rainbowit_get_options();
+$audio_url               = rainbowit_get_acf_data( "rainbowit_upload_audio" );
+$rainbowit_blog_thumb    =  is_active_sidebar( 'sidebar-1' )  ? 'rainbowit-thumbnail-lg':'rainbowit-thumbnail-single';
 
 ?>
 <!-- Start Single Blog  -->

@@ -244,7 +244,7 @@ class Rainbowit_Documentation extends Widget_Base
 
         <?php } elseif ($style == '2') { ?>
 
-            <div class="rbt-section-gapTop">
+            <div class="rbt-section-gapTop0 ptb--5">
                 <div class="container">
                     <div class="section-wide">
                         <div class="rbt-section-title section-title-center">

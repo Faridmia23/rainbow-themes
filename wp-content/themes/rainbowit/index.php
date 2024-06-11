@@ -16,8 +16,8 @@ get_header();
 // Get Value
 $rainbowit_options = Rainbowit_Helper::rainbowit_get_options();
 
-$blog_bottom_template_id = ($rainbowit_options['blog_bottom_template_id']) ? $rainbowit_options['blog_bottom_template_id'] : '';
-$blog_bottom_client_template_id = ($rainbowit_options['blog_bottom_client_template_id']) ? $rainbowit_options['blog_bottom_client_template_id'] : '';
+$blog_bottom_template_id = isset($rainbowit_options['blog_bottom_template_id']) ? $rainbowit_options['blog_bottom_template_id'] : '';
+$blog_bottom_client_template_id = isset( $rainbowit_options['blog_bottom_client_template_id']) ? $rainbowit_options['blog_bottom_client_template_id'] : '';
 
 ?>
 

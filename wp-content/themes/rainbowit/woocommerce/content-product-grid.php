@@ -33,8 +33,9 @@ $preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rain
 
 $envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
 
+
 ?>
-<div <?php wc_product_class('col-12 col-md-6 col-xl-6 single-item mb--24', $product); ?> data-sal="slide-up" data-sal-duration="400">
+<div <?php wc_product_class('col-12 col-md-6 col-xl-6 single-item mb--24', $product); ?>>
 	<div class="rbt-card">
 		<div>
 		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('rainbowit-product-grid'); ?></a>
@@ -42,7 +43,13 @@ $envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_t
 		<div class="rbt-card-body p--24">
 			<h3 class="title">
 				<a href="<?php the_permalink(); ?>">
-					<?php the_title(); ?>
+				<?php 
+					if( isset( $title_length2 ) && !empty( $title_length2 ) ) { 
+						echo wp_trim_words( get_the_title(), $title_length2,'... '); 
+					} else {
+						echo wp_trim_words( get_the_title(), '5','... '); 
+					}
+				?>
 				</a>
 			</h3>
 			<div class="rbt-card-meta woocommerce">
@@ -66,12 +73,32 @@ $envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_t
 				?>
 			</div>
 			<div class="rbt-card-bottom">
-				<div class="sales">
-					<?php woocommerce_template_loop_price(); ?>
-					<?php if(!empty($envato_product_total_sales)) { ?>
-					<span class="sales-count"><?php echo esc_html( $envato_product_total_sales );?> <?php echo esc_html__("sales","rainbowit"); ?></span>
-					<?php } ?>
-				</div>
+			<?php
+				$regular_price = $product->get_regular_price();
+				$sale_price = $product->get_sale_price();
+				if ($regular_price > 0) {
+				?>
+					<div class="sales">
+
+						<div class="price">
+							<?php
+							if (!empty($sale_price) &&  $sale_price > 0) {
+								echo '<div class="off-price">' . wc_price($regular_price) . '</div>';
+								echo '<div class="current-price">' . wc_price($sale_price) . '</div>';
+							} else {
+								if ($regular_price > 0) {
+
+									echo '<div class="current-price">' . wc_price($regular_price) . '</div>';
+								}
+							}
+							?>
+						</div>
+
+						<?php if (!empty($envato_product_total_sales)) { ?>
+							<span class="sales-count"><?php echo esc_html($envato_product_total_sales); ?> <?php echo esc_html__("sales", "rainbowit"); ?></span>
+						<?php } ?>
+					</div>
+				<?php } ?>
 				<div class="rbt-card-btn">
 					<a href="<?php echo esc_url( $envato_product_preview_url );?>" target="_blank" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary">
 						<span><i class="fa-sharp fa-regular fa-eye"></i></span>

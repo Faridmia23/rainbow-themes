@@ -70,7 +70,8 @@ trait MenuAreaTrait
             'container_class' => '',
             'menu_class' => "rbt-list has-link",
             'depth' => 1,
-            'fallback_cb' => false
+            'fallback_cb' => false,
+            'walker' => new RainbowitFooterWalker(),
         );
 
         return $footer_bottom_menu_args;

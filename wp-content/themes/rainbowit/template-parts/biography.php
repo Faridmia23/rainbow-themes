@@ -6,9 +6,9 @@
 *
 * @package rainbowit
 */
-$author_id = get_the_author_meta('ID');
-$author_info = get_userdata(get_the_author_meta( 'ID' ));
-$author_role = implode(', ', $author_info->roles);
+$author_id      = get_the_author_meta('ID');
+$author_info    = get_userdata(get_the_author_meta( 'ID' ));
+$author_role    = implode(', ', $author_info->roles);
 ?>
 <div class="rainbowit-blog-author">
     <div class="author d-flex">

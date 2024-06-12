@@ -1,27 +1,36 @@
-[11-Jun-2024 12:09:44 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 12:12:44 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 12:54:45 UTC] Cron reschedule event error for hook: jetpack_clean_nonces, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"hourly","args":[],"interval":3600}
-[11-Jun-2024 12:54:45 UTC] Cron unschedule event error for hook: jetpack_clean_nonces, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"hourly","args":[],"interval":3600}
-[11-Jun-2024 12:55:03 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 13:21:45 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 13:23:02 UTC] PHP Warning:  Undefined variable $filtered_related_products in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php on line 780
-[11-Jun-2024 13:23:02 UTC] PHP Fatal error:  Uncaught TypeError: array_values(): Argument #1 ($array) must be of type array, null given in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php:780
+[12-Jun-2024 05:04:03 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php:77
 Stack trace:
-#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php(780): array_values(NULL)
-#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): rainbowit_related_after_single_product_summary('')
-#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
-#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
-#4 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\content-single-product.php(77): do_action('woocommerce_aft...')
-#5 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template.php(812): require('C:\\Users\\HP\\Loc...')
-#6 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\Users\\HP\\Loc...', false)
-#7 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
-#8 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\template-loader.php(106): include('C:\\Users\\HP\\Loc...')
-#9 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-blog-header.php(19): require_once('C:\\Users\\HP\\Loc...')
-#10 C:\Users\HP\Local Sites\rainbow-themes\app\public\index.php(17): require('C:\\Users\\HP\\Loc...')
-#11 {main}
-  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\themes\rainbowit\woocommerce\custom\woo-single.php on line 780
-[11-Jun-2024 13:23:45 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 13:25:45 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 13:33:45 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 13:36:08 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
-[11-Jun-2024 13:45:45 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): ajax_requests->rbt_ajax_envato_api_product_func('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(192): do_action('wp_ajax_rbt_aja...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php on line 77
+[12-Jun-2024 05:04:53 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php:77
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): ajax_requests->rbt_ajax_envato_api_product_func('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(192): do_action('wp_ajax_rbt_aja...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php on line 77
+[12-Jun-2024 05:06:22 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php:77
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): ajax_requests->rbt_ajax_envato_api_product_func('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(192): do_action('wp_ajax_rbt_aja...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php on line 77
+[12-Jun-2024 05:09:27 UTC] PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php:75
+Stack trace:
+#0 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(324): ajax_requests->rbt_ajax_envato_api_product_func('')
+#1 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#2 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-admin\admin-ajax.php(192): do_action('wp_ajax_rbt_aja...')
+#4 {main}
+  thrown in C:\Users\HP\Local Sites\rainbow-themes\app\public\wp-content\plugins\rainbowit-core\include\ajax_requests.php on line 75
+[12-Jun-2024 05:45:44 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
+[12-Jun-2024 05:54:44 UTC] Cron reschedule event error for hook: jetpack_clean_nonces, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"hourly","args":[],"interval":3600}
+[12-Jun-2024 05:57:44 UTC] Cron reschedule event error for hook: action_scheduler_run_queue, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"every_minute","args":["WP Cron"],"interval":60}
+[12-Jun-2024 05:57:44 UTC] Cron reschedule event error for hook: wc_admin_unsnooze_admin_notes, Error code: could_not_set, Error message: The cron event list could not be saved., Data: {"schedule":"hourly","args":[],"interval":3600}

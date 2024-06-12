@@ -33,14 +33,15 @@ function rainbowit_before_main_content()
 		$rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
 
 		if( $rainbowit_own_product_checkbox == 'yes' ) {
-			$envato_product_last_update 		=  get_post_meta( get_the_ID(), '_own_product_last_update', true);
+
+			$product_post = get_post( get_the_ID() );
+    		$envato_product_last_update = $product_post->post_modified;
 			$envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);
 			$envato_product_total_sales 		=  get_post_meta( get_the_ID(), '_own_product_total_sales', true);
 			$envato_product_preview_icon_url 	=  get_post_meta( get_the_ID(), '_own_product_image_file', true);
+
 		} else {
 			$envato_product_last_update 	=  get_post_meta( get_the_ID(), '_envato_product_last_update', true);
-			$envato_product_avg_rating 		=  get_post_meta( get_the_ID(), '_envato_product_avg_rating', true);
-			$envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true);
 			$envato_product_preview_url 	=  get_post_meta( get_the_ID(), '_envato_product_preview_url', true);
 			$envato_product_total_sales 	=  get_post_meta( get_the_ID(), '_envato_product_total_sales', true);
 			$envato_product_preview_icon_url  =  get_post_meta(get_the_ID(), '_envato_product_preview_icon_url', true);
@@ -48,8 +49,6 @@ function rainbowit_before_main_content()
 		
 
 		
-		$envato_product_avg_rating 		  =  get_post_meta(get_the_ID(), '_envato_product_avg_rating', true);
-		$envato_product_total_rating 	  =  get_post_meta(get_the_ID(), '_envato_product_total_rating', true);
 		$last_update_date 				  = new DateTime($envato_product_last_update);
 		$envato_product_last_update 	  = $last_update_date->format('j F y');
 
@@ -78,7 +77,13 @@ function rainbowit_before_main_content()
 			$thumbnail_id = get_post_thumbnail_id(get_the_ID());
 
     		$image_url = wp_get_attachment_url($thumbnail_id);
-			$rating                         = get_post_meta( get_the_ID(), '_wc_average_rating', true );  
+			if( $rainbowit_own_product_checkbox == 'yes') {
+				$rating                         = get_post_meta( get_the_ID(), '_wc_average_rating', true ); 
+			} else {
+				$rating 					    =  get_post_meta( $post->ID, '_envato_product_avg_rating', true );
+				$review_count 					=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+			}
+			 
 			$own_product_feature_list       = get_post_meta( get_the_ID(), 'own_product_feature_list', true );    
 
 ?>
@@ -204,12 +209,12 @@ function rainbowit_before_main_content()
 										</g>
 									</svg>
 								</span>
-									Buy on Envato
+									<?php echo esc_html__("Buy on Envato","rainbowit"); ?>
 								</a>
 								<?php } else { ?>
 										
 									<a  data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-md rbt-btn-success woocommerce-own-product ajax-order-now-product"><span><i class="fa-regular fa-cart-shopping"></i></span>
-									Buy Now
+									<?php echo esc_html__("Purchase Now","rainbowit"); ?>
 								</a>
 								<?php } ?>
 
@@ -220,23 +225,8 @@ function rainbowit_before_main_content()
 										<?php echo esc_html__("Preview", "rainbowit"); ?>
 									</a>
 								</div>
-								<?php if( $service_product_checkbox != 'yes' && $envato_product_total_rating >= 3 ) { ?>
-								<div class="cart-bottom">
-									<div class="review">
-										<span class="review-text"><?php echo esc_html__("Reviews", "rainbowit"); ?></span>
-										<div class="rating">
-											<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-											<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-											<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-											<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-											<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-										</div>
-										<span class="rating-avg"><?php echo esc_attr($envato_product_avg_rating); ?></span>
-										<span class="rating-count badge"><?php echo esc_attr($envato_product_total_rating); ?> <?php echo esc_html__("(Total)", "rainbowit"); ?></span>
-									</div>
-								</div>
-								<?php } else { 
-									 if( $rating > 0 ) { ?>
+									<?php 
+									if( $rating > 0 ) { ?>
 									
 									<div class="cart-bottom">
 										<div class="review">
@@ -244,20 +234,24 @@ function rainbowit_before_main_content()
 												<?php if ( $rating ) : ?>
 												<?php echo '<div class="star-rating" title="'.sprintf(__( 'Rated %s out of 5', 'woocommerce' ), $rating).'"><span style="width:'.( ( $rating / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$rating.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>'; ?>
 											<?php endif; ?>
-											
-                                        	
+										
 											<?php if( $rating > 0 ) { ?>
 											<span class="rating-count">
 											<?php echo esc_html( $rating ); ?>
+											<?php if( $rainbowit_own_product_checkbox == 'yes') { ?>
 											<span class="rbt-review-total">(Total<?php echo " ";?><?php 
 												echo do_shortcode( "[reviews_count id='".$product_id ."']");
 											?>)</span>
+											<?php } else { ?>
+												<span class="rbt-review-total">(Total<?php echo " ";?><?php 
+												echo $review_count;?>)</span>
+											<?php } ?>
 											
 											</span>
 											<?php } ?>
 										</div>
 									</div>
-								<?php } } ?>
+								<?php }  ?>
 							</div>
 						</div>
 					</div>
@@ -326,10 +320,12 @@ function rainbowit_woocommerce_before_single_product()
 							$rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
 
 							if( $rainbowit_own_product_checkbox == 'yes' ) {
-								$envato_product_last_update 		=  get_post_meta( get_the_ID(), '_own_product_last_update', true);
-								$envato_product_published_date 	=  get_post_meta( get_the_ID(), '_own_product_published_date', true);
+								$product_post = get_post( get_the_ID() );
+    							$envato_product_last_update = $product_post->post_modified;
+
+    							$envato_product_published_date = $product_post->post_date;
 								$envato_product_compatable_with 	=  get_post_meta( get_the_ID(), '_own_product_compatable_with', true);
-								$envato_product_column 			=  get_post_meta( get_the_ID(), '_onw_product_column', true);
+								$envato_product_column 				=  get_post_meta( get_the_ID(), '_onw_product_column', true);
 								$envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);
 								$envato_product_total_sales 		=  get_post_meta( get_the_ID(), '_own_product_total_sales', true);
 								$product_documentation_link 		=  get_post_meta( get_the_ID(), '_onw_product_documentation_link', true);
@@ -338,8 +334,6 @@ function rainbowit_woocommerce_before_single_product()
 								$envato_product_published_date 	=  get_post_meta( get_the_ID(), '_envato_product_published_date', true);
 								$envato_product_compatable_with =  get_post_meta( get_the_ID(), '_envato_product_compatable_with', true);
 								$envato_product_column 			=  get_post_meta( get_the_ID(), '_envato_product_column', true);
-								$envato_product_avg_rating 		=  get_post_meta( get_the_ID(), '_envato_product_avg_rating', true);
-								$envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true);
 								$envato_product_preview_url 	=  get_post_meta( get_the_ID(), '_envato_product_preview_url', true);
 								$envato_product_total_sales 	=  get_post_meta( get_the_ID(), '_envato_product_total_sales', true);
 								$product_documentation_link 	=  get_post_meta( get_the_ID(), '_envator_product_documentation_link', true);
@@ -364,7 +358,12 @@ function rainbowit_woocommerce_before_single_product()
 							}
 
 							$own_product_feature_list       = get_post_meta( get_the_ID(), 'own_product_feature_list', true );  
-							$rating                         = get_post_meta( get_the_ID(), '_wc_average_rating', true );  
+							if( $rainbowit_own_product_checkbox == 'yes') {
+								$rating                         = get_post_meta( get_the_ID(), '_wc_average_rating', true ); 
+							} else {
+								$rating 					    =  get_post_meta( $post->ID, '_envato_product_avg_rating', true );
+								$review_count 					=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+							}
 
 							$external_class = 'col-12 col-md-12 col-lg-5 col-xl-4 me-auto';
 							$siebar_class = 'rbt-sidebar h-100';
@@ -675,43 +674,34 @@ function rainbowit_woocommerce_before_single_product()
 													<?php echo esc_html__("Preview", "rainbowit"); ?>
 												</a>
 											</div>
-											<?php if( $rainbowit_own_product_checkbox != 'yes' && $envato_product_total_rating > 3 ) { ?>
+											
+											<?php 
+											if( $rating > 0 ) { ?>
+											
 											<div class="cart-bottom">
 												<div class="review">
 													<span class="review-text"><?php echo esc_html__("Reviews", "rainbowit"); ?></span>
-													<div class="rating">
-														<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-														<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-														<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-														<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-														<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-													</div>
-													<span class="rating-avg"><?php echo esc_attr($envato_product_avg_rating); ?></span>
-													<span class="rating-count badge"><?php echo esc_attr($envato_product_total_rating); ?> <?php echo esc_html__("(Total)", "rainbowit"); ?></span>
+														<?php if ( $rating ) : ?>
+														<?php echo '<div class="star-rating" title="'.sprintf(__( 'Rated %s out of 5', 'woocommerce' ), $rating).'"><span style="width:'.( ( $rating / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$rating.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>'; ?>
+													<?php endif; ?>
+												
+													<?php if( $rating > 0 ) { ?>
+													<span class="rating-count">
+													<?php echo esc_html( $rating ); ?>
+													<?php if( $rainbowit_own_product_checkbox == 'yes') { ?>
+													<span class="rbt-review-total">(Total<?php echo " ";?><?php 
+														echo do_shortcode( "[reviews_count id='".get_the_ID() ."']");
+													?>)</span>
+													<?php } else { ?>
+														<span class="rbt-review-total">(Total<?php echo " ";?><?php 
+														echo $review_count;?>)</span>
+													<?php } ?>
+													
+													</span>
+													<?php } ?>
 												</div>
 											</div>
-											<?php } else { 
-												if( $rating > 0 ) { ?>
-									
-												<div class="cart-bottom">
-													<div class="review">
-														<span class="review-text"><?php echo esc_html__("Reviews", "rainbowit"); ?></span>
-														<?php 
-														woocommerce_template_loop_rating(); 
-														?>
-														<?php if( $rating > 0 ) { ?>
-														<span class="rating-count">
-														<?php echo esc_html( $rating ); ?>
-														<span class="rbt-review-total">(Total<?php echo " ";?><?php 
-															echo do_shortcode( "[reviews_count id='".get_the_ID() ."']");
-														?>)</span>
-														
-														</span>
-														<?php } ?>
-													</div>
-												</div>
-
-											<?php } } ?>
+										<?php }  ?>
 										</div>
 									<?php } ?>
 								</div>

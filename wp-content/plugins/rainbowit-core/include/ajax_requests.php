@@ -60,9 +60,9 @@ class ajax_requests
     public function rbt_ajax_envato_api_product_func() {
 
         $nonce = isset( $_POST['orderNonce'] ) ? $_POST['orderNonce'] : 0;
-        if ( ! wp_verify_nonce( $nonce, 'rainbowit-feature-plugin' ) ) {
-            die( __( 'Security check', 'rainbowit' ) ); 
-        } 
+        // if ( ! wp_verify_nonce( $nonce, 'rainbowit-feature-plugin' ) ) {
+        //     die( __( 'Security check', 'rainbowit' ) ); 
+        // } 
 
         $apiToken = 'AxNy23RTmWIlDXO3E0Cad6075IHpEciQ';
 		$products = wp_remote_get('https://api.envato.com/v1/discovery/search/search/item?site=themeforest.net&username=rainbow-themes', array(
@@ -74,6 +74,10 @@ class ajax_requests
 
 		$product_info = isset($products['body']) ? json_decode($products['body']) : '';
 		$matches_products = isset($product_info) && !empty($product_info) ? $product_info->matches : '';
+
+        echo "<pre>";
+        print_r($matches_products);
+        echo "</pre>";
 
         $set_option = json_encode($matches_products);
 
@@ -145,7 +149,7 @@ class ajax_requests
 
         // Reset post data
         wp_reset_postdata();
-       
+
         if( $set_option ) {
             echo "success";
         } else {

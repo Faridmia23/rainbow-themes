@@ -129,15 +129,6 @@ function rainbowit_options_product_tab_content()
 
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_envato_product_template_type',
-				'label'       => __('Template Category', 'rainbowit'),
-				'placeholder' => '',
-				'desc_tip'    => 'true',
-			)
-		);
-
-		woocommerce_wp_text_input(
-			array(
 				'id'          => '_envato_product_last_update',
 				'label'       => __('Last Update', 'rainbowit'),
 				'placeholder' => '',
@@ -305,23 +296,6 @@ function rainbowit_custom_service_options_product_tab_content()
 					'desc_tip'    => 'true',
 				)
 			);
-
-			woocommerce_wp_text_input( array(
-				'id'          => '_own_product_published_date',
-				'label'       => __( 'Product Published Date', 'rainbowit' ),
-				'placeholder' => 'YYYY-MM-DD',
-				'description' => __( 'Enter a custom date for this product.', 'rainbowit' ),
-				'type'        => 'date',
-			) );
-
-			woocommerce_wp_text_input( array(
-				'id'          => '_own_product_last_update',
-				'label'       => __( 'Product Last Update Date', 'rainbowit' ),
-				'placeholder' => 'YYYY-MM-DD',
-				'description' => __( 'Enter a custom date for this product.', 'rainbowit' ),
-				'type'        => 'date',
-			) );
-
 			
 			woocommerce_wp_text_input(
 				array(
@@ -423,10 +397,6 @@ function save_envato_product_options_field($post_id)
 		update_post_meta($post_id, '_envato_product_preview_url', sanitize_text_field($_POST['_envato_product_preview_url']));
 	endif;
 
-	if (isset($_POST['_envato_product_template_type'])) :
-		update_post_meta($post_id, '_envato_product_template_type', sanitize_text_field($_POST['_envato_product_template_type']));
-	endif;
-
 	if (isset($_POST['_envato_product_last_update'])) :
 		update_post_meta($post_id, '_envato_product_last_update', sanitize_text_field($_POST['_envato_product_last_update']));
 	endif;
@@ -490,13 +460,6 @@ function save_envato_product_options_field($post_id)
 		update_post_meta($post_id, '_own_product_preview_url', sanitize_text_field($_POST['_own_product_preview_url']));
 	endif;
 
-	if (isset($_POST['_own_product_last_update'])) :
-		update_post_meta($post_id, '_own_product_last_update', sanitize_text_field($_POST['_own_product_last_update']));
-	endif;
-
-	if (isset($_POST['_own_product_published_date'])) :
-		update_post_meta($post_id, '_own_product_published_date', sanitize_text_field($_POST['_own_product_published_date']));
-	endif;
 
 	if (isset($_POST['_own_product_compatable_with'])) :
 		update_post_meta($post_id, '_own_product_compatable_with', sanitize_text_field($_POST['_own_product_compatable_with']));
@@ -543,6 +506,7 @@ function rainbowit_envato_api_call() {
 	$matches_products 	= isset($product_info) && !empty($product_info) ? $product_info->matches : '';
 	$set_option 		= json_encode($matches_products);
 
+	
 	update_option( 'rainbowit_envato_product_save_update', $set_option );
 
 	$args = array(

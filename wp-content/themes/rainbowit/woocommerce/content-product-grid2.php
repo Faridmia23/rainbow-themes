@@ -24,13 +24,34 @@ if (empty($product) || !$product->is_visible()) {
 	return;
 }
 global $post;
+
 $rainbowit_options          	= Rainbowit_Helper::rainbowit_get_options();
-$envato_product_preview_url 	=  get_post_meta( $post->ID, '_envato_product_preview_url', true );
-$envatoproduct_template_type 	=  get_post_meta( $post->ID, '_envato_product_template_type', true );
-$envato_product_total_sales 	=  get_post_meta( $post->ID, '_envato_product_total_sales', true );
-$review_count 					= $product->get_review_count();
-$preview_btn_text 				=	isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
-$envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+$rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
+
+if( $rainbowit_own_product_checkbox == 'yes' ) {
+
+	$envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);
+	$envato_product_total_sales 		=  get_post_meta( get_the_ID(), '_own_product_total_sales', true);
+	$rating                         	= get_post_meta( get_the_ID(), '_wc_average_rating', true ); 
+	$review_count 					=  $product->get_review_count();
+
+} else {
+
+	$envato_product_preview_url 	=  get_post_meta( $post->ID, '_envato_product_preview_url', true );
+	$envato_product_total_sales 	=  get_post_meta( $post->ID, '_envato_product_total_sales', true );
+	$rating 					    =  get_post_meta( $post->ID, '_envato_product_avg_rating', true );
+	$review_count 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+}
+
+$tags = wp_get_post_terms($product->get_id(), 'product_tag');
+
+if (!empty($tags) && isset($tags[0])) {
+	$tag = $tags[0];
+	$tag_link = get_term_link($tag);
+}
+
+
+$preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
 
 ?>
 <div <?php wc_product_class('col-12 col-md-6 col-xl-4 single-item mb--24', $product); ?>>
@@ -52,24 +73,23 @@ $envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_t
 				</a>
 			</h3>
 			<div class="rbt-card-meta woocommerce">
-				<?php if( isset( $envatoproduct_template_type ) && !empty( $envatoproduct_template_type ) ) { ?>
-				<a  class="category"><?php echo esc_html( $envatoproduct_template_type );?></a>
+			<?php if (!empty($tags) && isset($tags[0])) { ?>
+				<a  href="<?php echo esc_url( esc_url($tag_link) ); ?>" class="category"><?php echo esc_html( $tags[0]->name );?></a>
 				<?php } 
-				if(  $product->is_type('external') && $envato_product_total_rating > 3 ) { ?>
+				if( $rating > 0  ) { ?>
 				<div class="review">
-					<div class="rating">
-						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-						<span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-					</div>
-					<span class="rating-count">(<?php echo esc_html( $envato_product_total_rating ); ?>)</span>
+						<?php if ( $rating ) : ?>
+						<?php echo '<div class="star-rating" title="'.sprintf(__( 'Rated %s out of 5', 'woocommerce' ), $rating).'"><span style="width:'.( ( $rating / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$rating.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>'; ?>
+					<?php endif; ?>
+					
+					
+					<?php if( $rating > 0 ) { ?>
+					<span class="rating-count">(<?php 
+						echo $review_count?>)
+					</span>
+					<?php } ?>
 				</div>
-				<?php } else { 
-				 woocommerce_template_loop_rating(); 
-				}
-				?>
+				<?php } ?>
 			</div>
 			<div class="rbt-card-bottom">
 			<?php

@@ -598,7 +598,6 @@ add_action('admin_menu', 'add_custom_submenu_page');
 add_action( 'admin_post_rainbowit_schedule_event_start', 'rainbowit_schedule_event_func' );
 
 function rainbowit_schedule_event_func() {
-    check_admin_referer( 'rainbowit-schedule-event' );
 
     $choose_schedule_rainbowit = isset( $_POST['choose_schedule_rainbowit'] ) ? $_POST['choose_schedule_rainbowit'] : '';
     
@@ -630,7 +629,6 @@ function envato_product_submenu_page_content() {
                     <option value="twicedaily" <?php selected( $choose_schedule, 'twicedaily' ); ?>><?php esc_html_e("Twicedaily","rainbowit"); ?></option>
                     <option value="weekly" <?php selected( $choose_schedule, 'weekly' ); ?>><?php esc_html_e("Weekly","rainbowit"); ?></option>
                 </select>
-                <?php wp_nonce_field( 'rainbowit-schedule-event' ); ?>
                 <?php submit_button('Schedule Active'); ?>
                 </div>
             </form>

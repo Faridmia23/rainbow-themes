@@ -57,15 +57,12 @@ if ( $product->is_in_stock() ) : ?>
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
 		?>
 		<?php if ($service_product_checkbox == 'yes') { ?>
-		<a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;" aria-describedby="some text">
+		<a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-xm w-100 rbt-btn-primary rbt-btn-round  btn-primary-outline rbt-btn-xm hover-effect-1 ajax-order-now-product" style="cursor:pointer;" aria-describedby="some text">
 			<?php  esc_attr_e("Order Now","rainbowit"); ?>
 		</a>
-		<?php } ?>
-		<?php if( $service_product_checkbox == 'yes') { ?>
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="service-product-normal rbt-btn rbt-btn-primary w-100  single_add_to_cart_button button alt<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
-		<?php } else { ?>
+		<?php }  else { ?>
 			<a  data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-md rbt-btn-success woocommerce-own-product ajax-order-now-product"><span><span><i class="fa-regular fa-cart-shopping"></i></span>
-				Buy Now
+				<?php echo esc_html__("Purchase Now","woocommerce"); ?>
 			</a>
 			<?php } 
 		

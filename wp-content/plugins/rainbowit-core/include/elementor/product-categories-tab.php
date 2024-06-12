@@ -142,7 +142,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
-        add_shortcode('reviews_count', [$this, 'reviews_count_func'], 10, 1);
 
 ?>
         <div class="mt_dec--225 product-tab-categories">
@@ -310,13 +309,33 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                             }
 
                             global $product;
-                            $product_id                     = $product->get_id();
-                            $rating                         = get_post_meta($product_id, '_wc_average_rating', true);
-                            $envatoproduct_template_type    =  get_post_meta($post->ID, '_envato_product_template_type', true);
-                            $envato_product_preview_url     = get_post_meta($post->ID, '_envato_product_preview_url', true);
-                            $preview_btn_text               = isset($rainbowit_options['preview_btn_text']) ?  $rainbowit_options['preview_btn_text'] : '';
-                            $envato_product_total_sales 	=  get_post_meta( $post->ID, '_envato_product_total_sales', true );
-                            $envato_product_total_rating 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+                            
+                            $rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
+
+                            if( $rainbowit_own_product_checkbox == 'yes' ) {
+
+                                $envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);
+                                $envato_product_total_sales 		=  get_post_meta( get_the_ID(), '_own_product_total_sales', true);
+                                $rating                         	= get_post_meta( get_the_ID(), '_wc_average_rating', true ); 
+                                $review_count 					=  $product->get_review_count();
+
+                            } else {
+
+                                $envato_product_preview_url 	=  get_post_meta( get_the_ID(), '_envato_product_preview_url', true );
+                                $envato_product_total_sales 	=  get_post_meta( get_the_ID(), '_envato_product_total_sales', true );
+                                $rating 					    =  get_post_meta( get_the_ID(), '_envato_product_avg_rating', true );
+                                $review_count 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+                            }
+
+                            $tags = wp_get_post_terms($product->get_id(), 'product_tag');
+
+                            if (!empty($tags) && isset($tags[0])) {
+                                $tag = $tags[0];
+                                $tag_link = get_term_link($tag);
+                            }
+
+
+                            $preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
                         ?>
                             <div class="col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 <?php echo esc_attr(strtolower($termsAssignedCat)); ?> <?php echo esc_attr(strtolower($parentCat)); ?>">
                                 <div class="rbt-card">
@@ -331,27 +350,22 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                         </h3>
                                         <div class="rbt-card-meta woocommerce">
                                             <div class="rbt-categories">
-                                                <?php if (isset($envatoproduct_template_type) && !empty($envatoproduct_template_type)) { ?>
-                                                    <a class="category"><?php echo esc_html($envatoproduct_template_type); ?></a>
+                                            <?php if (!empty($tags) && isset($tags[0])) { ?>
+                                                <a  href="<?php echo esc_url( esc_url($tag_link) ); ?>" class="category"><?php echo esc_html( $tags[0]->name );?></a>
                                                 <?php } ?>
                                             </div>
-                                            
-                                            <?php 
-                                            if(  $product->is_type('external') && $envato_product_total_rating > 3 ) { ?>
+                                           <?php if( $rating > 0  ) { ?>
                                             <div class="review">
-                                                <div class="rating">
-                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-                                                    <span class="rating-icon"><i class="fa-solid fa-star"></i></span>
-                                                </div>
-                                                <span class="rating-count">(<?php echo esc_html( $envato_product_total_rating ); ?>)</span>
+                                                    <?php if ( $rating ) : ?>
+                                                    <?php echo '<div class="star-rating" title="'.sprintf(__( 'Rated %s out of 5', 'woocommerce' ), $rating).'"><span style="width:'.( ( $rating / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$rating.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>'; ?>
+                                                <?php endif; ?>
+                                                <?php if( $rating > 0 ) { ?>
+                                                <span class="rating-count">(<?php 
+                                                    echo $review_count?>)
+                                                </span>
+                                                <?php } ?>
                                             </div>
-                                            <?php } else { 
-                                            woocommerce_template_loop_rating(); 
-                                            }
-                                            ?>
+                                            <?php } ?>
                                             </div>
                                        
                                         <div class="rbt-card-bottom">
@@ -427,24 +441,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
         </div>
 <?php
 
-    }
-
-    public function reviews_count_func($atts = '')
-    {
-        // Make sure an ID was passed,
-        if (!empty($atts['id'] && function_exists('wc_get_product'))) {
-            // Get a WC_Product object for the product.
-            $product = wc_get_product((int) $atts['id']);
-            // Return the review count.
-            $total_rating = $product->get_review_count();
-
-            if ($total_rating < 10) {
-                $total_rating = '0' . $total_rating;
-                return $total_rating;
-            }
-
-            return $total_rating;
-        }
     }
 }
 

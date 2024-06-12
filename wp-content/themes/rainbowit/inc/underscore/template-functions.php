@@ -25,6 +25,12 @@ function rainbowit_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
+    $service_product_checkbox = get_post_meta(get_the_ID(), "rainbowit_service_product_checkbox", true);
+
+    if( $service_product_checkbox == 'yes' ) {
+        $classes[] = 'service-single-product';
+    }
+
 
     // Scroll to top
     $classes[] = ($rainbowit_options['rainbowit_scroll_to_top_enable'] != 'no') ? "active-scroll-to-top" : "";

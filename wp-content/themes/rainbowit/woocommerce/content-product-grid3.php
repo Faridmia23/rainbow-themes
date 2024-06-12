@@ -26,11 +26,8 @@ if (empty($product) || !$product->is_visible()) {
 
 global $post;
 $rainbowit_options          		= Rainbowit_Helper::rainbowit_get_options();
-$envatoproduct_template_type 		=  get_post_meta( $post->ID, '_envato_product_template_type', true );
 $review_count 						=  $product->get_review_count();
 $preview_btn_text 					=	isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
-$envato_product_last_update 		=  get_post_meta( get_the_ID(), '_own_product_last_update', true);
-$envato_product_published_date 		=  get_post_meta( get_the_ID(), '_own_product_published_date', true);
 $envato_product_compatable_with 	=  get_post_meta( get_the_ID(), '_own_product_compatable_with', true);
 $envato_product_column 				=  get_post_meta( get_the_ID(), '_onw_product_column', true);
 $envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);

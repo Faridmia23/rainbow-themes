@@ -12,3 +12,4 @@
 include_once( RAINBOWIT_ADDONS_DIR. '/include/widgets/recent-posts.php' );
 include_once( RAINBOWIT_ADDONS_DIR. '/include/widgets/footer-logo-widget.php' );
 include_once( RAINBOWIT_ADDONS_DIR. '/include/widgets/single-quote-widget.php' );
+include_once( RAINBOWIT_ADDONS_DIR. '/include/widgets/human-reading-time.php' );

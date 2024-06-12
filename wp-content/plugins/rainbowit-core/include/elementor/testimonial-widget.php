@@ -37,6 +37,7 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
     protected function register_controls()
     {
 
+        $this->rbt_query_controls('testimonial', 'Testimonial - ', 'testimonial', 'testimonial-cat');
         $this->start_controls_section(
             'content_section',
             [
@@ -107,6 +108,8 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
                 'label_block' => true,
             ]
         );
+       
+        // testimonial Query
 
         $repeater = new \Elementor\Repeater();
 
@@ -132,6 +135,8 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
 
 
         $this->end_controls_section();
+
+        
     }
 
     protected function render($instance = [])
@@ -146,19 +151,20 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
         $extra_class    = $settings['extra_class'] ?? '';
         $section_id    = $settings['section_id'] ?? '';
 
+
         if ( ! empty( $settings['btn_link']['url'] ) ) {
 			$this->add_link_attributes( 'btn_link', $settings['btn_link'] );
 		}
 
-        $args = array(
-            'post_type'             => 'testimonial',
-            'post_status'           => 'publish',
-            'order' => 'DESC',
-            'ignore_sticky_posts'   => 1,
-            'posts_per_page'        => -1,
-        );
+        /**
+         * Setup the post arguments.
+         */
+        $testimonial_query = RBT_Helper::get_query_args('testimonial', 'testimonial-cat', $this->get_settings());
 
-        $testimonial_query = new \WP_Query($args);
+        // The Query
+        $query = new \WP_Query($testimonial_query);
+        $elemid = 'testimonial-' . rand(000000, 999999);
+
 
 ?>
 
@@ -190,9 +196,9 @@ class Rainbowit_Testimonial_Widget extends Widget_Base
             <div class="rbt-layout">
                 <!-- review 1 -->
                 <?php
-                if ($testimonial_query->have_posts()) {
-                    while ($testimonial_query->have_posts()) {
-                        $testimonial_query->the_post();
+                if ($query->have_posts()) {
+                    while ($query->have_posts()) {
+                        $query->the_post();
                         global $post;
                         $marketplace_name  = '';
                         $rating_select     = '';

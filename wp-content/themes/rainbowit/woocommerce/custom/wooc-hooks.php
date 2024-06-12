@@ -40,6 +40,7 @@ remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_pro
 remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
 remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
 add_filter('loop_shop_columns', 'rainbowit_shop_loop_shop_columns');
 add_action('woocommerce_before_shop_loop_item_title', 'rainbowit_shop_shop_thumb_area', 11);
 add_action('woocommerce_before_shop_loop_item_title', 'rainbowit_shop_shop_info_wrap_start', 12);

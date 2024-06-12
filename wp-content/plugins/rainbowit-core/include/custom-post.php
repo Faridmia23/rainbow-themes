@@ -113,6 +113,40 @@ if ( ! function_exists('rainbowit_testimonial_func') ) {
             'rewrite'               => array('slug' => esc_html__('testimonial' , 'rainbowit')),
 		);
 		register_post_type( 'testimonial', $args );
+
+		
+			register_taxonomy( 'testimonial-cat', array(
+			0 => 'testimonial',
+		), array(
+			'labels' => array(
+				'name' => 'Add Testimonial Category',
+				'singular_name' => 'Testimonial Category',
+				'menu_name' => 'Testimonial Category',
+				'all_items' => 'All Testimonial Category',
+				'edit_item' => 'Edit  Category',
+				'view_item' => 'View  Category',
+				'update_item' => 'Update  Category',
+				'add_new_item' => 'Add New  Category',
+				'new_item_name' => 'New Testimonial Category Name',
+				'search_items' => 'Search Testimonial Category',
+				'popular_items' => 'Testimonial Category',
+				'separate_items_with_commas' => 'Separate Testimonial',
+				'add_or_remove_items' => 'remove Testimonial Category',
+				'choose_from_most_used' => 'Choose Testimonial Category',
+				'not_found' => 'No Testimonial Category found',
+				'no_terms' => 'No Testimonial Category',
+				'items_list_navigation' => 'Category list',
+				'items_list' => 'Job Type list',
+				'back_to_items' => '← Go to Testimonial Category',
+				'item_link' => 'Testimonial Category Link',
+				'item_link_description' => 'A link to a Testimonial Category',
+			),
+			'public' => true,
+			'show_in_menu' => true,
+			'show_in_rest' => true,
+		)  );
+
+
 	}
 	add_action( 'init', 'rainbowit_testimonial_func', 0 );
 }

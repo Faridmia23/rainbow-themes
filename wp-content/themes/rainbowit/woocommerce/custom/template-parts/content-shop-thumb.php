@@ -6,17 +6,13 @@
  * @package rainbowit
  */
 ?>
-<div class="shop-thumbnail">
+<div>
 	<?php
 	global $product; ?>
-	<div class="woocommerce-LoopProduct-link">
+	<a href="<?php the_permalink(); ?>">
 	<?php 
-		woocommerce_show_product_loop_sale_flash();
-        woocommerce_template_loop_add_to_cart();
 		woocommerce_template_loop_product_thumbnail();
 	?>
-	</div>
+	</a>
 </div>
-<div class="shop-product-info">
-	<?php rainbowit_shop_loop_product_title();?>
-</div>
+                    

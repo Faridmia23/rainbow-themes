@@ -337,3 +337,11 @@ function get_elementor_template_library()
 
     return $posts;
 }
+
+function redirect_empty_cart_to_shop() {
+    if (is_cart() && WC()->cart->is_empty()) {
+        wp_safe_redirect(wc_get_page_permalink('shop'));
+        exit;
+    }
+}
+add_action('template_redirect', 'redirect_empty_cart_to_shop');

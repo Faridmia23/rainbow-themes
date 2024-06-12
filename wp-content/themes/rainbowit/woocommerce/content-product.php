@@ -24,7 +24,8 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<li <?php wc_product_class( '', $product ); ?>>
+<div <?php wc_product_class( 'col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 vue', $product ); ?>>
+	<div class="rbt-card">
 	<?php
 	/**
 	 * Hook: woocommerce_before_shop_loop_item.
@@ -64,4 +65,5 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 */
 	do_action( 'woocommerce_after_shop_loop_item' );
 	?>
-</li>
+	</div>
+</div>

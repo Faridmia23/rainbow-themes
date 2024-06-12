@@ -70,7 +70,7 @@ function rainbowit_shop_shop_thumb_area(){
 }
 
 function rainbowit_shop_shop_info_wrap_start(){
-    echo '<div class="products-shop">';
+    echo '<div class="rbt-card-body p--24">';
 }
 
 function rainbowit_shop_shop_add_description(){
@@ -210,3 +210,138 @@ function reviews_count_func( $atts = '') {
 }
 
 add_shortcode( 'reviews_count', 'reviews_count_func', 10, 1 );
+
+// shop rating functino
+
+add_action("woocommerce_after_shop_loop_item_title",'rainbowit_woocommerce_after_shop_loop_item_title',5);
+
+function rainbowit_woocommerce_after_shop_loop_item_title() {
+    global $product;
+    $rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
+
+    if( $rainbowit_own_product_checkbox == 'yes' ) {
+
+        $rating            	= get_post_meta( get_the_ID(), '_wc_average_rating', true ); 
+        $review_count 	    =  $product->get_review_count();
+
+    } else {
+        $rating 	    =  get_post_meta( get_the_ID(), '_envato_product_avg_rating', true );
+        $review_count 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
+    } 
+
+    $tags = wp_get_post_terms($product->get_id(), 'product_tag');
+
+    if (!empty($tags) && isset($tags[0])) {
+        $tag = $tags[0];
+        $tag_link = get_term_link($tag);
+    }
+
+    ?>
+
+    <div class="rbt-card-meta woocommerce">
+        <?php if (!empty($tags) && isset($tags[0])) { ?>
+            <div class="rbt-categories">
+                <a  href="<?php echo esc_url( esc_url($tag_link) ); ?>" class="category"><?php echo esc_html( $tags[0]->name );?></a>
+            </div>
+            <?php } 
+            if( $rating > 0  ) { ?>
+            <div class="review">
+                    <?php if ( $rating ) : ?>
+                    <?php echo '<div class="star-rating" title="'.sprintf(__( 'Rated %s out of 5', 'woocommerce' ), $rating).'"><span style="width:'.( ( $rating / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$rating.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>'; ?>
+                <?php endif; ?>
+                
+                
+                <?php if( $rating > 0 ) { ?>
+                <span class="rating-count">(<?php 
+                    echo $review_count?>)
+                </span>
+                <?php } ?>
+            </div>
+            <?php } ?>
+    </div>
+    <?php
+}
+
+add_action('woocommerce_shop_loop_item_title', function() { ?>
+    <h3 class="title">
+        <a href="<?php the_permalink(); ?>">
+            <?php the_title(); ?>
+        </a>
+    </h3>
+    <?php
+},10);
+
+add_action("woocommerce_after_shop_loop_item_title",function() { 
+
+   global $product;
+   $rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
+
+    if( $rainbowit_own_product_checkbox == 'yes' ) {
+        $envato_product_total_sales 		=  get_post_meta( get_the_ID(), '_own_product_total_sales', true);
+
+    } else {
+        $envato_product_total_sales 	=  get_post_meta( get_the_ID(), '_envato_product_total_sales', true );
+    }
+
+    $regular_price = $product->get_regular_price();
+    $sale_price = $product->get_sale_price();
+    if ($regular_price > 0) {
+    ?>
+    <div class="rbt-card-bottom">
+        <div class="sales">
+
+            <div class="price">
+                <?php
+                if (!empty($sale_price) &&  $sale_price > 0) {
+                    echo '<div class="off-price">' . wc_price($regular_price) . '</div>';
+                    echo '<div class="current-price">' . wc_price($sale_price) . '</div>';
+                } else {
+                    if ($regular_price > 0) {
+
+                        echo '<div class="current-price">' . wc_price($regular_price) . '</div>';
+                    }
+                }
+                ?>
+            </div>
+
+            <?php if (!empty($envato_product_total_sales)) { ?>
+                <span class="sales-count"><?php echo esc_html($envato_product_total_sales); ?> <?php echo esc_html__("sales", "rainbowit"); ?></span>
+            <?php } ?>
+        </div>
+    <?php } ?>
+    <?php
+}, 10 );
+
+add_action("woocommerce_after_shop_loop_item", function() {
+    $rainbowit_options          	=  Rainbowit_Helper::rainbowit_get_options();
+    $rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
+    if( $rainbowit_own_product_checkbox == 'yes' ) {
+        $envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);
+    } else {
+        $envato_product_preview_url 	=  get_post_meta( get_the_ID(), '_envato_product_preview_url', true );
+    }
+
+    $service_product_checkbox = get_post_meta( get_the_ID(), "rainbowit_service_product_checkbox", true );
+
+    $preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
+    $service_order_btn_title        = ( $rainbowit_options['order_btn_text'] ) ? $rainbowit_options['order_btn_text'] : '';
+    ?>
+    <div class="rbt-card-btn">
+            <?php if( $service_product_checkbox == 'yes') { ?>
+                <a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary ajax-order-now-product" style="cursor:pointer;">
+                    <span><i class="fa-regular fa-cart-shopping"></i></span>
+                    <?php echo esc_html( $service_order_btn_title ); ?>
+                </a>
+            <?php } else { ?>
+            <a href="<?php echo esc_url( $envato_product_preview_url );?>" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary ">
+                <span><i class="fa-sharp fa-regular fa-eye"></i></span>
+                <?php echo esc_html($preview_btn_text); ?>
+            </a>
+            <?php } 
+                woocommerce_template_loop_add_to_cart(); 
+            
+            ?>
+        </div>
+    </div>
+    <?php 
+}, 10 );

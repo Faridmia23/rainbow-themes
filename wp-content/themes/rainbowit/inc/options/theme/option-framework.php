@@ -776,6 +776,18 @@ Redux::setSection($opt_name, array(
             ),
 
             array(
+                'id' => 'rainbowit_show_blog_details_social_share_on_off',
+                'type' => 'button_set',
+                'title' => esc_html__('Social Share On/off', 'rainbowit'),
+                'subtitle' => esc_html__('Show or hide the social share.', 'rainbowit'),
+                'options' => array(
+                    'yes' => esc_html__('Show', 'rainbowit'),
+                    'no' => esc_html__('Hide', 'rainbowit'),
+                ),
+                'default' => 'yes',
+            ),
+
+            array(
                 'id' => 'rbt_blog_details_social_share_label',
                 'type' => 'text',
                 'title' => esc_html__('Social Share Label Text', 'rainbowit'),

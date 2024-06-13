@@ -129,7 +129,7 @@ class Rainbowit_Open_Job_Position extends Widget_Base
         $settings       = $this->get_settings_for_display();
         $heading_title  = $settings['heading_title'] ?? '';
         $sub_title      = $settings['sub_title'] ?? '';
-        $btn_title      = $settings['btn_title'] ?? '';
+        
         $post_per_page      = $settings['post_per_page'] ?? '';
 
 
@@ -160,6 +160,19 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                         global $post;
                         if (class_exists('acf')) {
                             $address = get_field('address', $post->ID);
+                            $job_status = get_field('job_status', $post->ID);
+
+                        }
+
+
+                        if( $job_status == 'enable') {
+                            $btn_title      = $settings['btn_title'] ?? '';
+                            $btn_disable_class = '';
+                            $permalink = get_the_permalink();
+                        } else {
+                            $btn_title      = 'Expired';
+                            $btn_disable_class = 'apply-disable';
+                            $permalink = '#';
                         }
 
                         $open_job = get_the_terms( $post->ID , 'open-job' );
@@ -205,13 +218,38 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-3 col-xl-3">
-                                        <div class="card-end ">
-                                            <a href="<?php the_permalink(); ?>" class="rbt-btn btn-primary-outline hover-effect-1"><?php echo esc_html($btn_title ); ?></a>
+                                        <div class="card-end apply-btn-class">
+                                            <a href="<?php echo esc_url($permalink); ?>" class="rbt-btn btn-primary-outline hover-effect-1 <?php echo esc_attr($btn_disable_class);?>"><?php echo esc_html($btn_title ); ?></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <script>
+
+                            jQuery(document).ready(function($) {
+                                // Function to check if button has apply-disable class and disable it
+                                function checkAndDisable() {
+                                    $('.apply-btn-class').each(function() {
+                                        if ($(this).hasClass('apply-disable')) {
+                                            $(this).prop('disabled', true);
+                                        } else {
+                                            $(this).prop('disabled', false);
+                                        }
+                                    });
+                                }
+
+                                // Initial check
+                                checkAndDisable();
+
+                                // Toggle button state
+                                $('#toggle-btn').click(function() {
+                                    $('.apply-btn-class').toggleClass('apply-disable');
+                                    checkAndDisable();
+                                });
+                            });
+                        </script>
                 <?php
 
                     }

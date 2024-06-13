@@ -650,3 +650,114 @@ function enqueue_custom_woocommerce_checkout_script() {
         );
     }
 }
+
+
+
+
+add_action('admin_init', 'eaw_add_meta_boxe_init', 2);
+
+# custom meta admin init
+function eaw_add_meta_boxe_init()
+{
+    add_meta_box('rainbowit_tab_title_group', 'Table of Content', 'rainbowit_tab_title_meta_box_func', 'post', 'normal', 'default');
+}
+
+function rainbowit_tab_title_meta_box_func()
+{
+    global $post;
+
+    wp_nonce_field('rainbowit_tab_title_meta_box_nonce', 'rainbowit_tab_title_meta_box_nonce');
+
+    $rainbowit_tab_title_group   = get_post_meta($post->ID, 'rainbowit_tab_title_group', true);
+
+    ?>
+    <table id="eaw-repeatable-fieldset-one">
+    <tbody>
+        <?php
+        if ($rainbowit_tab_title_group) :
+            foreach ($rainbowit_tab_title_group as $field) {
+        ?>
+                <tr class="eaw-tr-extra-field-item">
+                    <td class="eaw-input-td-field">
+                        <input type="text" placeholder="Tab Title" name="rainbowit_tab_title[]" value="<?php if ($field['rainbowit_tab_title'] != '') echo esc_attr($field['rainbowit_tab_title']); ?>" />
+                    </td>
+                    <td class="eaw-input-td-field">
+                        <input type="text" placeholder="Tab Id" name="rainbowit_tab_id[]" value="<?php if ($field['rainbowit_tab_id'] != '') echo esc_attr($field['rainbowit_tab_id']); ?>" />
+                    </td>
+                    <td width="15%"><a class="button eaw-remove-row" href="#1"><?php echo esc_html__("Remove", "eaw"); ?></a></td>
+                </tr>
+            <?php
+            }
+        else :
+            // show a blank one
+            ?>
+            <tr class="eaw-tr-extra-field-item">
+                <td class="eaw-input-td-field">
+                    <input type="text" placeholder="Tab Title" title="Label Text" name="rainbowit_tab_title[]" />
+                </td>
+                <td class="eaw-input-td-field">
+                    <input type="text" placeholder="Tab Id" title="Price" name="rainbowit_tab_id[]" />
+                </td>
+                <td><a class="button  cmb-remove-row-button button-disabled" href="#"><?php echo esc_html__("Remove", "eaw"); ?></a></td>
+            </tr>
+        <?php endif; ?>
+
+        <!-- empty hidden one for jQuery -->
+        <tr class="empty-row screen-reader-text eaw-tr-extra-field-item">
+            <td class="eaw-input-td-field">
+                <input type="text" placeholder="Extra Item Label Text" title="Label Text" name="rainbowit_tab_title[]" />
+            </td>
+            <td class="eaw-input-td-field">
+                <input type="text" placeholder="Price" title="Price" name="rainbowit_tab_id[]" />
+            </td>
+            <td><a class="button eaw-remove-row" href="#"><?php echo esc_html__("Remove", "eaw"); ?></a></td>
+        </tr>
+    </tbody>
+</table>
+<p><a id="eaw-add-row" class="button" href="#"><?php echo esc_html__("Add another", "eaw"); ?> </a></p>
+    <?php
+}
+
+add_action('save_post', 'rainbowit_tab_title_meta_box_save');
+
+# custom meta save function
+function rainbowit_tab_title_meta_box_save($post_id)
+{
+    if (
+        !isset($_POST['rainbowit_tab_title_meta_box_nonce']) ||
+        !wp_verify_nonce($_POST['rainbowit_tab_title_meta_box_nonce'], 'rainbowit_tab_title_meta_box_nonce')
+    )
+        return;
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        return;
+
+    if (!current_user_can('edit_post', $post_id))
+        return;
+
+    $old_meta          = get_post_meta($post_id, 'rainbowit_tab_title_group', true);
+    $new_meta          = array();
+    $extra_items       = isset($_POST['rainbowit_tab_title']) ? $_POST['rainbowit_tab_title'] : '';
+    $extra_items       = array_map('eaw_sanitize_input', $extra_items);
+    $prices            = isset($_POST['rainbowit_tab_id']) ? array_map('sanitize_text_field', $_POST['rainbowit_tab_id']) : array();
+    $count             = count($extra_items);
+
+    for ($i = 0; $i < $count; $i++) {
+        if ($extra_items[$i] != '') :
+            $new_meta[$i]['rainbowit_tab_title'] = stripslashes(strip_tags($extra_items[$i]));
+            $new_meta[$i]['rainbowit_tab_id'] = stripslashes($prices[$i]); # and however you want to sanitize
+        endif;
+    }
+
+    if (!empty($new_meta) && $new_meta != $old_meta)
+        update_post_meta($post_id, 'rainbowit_tab_title_group', $new_meta);
+    elseif (empty($new_meta) && $old_meta)
+        delete_post_meta($post_id, 'rainbowit_tab_title_group', $old_meta);
+
+}
+
+
+function eaw_sanitize_input($input)
+{
+    return strip_tags($input); // You can customize the sanitization method as needed
+}

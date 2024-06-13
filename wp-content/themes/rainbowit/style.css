@@ -2341,3 +2341,7 @@ ul.banner-icon-wrapper {
 .woocommerce.archive .products .star-rating {
     margin: 0;
 }
+
+.apply-btn-class .apply-disable {
+    cursor: not-allowed;
+}

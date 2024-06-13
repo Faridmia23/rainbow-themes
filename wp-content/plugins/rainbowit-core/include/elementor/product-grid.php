@@ -34,25 +34,15 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
         return ['about', 'rainbowit'];
     }
 
-    public function category_dropdown()
-    {
-        $terms  = get_terms(array('taxonomy' => 'product_cat', 'fields' => 'id=>name'));
-        $category_dropdown = array('0' => esc_html__('All Categories', 'rainbow-elements'));
-
-        foreach ($terms as $id => $name) {
-            $category_dropdown[$id] = $name;
-        }
-
-        return $category_dropdown;
-    }
 
     protected function register_controls()
     {
 
+        $this->rbt_product_control('product', 'Product - ', 'product', 'product_cat');
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__('Item', 'rainbowit'),
+                'label' => esc_html__('Content Section', 'rainbowit'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -170,25 +160,6 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
         );
 
         $this->add_control(
-            'cat_single_list',
-            [
-                'label' => __('Categories', 'rainbow-elements'),
-                'type' => Controls_Manager::SELECT2,
-                'default' => '0',
-                'multiple' => true,
-                'options' => $this->category_dropdown(),
-            ]
-        );
-
-        $this->add_control(
-            'product_per_page',
-            [
-                'label' => esc_html__('Product Per Page', 'rainbowit'),
-                'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('-1', 'rainbowit'),
-            ]
-        );
-        $this->add_control(
             'product_title_length',
             [
                 'label' => esc_html__('Title Length', 'rainbowit'),
@@ -196,7 +167,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                 'default' => esc_html__('5', 'rainbowit'),
             ]
         );
-        
+
 
         $this->end_controls_section();
     }
@@ -226,43 +197,25 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
         }
 
 
-        $cat_single_list  = $settings['cat_single_list'];
-        $product_per_page = $settings['product_per_page'];
+        $posts_per_page = $settings['posts_per_page'];
+        $product_grid_type = $settings['product_grid_type'];
+        $product_cat = $settings['product_cat'];
+        $exclude_category = $settings['exclude_category'];
+        $post__not_in = $settings['post__not_in'];
+        $offset = $settings['offset'];
+        $product_orderby = $settings['product_orderby'];
+        $product_order = $settings['product_order'];
+        $ignore_sticky_posts = $settings['ignore_sticky_posts'];
 
-        if (isset($cat_single_list) && !empty($cat_single_list)) {
-            $args = array(
-                'post_type'             => 'product',
-                'post_status'           => 'publish',
-                'ignore_sticky_posts'   => 1,
-                'posts_per_page'        => $product_per_page,
-                'tax_query'             => array(
-                    array(
-                        'taxonomy'      => 'product_cat',
-                        'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-                        'terms'         => $cat_single_list,
-                        'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
-                    ),
-                    array(
-                        'taxonomy'      => 'product_visibility',
-                        'field'         => 'slug',
-                        'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
-                        'operator'      => 'NOT IN'
-                    )
-                )
-            );
-        } else {
-            $args = array(
-                'post_type'             => 'product',
-                'post_status'           => 'publish',
-                'ignore_sticky_posts'   => 1,
-                'posts_per_page'        => $product_per_page,
-            );
-        }
+         /**
+         * Setup the post arguments.
+         */
+        $args = RBT_Helper::getProductInfo($posts_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_orderby, $product_order,  $ignore_sticky_posts, $posttype = 'product', $taxonomy = 'product_cat',$settings);
 
         $products_query = new \WP_Query($args);
 
         if ($layout_style == 'layout-1') {
-        ?>
+?>
             <div class="themes-wrapper rbt-section-gapBottom">
                 <div class="container">
                     <div class="row row--12">
@@ -285,7 +238,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                             </a>
                                         </div>
                                     </div>
-                                    <?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html( $settings, 'full', 'icon_image') ); ?>
+                                    <?php echo wp_kses_post(Group_Control_Image_Size::get_attachment_image_html($settings, 'full', 'icon_image')); ?>
                                 </div>
                             </div>
                         </div>
@@ -299,9 +252,8 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                         $product_id = $product->get_id();
                                         $located = locate_template('woocommerce/content-product-grid.php', false, false);
                                         if ($located) {
-                                             include($located);
+                                            include($located);
                                         }
-
                                     }
                                     // reset original post data
                                     wp_reset_postdata();
@@ -354,7 +306,6 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     while ($products_query->have_posts()) {
                                         $products_query->the_post();
                                         get_template_part('woocommerce/content-product', 'slider');
-
                                     }
                                     // reset original post data
                                     wp_reset_postdata();
@@ -380,7 +331,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     <span class="subtitle"><?php echo esc_html($subtitle_title); ?></span>
                                     <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
                                     <p class="description">
-                                    <?php echo wp_kses_post($desc); ?>
+                                        <?php echo wp_kses_post($desc); ?>
                                     </p>
                                     <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3" <?php echo $attr; ?>>
                                         <?php echo esc_html($btn_title); ?>
@@ -389,32 +340,30 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                     </a>
                                 </div>
                             </div>
-                            <?php if( isset( $settings['icon_image']['url'] ) && !empty( $settings['icon_image']['url'] ) ) { ?>
-                            <img class="tech-logo" src="<?php echo esc_url( $settings['icon_image']['url'] );?>" alt="Technology logo">
+                            <?php if (isset($settings['icon_image']['url']) && !empty($settings['icon_image']['url'])) { ?>
+                                <img class="tech-logo" src="<?php echo esc_url($settings['icon_image']['url']); ?>" alt="Technology logo">
                             <?php } ?>
                         </div>
                     </div>
                     <div class="rbt-top-items">
                         <div class="row row--12">
-                        <?php
+                            <?php
                             if ($products_query->have_posts()) {
                                 while ($products_query->have_posts()) {
 
                                     $products_query->the_post();
                                     $located = locate_template('woocommerce/content-product-grid2.php', false, false);
                                     if ($located) {
-                                            include($located);
+                                        include($located);
                                     }
-
                                 }
                                 // reset original post data
                                 wp_reset_postdata();
-
                             } else {
                                 // If no products found
                                 echo 'No products found';
                             }
-                        ?>
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -423,5 +372,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
 <?php
 
     }
+
 }
+
 Plugin::instance()->widgets_manager->register(new Rainbowit_Product_Categories_Grid());

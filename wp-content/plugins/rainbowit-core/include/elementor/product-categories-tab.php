@@ -49,6 +49,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
     protected function register_controls()
     {
 
+        $this->rbt_product_control('product', 'Product - ', 'product', 'product_cat');
         $this->start_controls_section(
             'content_section',
             [
@@ -69,16 +70,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
             ]
         );
 
-        $this->add_control(
-            'cat_single_list',
-            [
-                'label' => __('Categories', 'rainbowit'),
-                'type' => Controls_Manager::SELECT2,
-                'default' => '0',
-                'multiple' => true,
-                'options' => $this->category_dropdown(),
-            ]
-        );
 
         $this->add_control(
             'filter_label_text',
@@ -86,15 +77,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                 'label' => esc_html__('Filter Label Text', 'rainbowit'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => esc_html__('All Themes', 'rainbowit'),
-            ]
-        );
-
-        $this->add_control(
-            'product_per_page',
-            [
-                'label' => esc_html__('Product Per Page', 'rainbowit'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => esc_html__('6', 'rainbowit'),
+                'condition' => ['product_filter' => 'yes']
             ]
         );
 
@@ -110,7 +93,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
         $this->add_control(
             'product_blog_pagination',
             [
-                'label' => esc_html__('Show Filter?', 'rainbowit'),
+                'label' => esc_html__('Show Pagination?', 'rainbowit'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => esc_html__('Show', 'rainbowit'),
                 'label_off' => esc_html__('Hide', 'rainbowit'),
@@ -126,8 +109,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
     {
 
         $settings = $this->get_settings_for_display();
-        $product_per_page = $settings['product_per_page'];
-        $cat_single_list = $settings['cat_single_list'];
 
         $title_length2 = $settings['product_title_length'] ?? '';
 
@@ -140,7 +121,27 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
             return;
         }
 
+        
+
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+        $posts_per_page = $settings['posts_per_page'];
+        $product_grid_type = $settings['product_grid_type'];
+        $product_cat = $settings['product_cat'];
+        $exclude_category = $settings['exclude_category'];
+        $post__not_in = $settings['post__not_in'];
+        $offset = $settings['offset'];
+        $product_orderby = $settings['product_orderby'];
+        $product_order = $settings['product_order'];
+        $ignore_sticky_posts = $settings['ignore_sticky_posts'];
+
+
+         /**
+         * Setup the post arguments.
+         */
+        $args = RBT_Helper::getProductInfo($posts_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_orderby, $product_order,  $ignore_sticky_posts, $posttype = 'product', $taxonomy = 'product_cat',$settings);
+
+        $products_query = new \WP_Query($args);
 
 
 ?>
@@ -151,8 +152,8 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                 if ($settings['product_filter'] == 'yes') {
 
                     $category_list = '';
-                    if (!empty($settings['cat_single_list'])) {
-                        $category_list = implode(" ", $settings['cat_single_list']);
+                    if (!empty($product_cat)) {
+                        $category_list = implode(" ", $product_cat);
                     }
 
                     $category_list_value = explode(" ", $category_list);
@@ -164,29 +165,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                 <?php
                                 if (!empty($settings['filter_label_text'])) {
 
-                                    $args2 = array(
-                                        'post_type'             => 'product',
-                                        'post_status'           => 'publish',
-                                        'ignore_sticky_posts'   => 1,
-                                        'posts_per_page'        => $product_per_page,
-                                        'paged'                 => $paged,
-                                        'tax_query'             => array(
-                                            array(
-                                                'taxonomy'      => 'product_cat',
-                                                'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-                                                'terms'         => $cat_single_list,
-                                                'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
-                                            ),
-                                            array(
-                                                'taxonomy'      => 'product_visibility',
-                                                'field'         => 'slug',
-                                                'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
-                                                'operator'      => 'NOT IN'
-                                            )
-                                        )
-                                    );
-
-                                    $products_arg2 = new \WP_Query($args2);
 
                                     $get_cat = isset( $_GET['category'] ) ? $_GET['category'] : '';
                                     $active = '';
@@ -196,36 +174,15 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                 ?>
                                     <li class="rbt-tab-link <?php echo esc_attr($active);?>" data-filter2="*">
                                         <?php echo esc_html($settings['filter_label_text']); ?>
-                                        <span class="count"><?php echo esc_html($products_arg2->found_posts); ?></span>
+                                        <span class="count"><?php echo esc_html($products_query->found_posts); ?></span>
                                     </li>
                                 <?php } ?>
                                 <?php
-                                if (!empty($settings['cat_single_list'])) {
+                                if (!empty($settings['product_cat'])) {
                                     foreach ($category_list_value as $category) {
-                                        $categoryName = get_term($category, 'product_cat');
-
-                                        $product_arg = array(
-                                            'post_type'             => 'product',
-                                            'post_status'           => 'publish',
-                                           // 'paged'                 => $paged,
-                                            'posts_per_page'        => $product_per_page,
-                                            'tax_query'             => array(
-                                                array(
-                                                    'taxonomy'      => 'product_cat',
-                                                    'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-                                                    'terms'         => $category,
-                                                    'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
-                                                ),
-                                                array(
-                                                    'taxonomy'      => 'product_visibility',
-                                                    'field'         => 'slug',
-                                                    'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
-                                                    'operator'      => 'NOT IN'
-                                                )
-                                            )
-                                        );
-
-                                        $products_arg  = new \WP_Query($product_arg);
+                                     
+                                        $categoryName = get_term_by('slug', $category, 'product_cat');
+                                        $get_category = get_term_by('id', $categoryName->term_id, 'product_cat');
                                         $get_cat       = isset( $_GET['category'] ) ? $_GET['category'] : '';
                                         $cat_name      = isset( $categoryName->name  ) ? strtolower($categoryName->name) : '';
                                         
@@ -234,17 +191,66 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                             $active = 'active';
                                         }
 
+
+                                        if ($get_category->count >= 10)  {
+                                            $cat_count = $get_category->count;
+                                        } else {
+                                            $cat_count = "0" .$get_category->count;
+                                        }
+
                                         if( isset( $categoryName->name ) ) {
                                 ?>
-                                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->name)); ?>">
+                                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->slug)); ?>">
                                                 <?php echo esc_html($categoryName->name); ?>
-                                                <span class="count"><?php echo esc_html($products_arg->found_posts); ?></span>
+                                                <span class="count"><?php echo esc_html($cat_count); ?></span>
                                             </li>
                                 <?php
                                         }
                                         
                                     }
+                                } 
+
+                                else {
+                                    if( !empty($exclude_category)) {
+                                        $terms = get_terms(array(
+                                            'taxonomy'   => 'product_cat',
+                                            'hide_empty' => true,
+                                            'exclude'    => array_map(function($slug) {
+                                                $term = get_term_by('slug', $slug, 'product_cat');
+                                                return $term ? $term->term_id : 0;
+                                            }, $exclude_category),
+                                        ));
+                                    } else {
+                                        $terms = get_terms(array(
+                                            'taxonomy'   => 'product_cat',
+                                            'hide_empty' => true,
+                                        ));
+                                    }
+
+                                    
+                                    if ($terms && !is_wp_error($terms)) {
+                                        $i = 1;
+                                        foreach ($terms as $term) { 
+
+
+                                            // $categoryName = get_term_by('slug', $term, 'product_cat');
+                                            $get_category = get_term_by('id', $term->term_id, 'product_cat');
+                                            if ($get_category->count >= 10)  {
+                                                $cat_count = $get_category->count;
+                                            } else {
+                                                $cat_count = "0" .$get_category->count;
+                                            }
+                                            $active = '';
+                                            if ( empty( $settings['product_filter_all_button_label'] ) && $i == 1 ) {
+                                                $active = 'active';
+                                            }
+                                            ?>
+                                        <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $term->slug ) ); ?>"><?php echo esc_html( ucwords( $term->name ) ); ?> <span class="count"><?php echo esc_html($cat_count); ?></span></li>
+                                        <?php
+                                       $i++; }
+                                    }
                                 } ?>
+                                
                             </ul>
                         </div>
                     <?php endif; ?>
@@ -253,32 +259,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                 <!-- service 1 -->
                 <?php
-
-                if (isset($cat_single_list) && !empty($cat_single_list)) {
-                    $args3 = array(
-                        'post_type'             => 'product',
-                        'post_status'           => 'publish',
-                        'ignore_sticky_posts'   => 1,
-                        'posts_per_page'        => $product_per_page,
-                        'paged'                 => $paged,
-                        'tax_query'             => array(
-                            array(
-                                'taxonomy'      => 'product_cat',
-                                'field' => 'term_id', //This is optional, as it defaults to 'term_id'
-                                'terms'         => $cat_single_list,
-                                'operator'      => 'IN' // Possible values are 'IN', 'NOT IN', 'AND'.
-                            ),
-                            array(
-                                'taxonomy'      => 'product_visibility',
-                                'field'         => 'slug',
-                                'terms'         => 'exclude-from-catalog', // Possibly 'exclude-from-search' too
-                                'operator'      => 'NOT IN'
-                            )
-                        )
-                    );
-                }
-
-                $products_query = new \WP_Query($args3);
 
                 if ($products_query->have_posts()) { ?>
                     <div class="row row--12 rbt-tab-items rbt-tabs-active-2">
@@ -406,7 +386,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                     </div>
                     <!-- pagination -->
                     <?php
-                    if ($settings['product_blog_pagination'] == 'yes' && '-1' != $settings['product_per_page']) { ?>
+                    if ($settings['product_blog_pagination'] == 'yes' && '-1' != $posts_per_page) { ?>
                         <div class="rbt-pagination mt--10">
                             <div class="rbt-pagination-group justify-content-center">
                                 <?php

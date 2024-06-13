@@ -26,6 +26,7 @@ if (has_post_thumbnail()) {
 
 $rainbowit_options              = Rainbowit_Helper::rainbowit_get_options();
 $blog_bottom_client_template_id = isset( $rainbowit_options['blog_bottom_client_template_id']) ? $rainbowit_options['blog_bottom_client_template_id'] : '';
+$social_share_on_off = isset( $rainbowit_options['rainbowit_show_blog_details_social_share_on_off']) ? $rainbowit_options['rainbowit_show_blog_details_social_share_on_off'] : '';
 
 ?>
 
@@ -60,14 +61,53 @@ $blog_bottom_client_template_id = isset( $rainbowit_options['blog_bottom_client_
 <div class="rbt-section-wrapper pt--40  rbt-section-gap2Bottom rbt-blogs-details">
     <div class="container">
         <div class="row">
-        <?php if (is_active_sidebar('blog-single-left-sidebar')) { ?>
             <div class="col-12 col-lg-4 col-xxl-2">
                <div class="rbt-sidebar sticky-top">
-                    <?php dynamic_sidebar('blog-single-left-sidebar'); ?>
-                    <?php rbt_sharing_icon_links();?>
+               <?php 
+                        $rainbowit_tab_title_group = get_post_meta(get_the_ID() , 'rainbowit_tab_title_group', true);
+                    if( is_array($rainbowit_tab_title_group) || is_object($rainbowit_tab_title_group)) {
+                    ?>
+                <nav class="rbt-onepagenav">
+                    <h6 class="sidebar-title">
+                        <span><?php echo esc_html__("Table of Contents","rainbowit");?></span>
+                        <button class="close-btn"><i class="fa-regular fa-xmark"></i></button>
+                    </h6>
+
+                    <?php 
+                        $rainbowit_tab_title_group = get_post_meta(get_the_ID() , 'rainbowit_tab_title_group', true);
+                        
+                        $accitem = array();
+                        if( is_array( $rainbowit_tab_title_group) || is_object($rainbowit_tab_title_group)) {
+                            foreach(  $rainbowit_tab_title_group as $key => $values ) { 
+
+                                $accitem[] =  $values;
+                            } 
+                        }
+
+                        ?>
+                    <ul class="list-style-type h--325 overflow-auto">
+                        <?php foreach( $accitem as $key => $value ) { 
+                            $active = '';
+                            if( $key == 0 ) {
+                                $active = 'current';
+                            }
+                            $tab_title = $value['rainbowit_tab_title'];
+                            $rainbowit_tab_id = $value['rainbowit_tab_id'];
+                            ?>
+                        <li class="<?php echo $active ; ?>">
+                            <a href="#<?php echo $rainbowit_tab_id;?>"><?php echo $tab_title;?></a>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </nav>
+                <?php } ?>
+                <?php if( $social_share_on_off == 'yes') { ?>
+                <?php rbt_sharing_icon_links();?>
+                <?php } ?>
                 </div> 
             </div>
-            <?php } ?>
+           
+
             <div class="col-12 col-lg-8 col-xxl-8 ">
             <?php the_content(); ?>
             </div>

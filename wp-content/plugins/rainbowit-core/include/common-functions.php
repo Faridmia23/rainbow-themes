@@ -15,7 +15,6 @@ function rbt_elementor_init()
      * Initialize EAE_Helper
      */
     new rbt_Helper;
-
 }
 
 add_action('elementor/init', 'Elementor\rbt_elementor_init');
@@ -232,7 +231,6 @@ function rbt_get_allowed_html_tags($level = 'basic')
             'id' => [],
             'target' => [],
         ];
-
     }
 
     return $allowed_html;
@@ -316,14 +314,14 @@ trait RainbowitElementCommonFunctions
                 'label' => esc_html__($section_name, 'rainbowit'),
             ]
         );
-        if ($enable_title_show_hide){
+        if ($enable_title_show_hide) {
             $this->add_control(
                 'rbt_' . $control_id . '_section_title_show',
                 [
-                    'label' => esc_html__( 'Section Title & Content', 'rainbowit' ),
+                    'label' => esc_html__('Section Title & Content', 'rainbowit'),
                     'type' => Controls_Manager::SWITCHER,
-                    'label_on' => esc_html__( 'Show', 'rainbowit' ),
-                    'label_off' => esc_html__( 'Hide', 'rainbowit' ),
+                    'label_on' => esc_html__('Show', 'rainbowit'),
+                    'label_off' => esc_html__('Hide', 'rainbowit'),
                     'return_value' => 'yes',
                     'default' => $default_enable,
                 ]
@@ -334,7 +332,7 @@ trait RainbowitElementCommonFunctions
             'rbt_' . $control_id . '_before_title',
             [
                 'label' => esc_html__('Before Title', 'rainbowit'),
-                'description' => rbt_get_allowed_html_desc( 'basic' ),
+                'description' => rbt_get_allowed_html_desc('basic'),
                 'type' => Controls_Manager::TEXT,
                 'default' => $before_title,
                 'placeholder' => esc_html__('Type Before Heading Text', 'rainbowit'),
@@ -345,7 +343,7 @@ trait RainbowitElementCommonFunctions
             'rbt_' . $control_id . '_title',
             [
                 'label' => esc_html__('Title', 'rainbowit'),
-                'description' => rbt_get_allowed_html_desc( 'intermediate' ),
+                'description' => rbt_get_allowed_html_desc('intermediate'),
                 'type' => Controls_Manager::TEXT,
                 'default' => $title,
                 'placeholder' => esc_html__('Type Heading Text', 'rainbowit'),
@@ -392,13 +390,13 @@ trait RainbowitElementCommonFunctions
             'rbt_' . $control_id . '_desctiption',
             [
                 'label' => esc_html__('Description', 'rainbowit'),
-                'description' => rbt_get_allowed_html_desc( 'intermediate' ),
+                'description' => rbt_get_allowed_html_desc('intermediate'),
                 'type' => Controls_Manager::TEXTAREA,
                 'default' => $description,
                 'placeholder' => esc_html__('Type section description here', 'rainbowit'),
             ]
         );
-        if($align) {
+        if ($align) {
             $this->add_responsive_control(
                 'rbt_' . $control_id . '_align',
                 [
@@ -435,75 +433,76 @@ trait RainbowitElementCommonFunctions
     protected function rbt_section_title_render($control_id = null, $settings = null)
     {
 
-        if (!$settings['rbt_'.$control_id.'_section_title_show']){
+        if (!$settings['rbt_' . $control_id . '_section_title_show']) {
             return;
         }
         $this->add_render_attribute('title_args', 'class', 'title rbt-section-title');
-        ?>
-            <?php if (!empty($settings['rbt_'.$control_id.'_before_title'])) { ?>
-                <span class="sub-title"><?php echo rbt_kses_basic( $settings['rbt_'.$control_id.'_before_title'] ); ?></span>
-            <?php } ?>
-            <?php
-            if ($settings['rbt_'.$control_id.'_title_tag']) :
-                printf('<%1$s %2$s><span>%3$s</span></%1$s>',
-                    tag_escape($settings['rbt_'.$control_id.'_title_tag']),
-                    $this->get_render_attribute_string('title_args'),
-                    rbt_kses_intermediate($settings['rbt_'.$control_id.'_title'])
-                );
-            endif;
-            ?>
-            <?php if (!empty($settings['rbt_'.$control_id.'_desctiption'])) { ?>
-                <p><?php echo rbt_kses_intermediate( $settings['rbt_'.$control_id.'_desctiption'] ); ?></p>
-            <?php } ?>
+?>
+        <?php if (!empty($settings['rbt_' . $control_id . '_before_title'])) { ?>
+            <span class="sub-title"><?php echo rbt_kses_basic($settings['rbt_' . $control_id . '_before_title']); ?></span>
+        <?php } ?>
         <?php
+        if ($settings['rbt_' . $control_id . '_title_tag']) :
+            printf(
+                '<%1$s %2$s><span>%3$s</span></%1$s>',
+                tag_escape($settings['rbt_' . $control_id . '_title_tag']),
+                $this->get_render_attribute_string('title_args'),
+                rbt_kses_intermediate($settings['rbt_' . $control_id . '_title'])
+            );
+        endif;
+        ?>
+        <?php if (!empty($settings['rbt_' . $control_id . '_desctiption'])) { ?>
+            <p><?php echo rbt_kses_intermediate($settings['rbt_' . $control_id . '_desctiption']); ?></p>
+        <?php } ?>
+<?php
     }
 
     /**
      * @param null $control_id
      * @param $settings
      */
-    protected function rbt_link_control_render($control_id = null, $settings = null){
+    protected function rbt_link_control_render($control_id = null, $settings = null)
+    {
 
         // Link
-        if ('2' == $settings['rbt_'.$control_id.'_link_type']) {
-            $this->add_render_attribute('rbt_'.$control_id.'_link', 'href', get_permalink($settings['rbt_'.$control_id.'_page_link']));
-            $this->add_render_attribute('rbt_'.$control_id.'_link', 'target', '_self');
-            $this->add_render_attribute('rbt_'.$control_id.'_link', 'rel', 'nofollow');
+        if ('2' == $settings['rbt_' . $control_id . '_link_type']) {
+            $this->add_render_attribute('rbt_' . $control_id . '_link', 'href', get_permalink($settings['rbt_' . $control_id . '_page_link']));
+            $this->add_render_attribute('rbt_' . $control_id . '_link', 'target', '_self');
+            $this->add_render_attribute('rbt_' . $control_id . '_link', 'rel', 'nofollow');
         } else {
-            if (!empty($settings['rbt_'.$control_id.'_link']['url'])) {
-                $this->add_render_attribute('rbt_'.$control_id.'_link', 'href', $settings['rbt_'.$control_id.'_link']['url']);
+            if (!empty($settings['rbt_' . $control_id . '_link']['url'])) {
+                $this->add_render_attribute('rbt_' . $control_id . '_link', 'href', $settings['rbt_' . $control_id . '_link']['url']);
             }
-            if ($settings['rbt_'.$control_id.'_link']['is_external']) {
-                $this->add_render_attribute('rbt_'.$control_id.'_link', 'target', '_blank');
+            if ($settings['rbt_' . $control_id . '_link']['is_external']) {
+                $this->add_render_attribute('rbt_' . $control_id . '_link', 'target', '_blank');
             }
-            if (!empty($settings['rbt_'.$control_id.'_link']['nofollow'])) {
-                $this->add_render_attribute('rbt_'.$control_id.'_link', 'rel', 'nofollow');
+            if (!empty($settings['rbt_' . $control_id . '_link']['nofollow'])) {
+                $this->add_render_attribute('rbt_' . $control_id . '_link', 'rel', 'nofollow');
             }
         }
 
         // Button
-        if (!empty($settings['rbt_'.$control_id.'_link']['url']) || isset($settings['rbt_'.$control_id.'_link_type'])) {
+        if (!empty($settings['rbt_' . $control_id . '_link']['url']) || isset($settings['rbt_' . $control_id . '_link_type'])) {
 
-            $this->add_render_attribute('rbt_'.$control_id.'_link', 'class', ' rbt-button ');
+            $this->add_render_attribute('rbt_' . $control_id . '_link', 'class', ' rbt-button ');
             // Style
-            if (!empty($settings['rbt_'.$control_id.'_style_button_style'])) {
-                $this->add_render_attribute('rbt_'.$control_id.'_link', 'class', '' . $settings['rbt_'.$control_id.'_style_button_style'] . '');
+            if (!empty($settings['rbt_' . $control_id . '_style_button_style'])) {
+                $this->add_render_attribute('rbt_' . $control_id . '_link', 'class', '' . $settings['rbt_' . $control_id . '_style_button_style'] . '');
             }
             // Size
-            if (!empty($settings['rbt_'.$control_id.'_style_button_size'])) {
-                $this->add_render_attribute('rbt_'.$control_id.'_link', 'class', $settings['rbt_'.$control_id.'_style_button_size']);
+            if (!empty($settings['rbt_' . $control_id . '_style_button_size'])) {
+                $this->add_render_attribute('rbt_' . $control_id . '_link', 'class', $settings['rbt_' . $control_id . '_style_button_size']);
             }
             // Color
-            if (!empty($settings['rbt_'.$control_id.'_style_button_color'])) {
-                $this->add_render_attribute('rbt_'.$control_id.'_link', 'class', $settings['rbt_'.$control_id.'_style_button_color']);
+            if (!empty($settings['rbt_' . $control_id . '_style_button_color'])) {
+                $this->add_render_attribute('rbt_' . $control_id . '_link', 'class', $settings['rbt_' . $control_id . '_style_button_color']);
             }
             // Link
-            $button_html = '<a ' . $this->get_render_attribute_string('rbt_'.$control_id.'_link') . '>' . '<span class="button-text">' . $settings['rbt_'.$control_id.'_text'] . '</span></a>';
+            $button_html = '<a ' . $this->get_render_attribute_string('rbt_' . $control_id . '_link') . '>' . '<span class="button-text">' . $settings['rbt_' . $control_id . '_text'] . '</span></a>';
         }
-        if (!empty($settings['rbt_'.$control_id.'_text'])) {
+        if (!empty($settings['rbt_' . $control_id . '_text'])) {
             echo $button_html;
         }
-
     }
 
     /**
@@ -593,8 +592,8 @@ trait RainbowitElementCommonFunctions
                 'label' => esc_html__('Order', 'rainbowit'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'asc' 	=> esc_html__( 'Ascending', 'rainbowit' ),
-                    'desc' 	=> esc_html__( 'Descending', 'rainbowit' )
+                    'asc'     => esc_html__('Ascending', 'rainbowit'),
+                    'desc'     => esc_html__('Descending', 'rainbowit')
                 ],
                 'default' => $order,
 
@@ -603,17 +602,16 @@ trait RainbowitElementCommonFunctions
         $this->add_control(
             'ignore_sticky_posts',
             [
-                'label' => esc_html__( 'Ignore Sticky Posts', 'rainbowit' ),
+                'label' => esc_html__('Ignore Sticky Posts', 'rainbowit'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'rainbowit' ),
-                'label_off' => esc_html__( 'No', 'rainbowit' ),
+                'label_on' => esc_html__('Yes', 'rainbowit'),
+                'label_off' => esc_html__('No', 'rainbowit'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
         );
 
         $this->end_controls_section();
-
     }
 
 
@@ -625,7 +623,8 @@ trait RainbowitElementCommonFunctions
      * @param string $default_for_sm
      * @param string $default_for_all
      */
-    protected function rbt_columns($control_id = 'columns_options', $control_name = 'Select Columns', $default_for_lg = '4', $default_for_md = '6', $default_for_sm = '6', $default_for_all = '12'){
+    protected function rbt_columns($control_id = 'columns_options', $control_name = 'Select Columns', $default_for_lg = '4', $default_for_md = '6', $default_for_sm = '6', $default_for_all = '12')
+    {
         $this->start_controls_section(
             'rbt_' . $control_id . 'columns_section',
             [
@@ -636,17 +635,17 @@ trait RainbowitElementCommonFunctions
         $this->add_control(
             'rbt_' . $control_id . '_for_desktop',
             [
-                'label' => esc_html__( 'Columns for Desktop', 'rainbowit' ),
-                'description' => esc_html__( 'Screen width equal to or greater than 992px', 'rainbowit' ),
+                'label' => esc_html__('Columns for Desktop', 'rainbowit'),
+                'description' => esc_html__('Screen width equal to or greater than 992px', 'rainbowit'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    12 => esc_html__( '1 Columns', 'rainbowit' ),
-                    6 => esc_html__( '2 Columns', 'rainbowit' ),
-                    4 => esc_html__( '3 Columns', 'rainbowit' ),
-                    3 => esc_html__( '4 Columns', 'rainbowit' ),
-                    5 => esc_html__( '5 Columns (For Carousel Item)', 'rainbowit' ),
-                    2 => esc_html__( '6 Columns', 'rainbowit' ),
-                    1 => esc_html__( '12 Columns', 'rainbowit' ),
+                    12 => esc_html__('1 Columns', 'rainbowit'),
+                    6 => esc_html__('2 Columns', 'rainbowit'),
+                    4 => esc_html__('3 Columns', 'rainbowit'),
+                    3 => esc_html__('4 Columns', 'rainbowit'),
+                    5 => esc_html__('5 Columns (For Carousel Item)', 'rainbowit'),
+                    2 => esc_html__('6 Columns', 'rainbowit'),
+                    1 => esc_html__('12 Columns', 'rainbowit'),
                 ],
                 'separator' => 'before',
                 'default' => $default_for_lg,
@@ -656,17 +655,17 @@ trait RainbowitElementCommonFunctions
         $this->add_control(
             'rbt_' . $control_id . '_for_laptop',
             [
-                'label' => esc_html__( 'Columns for Laptop', 'rainbowit' ),
-                'description' => esc_html__( 'Screen width equal to or greater than 768px', 'rainbowit' ),
+                'label' => esc_html__('Columns for Laptop', 'rainbowit'),
+                'description' => esc_html__('Screen width equal to or greater than 768px', 'rainbowit'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    12 => esc_html__( '1 Columns', 'rainbowit' ),
-                    6 => esc_html__( '2 Columns', 'rainbowit' ),
-                    4 => esc_html__( '3 Columns', 'rainbowit' ),
-                    3 => esc_html__( '4 Columns', 'rainbowit' ),
-                    5 => esc_html__( '5 Columns (For Carousel Item)', 'rainbowit' ),
-                    2 => esc_html__( '6 Columns', 'rainbowit' ),
-                    1 => esc_html__( '12 Columns', 'rainbowit' ),
+                    12 => esc_html__('1 Columns', 'rainbowit'),
+                    6 => esc_html__('2 Columns', 'rainbowit'),
+                    4 => esc_html__('3 Columns', 'rainbowit'),
+                    3 => esc_html__('4 Columns', 'rainbowit'),
+                    5 => esc_html__('5 Columns (For Carousel Item)', 'rainbowit'),
+                    2 => esc_html__('6 Columns', 'rainbowit'),
+                    1 => esc_html__('12 Columns', 'rainbowit'),
                 ],
                 'separator' => 'before',
                 'default' => $default_for_md,
@@ -676,17 +675,17 @@ trait RainbowitElementCommonFunctions
         $this->add_control(
             'rbt_' . $control_id . '_for_tablet',
             [
-                'label' => esc_html__( 'Columns for Tablet', 'rainbowit' ),
-                'description' => esc_html__( 'Screen width equal to or greater than 576px', 'rainbowit' ),
+                'label' => esc_html__('Columns for Tablet', 'rainbowit'),
+                'description' => esc_html__('Screen width equal to or greater than 576px', 'rainbowit'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    12 => esc_html__( '1 Columns', 'rainbowit' ),
-                    6 => esc_html__( '2 Columns', 'rainbowit' ),
-                    4 => esc_html__( '3 Columns', 'rainbowit' ),
-                    3 => esc_html__( '4 Columns', 'rainbowit' ),
-                    5 => esc_html__( '5 Columns (For Carousel Item)', 'rainbowit' ),
-                    2 => esc_html__( '6 Columns', 'rainbowit' ),
-                    1 => esc_html__( '12 Columns', 'rainbowit' ),
+                    12 => esc_html__('1 Columns', 'rainbowit'),
+                    6 => esc_html__('2 Columns', 'rainbowit'),
+                    4 => esc_html__('3 Columns', 'rainbowit'),
+                    3 => esc_html__('4 Columns', 'rainbowit'),
+                    5 => esc_html__('5 Columns (For Carousel Item)', 'rainbowit'),
+                    2 => esc_html__('6 Columns', 'rainbowit'),
+                    1 => esc_html__('12 Columns', 'rainbowit'),
                 ],
                 'separator' => 'before',
                 'default' => $default_for_sm,
@@ -696,17 +695,17 @@ trait RainbowitElementCommonFunctions
         $this->add_control(
             'rbt_' . $control_id . '_for_mobile',
             [
-                'label' => esc_html__( 'Columns for Mobile', 'rainbowit' ),
-                'description' => esc_html__( 'Screen width less than 576px', 'rainbowit' ),
+                'label' => esc_html__('Columns for Mobile', 'rainbowit'),
+                'description' => esc_html__('Screen width less than 576px', 'rainbowit'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    12 => esc_html__( '1 Columns', 'rainbowit' ),
-                    6 => esc_html__( '2 Columns', 'rainbowit' ),
-                    4 => esc_html__( '3 Columns', 'rainbowit' ),
-                    3 => esc_html__( '4 Columns', 'rainbowit' ),
-                    5 => esc_html__( '5 Columns (For Carousel Item)', 'rainbowit' ),
-                    2 => esc_html__( '6 Columns', 'rainbowit' ),
-                    1 => esc_html__( '12 Columns', 'rainbowit' ),
+                    12 => esc_html__('1 Columns', 'rainbowit'),
+                    6 => esc_html__('2 Columns', 'rainbowit'),
+                    4 => esc_html__('3 Columns', 'rainbowit'),
+                    3 => esc_html__('4 Columns', 'rainbowit'),
+                    5 => esc_html__('5 Columns (For Carousel Item)', 'rainbowit'),
+                    2 => esc_html__('6 Columns', 'rainbowit'),
+                    1 => esc_html__('12 Columns', 'rainbowit'),
                 ],
                 'separator' => 'before',
                 'default' => $default_for_all,
@@ -717,7 +716,136 @@ trait RainbowitElementCommonFunctions
         $this->end_controls_section();
     }
 
+    protected function rbt_product_control( $control_id = null, $control_name = null, $post_type = 'product', $taxonomy = 'product_cat', $posts_per_page = '6', $offset = '0', $orderby = 'date', $order = 'desc' )
+    {
+       
+        $this->start_controls_section(
+            'rainbowit' . $control_id . '_query',
+            [
+                'label' => sprintf(esc_html__('%s Query', 'rainbowit'), $control_name),
+            ]
+        );
+        $this->add_control(
+            'posts_per_page',
+            [
+                'label' => esc_html__('Posts Per Page', 'rainbowit'),
+                'description' => esc_html__('Leave blank or enter -1 for all.', 'rainbowit'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => $posts_per_page,
+            ]
+        );
+        $this->add_control(
+            'product_grid_type',
+            [
+                'label' => esc_html__('Product Type', 'rainbowit'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'featured_products',
+                'options' => [
+                    'featured_products' => esc_html__('Featured Products', 'rainbowit'),
+                    'sale_products' => esc_html__('Sale Products', 'rainbowit'),
+                    'best_selling_products' => esc_html__('Best Selling Products', 'rainbowit'),
+                    'recent_products' => esc_html__('Recent Products', 'rainbowit'),
+                    'top_rated_products' => esc_html__('Top Rated Products', 'rainbowit'),
+                    'product_category' => esc_html__('Product Category', 'rainbowit'),
+                ]
+            ]
+        );
 
+        // Product categories.
+        $this->add_control(
+            'product_cat',
+            [
+               'type' => Controls_Manager::SELECT2,
+                'label' => esc_html__('Include Category', 'rainbowit'),
+                'multiple' => true,
+                'description' => esc_html__('Leave blank or enter -1 for all.', 'rainbowit'),
+                'options' => rbt_get_categories($taxonomy),
+                'condition' => [
+                    'product_grid_type' => 'product_category',
+                ],
+            ]
+        );
+        $this->add_control(
+            'exclude_category',
+            [
+                'label' => esc_html__('Exclude Categories', 'rainbowit'),
+                'description' => esc_html__('Select a category to exclude', 'rainbowit'),
+                'type' => Controls_Manager::SELECT2,
+                'multiple' => true,
+                'options' => rbt_get_categories($taxonomy),
+                'label_block' => true,
+                'condition' => [
+                    'product_grid_type' => 'product_category',
+                ],
+            ]
+        );
+        $this->add_control(
+            'post__not_in',
+            [
+                'label' => esc_html__('Exclude Item', 'rainbowit'),
+                'type' => Controls_Manager::SELECT2,
+                'options' => rbt_get_all_types_post($post_type),
+                'multiple' => true,
+                'label_block' => true
+            ]
+        );
+        $this->add_control(
+            'offset',
+            [
+                'label' => esc_html__('Offset', 'rainbowit'),
+                'type' => Controls_Manager::NUMBER,
+                'default' => $offset,
+            ]
+        );
+
+        $this->add_control(
+            'product_orderby',
+            [
+                'label' => esc_html__('Order By', 'rainbowit'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'date',
+                'options' => [
+                    'date' => esc_html__('Date', 'rainbowit'),
+                    'ID' => esc_html__('ID', 'rainbowit'),
+                    'author' => esc_html__('Author', 'rainbowit'),
+                    'title' => esc_html__('Title', 'rainbowit'),
+                    'modified' => esc_html__('Modified', 'rainbowit'),
+                    'rand' => esc_html__('Random', 'rainbowit'),
+                    'comment_count' => esc_html__('Comment count', 'rainbowit'),
+                    'menu_order' => esc_html__('Menu order', 'rainbowit'),
+                ],
+                'default' => $orderby,
+            ]
+        );
+
+        $this->add_control(
+            'product_order',
+            [
+                'label' => esc_html__('Product Order', 'rainbowit'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'desc',
+                'options' => [
+                    'desc' => esc_html__('desc', 'rainbowit'),
+                    'asc' => esc_html__('asc', 'rainbowit')
+                ],
+                'default' => $order,
+            ]
+        );
+
+        $this->add_control(
+            'ignore_sticky_posts',
+            [
+                'label' => esc_html__('Ignore Sticky Posts', 'rainbowit'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'rainbowit'),
+                'label_off' => esc_html__('No', 'rainbowit'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
+        $this->end_controls_section();
+    }
 
 }
 
@@ -747,7 +875,7 @@ class RBT_Helper
 
         // exclude_categories
         $exclude_categories = '';
-        if(!empty($settings['exclude_category'])){
+        if (!empty($settings['exclude_category'])) {
             $exclude_categories = implode(", ", $settings['exclude_category']);
         }
         $exclude_category_list_value = explode(" ", $exclude_categories);
@@ -761,7 +889,7 @@ class RBT_Helper
         $orderby = (!empty($settings['orderby'])) ? $settings['orderby'] : 'post_date';
         $order = (!empty($settings['order'])) ? $settings['order'] : 'desc';
         $offset_value = (!empty($settings['offset'])) ? $settings['offset'] : '0';
-        $ignore_sticky_posts = (! empty( $settings['ignore_sticky_posts'] ) && 'yes' == $settings['ignore_sticky_posts']) ? true : false ;
+        $ignore_sticky_posts = (!empty($settings['ignore_sticky_posts']) && 'yes' == $settings['ignore_sticky_posts']) ? true : false;
 
 
         // number
@@ -789,29 +917,28 @@ class RBT_Helper
         );
 
         // exclude_categories
-        if ( !empty($settings['exclude_category'])) {
+        if (!empty($settings['exclude_category'])) {
 
             // Exclude the correct cats from tax_query
             $args['tax_query'] = array(
                 array(
-                    'taxonomy'	=> $taxonomy,
-                    'field'	 	=> 'slug',
-                    'terms'		=> $exclude_category_list_value,
-                    'operator'	=> 'NOT IN'
+                    'taxonomy'    => $taxonomy,
+                    'field'         => 'slug',
+                    'terms'        => $exclude_category_list_value,
+                    'operator'    => 'NOT IN'
                 )
             );
 
             // Include the correct cats in tax_query
-            if ( !empty($settings['category'])) {
+            if (!empty($settings['category'])) {
                 $args['tax_query']['relation'] = 'AND';
                 $args['tax_query'][] = array(
-                    'taxonomy'	=> $taxonomy,
-                    'field'		=> 'slug',
-                    'terms'		=> $category_list_value,
-                    'operator'	=> 'IN'
+                    'taxonomy'    => $taxonomy,
+                    'field'        => 'slug',
+                    'terms'        => $category_list_value,
+                    'operator'    => 'IN'
                 );
             }
-
         } else {
             // Include the cats from $cat_slugs in tax_query
             if (!empty($settings['category'])) {
@@ -827,7 +954,156 @@ class RBT_Helper
 
         return $args;
     }
+
+    public static function getProductInfo($product_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_order_by, $product_order,  $ignore_sticky_posts, $posttype = 'product', $taxonomy = 'product_cat',$settings )
+    {
+
+      
+        if (get_query_var('paged')) {
+            $paged = get_query_var('paged');
+        } else if (get_query_var('page')) {
+            $paged = get_query_var('page');
+        } else {
+            $paged = 1;
+        }
+
+
+
+        // include_categories
+        $category_list = '';
+        if (!empty($product_cat)) {
+           $category_list = implode(", ", $product_cat);
+        }
+        $category_list_value = explode(" ", $category_list);
+
+        // exclude_categories
+        $exclude_categories = '';
+        if (!empty($settings['exclude_category'])) {
+            $exclude_categories = implode(", ", $settings['exclude_category']);
+        }
+        $exclude_category_list_value = explode(" ", $exclude_categories);
+
+        $post__not_in = '';
+        if (!empty($post__not_in)) {
+            $post__not_in = $post__not_in;
+            $args['post__not_in'] = $post__not_in;
+        }
+        $posts_per_page = (!empty($product_per_page)) ? $product_per_page : '-1';
+        $orderby = (!empty($product_order_by)) ? $product_order_by : 'post_date';
+        $order = (!empty($product_order)) ? $product_order : 'desc';
+        $offset_value = (!empty($offset)) ? $offset : '0';
+        $ignore_sticky_posts = (!empty($ignore_sticky_posts) && 'yes' == $ignore_sticky_posts) ? true : false;
+
+
+        // number
+        $off = (!empty($offset_value)) ? $offset_value : 0;
+        $offset = $off + (($paged - 1) * $posts_per_page);
+        $p_ids = array();
+
+        // build up the array
+        if (!empty($settings['post__not_in'])) {
+            foreach ($settings['post__not_in'] as $p_idsn) {
+                $p_ids[] = $p_idsn;
+            }
+        }
+
+        $args = array(
+            'post_type' => $posttype,
+            'post_status' => 'publish',
+            'posts_per_page' => $posts_per_page,
+            'orderby' => $orderby,
+            'order' => $order,
+            'offset' => $offset,
+            'paged' => $paged,
+            'post__not_in' => $p_ids,
+            'ignore_sticky_posts' => $ignore_sticky_posts
+        );
+
+        // exclude_categories
+        if (!empty($settings['exclude_category'])) {
+
+            // Exclude the correct cats from tax_query
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy'    => $taxonomy,
+                    'field'         => 'slug',
+                    'terms'        => $exclude_category_list_value,
+                    'operator'    => 'NOT IN'
+                )
+            );
+
+            // Include the correct cats in tax_query
+            if (!empty($product_cat)) {
+                $args['tax_query']['relation'] = 'AND';
+                $args['tax_query'][] = array(
+                    'taxonomy'    => $taxonomy,
+                    'field'        => 'slug',
+                    'terms'        => $category_list_value,
+                    'operator'    => 'IN'
+                );
+            }
+        } else {
+            // Include the cats from $cat_slugs in tax_query
+            if (!empty($product_cat)) {
+                $args['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'field' => 'slug',
+                    'terms' => $category_list_value,
+                ];
+            }
+        }
+
+
+        if ($product_grid_type == 'sale_products') {
+            // Meta query arguments
+            $meta_query = array(
+                'relation' => 'OR',
+                array( // Simple products type
+                    'key' => '_sale_price',
+                    'value' => 0,
+                    'compare' => '>',
+                    'type' => 'numeric'
+                ),
+                array( // Variable products type
+                    'key' => '_min_variation_sale_price',
+                    'value' => 0,
+                    'compare' => '>',
+                    'type' => 'numeric'
+                )
+            );
+
+            // Add the meta query to the common arguments
+            $args['meta_query'] = $meta_query;
+        }
+
+        if ($product_grid_type == 'best_selling_products') {
+
+            $args['meta_key'] = 'total_sales';
+            $args['orderby'] = 'meta_value_num';
+
+            
+        }
+        
+        if ($product_grid_type == 'featured_products') {
+            $tax_query = array(
+                array(
+                    'taxonomy' => 'product_visibility',
+                    'field' => 'name',
+                    'terms' => 'featured',
+                ),
+            );
+
+            // Add the tax query to the common arguments
+            $args['tax_query'] = $tax_query;
+        }
+        if ($product_grid_type == 'top_rated_products') {
+
+            $args['no_found_rows'] = 1;
+            $args['meta_key'] = '_wc_average_rating';
+            $args['meta_query'] = WC()->query->get_meta_query();
+            $args['tax_query'] = WC()->query->get_tax_query();
+        }
+
+        return $args;
+    }
 }
-
-
-

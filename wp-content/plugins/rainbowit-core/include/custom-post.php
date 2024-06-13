@@ -371,6 +371,33 @@ add_action( 'acf/include_fields', function() {
 			'prepend' => '',
 			'append' => '',
 		),
+
+		array(
+			'key' => 'field_666ac9b77b505',
+			'label' => 'Job Status',
+			'name' => 'job_status',
+			'aria-label' => '',
+			'type' => 'radio',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'enable' => 'enable',
+				'disable' => 'disable',
+			),
+			'default_value' => 'disable',
+			'return_format' => 'value',
+			'allow_null' => 0,
+			'other_choice' => 0,
+			'layout' => 'vertical',
+			'save_other_choice' => 0,
+		),
+
 	),
 	'location' => array(
 		array(

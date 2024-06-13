@@ -178,6 +178,20 @@
         })
     });
 
+    jQuery(document).ready(function($) {
+        $('#eaw-add-row').on('click', function() {
+            let extra_item = $('.empty-row.screen-reader-text').clone(true);
+            extra_item.removeClass('empty-row screen-reader-text');
+            extra_item.insertBefore('#eaw-repeatable-fieldset-one tbody>tr:last');
+            return false;
+        });
+     
+        $('.eaw-remove-row').on('click', function() {
+            $(this).parents('tr').remove();
+            return false;
+        });
+     });
+
 }(jQuery));
 
 

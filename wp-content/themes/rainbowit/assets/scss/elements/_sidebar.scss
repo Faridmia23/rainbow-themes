@@ -47,3 +47,81 @@
     background-position: bottom center;
     background-size: 100% auto;
 }
+
+
+
+.meeting-with-us {
+    background: var(--gradient-11);
+    border-radius: var(--radius-lg);
+    padding: 40px 20px;
+
+    .description {
+        color: rgba(255, 255, 255, 0.80);
+        text-align: center;
+        font-family: var(--font-secondary);
+        font-size: var(--font-size-b3);
+        font-weight: var(--f-bold);
+        line-height: 1.4;
+    }
+
+    .rbt-btn {
+        font-weight: var(--f-bold);
+    }
+}
+
+.rbt-avatar-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .rbt-avatar {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            right: 12px;
+            height: 16px;
+            width: 16px;
+            border-radius: var(--radius-full);
+            border: 2px solid #232249;
+        }
+
+        &.isactive {
+            &::after {
+                background: #29C841;
+            }
+        }
+
+        &.isaway {
+            &::after {
+                background: #FFB711;
+            }
+        }
+
+        &.isoffline {
+            &::after {
+                background: #E3E3E3;
+            }
+        }
+
+        +.rbt-avatar {
+            margin-left: -20px;
+        }
+
+        .inner {
+            height: 70px;
+            width: 70px;
+            border: 2px solid #5D4E8E;
+            border-radius: var(--radius-full);
+            overflow: hidden;
+
+            img {
+                width: 105%;
+                height: 105%;
+                object-fit: cover;
+            }
+        }
+    }
+}

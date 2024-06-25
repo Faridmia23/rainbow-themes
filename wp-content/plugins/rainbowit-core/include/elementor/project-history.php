@@ -231,7 +231,7 @@ class Rainbowit_Project_history extends Widget_Base
 
 <div class="rbt-section-wrapper-6 rbt-section-gapTop rbt-section-gapBottom">
     <div class="container">
-        <div class="row row--12 mb--80">
+        <div class="row row--60 mb--80">
             <div class="col-12 col-md-6">
                 <div class="rbt-section-title rbt-banner-section-title ">
                     <span class="subtitle text-white"><?php echo esc_html($sub_title); ?></span>
@@ -263,9 +263,19 @@ class Rainbowit_Project_history extends Widget_Base
                    
                     $history_image = $item['history_image']['url'];
 
+                    $image_id = $item['history_image']['id'];
+
+                    $image_title = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+
+                    // If title is not found, fallback to the post title
+                    if (empty($image_title)) {
+                        $image_title = get_the_title($image_id);
+                    }
+
+
             ?>
             <div class="rbt-thumbnail image-<?php echo esc_html( $count ); ?>">
-                <img data-parallax="{'x': 0, 'y': <?php echo $img_y_pos; ?>}" src="<?php echo esc_url($history_image); ?>" alt="Thumbnail Image">
+                <img data-parallax="{&quot;x&quot;: 0, &quot;y&quot;: <?php echo $img_y_pos; ?>}" src="<?php echo esc_url($history_image); ?>" alt="<?php echo esc_attr($image_title);?>">
             </div>
             <?php
                    $count++;  }

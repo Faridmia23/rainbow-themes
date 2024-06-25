@@ -160,6 +160,15 @@ class Rainbowit_Contact_Info extends Widget_Base
         $skype_number      = $settings['skype_number'] ?? '';
         $email_number      = $settings['email_number'] ?? '';
         $social_image       = $settings['social_image']['url'];
+
+        $social_image_id = $settings['social_image']['id'];
+
+        $social_image_title = get_post_meta($social_image_id, '_wp_attachment_image_alt', true);
+
+        // If title is not found, fallback to the post title
+        if (empty($social_image_title)) {
+            $social_image_title = get_the_title($social_image_id);
+        }
         $social_link = '';
         
         if( $social_select == 'skype') {
@@ -174,7 +183,7 @@ class Rainbowit_Contact_Info extends Widget_Base
 ?>
 <div class="rbt-contact-box-wrapper">
     <?php if(!empty($social_image )) { ?>
-    <figure class="rbt-contact-box-img"><img decoding="async" src="<?php echo esc_url( $social_image ); ?>" title="" alt="" loading="lazy">
+    <figure class="rbt-contact-box-img"><img decoding="async" src="<?php echo esc_url( $social_image ); ?>" title="" alt="<?php echo esc_attr($social_image_title);?>" loading="lazy">
     </figure>
     <?php } ?>
     <<?php echo esc_html($settings['sec_title_tag']); ?> class="rbt-contact-box-title">

@@ -197,14 +197,20 @@ class Rainbowit_Faq_Widget extends Widget_Base
                                 $faq_title      = $item['faq_title'] ?? '';
                                 $faq_desc       = $item['faq_desc'] ?? '';
                                 $show = '';
+                                $border = '';
+                                $collapsed = 'collapsed';
                                 if( $count == 1 ) {
                                     $show = 'show';
+                                    $border = 'border-0';
+                                    $collapsed = '';
                                 }
+
+                                
 
                         ?>
                                 <div class="rbt-accordion-item" data-sal="slide-up" data-sal-duration="400">
                                     <h3 class="title">
-                                        <button class="accordion-button rbt-accordion-btn border-0" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-<?php echo $count; ?>" aria-expanded="true" aria-controls="rbt-faq-<?php echo $count; ?>">
+                                        <button class="accordion-button rbt-accordion-btn <?php echo esc_attr($border); echo esc_attr($collapsed);?>" type="button" data-bs-toggle="collapse" data-bs-target="#rbt-faq-<?php echo $count; ?>" aria-expanded="true" aria-controls="rbt-faq-<?php echo $count; ?>">
                                             <span class="accordion-title"><?php echo esc_html($faq_title); ?></span>
                                             <span class="rbt-accordion-icon"><i class="fa-sharp fa-solid fa-arrow-down"></i></span>
                                         </button>

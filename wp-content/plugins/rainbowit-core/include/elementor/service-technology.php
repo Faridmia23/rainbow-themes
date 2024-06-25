@@ -216,8 +216,17 @@ class Rainbowit_Service_Technology extends Widget_Base
 
                             $image_url = $item['technology_image']['url'];
 
+                            $image_id = $item['technology_image']['id'];
+
+                            $image_title = get_post_meta($image_id, '_wp_attachment_image_alt', true);
+
+                            // If title is not found, fallback to the post title
+                            if (empty($image_title)) {
+                                $image_title = get_the_title($image_id);
+                            }
+
                         ?>
-                        <img src="<?php echo esc_url( $image_url ); ?>" alt="Technology logo">
+                        <img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr($image_title);?>">
                         <?php
                         }
                     } ?>

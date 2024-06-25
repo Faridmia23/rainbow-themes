@@ -25,7 +25,7 @@ if ( is_home() ) {
     }
 }
 
-elseif( is_account_page() && is_user_logged_in() ) {
+elseif ( is_account_page() && is_user_logged_in() && (!isset($_GET['action']) || $_GET['action'] !== 'newaccount') ) {
     if ("no" !== $banner_area && "0" !== $banner_area) {
         get_template_part('/template-parts/title/layout', $banner_style);
     }

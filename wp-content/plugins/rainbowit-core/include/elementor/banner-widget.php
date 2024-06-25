@@ -460,9 +460,18 @@ class Rainbowit_Elementor_Widget_Banner extends Widget_Base
                         if (!empty($settings['list'])) {
                             foreach ($settings['list'] as $item) {
                                 $client_image = $item['client_image']['url'];
+
+                                $single_image_id = $item['client_image']['id'];
+
+                                $single_image_id_title = get_post_meta($single_image_id, '_wp_attachment_image_alt', true);
+
+                                // If title is not found, fallback to the post title
+                                if (empty($single_image_id_title)) {
+                                    $single_image_id_title = get_the_title($single_image_id);
+                                }
                         ?>
                                 <li class="banner-tech-icon icon-<?php echo esc_attr($count); ?>">
-                                    <img src="<?php echo esc_url($client_image); ?>" alt="Technology icon">
+                                    <img src="<?php echo esc_url($client_image); ?>" alt="<?php echo esc_attr($single_image_id_title);?>">
                                 </li>
                         <?php $count++;
                             }

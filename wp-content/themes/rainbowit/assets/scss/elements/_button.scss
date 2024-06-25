@@ -50,6 +50,8 @@
             }
         }
     }
+
+    
 }
 
 .rbt-btn {
@@ -69,6 +71,12 @@
     font-weight: 600;
     white-space: nowrap;
     transition: var(--transition-1);
+
+    &.rbt-btn-blueshade {
+        border: 1px solid var(--color-border);
+        background: var(--color-border);
+        color: var(--color-dark-1);
+    }
 
     @media #{$md-layout} {
         padding: 0 20px;
@@ -250,6 +258,8 @@
                 background: var(--color-secondary);
             }
         }
+
+        
     }
 
     &.hover-effect-3 {

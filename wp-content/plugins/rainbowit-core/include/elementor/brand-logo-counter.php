@@ -135,15 +135,22 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
 
     <div class="brand-wrapper rbt-section-gapTop rbt-section-gapBottom">
         <!-- trusted customer -->
-        <?php if( $counter_on_off == 'yes' ) { ?>
-        <div class="rbt-counter d-none d-md-flex">
-            <span class="count-info"><?php echo esc_attr($heading_title); ?></span>
-            <div class="counter-wrapper">
-                <span class="odometer odometer-auto-theme count" data-count="<?php echo esc_attr($counter_number); ?>">00</span>
+        <div class="brand-wrapper-preloader">
+            <?php if( $counter_on_off == 'yes' ) { ?>
+                <div id="rainbowit-preloader">
+                <div class="spinner"></div>
             </div>
-            <span class="count-info"><?php echo esc_attr($subtitle_title); ?></span>
-        </div>
+            <div id="rainbowit-main-content" style="display: none;">
+                <div class="rbt-counter d-none d-md-flex">
+                    <span class="count-info"><?php echo esc_attr($heading_title); ?></span>
+                    <div class="counter-wrapper">
+                        <span class="odometer odometer-auto-theme count" data-count="<?php echo esc_attr($counter_number); ?>">00</span>
+                    </div>
+                    <span class="count-info"><?php echo esc_attr($subtitle_title); ?></span>
+                </div>
+            </div>
         <?php } ?>
+        </div>
         <div class="container overflow-hidden ">
             <div class="rbt-brand-group">
                 <div class="swiper-wrapper rbt-brand-wrapper">
@@ -153,9 +160,18 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
                         foreach ($settings['list'] as $item) {
                             $client_image = $item['client_image']['url'];
 
+                            $client_image_id = $item['client_image']['id'];
+
+                            $client_image_title = get_post_meta($client_image_id, '_wp_attachment_image_alt', true);
+
+                            // If title is not found, fallback to the post title
+                            if (empty($client_image_title)) {
+                                $client_image_title = get_the_title($client_image_id);
+                            }
+
                     ?>
                             <div class="swiper-slide">
-                                <img class="brand-img" src="<?php echo esc_url($client_image); ?>" alt="brand image 1">
+                                <img class="brand-img" src="<?php echo esc_url($client_image); ?>" alt="<?php echo esc_attr($client_image_title); ?>">
                             </div>
                     <?php }
                     } ?>

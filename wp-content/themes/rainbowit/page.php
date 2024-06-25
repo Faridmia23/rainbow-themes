@@ -41,9 +41,8 @@ if( !is_account_page() ) {
         </div>
     </div>
 </div>
-<?php }  ?>
-<?php 
-if( is_account_page() && is_user_logged_in() ) {
+<?php }  
+if ( is_account_page() && is_user_logged_in() && (!isset($_GET['action']) || $_GET['action'] !== 'newaccount') ) {
 ?>
 <div class="rbt-section-wrapper mt_dec--190">
     <div class="container">
@@ -71,7 +70,10 @@ if( is_account_page() && is_user_logged_in() ) {
 </div>
 <?php }  ?>
 <?php 
-if( is_account_page() && !is_user_logged_in() ) {
+if ( 
+    (is_account_page() && !is_user_logged_in()) || 
+    (is_user_logged_in() && (isset($_GET['action']) && $_GET['action'] == 'newaccount')) 
+) {
 ?>
 <div class="rbt-section-wrapper-4 pt--140 rbt-section-gap2Bottom login-page-rainbowit">
 	<div class=" rbt-section-wrapper-7 pt--25">

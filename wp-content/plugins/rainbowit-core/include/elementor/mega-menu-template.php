@@ -300,13 +300,20 @@ class Rainbowit_Elementor_Widget_Megamenu_Template extends Widget_Base
                                         if ($key == 0) {
                                             $active = 'active';
                                         }
+
+                                        $cat_image_id = $item['cat_image']['id'];
+                                        $cat_image_title = get_post_meta( $cat_image_id, '_wp_attachment_image_alt', true);
+
+                                        if (empty($cat_image_title)) {
+                                            $cat_image_title = get_the_title( $cat_image_id );
+                                        }
                                        
 
                                 ?>
                                         <li class="single-item">
                                             <a class="rbt-nav-link <?php echo esc_attr($active); ?>" id="pill<?php echo strtolower($category_name); ?>" href="#<?php echo strtolower($category_name); ?>" role="tab" aria-selected="true">
                                                 
-                                                <img class="tech-icon" src="<?php echo esc_url( $item['cat_image']['url'] ); ?>" alt="NextJs Icon">
+                                                <img class="tech-icon" src="<?php echo esc_url( $item['cat_image']['url'] ); ?>" alt="<?php echo esc_attr($cat_image_title);?>">
                                                 <?php
                                                 if ($category && !is_wp_error($category)) { ?>
                                                     <span><?php echo esc_html($category_name); ?></span>

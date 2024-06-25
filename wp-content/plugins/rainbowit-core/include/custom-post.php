@@ -496,6 +496,68 @@ add_action( 'acf/include_fields', function() {
 
 } );
 
+add_action( 'acf/include_fields', function() {
+	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+		return;
+	}
 
+	acf_add_local_field_group( array(
+	'key' => 'group_666ae2575225d',
+	'title' => 'Plan Product',
+	'fields' => array(
+		array(
+			'key' => 'field_666ae257a8fa2',
+			'label' => 'Plan Product Enable',
+			'name' => 'plan_product_enable',
+			'aria-label' => '',
+			'type' => 'radio',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'enable' => 'enable',
+				'disable' => 'disable',
+			),
+			'default_value' => 'disable',
+			'return_format' => 'value',
+			'allow_null' => 0,
+			'other_choice' => 0,
+			'layout' => 'vertical',
+			'save_other_choice' => 0,
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'post_type',
+				'operator' => '==',
+				'value' => 'product',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'show_in_rest' => 0,
+) );
+} );
 
-
+add_action( 'acf/init', function() {
+	acf_add_options_page( array(
+	'page_title' => 'Plan Product Enable',
+	'menu_slug' => 'plan-product-enable',
+	'parent_slug' => 'edit.php?post_type=product',
+	'position' => '',
+	'redirect' => false,
+) );
+} );

@@ -223,9 +223,18 @@ class Rainbowit_Elementor_Widget_Employee_Info extends Widget_Base
                                     $client_image       = $item['client_image']['url'];
                                     $animation_select   = $item['animation_select'] ?? 'slide-up';
 
+                                    $client_image_id = $item['client_image']['id'];
+
+                                    $client_image_title = get_post_meta($client_image_id, '_wp_attachment_image_alt', true);
+
+                                    // If title is not found, fallback to the post title
+                                    if (empty($client_image_title)) {
+                                        $client_image_title = get_the_title($client_image_id);
+                                    }
+
                                     ?>
                             <li class="rbt-team-member <?php echo esc_attr($triangle);?> <?php echo esc_attr($hide_sm);?>">
-                                <img src="<?php echo esc_url($client_image);?>" alt="team" data-sal="<?php echo esc_attr( $animation_select ); ?>" data-sal-duration="400">
+                                <img src="<?php echo esc_url($client_image);?>" alt="<?php echo esc_attr($client_image_title );?>" data-sal="<?php echo esc_attr( $animation_select ); ?>" data-sal-duration="400">
                             </li>
                             <?php } } ?>
                         </ul>

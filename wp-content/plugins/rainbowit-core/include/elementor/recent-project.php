@@ -270,17 +270,38 @@ class Rainbowit_Recent_Project extends Widget_Base
                             $technology_image        = $item['technology_image']['url'];
                             $btn_link                = $item['btn_link']['url'];
                             $flag_image              = $item['flag_image']['url'];
+                            $flag_image_id           = $item['flag_image']['id'];
+                            $project_image_id        = $item['project_image']['id'];
+                            $technology_image_id     = $item['technology_image']['id'];
+
+                            $flag_image_title = get_post_meta( $flag_image_id, '_wp_attachment_image_alt', true);
+
+                            if (empty($flag_image_title)) {
+                                $flag_image_title = get_the_title( $flag_image_id );
+                            }
+
+                            $techonology_image_title = get_post_meta( $technology_image_id, '_wp_attachment_image_alt', true);
+
+                            if (empty($techonology_image_title)) {
+                                $techonology_image_title = get_the_title( $technology_image_id );
+                            }
+
+                            $project_image_title = get_post_meta( $project_image_id, '_wp_attachment_image_alt', true);
+
+                            if (empty($project_image_title)) {
+                                $project_image_title = get_the_title( $project_image_id );
+                            }
 
                     ?>
                     <!-- single card -->
                     <div class="col-12 col-md-6 col-xl-4 mb--25" data-sal="slide-up" data-sal-duration="400">
                         <div class="rbt-card card-dark ">
                             <?php if( isset($project_image) && !empty($project_image)) { ?>
-                            <img class="card-thumbnail" src="<?php echo esc_url( $project_image ); ?>" alt="Project thumbnail">
+                            <img class="card-thumbnail" src="<?php echo esc_url( $project_image ); ?>" alt="<?php echo esc_attr($project_image_title); ?>">
                             <?php } ?>
                             <div class="rbt-card-body pt--25">
                                 <div class="technology-icon">
-                                    <img src="<?php echo esc_url( $technology_image ); ?>" alt="technology icon">
+                                    <img src="<?php echo esc_url( $technology_image ); ?>" alt="<?php echo esc_attr($techonology_image_title); ?>">
                                 </div>
                                 <a href="<?php echo esc_url( $btn_link ); ?>">
                                     <h5 class="title text-white mb-0 ps-4"><?php echo esc_html( $project_title); ?></h5>
@@ -301,7 +322,7 @@ class Rainbowit_Recent_Project extends Widget_Base
                                         <span class="meta-name"><i class="fa-regular fa-location-crosshairs"></i><?php echo esc_html( $location_label_text); ?> <i class="fa-solid fa-colon"></i></span>
                                         <span class="meta-info"><?php echo esc_html( $location_name); ?></span>
                                         <?php if( isset($flag_image) && !empty($flag_image)) { ?>
-                                        <img class="flag" src="<?php echo esc_url( $flag_image ); ?>" alt="Country flag">
+                                        <img class="flag" src="<?php echo esc_url( $flag_image ); ?>" alt="<?php echo esc_attr($flag_image_title); ?>">
                                         <?php } ?>
                                     </div>
                                 </div>

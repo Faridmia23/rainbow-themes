@@ -110,9 +110,19 @@ class Rainbowit_Gallery_Portfolio extends Widget_Base
             <?php
                 if ( !empty( $settings['list'] ) ) {
                     foreach ( $settings['list'] as $item ) {
+
+                        $portfolio_image_id = $item['portfolio_image']['id'];
+
+                        $portfolio_image_title = get_post_meta($portfolio_image_id, '_wp_attachment_image_alt', true);
+
+                        // If title is not found, fallback to the post title
+                        if (empty($portfolio_image_title)) {
+                            $portfolio_image_title = get_the_title($portfolio_image_id);
+                        }
+
                     ?>
                     <div class="col-12 col-md-6 col-lg-4 rbt-masonary-item mb--40" data-sal="slide-up" data-sal-duration="400">
-                        <img class="theme-gallery-img" src="<?php echo esc_url( $item['portfolio_image']['url'] ); ?>" alt="gallery image">
+                        <img class="theme-gallery-img" src="<?php echo esc_url( $item['portfolio_image']['url'] ); ?>" alt="<?php echo esc_attr( $portfolio_image_title); ?>">
                     </div>
                     <?php
                     }

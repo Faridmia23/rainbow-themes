@@ -1,5 +1,4 @@
 <?php
-
 namespace Elementor;
 
 use Elementor\Controls_Manager;
@@ -955,7 +954,7 @@ class RBT_Helper
         return $args;
     }
 
-    public static function getProductInfo($product_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_order_by, $product_order,  $ignore_sticky_posts, $posttype = 'product', $taxonomy = 'product_cat',$settings )
+    public static function getProductInfo($product_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_order_by, $product_order,  $ignore_sticky_posts, $posttype, $taxonomy,$settings )
     {
 
       

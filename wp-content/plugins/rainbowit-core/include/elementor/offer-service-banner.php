@@ -336,6 +336,13 @@ class Rainbowit_Offer_Service extends Widget_Base
                                 $btn_link_2     = $item['btn_link_2']['url'];
                                 $service_image  = $item['service_image']['url'];
 
+                                $service_image_id = $item['service_image']['id'];
+                                $service_image_title = get_post_meta( $service_image_id, '_wp_attachment_image_alt', true);
+
+                                if (empty($service_image_title)) {
+                                    $service_image_title = get_the_title( $service_image_id );
+                                }
+
                         ?>
                                 <div class="rbt-card-4 card-wider">
                                     <div class="content-wrapper">
@@ -372,7 +379,7 @@ class Rainbowit_Offer_Service extends Widget_Base
                                             </div>
                                         </div>
                                         <div class="rbt-card-img order-1 order-lg-2">
-                                            <img src="<?php echo esc_url( $service_image );?>" alt="Offer card image">
+                                            <img src="<?php echo esc_url( $service_image );?>" alt="<?php echo esc_attr($service_image_title);?>">
                                         </div>
                                     </div>
                                 </div>

@@ -344,4 +344,33 @@ function redirect_empty_cart_to_shop() {
         exit;
     }
 }
+
 add_action('template_redirect', 'redirect_empty_cart_to_shop');
+
+function exclude_plan_products_from_shop( $query ) {
+    if ( ! is_admin() && $query->is_main_query() && ( is_shop() || is_product_category() || is_product_tag() ) ) {
+        $meta_query = $query->get('meta_query');
+
+        if ( empty( $meta_query ) ) {
+            $meta_query = array();
+        }
+
+        $meta_query[] = array(
+            'relation' => 'OR',
+            array(
+                'key'     => 'plan_product_enable',
+                'value'   => 'enable',
+                'compare' => '!='
+            ),
+            array(
+                'key'     => 'plan_product_enable',
+                'compare' => 'NOT EXISTS'
+            )
+        );
+
+        $query->set('meta_query', $meta_query);
+    }
+}
+
+
+add_action( 'pre_get_posts', 'exclude_plan_products_from_shop' );

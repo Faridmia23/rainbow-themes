@@ -182,6 +182,13 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
         $this->add_render_attribute('icon_image', 'title', Control_Media::get_image_title($settings['icon_image']));
         $this->add_render_attribute('icon_image', 'class', 'impower-icon');
 
+        $icon_image_id = $settings['icon_image']['id'];
+        $icon_image_title = get_post_meta( $icon_image_id, '_wp_attachment_image_alt', true);
+
+        if (empty($icon_image_title)) {
+            $icon_image_title = get_the_title( $icon_image_id );
+        }
+
         $layout_style = $settings['layout_style'];
 
         $heading_title = $settings['heading_title'] ?? '';
@@ -190,6 +197,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
         $desc = $settings['desc'] ?? '';
         $btn_title = $settings['btn_title'] ?? '';
         $attr = '';
+        
         if (!empty($settings['btn_link']['url'])) {
             $attr  = 'href="' . $settings['btn_link']['url'] . '"';
             $attr .= !empty($settings['btn_link']['is_external']) ? ' target="_blank"' : '';
@@ -295,7 +303,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                 </div>
                             </div>
                         </div>
-                        <img class="section-tech-logo" src="<?php echo esc_url($settings['icon_image']['url']); ?>" alt="Background image">
+                        <img class="section-tech-logo" src="<?php echo esc_url($settings['icon_image']['url']); ?>" alt="<?php echo esc_attr($icon_image_title);?>">
                     </div>
                     <div class="rbt-swiper-wrapper">
                         <div class="swiper rbt-swiper-carousel">
@@ -341,7 +349,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                                 </div>
                             </div>
                             <?php if (isset($settings['icon_image']['url']) && !empty($settings['icon_image']['url'])) { ?>
-                                <img class="tech-logo" src="<?php echo esc_url($settings['icon_image']['url']); ?>" alt="Technology logo">
+                                <img class="tech-logo" src="<?php echo esc_url($settings['icon_image']['url']); ?>" alt="<?php echo esc_attr($icon_image_title); ?>">
                             <?php } ?>
                         </div>
                     </div>

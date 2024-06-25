@@ -113,7 +113,7 @@ class Rainbowit_Product_Categories extends Widget_Base
 
         $settings       = $this->get_settings_for_display();
         $post_per_page  = $settings['post_per_page'] ?? '5';
-        $title_limit = $settings['title_limit'];
+        $title_limit    = $settings['title_limit'];
 
         if (!empty($settings['list'])) {
             foreach ($settings['list'] as $key => $item) {

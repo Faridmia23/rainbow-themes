@@ -121,7 +121,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
             return;
         }
 
-        
+
 
         $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 
@@ -135,13 +135,87 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
         $product_order = $settings['product_order'];
         $ignore_sticky_posts = $settings['ignore_sticky_posts'];
 
+        $exclude_catlist = '';
+        if (!empty($exclude_category)) {
+            $exclude_catlist = implode(",", $exclude_category);
+        }
 
-         /**
+        $postnot_in = '';
+        if (!empty($post__not_in)) {
+            $postnot_in = implode(",", $post__not_in);
+        }
+
+        $data_attribute = [
+            'product_grid_type' => $product_grid_type,
+            'exclude_category'  => $exclude_catlist,
+            'post__not_in'      => $postnot_in,
+            'offset'            => $offset,
+            'product_orderby'   => $product_orderby,
+            'product_order'     => $product_order,
+            'ignore_sticky_posts'     => $ignore_sticky_posts,
+        ];
+
+        $json_data = json_encode($data_attribute);
+        $html_attribute = htmlspecialchars($json_data, ENT_QUOTES, 'UTF-8');
+
+        /**
          * Setup the post arguments.
          */
-        $args = RBT_Helper::getProductInfo($posts_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_orderby, $product_order,  $ignore_sticky_posts, $posttype = 'product', $taxonomy = 'product_cat',$settings);
+        $args = RBT_Helper::getProductInfo($posts_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_orderby, $product_order,  $ignore_sticky_posts, $posttype = 'product', $taxonomy = 'product_cat', $settings);
 
         $products_query = new \WP_Query($args);
+
+        $category_list = '';
+        if (!empty($product_cat)) {
+            $category_list = implode(",", $product_cat);
+        }
+
+        $category_list_value = explode(" ", $category_list);
+
+        if (!empty($settings['product_cat'])) {
+            $all_cat = [];
+            foreach ($settings['product_cat'] as $category) {
+
+                $categoryName = get_term_by('slug', $category, 'product_cat');
+
+                // echo "<pre>";
+                // print_r($product_cat);
+                // echo "</pre>";
+                // die;
+                $get_category = get_term_by('id', $categoryName->term_id, 'product_cat');
+                $get_cat       = isset($_GET['category']) ? $_GET['category'] : '';
+                $all_cat[]      = isset($categoryName->slug) ? strtolower($categoryName->slug) : '';
+            }
+        } else {
+            if (!empty($exclude_category)) {
+                $terms = get_terms(array(
+                    'taxonomy'   => 'product_cat',
+                    'hide_empty' => true,
+                    'exclude'    => array_map(function ($slug) {
+                        $term = get_term_by('slug', $slug, 'product_cat');
+                        return $term ? $term->term_id : 0;
+                    }, $exclude_category),
+                ));
+            } else {
+                $terms = get_terms(array(
+                    'taxonomy'   => 'product_cat',
+                    'hide_empty' => true,
+                ));
+            }
+
+            $all_cat = [];
+            if ($terms && !is_wp_error($terms)) {
+                foreach ($terms as $term) {
+                    // $categoryName = get_term_by('slug', $term, 'product_cat');
+                    $get_category = get_term_by('id', $term->term_id, 'product_cat');
+                    $all_cat[] = $get_category->slug;
+                }
+            }
+        }
+
+        $explode_cat = implode(",", $all_cat);
+
+       
 
 
 ?>
@@ -166,56 +240,63 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                 if (!empty($settings['filter_label_text'])) {
 
 
-                                    $get_cat = isset( $_GET['category'] ) ? $_GET['category'] : '';
+                                    $get_cat = isset($_GET['category']) ? $_GET['category'] : '';
                                     $active = '';
-                                    if( empty( $get_cat ) ) {
+                                    if (empty($get_cat)) {
                                         $active = 'active';
                                     }
+
+                                    $category_list2 = '';
+                                    if (!empty($product_cat)) {
+                                        $category_list2 = implode(",", $product_cat);
+                                    }
                                 ?>
-                                    <li class="rbt-tab-link <?php echo esc_attr($active);?>" data-filter2="*">
+                                    <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2="<?php echo esc_attr($explode_cat); ?>">
                                         <?php echo esc_html($settings['filter_label_text']); ?>
                                         <span class="count"><?php echo esc_html($products_query->found_posts); ?></span>
                                     </li>
                                 <?php } ?>
                                 <?php
                                 if (!empty($settings['product_cat'])) {
+                                    $i = 1;
                                     foreach ($category_list_value as $category) {
-                                     
+
                                         $categoryName = get_term_by('slug', $category, 'product_cat');
                                         $get_category = get_term_by('id', $categoryName->term_id, 'product_cat');
-                                        $get_cat       = isset( $_GET['category'] ) ? $_GET['category'] : '';
-                                        $cat_name      = isset( $categoryName->name  ) ? strtolower($categoryName->name) : '';
-                                        
+                                        $get_cat       = isset($_GET['category']) ? $_GET['category'] : '';
+                                        $cat_name      = isset($categoryName->name) ? strtolower($categoryName->name) : '';
+
                                         $active = '';
-                                        if(  $get_cat == $cat_name ) {
+                                        if ($get_cat == $cat_name) {
+                                            $active = 'active';
+                                        }
+
+                                        if ( ($get_cat != $cat_name && empty($settings['filter_label_text']) && $i == 1 ) ) {
                                             $active = 'active';
                                         }
 
 
-                                        if ($get_category->count >= 10)  {
+                                        if ($get_category->count >= 10) {
                                             $cat_count = $get_category->count;
                                         } else {
-                                            $cat_count = "0" .$get_category->count;
+                                            $cat_count = "0" . $get_category->count;
                                         }
 
-                                        if( isset( $categoryName->name ) ) {
+                                        if (isset($categoryName->name)) {
                                 ?>
-                                            <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->slug)); ?>">
+                                            <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->slug)); ?>">
                                                 <?php echo esc_html($categoryName->name); ?>
                                                 <span class="count"><?php echo esc_html($cat_count); ?></span>
                                             </li>
-                                <?php
+                                        <?php
                                         }
-                                        
-                                    }
-                                } 
-
-                                else {
-                                    if( !empty($exclude_category)) {
+                                    $i++; }
+                                } else {
+                                    if (!empty($exclude_category)) {
                                         $terms = get_terms(array(
                                             'taxonomy'   => 'product_cat',
                                             'hide_empty' => true,
-                                            'exclude'    => array_map(function($slug) {
+                                            'exclude'    => array_map(function ($slug) {
                                                 $term = get_term_by('slug', $slug, 'product_cat');
                                                 return $term ? $term->term_id : 0;
                                             }, $exclude_category),
@@ -227,187 +308,56 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                         ));
                                     }
 
-                                    
+
                                     if ($terms && !is_wp_error($terms)) {
                                         $i = 1;
-                                        foreach ($terms as $term) { 
+                                        foreach ($terms as $term) {
 
 
-                                            // $categoryName = get_term_by('slug', $term, 'product_cat');
+
                                             $get_category = get_term_by('id', $term->term_id, 'product_cat');
-                                            if ($get_category->count >= 10)  {
+                                            if ($get_category->count >= 10) {
                                                 $cat_count = $get_category->count;
                                             } else {
-                                                $cat_count = "0" .$get_category->count;
+                                                $cat_count = "0" . $get_category->count;
                                             }
-                                            $active = '';
-                                            if ( empty( $settings['product_filter_all_button_label'] ) && $i == 1 ) {
-                                                $active = 'active';
+                                            $active2 = '';
+                                            if (empty($settings['filter_label_text']) && $i == 1) {
+                                                $active2 = 'active';
                                             }
-                                            ?>
-                                        <li class="rbt-tab-link <?php echo esc_attr( $active ); ?>" data-filter=".<?php echo esc_attr( strtolower( $term->slug ) ); ?>"><?php echo esc_html( ucwords( $term->name ) ); ?> <span class="count"><?php echo esc_html($cat_count); ?></span></li>
-                                        <?php
-                                       $i++; }
+
+                                            
+                                        ?>
+                                            <li  class="rbt-tab-link <?php echo esc_attr($active2); ?>" data-catcount="<?php echo esc_attr($cat_count); ?>" data-filter2=".<?php echo esc_attr(strtolower($term->slug)); ?>"><?php echo esc_html(ucwords($term->name)); ?> <span class="count"><?php echo esc_html($cat_count); ?></span></li>
+                                <?php
+                                            $i++;
+                                        }
                                     }
                                 } ?>
-                                
+
                             </ul>
                         </div>
-                    <?php endif; ?>
-                <?php } ?>
-                <!-- tab content -->
+                    <?php endif;
+                }
 
-                <!-- service 1 -->
-                <?php
+                if ($products_query->have_posts()) {
+                    $current_page = max(1, get_query_var('paged'));
 
-                if ($products_query->have_posts()) { ?>
-                    <div class="row row--12 rbt-tab-items rbt-tabs-active-2">
-                        <?php
-                        while ($products_query->have_posts()) {
-                            $products_query->the_post();
-                            global $product;
-                            global $post;
+                    ?>
+                    <input type="hidden" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>" />
+                    <div class="row row--12 rbt-tab-items">
 
-                            $terms = get_the_terms($post->ID, 'product_cat');
-                            if ($terms && !is_wp_error($terms)) {
-                                $termsList = array();
-                                $parentList = array();
-                                foreach ($terms as $category) {
-                                    $termsList[] = $category->slug;
-                                    $parentTerm = get_term($category->parent, 'product_cat'); // 'category' is the taxonomy name
-                                    if (!is_wp_error($parentTerm) && $parentTerm) {
-                                        $parentList[] = $parentTerm->name;
-                                    } else {
-                                        $parentList[] = ''; // If parent term is not found or is an error, add empty string
-                                    }
-                                }
-                                $termsAssignedCat = join(" ", $termsList);
-                                $parentCat = join(" ", $parentList);
-                            } else {
-                                $termsAssignedCat = '';
-                                $parentCat = '';
-                            }
-
-                            global $product;
-                            
-                            $rainbowit_own_product_checkbox 		=  get_post_meta( get_the_ID(), 'rainbowit_own_product_checkbox', true);
-
-                            if( $rainbowit_own_product_checkbox == 'yes' ) {
-
-                                $envato_product_preview_url 		=  get_post_meta( get_the_ID(), '_own_product_preview_url', true);
-                                $envato_product_total_sales 		=  get_post_meta( get_the_ID(), '_own_product_total_sales', true);
-                                $rating                         	= get_post_meta( get_the_ID(), '_wc_average_rating', true ); 
-                                $review_count 					=  $product->get_review_count();
-
-                            } else {
-
-                                $envato_product_preview_url 	=  get_post_meta( get_the_ID(), '_envato_product_preview_url', true );
-                                $envato_product_total_sales 	=  get_post_meta( get_the_ID(), '_envato_product_total_sales', true );
-                                $rating 					    =  get_post_meta( get_the_ID(), '_envato_product_avg_rating', true );
-                                $review_count 	=  get_post_meta( get_the_ID(), '_envato_product_total_rating', true );
-                            }
-
-                            $tags = wp_get_post_terms($product->get_id(), 'product_tag');
-
-                            if (!empty($tags) && isset($tags[0])) {
-                                $tag = $tags[0];
-                                $tag_link = get_term_link($tag);
-                            }
-
-
-                            $preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
-                        ?>
-                            <div class="col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 <?php echo esc_attr(strtolower($termsAssignedCat)); ?> <?php echo esc_attr(strtolower($parentCat)); ?>">
-                                <div class="rbt-card">
-                                    <div>
-                                        <a href="<?php the_permalink(); ?>"><?php woocommerce_template_loop_product_thumbnail(); ?></a>
-                                    </div>
-                                    <div class="rbt-card-body p--24">
-                                        <h3 class="title">
-                                            <a href="<?php the_permalink(); ?>">
-                                            <?php echo wp_trim_words( get_the_title(), $title_length2,'... '); ?>
-                                            </a>
-                                        </h3>
-                                        <div class="rbt-card-meta woocommerce">
-                                            <div class="rbt-categories">
-                                            <?php if (!empty($tags) && isset($tags[0])) { ?>
-                                                <a  href="<?php echo esc_url( esc_url($tag_link) ); ?>" class="category"><?php echo esc_html( $tags[0]->name );?></a>
-                                                <?php } ?>
-                                            </div>
-                                           <?php if( $rating > 0  ) { ?>
-                                            <div class="review">
-                                                    <?php if ( $rating ) : ?>
-                                                    <?php echo '<div class="star-rating" title="'.sprintf(__( 'Rated %s out of 5', 'woocommerce' ), $rating).'"><span style="width:'.( ( $rating / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$rating.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>'; ?>
-                                                <?php endif; ?>
-                                                <?php if( $rating > 0 ) { ?>
-                                                <span class="rating-count">(<?php 
-                                                    echo $review_count?>)
-                                                </span>
-                                                <?php } ?>
-                                            </div>
-                                            <?php } ?>
-                                            </div>
-                                       
-                                        <div class="rbt-card-bottom">
-                                            <div class="sales">
-                                            <div class="price">
-                                                <?php
-                                                $regular_price = $product->get_regular_price();
-                                                $sale_price = $product->get_sale_price();
-                                                if ( $sale_price ) {
-                                                    echo '<div class="off-price">' . wc_price( $sale_price ) . '</div>';
-                                                    echo '<div class="current-price">' . wc_price( $regular_price ) . '</div>';
-                                                    } else {
-                                                    echo '<div class="current-price">' . wc_price( $regular_price ) . '</div>';
-                                                } 
-                                                ?>
-                                            </div>
-                                                
-                                                <?php if(!empty($envato_product_total_sales)) { ?>
-                                                <span class="sales-count"><?php echo esc_html( $envato_product_total_sales );?> <?php echo esc_html__("sales","rainbowit"); ?></span>
-                                                <?php } ?>
-                                            </div>
-                                            <div class="rbt-card-btn">
-                                                <a href="<?php echo esc_url($envato_product_preview_url); ?>" target="_blank" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary">
-                                                    <span><i class="fa-sharp fa-regular fa-eye"></i></span>
-                                                    <?php echo esc_html($preview_btn_text); ?>
-                                                </a>
-                                                <?php woocommerce_template_loop_add_to_cart(); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-
-                        }
-
-                        ?>
                     </div>
                     <!-- pagination -->
                     <?php
-                    if ($settings['product_blog_pagination'] == 'yes' && '-1' != $posts_per_page) { ?>
-                        <div class="rbt-pagination mt--10">
-                            <div class="rbt-pagination-group justify-content-center">
-                                <?php
-                                $big = 999999999; // need an unlikely integer
+                    if ($settings['product_blog_pagination'] == 'yes' && '-1' != $posts_per_page) {
+                        $big = 999999999; // need an unlikely integer
 
-                                $current_page = max(1, get_query_var('paged'));
-                                echo paginate_links(array(
-                                    'base'       => str_replace($big, '%#%', get_pagenum_link($big)),
-                                    'format'     => '?paged=%#%',
-                                    'current'    => $current_page,
-                                    'total'      => $products_query->max_num_pages,
-                                    'type'       => 'list',
-                                    'prev_text'  => '<i class="fa-solid fa-chevron-left"></i>',
-                                    'next_text'  => '<i class="fa-solid fa-chevron-right"></i>',
-                                    'show_all'   => false,
-                                    'end_size'   => 1,
-                                    'mid_size'   => 4,
-                                ));
-                                ?>
-                            </div>
+                    ?>
+                        <div class="rainbowit-load-more-button">
+                            <button type="button" id="rainbowit-load-more" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>"><?php echo esc_html__("Load More", "rainbowit"); ?></button>
                         </div>
+
                 <?php
                     }
                     // reset original post data

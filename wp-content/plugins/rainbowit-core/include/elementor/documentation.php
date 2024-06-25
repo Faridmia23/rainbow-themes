@@ -220,6 +220,15 @@ class Rainbowit_Documentation extends Widget_Base
                                     $doc_title  = $item['doc_title'] ?? '';
                                     $img_url    = $item['project_image']['url'];
                                     $btn_link   = $item['btn_link']['url'];
+
+                                    $portfolio_image_id = $item['project_image']['id'];
+
+                                    $portfolio_image_title = get_post_meta($portfolio_image_id, '_wp_attachment_image_alt', true);
+            
+                                    // If title is not found, fallback to the post title
+                                    if (empty($portfolio_image_title)) {
+                                        $portfolio_image_title = get_the_title($portfolio_image_id);
+                                    }
                                 ?>
                                     <!-- single item -->
                                     <div class="col-12 col-md-6 col-xl-4" data-sal="slide-up" data-sal-duration="400">
@@ -227,7 +236,7 @@ class Rainbowit_Documentation extends Widget_Base
                                             <div class="rbt-doc-card">
                                                 <span class="link-icon"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i></span>
                                                 <?php if (isset($img_url)) { ?>
-                                                    <img class="doc-thumbnail" src="<?php echo esc_url($img_url); ?>" alt="Thumbnail image">
+                                                    <img class="doc-thumbnail" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($portfolio_image_title);?>">
                                                 <?php } ?>
                                                 <<?php echo esc_html($item['sec_title_tag_item']); ?> class="doc-card-title"><?php echo esc_html($doc_title); ?></<?php echo esc_html($item['sec_title_tag_item']); ?>>
                                             </div>
@@ -259,6 +268,14 @@ class Rainbowit_Documentation extends Widget_Base
                                     $doc_title  = $item['doc_title'] ?? '';
                                     $img_url    = $item['project_image']['url'];
                                     $btn_link   = $item['btn_link']['url'];
+
+                                    $portfolio_image_id = $item['project_image']['id'];
+                                    $portfolio_image_title = get_post_meta($portfolio_image_id, '_wp_attachment_image_alt', true);
+            
+                                    // If title is not found, fallback to the post title
+                                    if (empty($portfolio_image_title)) {
+                                        $portfolio_image_title = get_the_title($portfolio_image_id);
+                                    }
                                 ?>
 
                              <!-- single item -->
@@ -267,7 +284,7 @@ class Rainbowit_Documentation extends Widget_Base
                                         <div class="rbt-doc-card">
                                             <span class="link-icon"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i></span>
                                             <?php if (isset($img_url)) { ?>
-                                                <img class="doc-thumbnail" src="<?php echo esc_url($img_url); ?>" alt="Thumbnail image">
+                                                <img class="doc-thumbnail" src="<?php echo esc_url($img_url); ?>" alt="<?php echo esc_attr($portfolio_image_title);?>">
                                             <?php } ?>
                                             <<?php echo esc_html($item['sec_title_tag_item']); ?> class="doc-card-title"><?php echo esc_html($doc_title); ?></<?php echo esc_html($item['sec_title_tag_item']); ?>>
                                         </div>

@@ -179,6 +179,14 @@ class Blog_Single_Content extends Widget_Base
         $this->add_render_attribute('single_image', 'title', Control_Media::get_image_title($settings['single_image']));
         $this->add_render_attribute('single_image', 'class', 'impower-icon');
 
+        $single_image_id = $settings['single_image']['id'];
+
+        $single_image_id_title = get_post_meta($single_image_id, '_wp_attachment_image_alt', true);
+
+        // If title is not found, fallback to the post title
+        if (empty($single_image_id_title)) {
+            $single_image_id_title = get_the_title($single_image_id);
+        }
 
         $heading_title = $settings['heading_title'] ?? '';
         $overview_desc_1 = $settings['overview_desc_1'] ?? '';
@@ -190,6 +198,16 @@ class Blog_Single_Content extends Widget_Base
         $list_content = $settings['list_content'] ?? '';
         $instructor_desc_1 = $settings['instructor_desc_1'] ?? '';
         $instructor_desc_2 = $settings['instructor_desc_2'] ?? '';
+
+
+        $single_bottom_image_id = $settings['single_bottom_image']['id'];
+
+        $single_bottom_image_title = get_post_meta($single_bottom_image_id, '_wp_attachment_image_alt', true);
+
+        // If title is not found, fallback to the post title
+        if (empty($single_bottom_image_title)) {
+            $single_bottom_image_title = get_the_title($single_bottom_image_id);
+        }
 
 ?>
 
@@ -220,7 +238,7 @@ class Blog_Single_Content extends Widget_Base
 
         <!-- single contect -->
         <div class="mb--40" id="details">
-            <img class="mb--40" src="<?php echo esc_url($settings['single_image']['url']);?>" alt="Blog Image">
+            <img class="mb--40" src="<?php echo esc_url($settings['single_image']['url']);?>" alt="<?php echo esc_attr($single_image_id_title); ?>">
             <h4 class="title">
             <?php echo esc_html($single_title );?>
             </h4>
@@ -228,7 +246,7 @@ class Blog_Single_Content extends Widget_Base
                 <?php echo wp_kses_post($descdetails );?>
             </p>
             <?php echo wp_kses_post($list_content);?>
-            <img class="mt--25" src="<?php echo esc_url($settings['single_bottom_image']['url']);?>" alt="Blog Image">
+            <img class="mt--25" src="<?php echo esc_url($settings['single_bottom_image']['url']);?>" alt="<?php echo esc_attr($single_bottom_image_title); ?>">
             
         </div>
         

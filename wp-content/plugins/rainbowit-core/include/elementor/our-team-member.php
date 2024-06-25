@@ -46,6 +46,19 @@ class Rainbowit_Team_Member extends Widget_Base
         );
 
         $this->add_control(
+            'layout_style',
+            [
+                'label' => esc_html__('Layout Style', 'rainbowit'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'layout-1',
+                'options' => [
+                    'layout-1' => esc_html__('layout 1', 'rainbowit'),
+                    'layout-2' => esc_html__('layout 2', 'rainbowit'),
+                ],
+            ]
+        );
+
+        $this->add_control(
             'sub_title',
             [
                 'label' => esc_html__('Sub Title', 'rainbowit'),
@@ -126,7 +139,18 @@ class Rainbowit_Team_Member extends Widget_Base
         $repeater->add_control(
             'team_image',
             [
-                'label' => esc_html__('Team Image', 'rainbowit'),
+                'label' => esc_html__('Front Team Image', 'rainbowit'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'default' => [
+                    'url' => \Elementor\Utils::get_placeholder_image_src(),
+                ],
+            ]
+        );
+
+        $repeater->add_control(
+            'back_team_image',
+            [
+                'label' => esc_html__('Back Team Image', 'rainbowit'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'default' => [
                     'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -152,7 +176,8 @@ class Rainbowit_Team_Member extends Widget_Base
         $settings            = $this->get_settings_for_display();
         $heading_title       = $settings['heading_title'] ?? '';
         $sub_title           = $settings['sub_title'] ?? '';
-
+        $layout_style           = $settings['layout_style'] ?? '';
+if( $layout_style == 'layout-1') {
 ?>
     <div class="rbt-section-gap2Top rbt-section-gapBottom">
         <div class="container">
@@ -168,14 +193,82 @@ class Rainbowit_Team_Member extends Widget_Base
                         $item_title = $item['item_title'];
                         $designation = $item['designation'];
                         $team_image = $item['team_image']['url'];
+                        $back_team_image = $item['back_team_image']['url'];
+
+                        $front_image_id = $item['team_image']['id'];
+                        $front_image_title = get_post_meta($front_image_id, '_wp_attachment_image_alt', true);
+
+                        // If title is not found, fallback to the post title
+                        if (empty($front_image_title)) {
+                            $front_image_title = get_the_title($front_image_id);
+                        }
 
                 ?>
                         <!-- single member -->
                         <div class="rbt-team-card">
-                            <div class="rbt-member-img">
-                                <img src="<?php echo esc_url($team_image); ?>" alt="Team member image">
-                                <div class="member-img-bg"></div>
+                            <div class="team-member-image">
+                                <div class="rbt-member-img">
+                                    <?php if(!empty($team_image )) { ?>
+                                    <img src="<?php echo esc_url($team_image); ?>" alt="<?php echo esc_attr($front_image_title);?>">
+                                    <?php } ?>
+                                    <div class="member-img-bg"></div>
+                                </div>
                             </div>
+                            
+                            <div class="rbt-member-info">
+                                <h6 class="member"><?php echo esc_html($item_title); ?></h6>
+                                <span class="member-role"><?php echo esc_html($designation); ?></span>
+                            </div>
+                        </div>
+                <?php
+                    }
+                } ?>
+            </div>
+        </div>
+    </div>
+    <?php } else { ?>
+        <div class="rbt-section-gap2Top rbt-section-gapBottom layout-style2">
+        <div class="container">
+            <div class="rbt-section-title section-title-center" data-sal="slide-up" data-sal-duration="400">
+                <span class="subtitle"><?php echo esc_html($sub_title); ?></span>
+                <<?php echo esc_html($settings['sec_title_tag']); ?> class="title"><?php echo esc_html($heading_title); ?></<?php echo esc_html($settings['sec_title_tag']); ?>>
+            </div>
+
+            <div class="rbt-team-wrapper-2">
+                <?php
+                if (!empty($settings['list2'])) {
+                    foreach ($settings['list2'] as $item) {
+                        $item_title = $item['item_title'];
+                        $designation = $item['designation'];
+                        $team_image = $item['team_image']['url'];
+                        $front_image_id = $item['team_image']['id'];
+                        $back_team_image = $item['back_team_image']['url'];
+                        $back_image_id = $item['back_team_image']['id'];
+
+                        $front_image_title = get_post_meta($front_image_id, '_wp_attachment_image_alt', true);
+
+                        // If title is not found, fallback to the post title
+                        if (empty($front_image_title)) {
+                            $front_image_title = get_the_title($front_image_id);
+                        }
+
+                        $back_image_title = get_post_meta($back_image_id, '_wp_attachment_image_alt', true);
+
+                        // If title is not found, fallback to the post title
+                        if (empty($back_image_title)) {
+                            $back_image_title = get_the_title($back_image_id);
+                        }
+
+                ?>
+                        <!-- single member -->
+                        <div class="rbt-team-card">
+                            <div class="team-member-image">
+                                <div class="rbt-member-img ">
+                                    <img src="<?php echo esc_url($team_image); ?>" alt="<?php echo esc_attr($front_image_title);?>" class="image1">
+                                    <img src="<?php echo esc_url($back_team_image); ?>" alt="<?php echo esc_attr($back_image_title);?>" class="image2">
+                                </div>
+                            </div>
+                            
                             <div class="rbt-member-info">
                                 <h6 class="member"><?php echo esc_html($item_title); ?></h6>
                                 <span class="member-role"><?php echo esc_html($designation); ?></span>
@@ -188,6 +281,7 @@ class Rainbowit_Team_Member extends Widget_Base
         </div>
     </div>
 <?php
+    }
     }
 }
 

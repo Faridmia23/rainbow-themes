@@ -27,7 +27,7 @@
             rbt.reviewsLayout();
             rbt.tabActivation();
             rbt.tabActivationTwo();
-            rbt.tabActivationThree();
+           // rbt.tabActivationThree();
             rbt.showTeamMember();
             rbt.stopInputAutofill();
             rbt.selectPicker();
@@ -332,48 +332,48 @@
         },
 
         // tab activation 3 (this tab in premium products page)
-        tabActivationThree: function () {
-            $('.rbt-tabs-active-2').imagesLoaded(() => {
-                $('.rbt-tabs-active-2').isotope({
-                    itemSelector: '.rbt-tab-item-2',
-                });
+        // tabActivationThree: function () {
+        //     $('.rbt-tabs-active-2').imagesLoaded(() => {
+        //         $('.rbt-tabs-active-2').isotope({
+        //             itemSelector: '.rbt-tab-item-2',
+        //         });
 
-                $('.tabs-2 li').click(function () {
-                    $('.tabs-2 li').removeClass('active');
-                    $(this).addClass('active');
+        //         $('.tabs-2 li').click(function () {
+        //             $('.tabs-2 li').removeClass('active');
+        //             $(this).addClass('active');
 
-                    var selector = $(this).attr('data-filter2');
-                    $('.rbt-tabs-active-2').isotope({
-                        filter: selector
-                    });
-                    return false;
-                });
+        //             var selector = $(this).attr('data-filter2');
+        //             $('.rbt-tabs-active-2').isotope({
+        //                 filter: selector
+        //             });
+        //             return false;
+        //         });
 
-                // Initialize Isotope
-                $('.rbt-tabs-active-2').isotope({
-                    itemSelector: '.rbt-tab-item-2'
-                });
+        //         // Initialize Isotope
+        //         $('.rbt-tabs-active-2').isotope({
+        //             itemSelector: '.rbt-tab-item-2'
+        //         });
                 
-                function checkForActiveTab() {
-                    var activeTab = $('.tabs-2 li.active');
-                    if (activeTab.length > 0) {
-                        var category = activeTab.attr('data-filter2');
-                        filterIsotopeItems(category);
-                    }
-                }
+        //         function checkForActiveTab() {
+        //             var activeTab = $('.tabs-2 li.active');
+        //             if (activeTab.length > 0) {
+        //                 var category = activeTab.attr('data-filter2');
+        //                 filterIsotopeItems(category);
+        //             }
+        //         }
 
-                function filterIsotopeItems(category) {
-                    $('.tabs-2 li').removeClass('active');
-                    $('.tabs-2 li[data-filter2="' + category + '"]').addClass('active');
+        //         function filterIsotopeItems(category) {
+        //             $('.tabs-2 li').removeClass('active');
+        //             $('.tabs-2 li[data-filter2="' + category + '"]').addClass('active');
                 
-                    $('.rbt-tabs-active-2').isotope({
-                        filter: category
-                    });
-                }
+        //             $('.rbt-tabs-active-2').isotope({
+        //                 filter: category
+        //             });
+        //         }
 
-                checkForActiveTab();
-            })
-        },
+        //         checkForActiveTab();
+        //     })
+        // },
 
         // random team member img to show
         showTeamMember: () => {
@@ -513,12 +513,34 @@
         $('[data-toggle="tooltip"]').tooltip()
     });
 
+    document.addEventListener("DOMContentLoaded", function() {
+        // Simulate loading time with a timeout (remove or adjust in production)
+        var elements = document.getElementsByClassName('brand-wrapper-preloader');
+
+        if (elements.length > 0) {
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.position = 'relative';
+            }
+            setTimeout(function() {
+                // Hide preloader
+                document.getElementById('rainbowit-preloader').style.display = 'none';
+            
+                // Show main content
+                document.getElementById('rainbowit-main-content').style.display = 'block';
+
+                // Initialize odometer (assuming you're using the Odometer library)
+                var odometerElement = document.querySelector('.odometer');
+                var odometerValue = odometerElement.getAttribute('data-count');
+                odometerElement.innerHTML = odometerValue;
+                var elements2 = document.getElementsByClassName('brand-wrapper-preloader');
+                for (var i = 0; i < elements2.length; i++) {
+                    elements2[i].style.position = 'static';
+                }
+            }, 2000); // Adjust the timeout duration as needed
+        }
+            
+    });
+
 
 })(window, document, jQuery);
-
-
-
-
-
-
-

@@ -325,9 +325,17 @@ add_action("woocommerce_after_shop_loop_item", function() {
 
     $preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
     $service_order_btn_title        = ( $rainbowit_options['order_btn_text'] ) ? $rainbowit_options['order_btn_text'] : '';
+    global $post;
+    $plan_product_enable = '';
+    if (class_exists('acf')) {
+        $plan_product_enable = get_field('plan_product_enable', $post->ID);
+
+    }
+
+
     ?>
     <div class="rbt-card-btn">
-            <?php if( $service_product_checkbox == 'yes') { ?>
+            <?php if( $service_product_checkbox == 'yes' || $plan_product_enable == 'enable') { ?>
                 <a data-redirect_url="<?php echo wc_get_checkout_url(); ?>" data-product_id="<?php echo esc_attr(get_the_ID()); ?>" class="rbt-btn rbt-btn-sm hover-effect-1 btn-border-secondary ajax-order-now-product" style="cursor:pointer;">
                     <span><i class="fa-regular fa-cart-shopping"></i></span>
                     <?php echo esc_html( $service_order_btn_title ); ?>

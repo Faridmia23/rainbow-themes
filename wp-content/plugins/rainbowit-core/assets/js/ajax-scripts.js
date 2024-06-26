@@ -194,12 +194,18 @@
 
 
     jQuery(document).ready(function ($) {
+        
         var page = 1;
         var defaultCategory = document.querySelector('.rainbowit-load-more').getAttribute('data-cate');
-        var perpage = document.querySelector('.rainbowit-load-more').getAttribute('data-perpage');
-        var productby = document.querySelector('.rainbowit-load-more').getAttribute('data-productby');
+        var perpage         = document.querySelector('.rainbowit-load-more').getAttribute('data-perpage');
+        var productby       = document.querySelector('.rainbowit-load-more').getAttribute('data-productby');
+
+        // Get the category from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryFromUrl = urlParams.get('category');
+
+        var currentCategory = categoryFromUrl ? categoryFromUrl : defaultCategory; // Track current category
        
-        var currentCategory = defaultCategory; // Track current category
         var dataObject = JSON.parse(productby);
         let product_grid_type = dataObject.product_grid_type;
         let exclude_category = dataObject.exclude_category;
@@ -229,12 +235,15 @@
                 },
                 beforeSend: function () {
                     if (page == 1) {
-                        $('.rbt-tab-items').html('<p>Loading...</p>');
+                        $('#loading-spinner-load-more').show();
+                        $('#rainbowit-load-more').text('Loading...').prop('disabled', false);
                     }
-                    $('#rainbowit-load-more').text('Loading...').prop('disabled', true);
+
+                    $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
 
                 },
                 success: function (response) {
+                    $('#loading-spinner-load-more').hide(); // Hide spinner
                     if (response) {
                         
                         if (page == 1) {
@@ -242,19 +251,32 @@
                         } else {
                             $('.rbt-tab-items').append(response);
                         }
-                        let cat_count = document.querySelector('.rbt-tab-item-2').getAttribute('data-catcount');
 
-                        if (cat_count <= perpage) {
+                        var activeTab = $('.rbt-tab-link.active');
+                        var countFilterValue = parseInt(activeTab.data('countfilter'), 10); 
+
+                        console.log(countFilterValue);
+
+                        var totalPages = Math.ceil(countFilterValue / perpage);
+
+                        $('#rainbowit-load-more').text('Load More').prop('disabled', false).show();
+
+                        // Hide load more button if there are no more pages
+                        if (page >= totalPages) {
                             $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
-                        }  else {
-                            $('#rainbowit-load-more').text('Load More').prop('disabled', false);
                         }
+
+                       
                     } else {
                         if (page == 1) {
                             $('.rbt-tab-items').html('<p>No products found</p>');
                         }
                         $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
                     }
+                },
+                error: function() {
+                    $('#loading-spinner').hide(); // Hide spinner on error
+                    $('#rainbowit-load-more').text('Load More').prop('disabled', false);
                 }
             });
         }
@@ -273,8 +295,6 @@
 
             $('.rbt-tab-link').removeClass('');
             button.addClass('active');
-
-            // Update currentCategory and data-cate attribute
             currentCategory = category;
             $('.rainbowit-load-more').attr('data-cate', category);
 
@@ -284,10 +304,8 @@
         });
 
         // Load default category products on page load
-        loadProducts(defaultCategory, page);
+        loadProducts(currentCategory, page);
     });
-
-
 
 }(jQuery));
 

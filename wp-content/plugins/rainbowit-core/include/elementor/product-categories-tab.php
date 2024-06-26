@@ -251,7 +251,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                         $category_list2 = implode(",", $product_cat);
                                     }
                                 ?>
-                                    <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2="<?php echo esc_attr($explode_cat); ?>">
+                                    <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2="<?php echo esc_attr($explode_cat); ?>" data-countfilter="<?php echo esc_html($products_query->found_posts); ?>">
                                         <?php echo esc_html($settings['filter_label_text']); ?>
                                         <span class="count"><?php echo esc_html($products_query->found_posts); ?></span>
                                     </li>
@@ -284,7 +284,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                                         if (isset($categoryName->name)) {
                                 ?>
-                                            <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->slug)); ?>">
+                                            <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2=".<?php echo esc_attr(strtolower($categoryName->slug)); ?>" data-countfilter="<?php echo esc_html($cat_count); ?>">
                                                 <?php echo esc_html($categoryName->name); ?>
                                                 <span class="count"><?php echo esc_html($cat_count); ?></span>
                                             </li>
@@ -328,7 +328,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                                             
                                         ?>
-                                            <li  class="rbt-tab-link <?php echo esc_attr($active2); ?>" data-catcount="<?php echo esc_attr($cat_count); ?>" data-filter2=".<?php echo esc_attr(strtolower($term->slug)); ?>"><?php echo esc_html(ucwords($term->name)); ?> <span class="count"><?php echo esc_html($cat_count); ?></span></li>
+                                            <li  class="rbt-tab-link <?php echo esc_attr($active2); ?>" data-catcount="<?php echo esc_attr($cat_count); ?>" data-filter2=".<?php echo esc_attr(strtolower($term->slug)); ?>" data-countfilter="<?php echo esc_html($cat_count); ?>"><?php echo esc_html(ucwords($term->name)); ?> <span class="count"><?php echo esc_html($cat_count); ?></span></li>
                                 <?php
                                             $i++;
                                         }
@@ -346,6 +346,8 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                     ?>
                     <input type="hidden" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>" />
                     <div class="row row--12 rbt-tab-items">
+                    <div class="load-more-spinner" id="loading-spinner-load-more"></div>
+
 
                     </div>
                     <!-- pagination -->

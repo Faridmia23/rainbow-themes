@@ -27,7 +27,7 @@
             rbt.reviewsLayout();
             rbt.tabActivation();
             rbt.tabActivationTwo();
-           // rbt.tabActivationThree();
+            rbt.tabActivationThree();
             rbt.showTeamMember();
             rbt.stopInputAutofill();
             rbt.selectPicker();
@@ -332,48 +332,48 @@
         },
 
         // tab activation 3 (this tab in premium products page)
-        // tabActivationThree: function () {
-        //     $('.rbt-tabs-active-2').imagesLoaded(() => {
-        //         $('.rbt-tabs-active-2').isotope({
-        //             itemSelector: '.rbt-tab-item-2',
-        //         });
+        tabActivationThree: function () {
+            $('.rbt-tabs-active-2').imagesLoaded(() => {
+                $('.rbt-tabs-active-2').isotope({
+                    itemSelector: '.rbt-tab-item-2',
+                });
 
-        //         $('.tabs-2 li').click(function () {
-        //             $('.tabs-2 li').removeClass('active');
-        //             $(this).addClass('active');
+                $('.tabs-2 li').click(function () {
+                    $('.tabs-2 li').removeClass('active');
+                    $(this).addClass('active');
 
-        //             var selector = $(this).attr('data-filter2');
-        //             $('.rbt-tabs-active-2').isotope({
-        //                 filter: selector
-        //             });
-        //             return false;
-        //         });
+                    var selector = $(this).attr('data-filter2');
+                    $('.rbt-tabs-active-2').isotope({
+                        filter: selector
+                    });
+                    return false;
+                });
 
-        //         // Initialize Isotope
-        //         $('.rbt-tabs-active-2').isotope({
-        //             itemSelector: '.rbt-tab-item-2'
-        //         });
+                // Initialize Isotope
+                $('.rbt-tabs-active-2').isotope({
+                    itemSelector: '.rbt-tab-item-2'
+                });
                 
-        //         function checkForActiveTab() {
-        //             var activeTab = $('.tabs-2 li.active');
-        //             if (activeTab.length > 0) {
-        //                 var category = activeTab.attr('data-filter2');
-        //                 filterIsotopeItems(category);
-        //             }
-        //         }
+                function checkForActiveTab() {
+                    var activeTab = $('.tabs-2 li.active');
+                    if (activeTab.length > 0) {
+                        var category = activeTab.attr('data-filter2');
+                        filterIsotopeItems(category);
+                    }
+                }
 
-        //         function filterIsotopeItems(category) {
-        //             $('.tabs-2 li').removeClass('active');
-        //             $('.tabs-2 li[data-filter2="' + category + '"]').addClass('active');
+                function filterIsotopeItems(category) {
+                    $('.tabs-2 li').removeClass('active');
+                    $('.tabs-2 li[data-filter2="' + category + '"]').addClass('active');
                 
-        //             $('.rbt-tabs-active-2').isotope({
-        //                 filter: category
-        //             });
-        //         }
+                    $('.rbt-tabs-active-2').isotope({
+                        filter: category
+                    });
+                }
 
-        //         checkForActiveTab();
-        //     })
-        // },
+                checkForActiveTab();
+            })
+        },
 
         // random team member img to show
         showTeamMember: () => {

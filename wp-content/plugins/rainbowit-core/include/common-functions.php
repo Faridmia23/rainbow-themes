@@ -1,4 +1,5 @@
 <?php
+
 namespace Elementor;
 
 use Elementor\Controls_Manager;
@@ -453,7 +454,7 @@ trait RainbowitElementCommonFunctions
         <?php if (!empty($settings['rbt_' . $control_id . '_desctiption'])) { ?>
             <p><?php echo rbt_kses_intermediate($settings['rbt_' . $control_id . '_desctiption']); ?></p>
         <?php } ?>
-<?php
+    <?php
     }
 
     /**
@@ -715,9 +716,9 @@ trait RainbowitElementCommonFunctions
         $this->end_controls_section();
     }
 
-    protected function rbt_product_control( $control_id = null, $control_name = null, $post_type = 'product', $taxonomy = 'product_cat', $posts_per_page = '6', $offset = '0', $orderby = 'date', $order = 'desc' )
+    protected function rbt_product_control($control_id = null, $control_name = null, $post_type = 'product', $taxonomy = 'product_cat', $posts_per_page = '6', $offset = '0', $orderby = 'date', $order = 'desc')
     {
-       
+
         $this->start_controls_section(
             'rainbowit' . $control_id . '_query',
             [
@@ -754,7 +755,7 @@ trait RainbowitElementCommonFunctions
         $this->add_control(
             'product_cat',
             [
-               'type' => Controls_Manager::SELECT2,
+                'type' => Controls_Manager::SELECT2,
                 'label' => esc_html__('Include Category', 'rainbowit'),
                 'multiple' => true,
                 'description' => esc_html__('Leave blank or enter -1 for all.', 'rainbowit'),
@@ -845,7 +846,6 @@ trait RainbowitElementCommonFunctions
 
         $this->end_controls_section();
     }
-
 }
 
 /**
@@ -954,10 +954,10 @@ class RBT_Helper
         return $args;
     }
 
-    public static function getProductInfo($product_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_order_by, $product_order,  $ignore_sticky_posts, $posttype, $taxonomy,$settings )
+    public static function getProductInfo($product_per_page, $product_grid_type, $product_cat, $exclude_category, $post__not_in, $offset, $product_order_by, $product_order,  $ignore_sticky_posts, $posttype, $taxonomy, $settings)
     {
 
-      
+
         if (get_query_var('paged')) {
             $paged = get_query_var('paged');
         } else if (get_query_var('page')) {
@@ -971,7 +971,7 @@ class RBT_Helper
         // include_categories
         $category_list = '';
         if (!empty($product_cat)) {
-           $category_list = implode(", ", $product_cat);
+            $category_list = implode(", ", $product_cat);
         }
         $category_list_value = explode(" ", $category_list);
 
@@ -1079,10 +1079,8 @@ class RBT_Helper
 
             $args['meta_key'] = 'total_sales';
             $args['orderby'] = 'meta_value_num';
-
-            
         }
-        
+
         if ($product_grid_type == 'featured_products') {
             $tax_query = array(
                 array(
@@ -1106,3 +1104,9 @@ class RBT_Helper
         return $args;
     }
 }
+
+
+
+//short code to get the woocommerce recently viewed products
+ 
+

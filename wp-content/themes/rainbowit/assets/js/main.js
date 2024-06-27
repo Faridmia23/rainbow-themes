@@ -27,7 +27,6 @@
             rbt.reviewsLayout();
             rbt.tabActivation();
             rbt.tabActivationTwo();
-            rbt.tabActivationThree();
             rbt.showTeamMember();
             rbt.stopInputAutofill();
             rbt.selectPicker();
@@ -37,6 +36,7 @@
             rbt.salActive();
             rbt.courseActionBottom();
             rbt.progressReadTime();
+            rbt._searchDoc();
         },
 
         // header sticky
@@ -60,6 +60,37 @@
                     })
                 })
             })
+        },
+
+        _searchDoc: function () {
+            var inputblur, inputFocus, openSideNav, closeSideNav;
+            inputblur = function (e) {
+				if (!$(this).val()) {
+					$(this).parent('.form-group').removeClass('focused');
+				}
+            };
+            inputFocus = function (e) {
+				$(this).parents('.form-group').addClass('focused');
+            };
+            openSideNav = function (e) {
+                e.preventDefault();
+                rbt.sideNav.addClass('active');
+                $('.search-trigger-active').addClass('open');
+                rbt._html.addClass('side-nav-opened');
+            };
+
+            closeSideNav = function (e) {
+				if (!$('.rbt-search-dropdown, .rbt-search-dropdown *:not(".search-trigger-active, .search-trigger-active *")').is(e.target)) {
+                    rbt.sideNav.removeClass('active');
+                    $('.search-trigger-active').removeClass('open');
+                    rbt._html.removeClass('side-nav-opened');
+                }
+            };
+            rbt._document
+            .on('blur', 'input,textarea,select', inputblur)
+            .on('focus', 'input:not([type="radio"]),input:not([type="checkbox"]),textarea,select', inputFocus)
+            .on('click', '.search-trigger-active', openSideNav)
+            .on('click', '.side-nav-opened', closeSideNav)
         },
 
         // mobile menu active
@@ -331,49 +362,6 @@
             })
         },
 
-        // tab activation 3 (this tab in premium products page)
-        tabActivationThree: function () {
-            $('.rbt-tabs-active-2').imagesLoaded(() => {
-                $('.rbt-tabs-active-2').isotope({
-                    itemSelector: '.rbt-tab-item-2',
-                });
-
-                $('.tabs-2 li').click(function () {
-                    $('.tabs-2 li').removeClass('active');
-                    $(this).addClass('active');
-
-                    var selector = $(this).attr('data-filter2');
-                    $('.rbt-tabs-active-2').isotope({
-                        filter: selector
-                    });
-                    return false;
-                });
-
-                // Initialize Isotope
-                $('.rbt-tabs-active-2').isotope({
-                    itemSelector: '.rbt-tab-item-2'
-                });
-                
-                function checkForActiveTab() {
-                    var activeTab = $('.tabs-2 li.active');
-                    if (activeTab.length > 0) {
-                        var category = activeTab.attr('data-filter2');
-                        filterIsotopeItems(category);
-                    }
-                }
-
-                function filterIsotopeItems(category) {
-                    $('.tabs-2 li').removeClass('active');
-                    $('.tabs-2 li[data-filter2="' + category + '"]').addClass('active');
-                
-                    $('.rbt-tabs-active-2').isotope({
-                        filter: category
-                    });
-                }
-
-                checkForActiveTab();
-            })
-        },
 
         // random team member img to show
         showTeamMember: () => {
@@ -457,17 +445,18 @@
             };
             openSideNav = function (e) {
                 e.preventDefault();
-                eduJs.sideNav.addClass('active');
+                rbt.sideNav.addClass('active');
                 $('.search-trigger-active').addClass('open');
-                eduJs._html.addClass('side-nav-opened');
+                rbt._html.addClass('side-nav-opened');
             };
 
             closeSideNav = function (e) {
-                if (!$('.rbt-search-dropdown, .rbt-search-dropdown *:not(".search-trigger-active, .search-trigger-active *")').is(e.target)) {
-                    eduJs.sideNav.removeClass('active');
+                if (!$('.rbt-search-dropdown,.search-trigger-close-icon, .rbt-search-dropdown *:not(".search-trigger-active, .search-trigger-active *")').is(e.target)) {
+                    rbt.sideNav.removeClass('active');
                     $('.search-trigger-active').removeClass('open');
-                    eduJs._html.removeClass('side-nav-opened');
+                    rbt._html.removeClass('side-nav-opened');
                 }
+
             };
             rbt._document
                 .on('blur', 'input,textarea,select', inputblur)
@@ -540,6 +529,12 @@
             }, 2000); // Adjust the timeout duration as needed
         }
             
+    });
+
+   $('.search-trigger-close-icon').on("click",function() {
+        rbt.sideNav.removeClass('active');
+        $('.search-trigger-active').removeClass('open');
+        rbt._html.removeClass('side-nav-opened');
     });
 
 

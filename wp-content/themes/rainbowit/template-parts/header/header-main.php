@@ -25,6 +25,7 @@ $menu_type          = rainbowit_get_acf_data("rainbowit_menu_type");
 $header_buttontext = isset($rainbowit_options['rainbowit_header_buttontext']) ? $rainbowit_options['rainbowit_header_buttontext'] : '';
 $hire_us_btn_text  = isset($rainbowit_options['rainbowit_header_hire_us_btn_text']) ? $rainbowit_options['rainbowit_header_hire_us_btn_text'] : '';
 $hire_us_buttonUrl = isset($rainbowit_options['rainbowit_header_hire_us_buttonUrl']) ? $rainbowit_options['rainbowit_header_hire_us_buttonUrl'] : '';
+$rainbowit_header_search = isset($rainbowit_options['rainbowit_header_search']) ? $rainbowit_options['rainbowit_header_search'] : '';
 $select_menu        = $nav_menu_args;
 
 $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
@@ -34,7 +35,7 @@ $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
 <header class="rbt-header">
     <div class="rbt-header-wrapper">
         <div class="backdrop-shadow"></div>
-        <div class="container">
+        <div class="container header-custom-container">
             <div class="mainbar">
                 <div class="header-left">
                     <div class="header-info">
@@ -70,6 +71,12 @@ $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
                 <?php if( isset($hire_us_buttonUrl) && !empty($hire_us_buttonUrl) ) { ?>
                 <div class="header-right">
                     <div class="rbt-btn-group">
+                  
+                    <?php if( $rainbowit_header_search == '1') {  ?>
+                    <a class="search-trigger-active rbt-round-btn" href="#">
+                        <i class="feather-search"></i>
+                    </a>
+                    <?php } ?>
                         <?php 
                             if(is_user_logged_in() ) { ?>
                         <a class="nav-login-btn d-none d-xl-block" href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id') ) ); ?>">
@@ -94,6 +101,7 @@ $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
                 </div>
                 <?php } ?>
             </div>
+            
         </div>
     </div>
 </header>
@@ -141,6 +149,9 @@ $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
         </div>
     </div>
 </div>
+<?php if( $rainbowit_header_search == '1') { 
+    get_template_part('template-parts/header/search-dropdown'); 
+} ?>
 <?php
 /**
  * Load Page Title Wrapper

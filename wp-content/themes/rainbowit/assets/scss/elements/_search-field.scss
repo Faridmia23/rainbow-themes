@@ -69,3 +69,112 @@
         visibility: visible;
     }
 }
+
+
+
+.rbt-search-dropdown {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 967px;
+    margin: 0 auto;
+    background: white;
+    border-top: 1px solid #f1f0f3;
+    box-shadow: 0px 10px 30px 5px rgba(19, 65, 98, 0.10);
+    z-index: 104;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s linear, clip 0.6s linear, visibility 0s 0.2s;
+    transform: translateZ(0);
+    border-radius: 12px;
+    display: none;
+    z-index: 1010;
+
+    .wrapper {
+        padding: 0;
+        font-weight: 400;
+        form {
+            display: flex;
+            input {
+                height: 50px;
+                line-height: 48px;
+                margin: 0;
+                padding: 38px 40px 35px 66px;
+                border: none;
+                border-bottom: 1px solid #E3E0F5;
+                transition: 0.3s;
+                border-radius: unset;
+                font-size: 18px;
+                &:focus {
+                    border-color: #c0d2ed;
+                }
+            }
+        }
+
+        .section-title {
+            padding-left: 40px;
+            color: #04122B;
+
+            font-family: Manrope;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 28px; /* 140% */
+            text-transform: capitalize;
+        }
+    }
+
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        transition: clip 0.6s linear, opacity 0.2s linear;
+    }
+
+}
+
+.rbt-search-dropdown.active {
+    overflow-x: hidden;
+    overflow: visible!important;
+}
+
+.search-trigger-close-icon i.feather-search::before {
+    content: "\ea02";
+}
+
+.ajax-search-close-icon {
+    position: relative;
+}
+
+.rbt-search-dropdown .search-trigger-close-icon {
+    position: absolute;
+    right: -23px;
+    top: -25px;
+    width: 48px;
+    height: 48px;
+    z-index: 1020;
+    border-radius: 50%;
+    border: 1px solid #E3E0F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    cursor: pointer;
+}
+.rbt-search-dropdown .search-trigger-close-icon i {
+    color: #04122B;
+    text-align: center;
+    font-family: "Font Awesome 6 Pro";
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    cursor: pointer;
+}
+
+.rbt-search-dropdown.active .wrapper {
+    overflow-y: auto!important;
+    overflow-x: hidden;
+    max-height: calc(100vh - 180px);
+}

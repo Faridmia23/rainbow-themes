@@ -33,7 +33,7 @@ $rainbowit_blog_sidebar_class = !is_active_sidebar('sidebar-1')  ? 'col-lg-10 of
                 endwhile;
             else :
 
-                get_template_part('template-parts/post/content', 'none');
+                get_template_part('template-parts/content', 'none');
 
             endif;
             ?>

@@ -411,7 +411,18 @@ Redux::setSection($opt_name, array(
                 'required' => array('rainbowit_enable_header', 'equals', true),
             ),
 
+            array(
+                'id' => 'rainbowit_header_search',
+                'type' => 'switch',
+                'title' => esc_html__('Header Search', 'rainbowit'),
+                'on' => esc_html__('Enabled', 'rainbowit'),
+                'off' => esc_html__('Disabled', 'rainbowit'),
+                'default' => true,
+                'required' => array('rainbowit_enable_header', 'equals', true),
+            ),
+
         )
+        
     )
 );
 
@@ -1162,4 +1173,85 @@ if ( class_exists( 'WooCommerce' ) ) {
             ),
         )
     ));
+
+     /**
+     * WooCommerce header search
+     */
+    Redux::setSection($opt_name, array(
+        'title' => esc_html__('Product Header Search', 'rainbowit'),
+        'id' => 'product_header_search',
+        'icon' => 'el el-folder-open',
+        'subsection' => true,
+        'fields' => array(
+            array(
+                'id'       => 'wc_cross_sell',
+                'type'     => 'switch',
+                'title'    => esc_html__( 'Header Search Products', 'rainbowit' ),
+                'on'       => esc_html__( 'Show', 'rainbowit' ),
+                'off'      => esc_html__( 'Hide', 'rainbowit' ),
+                'default'  => true,
+            ),
+        ),
+        
+    ));
+
+    
+    Redux::set_field( $opt_name, 'product_header_search', array( 
+        'id' => 'product_perpage',
+        'type' => 'text',
+        'title'    => esc_html__('Product Perpage', 'rainbowit'), 
+        'default'  => '3',
+    ) );
+
+
+    Redux::set_field( $opt_name, 'product_header_search', array(
+        'id'       => 'product_grid_type',
+        'type'     => 'select',
+        'title'    => esc_html__('Product Type', 'rainbowit'), 
+        'subtitle' => esc_html__('No validation can be done on this field type', 'rainbowit'),
+        'desc'     => esc_html__('This is the description field, again good for additional info.', 'rainbowit'),
+        // Must provide key => value pairs for select options
+        'options'  => array(
+            'featured_products' => 'Featured Product',
+            'sale_products' => 'Sale Product',
+            'best_selling_products' => 'Best Salling Product',
+            'recent_products' => 'Recent Product',
+            'top_rated_products' => 'Top Rated Product',
+        ),
+        'default'  => 'featured_products',
+    ) );
+
+    Redux::set_field( $opt_name, 'product_header_search', array(
+        'id'       => 'product_order',
+        'type'     => 'select',
+        'title'    => esc_html__('Product Order', 'rainbowit'), 
+        'subtitle' => esc_html__('No validation can be done on this field type', 'rainbowit'),
+        'desc'     => esc_html__('This is the description field, again good for additional info.', 'rainbowit'),
+        // Must provide key => value pairs for select options
+        'options'  => array(
+            'desc' => 'DESC',
+            'asc' => 'ASC',
+        ),
+        'default'  => 'desc',
+    ) );
+
+    Redux::set_field( $opt_name, 'product_header_search', array(
+        'id'       => 'product_orderby',
+        'type'     => 'select',
+        'title'    => esc_html__('Product Orderby', 'rainbowit'), 
+        'subtitle' => esc_html__('No validation can be done on this field type', 'rainbowit'),
+        'desc'     => esc_html__('This is the description field, again good for additional info.', 'rainbowit'),
+        // Must provide key => value pairs for select options
+        'options'  => array(
+            'date' => 'Date',
+            'ID' => 'ID',
+            'author' => 'Author',
+            'title' => 'Title',
+            'modified' => 'Modified',
+            'rand' => 'Random',
+            'comment_count' => 'Comment count',
+            'menu_order' => 'Menu order',
+        ),
+        'default'  => 'date',
+    ) );
 } // End WooCommerce

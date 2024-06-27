@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
 
-    jQuery(document).ready(function ($) {
+    $(function () {
         const { ajax_nonce, ajax_url } = rainbowit_portfolio_ajax;
 
         $('.rainbow-theme-envato-product-select').on('change', function () {
@@ -129,6 +129,7 @@
 
     });
 
+    // product redirect checkout page and add to cart product add
 
     $('.ajax-order-now-product').on('click', function () {
         const productId = $(this).data('product_id');
@@ -156,6 +157,8 @@
         })
     });
 
+    // envato product update ajax api call script
+
     $('.envato-product-update').on('click', function () {
         $.ajax({
             type: 'post',
@@ -178,7 +181,9 @@
         })
     });
 
-    jQuery(document).ready(function ($) {
+    // blog single table content jquery
+
+    $(function () {
         $('#eaw-add-row').on('click', function () {
             let extra_item = $('.empty-row.screen-reader-text').clone(true);
             extra_item.removeClass('empty-row screen-reader-text');
@@ -193,119 +198,214 @@
     });
 
 
-    jQuery(document).ready(function ($) {
+    // ajax load more product scripts
+
+    $(function () {
         
-        var page = 1;
-        var defaultCategory = document.querySelector('.rainbowit-load-more').getAttribute('data-cate');
-        var perpage         = document.querySelector('.rainbowit-load-more').getAttribute('data-perpage');
-        var productby       = document.querySelector('.rainbowit-load-more').getAttribute('data-productby');
 
-        // Get the category from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const categoryFromUrl = urlParams.get('category');
+        if ($('.rainbowit-load-more').length) {
+            var page = 1;
+            var defaultCategory = document.querySelector('.rainbowit-load-more').getAttribute('data-cate');
+            var perpage = document.querySelector('.rainbowit-load-more').getAttribute('data-perpage');
+            var productby = document.querySelector('.rainbowit-load-more').getAttribute('data-productby');
 
-        var currentCategory = categoryFromUrl ? categoryFromUrl : defaultCategory; // Track current category
-       
-        var dataObject = JSON.parse(productby);
-        let product_grid_type = dataObject.product_grid_type;
-        let exclude_category = dataObject.exclude_category;
-        let post__not_in = dataObject.post__not_in;
-        let offset = dataObject.offset;
-        let product_orderby = dataObject.product_orderby;
-        let product_order = dataObject.product_order;
-        let ignore_sticky_posts = dataObject.ignore_sticky_posts;
+            // Get the category from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryFromUrl = urlParams.get('category');
 
+            var currentCategory = categoryFromUrl ? categoryFromUrl : defaultCategory; // Track current category
 
-        function loadProducts(category, page ) {
-            $.ajax({
-                url: rainbowit_portfolio_ajax.ajax_url,
-                type: 'POST',
-                data: {
-                    action: 'rainbowit_load_more_products',
-                    page: page,
-                    category: category,
-                    perpage: perpage,
-                    product_grid_type: product_grid_type,
-                    exclude_category: exclude_category,
-                    post__not_in: post__not_in,
-                    offset: offset,
-                    product_orderby: product_orderby,
-                    product_order: product_order,
-                    ignore_sticky_posts: ignore_sticky_posts,
-                },
-                beforeSend: function () {
-                    if (page == 1) {
-                        $('#loading-spinner-load-more').show();
-                        $('#rainbowit-load-more').text('Loading...').prop('disabled', false);
-                    }
+            var dataObject = JSON.parse(productby);
+            let product_grid_type = dataObject.product_grid_type;
+            let exclude_category = dataObject.exclude_category;
+            let post__not_in = dataObject.post__not_in;
+            let offset = dataObject.offset;
+            let product_orderby = dataObject.product_orderby;
+            let product_order = dataObject.product_order;
+            let ignore_sticky_posts = dataObject.ignore_sticky_posts;
+            let debounceTimeoutData;
 
-                    $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
+            clearTimeout(debounceTimeoutData);
+            debounceTimeoutData = setTimeout(function() {
 
-                },
-                success: function (response) {
-                    $('#loading-spinner-load-more').hide(); // Hide spinner
-                    if (response) {
-                        
-                        if (page == 1) {
-                            $('.rbt-tab-items').html(response);
-                        } else {
-                            $('.rbt-tab-items').append(response);
+                // Function to initialize Isotope
+                function initializeIsotope() {
+                    $('.rbt-tabs-active-2').imagesLoaded(() => {
+                        $('.rbt-tabs-active-2').isotope({
+                            itemSelector: '.rbt-tab-item-2',
+                        });
+
+                        $('.tabs-2 li').on('click', function () {
+                            $('.tabs-2 li').removeClass('active');
+                            $(this).addClass('active');
+
+                            var selector = $(this).attr('data-filter2');
+                            $('.rbt-tabs-active-2').isotope({
+                                filter: selector
+                            });
+                            return false;
+                        });
+
+                        // Initialize Isotope on page load
+                        var activeTab = $('.tabs-2 li.active');
+                        if (activeTab.length > 0) {
+                            var category = activeTab.attr('data-filter2');
+                            $('.rbt-tabs-active-2').isotope({
+                                filter: category
+                            });
                         }
-
-                        var activeTab = $('.rbt-tab-link.active');
-                        var countFilterValue = parseInt(activeTab.data('countfilter'), 10); 
-
-                        console.log(countFilterValue);
-
-                        var totalPages = Math.ceil(countFilterValue / perpage);
-
-                        $('#rainbowit-load-more').text('Load More').prop('disabled', false).show();
-
-                        // Hide load more button if there are no more pages
-                        if (page >= totalPages) {
-                            $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
-                        }
-
-                       
-                    } else {
-                        if (page == 1) {
-                            $('.rbt-tab-items').html('<p>No products found</p>');
-                        }
-                        $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
-                    }
-                },
-                error: function() {
-                    $('#loading-spinner').hide(); // Hide spinner on error
-                    $('#rainbowit-load-more').text('Load More').prop('disabled', false);
+                    });
                 }
-            });
+
+                function loadProducts(category, page) {
+                    $.ajax({
+                        url: rainbowit_portfolio_ajax.ajax_url,
+                        type: 'POST',
+                        data: {
+                            action: 'rainbowit_load_more_products',
+                            page: page,
+                            category: category,
+                            perpage: perpage,
+                            product_grid_type: product_grid_type,
+                            exclude_category: exclude_category,
+                            post__not_in: post__not_in,
+                            offset: offset,
+                            product_orderby: product_orderby,
+                            product_order: product_order,
+                            ignore_sticky_posts: ignore_sticky_posts,
+                        },
+                        beforeSend: function () {
+                            if (page == 1) {
+                                $('#loading-spinner-load-more').show();
+
+                            }
+
+                        },
+                        success: function (response) {
+                            $('#loading-spinner-load-more').hide(); // Hide spinner
+                            if (response) {
+
+                                if (page == 1) {
+                                    $('.rbt-tab-items').html(response);
+                                } else {
+                                    // Append new items with fade-in effect
+                                    var $newItems = $(response).css({ opacity: 0 });
+                                    $('.rbt-tab-items').append($newItems);
+                                    $newItems.animate({ opacity: 1 }, 400); // Adjust animation duration as needed
+
+                                    // Update Isotope after appending new content
+                                    $('.rbt-tabs-active-2').isotope('appended', $newItems).isotope('layout');
+                                }
+
+                                var activeTab = $('.rbt-tab-link.active');
+                                var countFilterValue = parseInt(activeTab.data('countfilter'), 10);
+
+                                var totalPages = Math.ceil(countFilterValue / perpage);
+
+                                $('#rainbowit-load-more').text('Load More').prop('disabled', false).show();
+
+                                // Hide load more button if there are no more pages
+                                if (page >= totalPages) {
+                                    $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
+                                }
+
+                                // Update Isotope after appending new content
+                                $('.rbt-tabs-active-2').isotope('reloadItems').isotope();
+
+                            } else {
+                                if (page == 1) {
+                                    $('.rbt-tab-items').html('<p>No products found</p>');
+                                }
+                                $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
+                            }
+                        },
+                        error: function () {
+                            $('#loading-spinner').hide(); // Hide spinner on error
+                            $('#rainbowit-load-more').text('Load More').prop('disabled', false).hide();
+                        },
+                    });
+                }
+
+                // Load More Button
+                $('#rainbowit-load-more').on('click', function () {
+                    page++;
+                    loadProducts(currentCategory, page);
+                });
+
+                // Filter by Category
+                $('.rbt-tab-link').on('click', function () {
+                    var button = $(this),
+                        category = button.data('filter2').replace('.', '');
+
+                    let allcat = button.data('allcat');
+
+                    category = allcat ? allcat : category;
+
+                    $('.rbt-tab-link').removeClass('');
+                    button.addClass('active');
+                    currentCategory = category;
+                    $('.rainbowit-load-more').attr('data-cate', category);
+
+                    // Reset page to 1 and load products
+                    page = 1;
+                    loadProducts(category, page);
+                });
+
+                initializeIsotope();
+
+                // Load default category products on page load
+                loadProducts(currentCategory, page);
+            }, 500);
+
         }
 
-        // Load More Button
-        $('#rainbowit-load-more').on('click', function () {
-            page++;
-            loadProducts(currentCategory, page);
+
+        /**
+         * Create an ajax for header search
+         * 
+         * @since 1.0.0
+         * @return void
+         */
+
+        let debounceTimeout;
+        $('.ajax_search_rainbowit_product').on('input', function(e) {
+
+            let searchTitle = e.target.value;
+
+            searchTitle = "Showing Results for: " + "<span class='search-red-title'>"+ searchTitle + "</span>";
+
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(function() {
+                const inputValue = e.target.value;
+                // data
+                const data = {
+                    action: 'rbt_ajax_header_search',
+                    url: rainbowit_portfolio_ajax.ajax_url,
+                    nonce: rainbowit_portfolio_ajax.ajax_nonce,
+                    inputValue
+                }
+                $.ajax({
+                    type: 'post',
+                    url: rainbowit_portfolio_ajax.ajax_url,
+                    data,
+                    beforeSend: () => {
+                        $('.rainbow-header-popular-item-ajax').html( '<p>Loading</p>' );
+                    },
+                    success: (response) => {
+                        const content = response?.data?.products;
+                        $('.rainbow-header-popular-item-ajax').html( content );
+                        $('.rainbowit-search-title').html(searchTitle);
+                       // Showing Results for “Agency Template”
+                    },
+                    error: (err) => {
+                        console.log(err);
+                    }
+                })
+            }, 500);
         });
-
-        // Filter by Category
-        $('.rbt-tab-link').on('click', function () {
-            var button = $(this),
-                category = button.data('filter2').replace('.', '');
-                
-
-            $('.rbt-tab-link').removeClass('');
-            button.addClass('active');
-            currentCategory = category;
-            $('.rainbowit-load-more').attr('data-cate', category);
-
-            // Reset page to 1 and load products
-            page = 1;
-            loadProducts(category, page);
-        });
-
-        // Load default category products on page load
-        loadProducts(currentCategory, page);
     });
+
+
 
 }(jQuery));
 

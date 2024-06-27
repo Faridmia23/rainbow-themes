@@ -338,7 +338,8 @@ function get_elementor_template_library()
     return $posts;
 }
 
-function redirect_empty_cart_to_shop() {
+function redirect_empty_cart_to_shop()
+{
     if (is_cart() && WC()->cart->is_empty()) {
         wp_safe_redirect(wc_get_page_permalink('shop'));
         exit;
@@ -347,11 +348,12 @@ function redirect_empty_cart_to_shop() {
 
 add_action('template_redirect', 'redirect_empty_cart_to_shop');
 
-function exclude_plan_products_from_shop( $query ) {
-    if ( ! is_admin() && $query->is_main_query() && ( is_shop() || is_product_category() || is_product_tag() ) ) {
+function exclude_plan_products_from_shop($query)
+{
+    if (!is_admin() && $query->is_main_query() && (is_shop() || is_product_category() || is_product_tag())) {
         $meta_query = $query->get('meta_query');
 
-        if ( empty( $meta_query ) ) {
+        if (empty($meta_query)) {
             $meta_query = array();
         }
 
@@ -373,4 +375,108 @@ function exclude_plan_products_from_shop( $query ) {
 }
 
 
-add_action( 'pre_get_posts', 'exclude_plan_products_from_shop' );
+add_action('pre_get_posts', 'exclude_plan_products_from_shop');
+
+
+//short code to get the woocommerce recently viewed products
+function custom_track_product_view()
+{
+    if (!is_singular('product')) {
+        return;
+    }
+
+    global $post;
+
+    if (empty($_COOKIE['woocommerce_recently_viewed']))
+        $viewed_products = array();
+    else
+        $viewed_products = (array) explode('|', $_COOKIE['woocommerce_recently_viewed']);
+
+    if (!in_array($post->ID, $viewed_products)) {
+        $viewed_products[] = $post->ID;
+    }
+
+    if (sizeof($viewed_products) > 15) {
+        array_shift($viewed_products);
+    }
+
+    // Store for session only
+    wc_setcookie('woocommerce_recently_viewed', implode('|', $viewed_products));
+}
+
+/**
+ * Recently viewed  product functionality
+ * 
+ * This will work for when view product
+ * 
+ * @since
+ * @return void
+ */
+
+add_action('template_redirect', 'custom_track_product_view', 20);
+function rc_woocommerce_recently_viewed_products($atts, $content = null)
+{
+    global $post;
+    // Get shortcode parameters
+    extract(shortcode_atts(array(
+        "per_page" => '5'
+    ), $atts));
+
+    // Get WooCommerce Global
+    global $woocommerce;
+    // Get recently viewed product cookies data
+    $viewed_products = !empty($_COOKIE['woocommerce_recently_viewed']) ? (array) explode('|', $_COOKIE['woocommerce_recently_viewed']) : array();
+    $viewed_products = array_filter(array_map('absint', $viewed_products));
+
+    // If no data, quit
+    if (empty($viewed_products))
+        return __('You have not viewed any product yet!', 'rc_wc_rvp');
+    // Create the object
+    ob_start();
+
+    // Get products per page
+    if (!isset($per_page) ? $number = 5 : $number = $per_page)
+        // Create query arguments array
+        $query_args = array(
+            'posts_per_page' => $number,
+            'no_found_rows'  => 1,
+            'post_status'    => 'publish',
+            'post_type'      => 'product',
+            'post__in'       => $viewed_products,
+            'orderby'        => 'rand'
+        );
+
+        // Add meta_query to query args
+        $query_args['meta_query'] = array();
+
+        // Check products stock status
+        $query_args['meta_query'][] = $woocommerce->query->stock_status_meta_query();
+
+        // Create a new query
+        $query_post = new WP_Query($query_args);
+
+        // ----
+        if (empty($query_post)) {
+            return __('You have not viewed any product yet!', 'rainbowit');
+        }
+
+
+        while ($query_post->have_posts()) : $query_post->the_post();
+            $url = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
+
+            $located = locate_template('woocommerce/content-product-grid4.php', false, false);
+            if ($located) {
+                include($located);
+            }
+        // end html loop  
+        endwhile;
+
+        wp_reset_postdata();
+        // ----
+        // Get clean object
+        $content .= ob_get_clean();
+        // Return whole content
+        return $content;
+    }
+    // Register the shortcode
+    add_shortcode("woocommerce_recently_viewed_products", "rc_woocommerce_recently_viewed_products");

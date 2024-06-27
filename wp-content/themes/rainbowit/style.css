@@ -2483,3 +2483,248 @@ ul.banner-icon-wrapper {
         transform: rotate(360deg);
     }
 }
+
+/* search css */
+
+.search-trigger-active.rbt-round-btn {
+    width: 40px;
+    height: 40px;
+    line-height: 41px;
+    text-align: center;
+    border-radius: 100%;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+    padding: 0;
+    border: 0 none;
+    display: block;
+}
+
+.search-trigger-active.rbt-round-btn::after {
+    background: var(--color-grayscale-2);
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transition: 0.4s;
+    opacity: 1;
+    transform: scale(0.8);
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.search-trigger-active.rbt-round-btn:hover::after, 
+.search-trigger-active.rbt-round-btn::after {
+    opacity: 1;
+    transform: scale(1);
+}
+.side-nav-opened body {
+    position: relative;
+}
+
+.side-nav-opened body::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(7.5px);
+    z-index: 1002;
+    transition: all 0.7s;
+}
+
+.side-nav-opened body::before, 
+.close_side_menu, .popup-mobile-menu, 
+.rbt-offcanvas-side-menu {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(7.5px);
+}
+
+.rbt-search-dropdown.active {
+    display: block;
+}
+
+.side-nav-opened .rbt-header .rbt-header-wrapper.sticky {
+    background: unset!important;
+    box-shadow: unset;
+}
+
+.popular-product-items {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.nav-login-btn {
+    padding-left: 25px;
+    position: relative;
+}
+
+.nav-login-btn::after {
+    background: #D5D5D5;
+    width: 1px;
+    height: 24px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    content: "";
+}
+
+
+@media (min-width: 1400px) {
+    .header-custom-container {
+        max-width: 1350px;
+    }
+    
+}
+
+.popular-product-items .rbt-title-style-2 {
+    font-size: 20px;
+}
+
+.popular-product-items .rbt-card .rbt-card-body .title {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    text-transform: capitalize;
+}
+
+.popular-product-items .rbt-card .rbt-card-body .rbt-card-meta .category {
+    color: #6E8393;
+    font-family: "IBM Plex Sans";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.popular-product-items .rbt-card .rbt-card-body .rbt-card-meta .rating-icon,.popular-product-items .rating-count {
+    font-size: 10px;
+}
+
+
+.ajax_search_rainbowit_product {
+    position: relative;
+}
+
+.ajax_search_rainbowit_product .search-button {
+    position: absolute;
+    left: 22px;
+    top: 52%;
+    transform: translateY(-50%);
+    height: 100%;
+    background: transparent;
+    padding: 0;
+    border: 0 none;
+    display: block;
+    width: 50px;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.ajax_search_rainbowit_product .search-button i {
+    color: #000;
+}
+
+input[name="s"]::placeholder {
+    color: #6E8393;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 34px; /* 188.889% */
+    text-transform: capitalize;
+}
+
+.popular-product-items .rbt-card .rbt-card-body .rbt-card-meta {
+    margin-bottom: 0;
+}
+
+
+.popular-product-items .woocommerce  .star-rating {
+    font-size: 12px;
+}
+
+.popular-product-items .woocommerce .review {
+    gap: 5px;
+}
+
+.popular-product-items .woocommerce .rating-count {
+    margin-top: 1;
+}
+
+
+.popular-product-items .single-item:nth-last-child(n+2) {
+    margin-bottom: 10px !important;
+}
+
+.section-title.recently-viewed-product-title {
+    margin-top: 10px;
+}
+ 
+.recently-viewed-product {
+    padding-bottom: 40px!important;
+}
+
+.popular-product-items.no-view-product {
+    margin-bottom: 20px;
+}
+
+.rainbowit-no-result-found {
+    text-align: center;
+}
+
+.search-red-title {
+    color: var(--color-primary);
+}
+
+.search.search-no-results .no-results.not-found{
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.search.search-no-results .breadcrumb {
+    padding-bottom: 110px;
+}
+
+.search.search-no-results  .blog-search-page { 
+    margin-top: 0;
+    padding: 120px 0;
+}
+
+.blog-search {
+    position: relative;
+}
+
+.blog-search .search-button, 
+.blog-search .wp-block-search__button, 
+.widget_search .search-button, 
+.widget_search .wp-block-search__button {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--gradient-primary);
+    height: 47px;
+    padding: 0 20px;
+    border-radius: 3px;
+    text-align: center;
+    color: var(--color-white);
+    border-color: var(--gradient-primary);
+    border-width: 2px;
+    transition: 0.3s;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.blog-search input[type="text"]{
+    height: 55px;
+    border: 2px solid var(--color-primary);
+}
+

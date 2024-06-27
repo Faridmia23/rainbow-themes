@@ -16,6 +16,9 @@ class ajax_requests
 
         add_action('wp_ajax_rbt_ajax_product_order_now', array($this, 'rbt_ajax_product_order_now_func'));
         add_action('wp_ajax_nopriv_rbt_ajax_product_order_now', array($this, 'rbt_ajax_product_order_now_func'));
+        
+        add_action('wp_ajax_rbt_ajax_header_search', array($this, 'rbt_ajax_header_search_func'));
+        add_action('wp_ajax_nopriv_rbt_ajax_header_search', array($this, 'rbt_ajax_header_search_func'));
 
         add_action('wp_ajax_rbt_ajax_envato_api_product', array($this, 'rbt_ajax_envato_api_product_func'));
         add_action('wp_ajax_nopriv_rbt_ajax_envato_api_product', array($this, 'rbt_ajax_envato_api_product_func'));
@@ -23,7 +26,68 @@ class ajax_requests
         add_action('wp_ajax_rainbowit_load_more_products', array($this, 'rainbowit_load_more_products'));
         add_action('wp_ajax_nopriv_rainbowit_load_more_products', array($this, 'rainbowit_load_more_products'));
     }
+    /**
+     * Ajax search functionality for header search popup
+     * 
+     * This will work for all product are available
+     * 
+     * @since 1.0.0
+     * @return void
+     */
+    public function rbt_ajax_header_search_func() {
+        /**
+         * return  if nonce is not exists
+         */
+        if( !isset($_POST['nonce']) ) {
+            return wp_send_json_error(
+                array(
+                    'message' => __( 'Sorry! nonce is not exists.', 'rainbowit' )
+                ),
+                404
+            );
+        }
+        /**
+         * Check if nonce are valid then do other things.
+         */
+        if (wp_verify_nonce(wp_unslash($_POST['nonce']), 'rainbowit-feature-plugin')) {
+            $search_query = isset($_POST['inputValue']) ? sanitize_text_field(wp_unslash($_POST['inputValue'])) : '';
+            /**
+             * Query for fetch posts
+             */
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'ignore_sticky_post' => true,
+                's' => $search_query
+            );
+            $query = new \WP_Query($args);
+            if( $query->have_posts() ) {
+                ob_start();
+                while($query->have_posts()) {
+                    $query->the_post();
+                    global $product;
+                    $product_id = $product->get_id();
+                    $located = locate_template('woocommerce/content-product-grid4.php', false, false);
+                    if ($located) {
+                        include($located);
+                    }
+                }
+                $rbt_products = ob_get_clean();
+            } else { 
+               echo '<div class="rainbowit-no-result-found">No results found.</div>';
 
+                $rbt_products = ob_get_clean();
+                
+            }
+            return wp_send_json_success(
+                array(
+                    'message' => __( 'Product fetch successfully!', 'rainbowit' ),
+                    'products' => $rbt_products
+                ),
+            );
+        }
+        die;
+    }
     function rainbowit_ajax_enqueue()
     {
         wp_enqueue_script('rainbowit-core-ajax', RAINBOWIT_ADDONS_URL . 'assets/js/ajax-scripts.js', array('jquery'), null, true);
@@ -46,42 +110,38 @@ class ajax_requests
     function rainbowit_load_more_products()
     {
 
-        $paged = isset($_POST['page']) ? $_POST['page'] : 1;
-        $posts_per_page = isset($_POST['perpage']) ? $_POST['perpage'] : -1;
-        $category = isset($_POST['category']) ? explode(',', $_POST['category']) : array();
-        $post__not_in = isset($_POST['post__not_in']) ? explode(',', $_POST['post__not_in']) : array();
-
-        $product_grid_type = isset($_POST['product_grid_type']) ? $_POST['product_grid_type'] : 1;
-        $offset = isset($_POST['offset']) ? $_POST['offset'] : 0;
-        $exclude_categories = isset($_POST['exclude_category']) ? $_POST['exclude_category'] : array();
-
-        $product_order_by = isset($_POST['product_orderby']) ? $_POST['product_orderby'] : 'date';
-        $product_order = isset($_POST['product_order']) ? $_POST['product_order'] : 'desc';
-        $ignore_sticky_posts = isset($_POST['ignore_sticky_posts']) ? $_POST['ignore_sticky_posts'] : '';
+        $paged                  = isset($_POST['page']) ? $_POST['page'] : 1;
+        $posts_per_page         = isset($_POST['perpage']) ? $_POST['perpage'] : -1;
+        $category               = isset($_POST['category']) ? explode(',', $_POST['category']) : array();
+        $post__not_in           = isset($_POST['post__not_in']) ? explode(',', $_POST['post__not_in']) : array();
+        $product_grid_type      = isset($_POST['product_grid_type']) ? $_POST['product_grid_type'] : 1;
+        $offset                 = isset($_POST['offset']) ? $_POST['offset'] : 0;
+        $exclude_categories     = isset($_POST['exclude_category']) ? $_POST['exclude_category'] : array();
+        $product_order_by       = isset($_POST['product_orderby']) ? $_POST['product_orderby'] : 'date';
+        $product_order          = isset($_POST['product_order']) ? $_POST['product_order'] : 'desc';
+        $ignore_sticky_posts    = isset($_POST['ignore_sticky_posts']) ? $_POST['ignore_sticky_posts'] : '';
 
         $exclude_category_list_value = explode(",", $exclude_categories);
 
-        // echo "<pre>";
-        // print_r($exclude_category_list_value );
-        // echo "</pre>";
         $post__not_in = '';
         if (!empty($post__not_in)) {
             $post__not_in = $post__not_in;
             $args['post__not_in'] = $post__not_in;
         }
 
-        $posts_per_page = (!empty($posts_per_page)) ? $posts_per_page : '-1';
-        $orderby = (!empty($product_order_by)) ? $product_order_by : 'post_date';
-        $order = (!empty($product_order)) ? $product_order : 'desc';
-        $offset_value = (!empty($offset)) ? $offset : '0';
-        $ignore_sticky_posts = (!empty($ignore_sticky_posts) && 'yes' == $ignore_sticky_posts) ? true : false;
+        $posts_per_page         = (!empty($posts_per_page)) ? $posts_per_page : '-1';
+        $orderby                = (!empty($product_order_by)) ? $product_order_by : 'post_date';
+        $order                  = (!empty($product_order)) ? $product_order : 'desc';
+        $offset_value           = (!empty($offset)) ? $offset : '0';
+        $ignore_sticky_posts    = (!empty($ignore_sticky_posts) && 'yes' == $ignore_sticky_posts) ? true : false;
 
 
         // number
-        $off = (!empty($offset_value)) ? $offset_value : 0;
-        $offset = $off + (($paged - 1) * $posts_per_page);
-        $p_ids = array();
-        $post__not_in = isset($_POST['post__not_in']) ? explode(',', $_POST['post__not_in']) : array();
+        $off            = (!empty($offset_value)) ? $offset_value : 0;
+        $offset         = $off + (($paged - 1) * $posts_per_page);
+        $p_ids          = array();
+        $post__not_in   = isset($_POST['post__not_in']) ? explode(',', $_POST['post__not_in']) : array();
+
         // build up the array
         if (!empty($post__not_in)) {
             foreach ($post__not_in as $p_idsn) {
@@ -90,15 +150,15 @@ class ajax_requests
         }
 
         $args = array(
-            'post_type' => 'product',
-            'post_status' => 'publish',
-            'posts_per_page' => $posts_per_page,
-            'orderby' => $orderby,
-            'order' => $order,
-            'offset' => $offset,
-            'paged' => $paged,
-            'post__not_in' => $p_ids,
-            'ignore_sticky_posts' => $ignore_sticky_posts
+            'post_type'             => 'product',
+            'post_status'           => 'publish',
+            'posts_per_page'        => $posts_per_page,
+            'orderby'               => $orderby,
+            'order'                 => $order,
+            'offset'                => $offset,
+            'paged'                 => $paged,
+            'post__not_in'          => $p_ids,
+            'ignore_sticky_posts'   => $ignore_sticky_posts
         );
 
         // Initialize tax_query if it's not already set
@@ -229,7 +289,6 @@ class ajax_requests
 
         /*end product category count code*/
 
-
         if ($products_query2->have_posts()) {
             while ($products_query2->have_posts()) {
                 $products_query2->the_post();
@@ -250,8 +309,10 @@ class ajax_requests
                             $parentList[] = ''; // If parent term is not found or is an error, add empty string
                         }
                     }
+
                     $termsAssignedCat = join(" ", $termsList);
                     $parentCat = join(" ", $parentList);
+
                 } else {
                     $termsAssignedCat = '';
                     $parentCat = '';
@@ -266,7 +327,7 @@ class ajax_requests
                     $envato_product_preview_url         =  get_post_meta(get_the_ID(), '_own_product_preview_url', true);
                     $envato_product_total_sales         =  get_post_meta(get_the_ID(), '_own_product_total_sales', true);
                     $rating                             = get_post_meta(get_the_ID(), '_wc_average_rating', true);
-                    $review_count                     =  $product->get_review_count();
+                    $review_count                       =  $product->get_review_count();
                 } else {
 
                     $envato_product_preview_url     =  get_post_meta(get_the_ID(), '_envato_product_preview_url', true);
@@ -282,8 +343,7 @@ class ajax_requests
                     $tag_link = get_term_link($tag);
                 }
 
-
-                $preview_btn_text                 =  isset($rainbowit_options['preview_btn_text']) ? $rainbowit_options['preview_btn_text'] : '';
+                $preview_btn_text    =  isset($rainbowit_options['preview_btn_text']) ? $rainbowit_options['preview_btn_text'] : '';
 ?>
                 <div data-catcount="<?php echo esc_attr($cat_count);?>" class="col-12 col-md-6 col-xl-4 mb--25 rbt-tab-item-2 <?php echo esc_attr(strtolower($termsAssignedCat)); ?> <?php echo esc_attr(strtolower($parentCat)); ?>">
                     <div class="rbt-card">
@@ -345,9 +405,10 @@ class ajax_requests
                         </div>
                     </div>
                 </div>
-<?php
-
+        <?php
             }
+
+            wp_reset_postdata();
         }
 
         wp_die();
@@ -448,12 +509,14 @@ class ajax_requests
                 $product = wc_get_product(get_the_ID());
                 $product->save();
             }
+
+            // Reset post data
+            wp_reset_postdata();
+
         } else {
             echo '<p>No external products found.</p>';
         }
 
-        // Reset post data
-        wp_reset_postdata();
 
         if ($set_option) {
             echo "success";

@@ -251,7 +251,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
                                         $category_list2 = implode(",", $product_cat);
                                     }
                                 ?>
-                                    <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2="<?php echo esc_attr($explode_cat); ?>" data-countfilter="<?php echo esc_html($products_query->found_posts); ?>">
+                                    <li class="rbt-tab-link <?php echo esc_attr($active); ?>" data-filter2="*" data-countfilter="<?php echo esc_html($products_query->found_posts); ?>" data-allcat="<?php echo esc_attr($category_list2);?>">
                                         <?php echo esc_html($settings['filter_label_text']); ?>
                                         <span class="count"><?php echo esc_html($products_query->found_posts); ?></span>
                                     </li>
@@ -345,7 +345,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                     ?>
                     <input type="hidden" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>" />
-                    <div class="row row--12 rbt-tab-items">
+                    <div class="row row--12 rbt-tab-items rbt-tabs-active-2">
                     <div class="load-more-spinner" id="loading-spinner-load-more"></div>
 
 
@@ -357,7 +357,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                     ?>
                         <div class="rainbowit-load-more-button">
-                            <button type="button" id="rainbowit-load-more" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>"><?php echo esc_html__("Load More", "rainbowit"); ?></button>
+                            <button type="button" id="rainbowit-load-more" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>" style="display:none;"><?php echo esc_html__("Load More", "rainbowit"); ?></button>
                         </div>
 
                 <?php

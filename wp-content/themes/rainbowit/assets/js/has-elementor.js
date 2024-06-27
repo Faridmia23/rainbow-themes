@@ -218,16 +218,16 @@
             };
             openSideNav = function (e) {
                 e.preventDefault();
-                eduJs.sideNav.addClass('active');
+                rbt.sideNav.addClass('active');
                 $('.search-trigger-active').addClass('open');
-                eduJs._html.addClass('side-nav-opened');
+                rbt._html.addClass('side-nav-opened');
             };
 
             closeSideNav = function (e) {
                 if (!$('.rbt-search-dropdown, .rbt-search-dropdown *:not(".search-trigger-active, .search-trigger-active *")').is(e.target)) {
-                    eduJs.sideNav.removeClass('active');
+                    rbt.sideNav.removeClass('active');
                     $('.search-trigger-active').removeClass('open');
-                    eduJs._html.removeClass('side-nav-opened');
+                    rbt._html.removeClass('side-nav-opened');
                 }
             };
             rbt._document

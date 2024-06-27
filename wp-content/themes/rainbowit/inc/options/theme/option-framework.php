@@ -1195,7 +1195,13 @@ if ( class_exists( 'WooCommerce' ) ) {
         
     ));
 
-    
+    Redux::set_field( $opt_name, 'product_header_search', array( 
+        'id' => 'popular_product_title',
+        'type' => 'text',
+        'title'    => esc_html__('Popular Product Title', 'rainbowit'), 
+        'default'  => 'Popular Items',
+    ) );
+
     Redux::set_field( $opt_name, 'product_header_search', array( 
         'id' => 'product_perpage',
         'type' => 'text',

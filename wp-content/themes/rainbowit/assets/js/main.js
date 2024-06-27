@@ -513,10 +513,17 @@
             }
             setTimeout(function() {
                 // Hide preloader
-                document.getElementById('rainbowit-preloader').style.display = 'none';
+
+                var preloader = document.getElementById('rainbowit-preloader');
+                if (preloader) {
+                    preloader.style.display = 'none';
+                } 
             
+                var mainContent = document.getElementById('rainbowit-main-content');
                 // Show main content
-                document.getElementById('rainbowit-main-content').style.display = 'block';
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                } 
 
                 // Initialize odometer (assuming you're using the Odometer library)
                 var odometerElement = document.querySelector('.odometer');

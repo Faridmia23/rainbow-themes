@@ -25,6 +25,7 @@ $product_perpage        = isset($rainbowit_options['product_perpage']) ? $rainbo
 $product_grid_type      = isset($rainbowit_options['product_grid_type']) ? $rainbowit_options['product_grid_type'] : '';
 $product_order          = isset($rainbowit_options['product_order']) ? $rainbowit_options['product_order'] : '';
 $product_orderby        = isset($rainbowit_options['product_order']) ? $rainbowit_options['product_orderby'] : '';
+$popular_product_title        = isset($rainbowit_options['popular_product_title']) ? $rainbowit_options['popular_product_title'] : '';
 
 
 $viewed_products = !empty($_COOKIE['woocommerce_recently_viewed']) ? (array) explode('|', $_COOKIE['woocommerce_recently_viewed']) : array();
@@ -60,7 +61,7 @@ if( empty( $viewed_products ) ) {
         <div class="section-title pt--30">
             <div class="row align-items-center">
                 <div class="col-12">
-                    <h5 class="rbt-title-style-2 rainbowit-search-title">Popular Items</h5>
+                    <h5 class="rbt-title-style-2 rainbowit-search-title"><?php echo esc_html($popular_product_title );?></h5>
                 </div>
             </div>
         </div>

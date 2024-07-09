@@ -519,11 +519,15 @@
                     preloader.style.display = 'none';
                 } 
             
-                var mainContent = document.getElementById('rainbowit-main-content');
+                var mainContent = document.getElementsByClassName('counter-wrapper');
                 // Show main content
-                if (mainContent) {
-                    mainContent.style.display = 'block';
-                } 
+                // Check if any elements were found
+                if (mainContent.length > 0) {
+                    // Loop through each element and set display to 'block'
+                    for (var i = 0; i < mainContent.length; i++) {
+                        mainContent[i].style.display = 'flex';
+                    }
+                }
 
                 // Initialize odometer (assuming you're using the Odometer library)
                 var odometerElement = document.querySelector('.odometer');
@@ -531,18 +535,23 @@
                 odometerElement.innerHTML = odometerValue;
                 var elements2 = document.getElementsByClassName('brand-wrapper-preloader');
                 for (var i = 0; i < elements2.length; i++) {
-                    elements2[i].style.position = 'static';
+                    elements2[i].style.position = 'relative';
                 }
             }, 2000); // Adjust the timeout duration as needed
         }
             
     });
 
-   $('.search-trigger-close-icon').on("click",function() {
+   $('.search-trigger-close-icon').on("click",function(e) {
+        e.preventDefault();
         rbt.sideNav.removeClass('active');
         $('.search-trigger-active').removeClass('open');
         rbt._html.removeClass('side-nav-opened');
+        
     });
+
+  
+
 
 
 })(window, document, jQuery);

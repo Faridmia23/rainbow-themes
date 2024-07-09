@@ -25,7 +25,19 @@ class ajax_requests
 
         add_action('wp_ajax_rainbowit_load_more_products', array($this, 'rainbowit_load_more_products'));
         add_action('wp_ajax_nopriv_rainbowit_load_more_products', array($this, 'rainbowit_load_more_products'));
+
+        add_action('wp_ajax_rainbowit_get_cart_count', array($this,'rainbowit_get_cart_count'));
+        add_action('wp_ajax_nopriv_rainbowit_get_cart_count', array($this,'rainbowit_get_cart_count'));
     }
+
+    function rainbowit_get_cart_count() {
+        if (class_exists('woocommerce')) {
+            echo WC()->cart->get_cart_contents_count();
+        }
+        wp_die();
+    }
+    
+    
     /**
      * Ajax search functionality for header search popup
      * 
@@ -34,14 +46,15 @@ class ajax_requests
      * @since 1.0.0
      * @return void
      */
+
     public function rbt_ajax_header_search_func() {
         /**
-         * return  if nonce is not exists
+         * Return if nonce is not exists
          */
-        if( !isset($_POST['nonce']) ) {
+        if (!isset($_POST['nonce'])) {
             return wp_send_json_error(
                 array(
-                    'message' => __( 'Sorry! nonce is not exists.', 'rainbowit' )
+                    'message' => __('Sorry! nonce is not exists.', 'rainbowit')
                 ),
                 404
             );
@@ -51,19 +64,40 @@ class ajax_requests
          */
         if (wp_verify_nonce(wp_unslash($_POST['nonce']), 'rainbowit-feature-plugin')) {
             $search_query = isset($_POST['inputValue']) ? sanitize_text_field(wp_unslash($_POST['inputValue'])) : '';
+    
             /**
-             * Query for fetch posts
+             * Add a custom filter to modify the search query
+             */
+            add_filter('posts_search', 'custom_search_by_title', 10, 2);
+    
+            add_filter('posts_search', 'custom_search_by_title', 10, 2);
+
+            function custom_search_by_title($search, $wp_query) {
+                global $wpdb;
+
+                // Only modify the query for the main search
+                if (!empty($wp_query->query_vars['s']) && $wp_query->is_search()) {
+                    $search_term = '%' . $wpdb->esc_like($wp_query->query_vars['s']) . '%';
+                    $search = $wpdb->prepare(" AND {$wpdb->posts}.post_title LIKE %s ", $search_term);
+                }
+
+                return $search;
+            }
+                
+            /**
+             * Query for fetching posts
              */
             $args = array(
                 'post_type' => 'product',
                 'posts_per_page' => -1,
-                'ignore_sticky_post' => true,
-                's' => $search_query
+                'ignore_sticky_posts' => true,
+                's' => $search_query // Use the 's' parameter
             );
+    
             $query = new \WP_Query($args);
-            if( $query->have_posts() ) {
+            if ($query->have_posts()) {
                 ob_start();
-                while($query->have_posts()) {
+                while ($query->have_posts()) {
                     $query->the_post();
                     global $product;
                     $product_id = $product->get_id();
@@ -72,22 +106,56 @@ class ajax_requests
                         include($located);
                     }
                 }
-                $rbt_products = ob_get_clean();
-            } else { 
-               echo '<div class="rainbowit-no-result-found">No results found.</div>';
-
+                $found_product = 'yes';
                 $rbt_products = ob_get_clean();
                 
+            } else {
+               
+                $found_product = 'no';
+                $query_args =  array(
+                    'posts_per_page' =>  9, // -1 (for all)
+                    'post_type'      =>  array( 'product' ),
+                    'post_status'    =>  'publish',
+                    'meta_key'       => 'total_sales',
+                    'order'          => 'DESC',
+                    'orderby'        => 'meta_value_num',
+                    'ignore_sticky_posts' => true,
+                );
+
+                $query = new \WP_Query($query_args);
+
+                if ($query->have_posts()) {
+                    ob_start();
+                    while ($query->have_posts()) {
+                        $query->the_post();
+                        global $product;
+                        $product_id = $product->get_id();
+                        $located = locate_template('woocommerce/content-product-grid4.php', false, false);
+                        if ($located) {
+                            include($located);
+                        }
+                    }
+                    $rbt_products = ob_get_clean();
+                }
+                
             }
+    
+            // Remove the filter after the query
+            remove_filter('posts_search', 'custom_search_by_title', 10);
+    
             return wp_send_json_success(
                 array(
-                    'message' => __( 'Product fetch successfully!', 'rainbowit' ),
-                    'products' => $rbt_products
-                ),
+                    'message' => __('Product fetched successfully!', 'rainbowit'),
+                    'products' => $rbt_products,
+                    'foundproduct' => $found_product,
+                )
             );
         }
         die;
     }
+    
+
+
     function rainbowit_ajax_enqueue()
     {
         wp_enqueue_script('rainbowit-core-ajax', RAINBOWIT_ADDONS_URL . 'assets/js/ajax-scripts.js', array('jquery'), null, true);
@@ -287,6 +355,14 @@ class ajax_requests
             }
         } 
 
+        // Check if the rainbowit_Helper class exists
+        if (class_exists('Rainbowit_Helper')) {
+            $rainbowit_Helper = new \Rainbowit_Helper();
+            $rainbowit_options = $rainbowit_Helper->rainbowit_get_options();
+        } else {
+            // Handle the case where the class doesn't exist
+            return;
+        }
         /*end product category count code*/
 
         if ($products_query2->have_posts()) {

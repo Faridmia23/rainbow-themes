@@ -26,6 +26,7 @@ $header_buttontext = isset($rainbowit_options['rainbowit_header_buttontext']) ? 
 $hire_us_btn_text  = isset($rainbowit_options['rainbowit_header_hire_us_btn_text']) ? $rainbowit_options['rainbowit_header_hire_us_btn_text'] : '';
 $hire_us_buttonUrl = isset($rainbowit_options['rainbowit_header_hire_us_buttonUrl']) ? $rainbowit_options['rainbowit_header_hire_us_buttonUrl'] : '';
 $rainbowit_header_search = isset($rainbowit_options['rainbowit_header_search']) ? $rainbowit_options['rainbowit_header_search'] : '';
+$rainbowit_header_cart_icon = isset($rainbowit_options['rainbowit_header_cart_icon']) ? $rainbowit_options['rainbowit_header_cart_icon'] : '';
 $select_menu        = $nav_menu_args;
 
 $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
@@ -71,13 +72,24 @@ $rainbowit_mobile_menu_args = Rainbowit_Helper::mobile_menu_args();
                 <?php if( isset($hire_us_buttonUrl) && !empty($hire_us_buttonUrl) ) { ?>
                 <div class="header-right">
                     <div class="rbt-btn-group">
-                  
                     <?php if( $rainbowit_header_search == '1') {  ?>
                     <a class="search-trigger-active rbt-round-btn" href="#">
                         <i class="feather-search"></i>
                     </a>
-                    <?php } ?>
+                    <?php } 
+
+                    if( $rainbowit_header_cart_icon == '1') { ?>
+                    
+                    <a class="rbt-cart-sidenav-activation rbt-round-btn" href="<?php echo esc_url(home_url('/')); ?>cart"><i class="feather-shopping-cart"></i><span class="rbt-cart-count">
                         <?php 
+                            if(class_exists('woocommerce') ) {
+                                echo WC()->cart->get_cart_contents_count(); 
+                            }
+                        ?>
+                    </span></a>
+
+                        <?php 
+                    }
                             if(is_user_logged_in() ) { ?>
                         <a class="nav-login-btn d-none d-xl-block" href="<?php echo esc_url( get_permalink( get_option('woocommerce_myaccount_page_id') ) ); ?>">
                             <?php echo esc_html_e("Dashboard","rainbowit"); ?>

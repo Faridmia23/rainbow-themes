@@ -229,7 +229,7 @@ class Rainbowit_Project_history extends Widget_Base
 
 ?>
 
-<div class="rbt-section-wrapper-6 rbt-section-gapTop rbt-section-gapBottom">
+<div class="rbt-section-wrapper-6 rbt-section-gapTop rbt-section-gapBottom project-history-section">
     <div class="container">
         <div class="row row--60 mb--80">
             <div class="col-12 col-md-6">

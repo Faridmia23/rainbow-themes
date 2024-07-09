@@ -177,11 +177,6 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
             foreach ($settings['product_cat'] as $category) {
 
                 $categoryName = get_term_by('slug', $category, 'product_cat');
-
-                // echo "<pre>";
-                // print_r($product_cat);
-                // echo "</pre>";
-                // die;
                 $get_category = get_term_by('id', $categoryName->term_id, 'product_cat');
                 $get_cat       = isset($_GET['category']) ? $_GET['category'] : '';
                 $all_cat[]      = isset($categoryName->slug) ? strtolower($categoryName->slug) : '';
@@ -206,7 +201,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
             $all_cat = [];
             if ($terms && !is_wp_error($terms)) {
                 foreach ($terms as $term) {
-                    // $categoryName = get_term_by('slug', $term, 'product_cat');
+                    
                     $get_category = get_term_by('id', $term->term_id, 'product_cat');
                     $all_cat[] = $get_category->slug;
                 }
@@ -345,7 +340,7 @@ class Rainbowit_Product_Categories_Tab extends Widget_Base
 
                     ?>
                     <input type="hidden" class="rainbowit-load-more" data-page="<?php echo esc_attr($current_page); ?>" data-cate="<?php echo esc_attr($explode_cat); ?>" data-perpage="<?php echo esc_attr($posts_per_page); ?>" data-productby="<?php echo esc_attr($html_attribute); ?>" />
-                    <div class="row row--12 rbt-tab-items rbt-tabs-active-2">
+                    <div class="row row--12 rbt-tab-items">
                     <div class="load-more-spinner" id="loading-spinner-load-more"></div>
 
 

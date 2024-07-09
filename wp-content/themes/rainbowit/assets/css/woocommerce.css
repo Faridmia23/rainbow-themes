@@ -939,7 +939,7 @@ strong.woocommerce-review__author {
 
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .select2-container--default .select2-results__option--highlighted[data-selected] {
-    background-color: var(--color-primary);
+    background-color: #A8A8A8;
 }
 
 .woocommerce-order-received .woocommerce .woocommerce-thankyou-order-received {
@@ -2150,12 +2150,15 @@ span.select2-selection.select2-selection--single {
     width: 100%;
     line-height: 22px;
 }
-
-.woocommerce-message::before,
-.woocommerce-notice.woocommerce-notice--success:before {
-    color: var(--color-primary);
-}
 .woocommerce-message {
+    border-radius: 6px;
+}
+
+.woocommerce-message::before, .woocommerce-notice.woocommerce-notice--success:before {
+
+}
+
+.woocommerce-error .woocommerce-message {
     border-color: var(--color-primary) !important;
 }
 

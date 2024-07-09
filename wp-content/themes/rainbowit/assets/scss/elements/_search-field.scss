@@ -73,7 +73,7 @@
 
 
 .rbt-search-dropdown {
-    position: absolute;
+    position: fixed;
     top: 100px;
     left: 0;
     right: 0;
@@ -86,10 +86,10 @@
     z-index: 104;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.2s linear, clip 0.6s linear, visibility 0s 0.2s;
+    transition: opacity 0.3s linear, clip 0.6s linear, visibility 0s 0.2s;
     transform: translateZ(0);
     border-radius: 12px;
-    display: none;
+    opacity: 0;
     z-index: 1010;
 
     .wrapper {
@@ -101,7 +101,7 @@
                 height: 50px;
                 line-height: 48px;
                 margin: 0;
-                padding: 38px 40px 35px 66px;
+                padding: 36px 40px 35px 66px;
                 border: none;
                 border-bottom: 1px solid #E3E0F5;
                 transition: 0.3s;
@@ -116,7 +116,6 @@
         .section-title {
             padding-left: 40px;
             color: #04122B;
-
             font-family: Manrope;
             font-size: 20px;
             font-style: normal;
@@ -132,6 +131,11 @@
         transition: clip 0.6s linear, opacity 0.2s linear;
     }
 
+}
+
+.rbt-search-dropdown {
+    overflow-x: hidden;
+    overflow: hidden!important;
 }
 
 .rbt-search-dropdown.active {
@@ -173,8 +177,11 @@
     cursor: pointer;
 }
 
-.rbt-search-dropdown.active .wrapper {
+.rbt-search-dropdown.active .rbt-search-all-product {
     overflow-y: auto!important;
-    overflow-x: hidden;
     max-height: calc(100vh - 180px);
+}
+
+.rbt-search-dropdown .rbt-search-all-product {
+    overflow-x: hidden;
 }

@@ -8,6 +8,12 @@
         padding: 24px;
         border-radius: var(--radius-sm);
     }
+
+    nav {
+        &.rbt-tabs-2 {
+            flex-wrap: nowrap!important;
+        }
+    }
 }
 
 .rbt-form-wrapper-2 {
@@ -136,15 +142,11 @@ select {
         transition: 0.3s;
 
         @media #{$sm-layout} {
-            top: 16px;
+            top: 14px;
         }
     }
 
     &.focused {
-        .input-field {
-            border-color: var(--color-primary);
-        }
-
         label {
             top: -10px;
             left: 8px;
@@ -216,7 +218,6 @@ select {
 
 .rbt-checkbox {
     input[type="checkbox"] {
-        display: none;
 
         ~label {
             color: var(--color-gray-6);

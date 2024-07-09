@@ -1116,13 +1116,6 @@ tr.wc-block-cart-items__row .wc-block-cart-item__wrap a {
     padding-left: 0;
 }
 
-.wc-block-cart-item__wrap .wc-block-components-product-badge {
-    background: var(--primary-opacity);
-    color: var(--color-primary);
-    border: 0;
-}
-
-
 td.wc-block-cart-item__product .wc-block-components-quantity-selector {
     margin: 0 auto;
     height: 40px;
@@ -1131,7 +1124,6 @@ td.wc-block-cart-item__product .wc-block-components-quantity-selector {
 .wc-block-cart .wc-block-cart__submit-container a {
     color: var(--color-white);
     background-size: 300% 100%;
-    background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary), var(--color-secondary), var(--color-primary));
     padding: 0 26px;
     height: 60px;
     line-height: 60px;
@@ -1169,7 +1161,7 @@ div .wc-block-cart__submit {
     box-shadow: none;
 }
 .wp-block-woocommerce-checkout .wc-block-components-button:not(.is-link) {
-    border-radius: 8px !important;
+    border-radius: 4px !important;
 }
 .wp-block-woocommerce-checkout-order-summary-block .wc-block-components-totals-wrapper:first-child {
     padding-top: 0;
@@ -1855,7 +1847,7 @@ div .wc-block-cart__submit {
             margin-bottom: 18px;
             .comment-avatar {
                 margin-right: 20px;
-                border-radius: 3px;
+                border-radius: 50%;
             }
             h6 {
                 margin-bottom: 0;
@@ -2016,13 +2008,7 @@ div .wc-block-cart__submit {
             border: 2px solid var(--color-primary);
             margin-top: 0;
             color: #ffffff !important;
-            &:hover {
-                color: var(--color-primary) !important;
-                box-shadow: 0 10px 15px 0 rgb(249 0 77 / 10%);
-                transform: translateY(-5px);
-                background: transparent;
-                border-color: var(--color-primary) !important;
-            }
+            
         }
     }
     textarea {
@@ -2061,4 +2047,11 @@ div .wc-block-cart__submit {
             font-size: 19px;
         }
     }
+}
+
+.comment-awaiting-moderation {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }

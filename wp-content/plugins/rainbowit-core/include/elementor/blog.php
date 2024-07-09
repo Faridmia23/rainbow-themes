@@ -285,9 +285,9 @@ class rainbowit_Elementor_Widget_Blog extends Widget_Base
                                             }
                                             ?>
 
-                                                <li class="rbt-tab-link3" data-filter2=".<?php echo esc_attr($term->slug); ?>">
-                                                    <button class="filter-btn"><?php echo esc_html($term->name); ?></button>
-                                                </li>
+                                            <li class="rbt-tab-link3" data-filter2=".<?php echo esc_attr($term->slug); ?>">
+                                                <button class="filter-btn"><?php echo esc_html($term->name); ?></button>
+                                            </li>
                                 <?php
                                             
                                             $m++;

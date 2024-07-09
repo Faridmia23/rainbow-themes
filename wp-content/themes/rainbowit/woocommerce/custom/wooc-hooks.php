@@ -70,3 +70,5 @@ add_action('init', 'rainbowit_shop_show_or_hide_cross_sells');
 /* Change the breadcrumb separator */
 add_filter( 'woocommerce_breadcrumb_defaults', 'rainbowit_change_breadcrumb_delimiter' );
 
+add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
+

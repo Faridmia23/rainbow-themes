@@ -51,28 +51,20 @@ if (!empty($tags) && isset($tags[0])) {
 	$tag_link = get_term_link($tag);
 }
 
-
 $preview_btn_text 				=  isset( $rainbowit_options['preview_btn_text'] ) ? $rainbowit_options['preview_btn_text'] : '';
-
-
-
 
 ?>
 
 <div <?php wc_product_class('col-12 col-md-6 col-xl-4 single-item mb--24', $product); ?>>
 	<div class="rbt-card">
 		<div>
-		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('rainbowit-product-grid'); ?></a>
+		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 		</div>
 		<div class="rbt-card-body p--24">
 			<h3 class="title">
 				<a href="<?php the_permalink(); ?>">
 				<?php 
-					if( isset( $title_length2 ) && !empty( $title_length2 ) ) { 
-						echo wp_trim_words( get_the_title(), $title_length2,'... '); 
-					} else {
-						echo wp_trim_words( get_the_title(), '5','... '); 
-					}
+					the_title();
 				?>
 				</a>
 			</h3>

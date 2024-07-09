@@ -106,10 +106,34 @@ $social_share_on_off = isset( $rainbowit_options['rainbowit_show_blog_details_so
                 <?php } ?>
                 </div> 
             </div>
-           
-
             <div class="col-12 col-lg-8 col-xxl-8 ">
-            <?php the_content(); ?>
+                <div class="rainbowit-single-content-part">
+                <?php the_content(); ?>
+                <?php wp_link_pages( array(
+                    'before'      => '<div class="rn-pagination justify-content-center"><span class="page-link-holder">' . esc_html__( 'Pages:', 'rainbowit' ) . '</span>',
+                    'after'       => '</div>',
+                    'link_before' => '<span>',
+                    'link_after'  => '</span>',
+                ) );
+                ?>
+            </div>
+            <?php
+                /**
+                 *  Output comments wrapper if it's a post, or if comments are open,
+                 * or if there's a comment number – and check for password.
+                 * */
+                if ((is_single() || is_page()) && (comments_open() || get_comments_number()) && !post_password_required()) {
+                ?>
+
+                    <div class="comments-wrapper section-inner">
+
+                        <?php comments_template(); ?>
+
+                    </div><!-- .comments-wrapper -->
+
+                <?php
+            }
+            ?>
             </div>
             <?php if (is_active_sidebar('blog-single-right-sidebar')) { ?>
             <div class="col-12 col-xxl-2 d-xl-none d-xxl-block">

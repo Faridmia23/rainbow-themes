@@ -421,6 +421,16 @@ Redux::setSection($opt_name, array(
                 'required' => array('rainbowit_enable_header', 'equals', true),
             ),
 
+            array(
+                'id' => 'rainbowit_header_cart_icon',
+                'type' => 'switch',
+                'title' => esc_html__('Header Cart Icon', 'rainbowit'),
+                'on' => esc_html__('Enabled', 'rainbowit'),
+                'off' => esc_html__('Disabled', 'rainbowit'),
+                'default' => true,
+                'required' => array('rainbowit_enable_header', 'equals', true),
+            ),
+
         )
         
     )
@@ -1131,6 +1141,13 @@ if ( class_exists( 'WooCommerce' ) ) {
                 'id'       => 'single_product_vat_text_change',
                 'type'     => 'text',
                 'title'    => esc_html__( 'Vat Text Single Product', 'rainbowit' ),
+            ),
+
+            array(
+                'id'       => 'envato_product_feature_desc',
+                'type'     => 'textarea',
+                'title'    => esc_html__( 'Envato Product Pricing Feature Text', 'rainbowit' ),
+               
             ),
 
             array(

@@ -480,3 +480,18 @@ function rc_woocommerce_recently_viewed_products($atts, $content = null)
     }
     // Register the shortcode
     add_shortcode("woocommerce_recently_viewed_products", "rc_woocommerce_recently_viewed_products");
+
+
+    function rtb_wc_refresh_mini_cart_count($fragments)
+    {
+        ob_start();
+        
+    ?>
+       <span class="rbt-cart-count">
+            <?php echo WC()->cart->get_cart_contents_count(); ?>
+       </span>
+    <?php
+        $fragments['.rbt-cart-count'] = ob_get_clean();
+        return $fragments;
+    }
+    add_filter('woocommerce_add_to_cart_fragments', 'rtb_wc_refresh_mini_cart_count');

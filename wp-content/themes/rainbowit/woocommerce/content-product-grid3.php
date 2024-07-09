@@ -56,7 +56,7 @@ if (!empty($tags) && isset($tags[0])) {
 					if( isset( $title_length2 ) && !empty( $title_length2 ) ) { 
 						echo wp_trim_words( get_the_title(), $title_length2,'... '); 
 					} else {
-						echo wp_trim_words( get_the_title(), '5','... '); 
+						echo wp_trim_words( get_the_title(), '10','... '); 
 					}
 				?>
 				</a>

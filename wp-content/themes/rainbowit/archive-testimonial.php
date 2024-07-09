@@ -2,7 +2,7 @@
 get_header(); ?>
 
 <div class="rbt-section-wrapper rbt-section-gapTop  " id="customer-success">
-    <div class="container  ">
+    <div class="container  rainbowit-testimonial-layout">
             <div class="rbt-layout">
                 <?php
 

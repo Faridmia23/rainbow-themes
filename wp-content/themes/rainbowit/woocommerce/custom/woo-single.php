@@ -89,10 +89,10 @@ function rainbowit_before_main_content()
 ?>
 			<!--End Banner Section -->
 
-			<div class="rbt-section-wrapper-4 pt--140 pb--60">
+			<div class="rbt-section-wrapper-4 pt--140 pb--60 woo-single-top-breadcrumb">
 				<div class="container">
 					<div class="row row--12 row-gap-4 ">
-						<div class="col-12 col-md-6 col-lg-6 col-xl-6 ms-auto">
+						<div class="col-12 col-md-6 col-lg-6 col-xl-6 ms-auto breadcrumb-left-part">
 							<div class="rbt-product-breadcrumb">
 								<?php if( isset($envato_product_preview_icon_url) && !empty($envato_product_preview_icon_url)) { ?>
 								<img class="product-thumbnail" src="<?php echo esc_url($envato_product_preview_icon_url); ?>" alt="product icon">
@@ -127,7 +127,7 @@ function rainbowit_before_main_content()
 								</div>
 							</div>
 						</div>
-						<div class="col-12 col-md-6 col-lg-6 col-xl-4 me-auto">
+						<div class="col-12 col-md-6 col-lg-6 col-xl-4 me-auto breadcrumb-right-part">
 							<div class="rbt-cart">
 								<div class="rbt-cart-top">
 									<h6 class="product-license">
@@ -150,20 +150,13 @@ function rainbowit_before_main_content()
 									</div>
 								</div>
 								<div class="rbt-cart-body">
-									<?php if( $rainbowit_own_product_checkbox != 'yes') { ?>
+									<?php if( $rainbowit_own_product_checkbox != 'yes') { 
+										$rainbowit_options 				= Rainbowit_Helper::rainbowit_get_options();
+										$envato_product_feature_desc = isset( $rainbowit_options["envato_product_feature_desc"] ) ? $rainbowit_options["envato_product_feature_desc"] : '';
+										
+										?>
 									<ul class="rbt-list rbt-list-2">
-										<li>
-											<span class="color-primary"><i class="fa-duotone fa-check"></i></span>
-											<span><?php echo esc_html__("Quality checked by Envato", "rainbowit"); ?></span>
-										</li>
-										<li>
-											<span class="color-primary"><i class="fa-duotone fa-check"></i></span>
-											<span><?php echo esc_html__("6 months support from Rainbow-Themes", "rainbowit"); ?></span>
-										</li>
-										<li>
-											<span class="color-primary"><i class="fa-duotone fa-check"></i></span>
-											<span><?php echo esc_html__("Lifetime Future updates", "rainbowit"); ?></span>
-										</li>
+										<?php echo wp_kses_post($envato_product_feature_desc); ?>
 									</ul>
 									<?php } else { ?>
 										<?php 
@@ -313,7 +306,9 @@ function rainbowit_woocommerce_before_single_product()
 							$single_product_heading_title 	= isset( $rainbowit_options["single_product_heading_title"] ) ? $rainbowit_options["single_product_heading_title"] : '';
 							$single_product_btn_title 		= isset( $rainbowit_options["single_product_btn_title"] ) ? $rainbowit_options["single_product_btn_title"] : '';
 							$single_product_btn_quote_link 	= isset( $rainbowit_options["single_product_btn_quote_link"] ) ? $rainbowit_options["single_product_btn_quote_link"] : '';
+
 							$single_product_vat_text_change = isset( $rainbowit_options["single_product_vat_text_change"] ) ? $rainbowit_options["single_product_vat_text_change"] : '';
+							
 
 							// own product variable
 
@@ -618,21 +613,11 @@ function rainbowit_woocommerce_before_single_product()
 											</div>
 											<div class="rbt-cart-body">
 											<?php 
-												if( $rainbowit_own_product_checkbox != 'yes') { ?>
-												<ul class="rbt-list rbt-list-2">
-													<li>
-														<span class="color-primary"><i class="fa-duotone fa-check"></i></span>
-														<span><?php echo esc_html__("Quality checked by Envato", "rainbowit"); ?></span>
-													</li>
-													<li>
-														<span class="color-primary"><i class="fa-duotone fa-check"></i></span>
-														<span><?php echo esc_html__("6 months support from Rainbow-Themes", "rainbowit"); ?></span>
-													</li>
-													<li>
-														<span class="color-primary"><i class="fa-duotone fa-check"></i></span>
-														<span><?php echo esc_html__("Lifetime Future updates", "rainbowit"); ?></span>
-													</li>
-												</ul>
+												if( $rainbowit_own_product_checkbox != 'yes') { 
+													$rainbowit_options 				= Rainbowit_Helper::rainbowit_get_options();
+													$envato_product_feature_desc = isset( $rainbowit_options["envato_product_feature_desc"] ) ? $rainbowit_options["envato_product_feature_desc"] : '';
+													?>
+												<?php echo wp_kses_post( $envato_product_feature_desc ); ?>
 												<?php
 												}   else { 
 

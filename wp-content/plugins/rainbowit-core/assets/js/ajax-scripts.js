@@ -228,35 +228,6 @@
             clearTimeout(debounceTimeoutData);
             debounceTimeoutData = setTimeout(function() {
 
-                // Function to initialize Isotope
-                function initializeIsotope() {
-                    $('.rbt-tabs-active-2').imagesLoaded(() => {
-                        $('.rbt-tabs-active-2').isotope({
-                            itemSelector: '.rbt-tab-item-2',
-                        });
-
-                        $('.tabs-2 li').on('click', function () {
-                            $('.tabs-2 li').removeClass('active');
-                            $(this).addClass('active');
-
-                            var selector = $(this).attr('data-filter2');
-                            $('.rbt-tabs-active-2').isotope({
-                                filter: selector
-                            });
-                            return false;
-                        });
-
-                        // Initialize Isotope on page load
-                        var activeTab = $('.tabs-2 li.active');
-                        if (activeTab.length > 0) {
-                            var category = activeTab.attr('data-filter2');
-                            $('.rbt-tabs-active-2').isotope({
-                                filter: category
-                            });
-                        }
-                    });
-                }
-
                 function loadProducts(category, page) {
                     $.ajax({
                         url: rainbowit_portfolio_ajax.ajax_url,
@@ -277,8 +248,10 @@
                         beforeSend: function () {
                             if (page == 1) {
                                 $('#loading-spinner-load-more').show();
-
+                            } else {
+                                $('#rainbowit-load-more').text('Loading...').prop('disabled', true).show();
                             }
+                            
 
                         },
                         success: function (response) {
@@ -293,8 +266,6 @@
                                     $('.rbt-tab-items').append($newItems);
                                     $newItems.animate({ opacity: 1 }, 400); // Adjust animation duration as needed
 
-                                    // Update Isotope after appending new content
-                                    $('.rbt-tabs-active-2').isotope('appended', $newItems).isotope('layout');
                                 }
 
                                 var activeTab = $('.rbt-tab-link.active');
@@ -309,8 +280,6 @@
                                     $('#rainbowit-load-more').text('No more products').prop('disabled', true).hide();
                                 }
 
-                                // Update Isotope after appending new content
-                                $('.rbt-tabs-active-2').isotope('reloadItems').isotope();
 
                             } else {
                                 if (page == 1) {
@@ -351,8 +320,6 @@
                     loadProducts(category, page);
                 });
 
-                initializeIsotope();
-
                 // Load default category products on page load
                 loadProducts(currentCategory, page);
             }, 500);
@@ -368,11 +335,19 @@
          */
 
         let debounceTimeout;
-        $('.ajax_search_rainbowit_product').on('input', function(e) {
+        $('.ajax_search_rainbowit_product').on('keydown', function(e) {
 
-            let searchTitle = e.target.value;
+            if (e.key === 'Enter') {
+                e.preventDefault();
+            }
+            let searchTitle;
+            let searchVal = e.target.value;
 
-            searchTitle = "Showing Results for: " + "<span class='search-red-title'>"+ searchTitle + "</span>";
+            if( searchVal ) {
+                searchTitle = "Showing Results for: " + "<span class='search-red-title'>" + searchVal + "</span>";
+            } else {
+               searchTitle = "All Products";
+            }
 
             clearTimeout(debounceTimeout);
             debounceTimeout = setTimeout(function() {
@@ -393,22 +368,62 @@
                     },
                     success: (response) => {
                         const content = response?.data?.products;
+                        const foundProduct = response?.data?.foundproduct;
                         $('.rainbow-header-popular-item-ajax').html( content );
-                        $('.rainbowit-search-title').html(searchTitle);
-                       // Showing Results for “Agency Template”
+
+                        if( foundProduct == 'yes') {
+                            $('.rainbowit-search-title').html(searchTitle);
+                            $('.rbt-no-search-results-found').css('display', 'none');
+                        } else {
+                            searchTitle = "Try it our popular items";
+                            $('.rainbowit-search-title').html(searchTitle);
+                            if( searchVal ) {
+                                let notfound = "No result for ";
+                                $('.rbt-no-search-results-found').css('display', 'block');
+                                 $('.rbt-no-search-results-found').html( notfound +  "<span class='search-red-title'>" + '"' + searchVal + '"' + "</span>"  );
+                            } else {
+                                $('.rbt-no-search-results-found').css('display', 'none');
+                            }
+                            
+                            
+                        }
                     },
                     error: (err) => {
                         console.log(err);
                     }
                 })
             }, 500);
+
+
         });
+    });
+
+    // cart count
+
+    $(document).ready(function() {
+        function updateCartCount() {
+            $.ajax({
+                url: rainbowit_portfolio_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'rainbowit_get_cart_count'
+                },
+                success: function(response) {
+                    $('.rbt-cart-count').text(response);
+                }
+            });
+        }
+
+        // Update the cart count when the page loads
+        updateCartCount();
+        let intervalID = setInterval(updateCartCount, 300);
+
+        setTimeout(function() {
+            clearInterval(intervalID);
+        }, 5000);
+
     });
 
 
 
 }(jQuery));
-
-
-
-

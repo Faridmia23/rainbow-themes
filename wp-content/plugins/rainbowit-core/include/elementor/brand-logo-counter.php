@@ -135,22 +135,24 @@ class Rainbowit_Elementor_Widget_Brand_Logo extends Widget_Base
 
     <div class="brand-wrapper rbt-section-gapTop rbt-section-gapBottom">
         <!-- trusted customer -->
-        <div class="brand-wrapper-preloader">
-            <?php if( $counter_on_off == 'yes' ) { ?>
-                <div id="rainbowit-preloader">
-                <div class="spinner"></div>
-            </div>
-            <div id="rainbowit-main-content" style="display: none;">
-                <div class="rbt-counter d-none d-md-flex">
+        <?php if( $counter_on_off == 'yes' ) { ?>
+            <div id="rainbowit-main-content">
+                <div class="rbt-counter rbt-counter d-none d-md-flex">
                     <span class="count-info"><?php echo esc_attr($heading_title); ?></span>
-                    <div class="counter-wrapper">
-                        <span class="odometer odometer-auto-theme count" data-count="<?php echo esc_attr($counter_number); ?>">00</span>
+                    <div class="brand-wrapper-preloader">
+                        
+                            <div id="rainbowit-preloader">
+                            <div class="spinner"></div>
+                        </div>
+                        <div class="counter-wrapper" style="display: none;">
+                            <span class="odometer odometer-auto-theme count" data-count="<?php echo esc_attr($counter_number); ?>">00</span>
+                        </div>
                     </div>
                     <span class="count-info"><?php echo esc_attr($subtitle_title); ?></span>
                 </div>
             </div>
         <?php } ?>
-        </div>
+        
         <div class="container overflow-hidden ">
             <div class="rbt-brand-group">
                 <div class="swiper-wrapper rbt-brand-wrapper">

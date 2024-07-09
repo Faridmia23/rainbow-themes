@@ -285,7 +285,7 @@ class Rainbowit_Product_Categories_Grid extends Widget_Base
                             <?php echo wp_kses_post($desc); ?>
                         </p>
                         <div class="nav-btn-group">
-                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3 mx-md-auto mx-xl-0 " <?php echo esc_attr($attr); ?>>
+                            <a class="rbt-btn rbt-btn-xm rbt-outline-none hover-effect-3 mx-md-auto mx-xl-0" <?php echo $attr; ?>>
                                 <?php echo esc_html($btn_title); ?>
                                 <span class="default-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>
                                 <span class="hover-btn-icon"><i class="fa-solid fa-arrow-up-right"></i></span>

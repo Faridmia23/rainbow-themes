@@ -31,6 +31,7 @@ $rainbowit_blog_sidebar_class = !is_active_sidebar('sidebar-1')  ? 'col-lg-10 of
                     get_template_part('template-parts/content', 'search');
 
                 endwhile;
+                rainbowit_blog_pagination();
             else :
 
                 get_template_part('template-parts/content', 'none');
@@ -38,6 +39,8 @@ $rainbowit_blog_sidebar_class = !is_active_sidebar('sidebar-1')  ? 'col-lg-10 of
             endif;
             ?>
         </div>
+
+      
     </div>
 </div>
 <?php

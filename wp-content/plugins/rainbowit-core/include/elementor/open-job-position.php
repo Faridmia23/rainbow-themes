@@ -161,14 +161,32 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                         if (class_exists('acf')) {
                             $address = get_field('address', $post->ID);
                             $job_status = get_field('job_status', $post->ID);
+                            $job__expire_date = get_field('job__expire_date2', $post->ID);
+                            $apply_link = get_field('apply_link', $post->ID);
+                            $formatted_date = '';
+                            if (!empty( $job__expire_date ) ) {
+                                $timestamp = strtotime(str_replace('/', '-', $job__expire_date ) );
+                            
+                                if ($timestamp) {
+                                    $formatted_date = date('F j, Y', $timestamp); 
+                                } 
+
+                                $current_time = time();
+                            }
 
                         }
 
+                        $apply_link = !empty( $apply_link ) ? $apply_link : get_the_permalink();
 
-                        if( $job_status == 'enable') {
+                        if( $job_status == 'enable' && empty( $settings['btn_title'] ) && ( $timestamp >= $current_time ) ) {
                             $btn_title      = $settings['btn_title'] ?? '';
                             $btn_disable_class = '';
-                            $permalink = get_the_permalink();
+                            $permalink = $apply_link;
+                        }
+                        else if( $job_status == 'enable' && !empty( $settings['btn_title'] ) && ( $timestamp >= $current_time ) ) {
+                            $btn_title      = $settings['btn_title'] ?? '';
+                            $btn_disable_class = '';
+                            $permalink = $apply_link;
                         } else {
                             $btn_title      = 'Expired';
                             $btn_disable_class = 'apply-disable';
@@ -186,7 +204,7 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                                 <div class="row">
                                     <div class="col-12 col-lg-6 col-xl-6">
                                         <div class="card-left">
-                                            <h5 class="title title-sm"><?php the_title(); ?></h5>
+                                            <h5 class="title title-sm"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h5>
                                             <div class="card-meta">
                                                 <p class="single-meta">
                                                     <span><i class="fa-regular fa-briefcase"></i></span>
@@ -205,7 +223,7 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                                     </div>
                                     <div class="col-12 col-lg-3 col-xl-3">
                                         <div class="card-middile">
-                                            <h6 class="rbt-apply-deadline"><?php the_time(get_option('date_format')); ?></h6>
+                                            <h6 class="rbt-apply-deadline"><?php echo  $formatted_date; ?></h6>
                                             <span class="rbt-vacancy"><?php echo esc_html__("No of vacancies:", "rainbowit"); ?> 
                                             
                                             <?php 
@@ -219,7 +237,7 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                                     </div>
                                     <div class="col-12 col-lg-3 col-xl-3">
                                         <div class="card-end apply-btn-class">
-                                            <a href="<?php echo esc_url($permalink); ?>" class="rbt-btn btn-primary-outline hover-effect-1 <?php echo esc_attr($btn_disable_class);?>"><?php echo esc_html($btn_title ); ?></a>
+                                            <a href="<?php echo esc_url( $permalink ); ?>" class="rbt-btn btn-primary-outline hover-effect-1 <?php echo esc_attr($btn_disable_class);?>"><?php echo esc_html($btn_title ); ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +275,7 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                     wp_reset_postdata();
                 } else {
                     // If no products found
-                    echo 'No Testimonial found';
+                    echo 'No Jobs found';
                 }
                 ?>
 

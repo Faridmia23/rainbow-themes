@@ -31,7 +31,16 @@ $rainbowit_blog_sidebar_class =  !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10
     <div class="rainbowit-blog-area mt--120 mb--120">
         <div class="container">
             <div class="row row--40">
-                <h2 class="text-center"><?php echo esc_html__("The Job post expired..","rainbowit"); ?></h2>
+                <div class="col-lg-12 col-md-12 col-xl-12 mb--25 jobs-post-single-content-area" >
+                <?php 
+                    while ( have_posts() ) :
+                        the_post();
+                
+                        the_content();
+                
+                    endwhile; // End of the loop.
+                ?>
+                </div>
             </div>
         </div>
     </div>

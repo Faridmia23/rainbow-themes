@@ -342,6 +342,7 @@ add_action( 'init', function() {
 ) );
 } );
 
+
 add_action( 'acf/include_fields', function() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {
 		return;
@@ -371,7 +372,6 @@ add_action( 'acf/include_fields', function() {
 			'prepend' => '',
 			'append' => '',
 		),
-
 		array(
 			'key' => 'field_666ac9b77b505',
 			'label' => 'Job Status',
@@ -397,7 +397,41 @@ add_action( 'acf/include_fields', function() {
 			'layout' => 'vertical',
 			'save_other_choice' => 0,
 		),
-
+		array(
+			'key' => 'field_6715ddd39fe9d',
+			'label' => 'Job	Expire Date',
+			'name' => 'job__expire_date2',
+			'aria-label' => '',
+			'type' => 'date_picker',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'display_format' => 'F j, Y',
+			'return_format' => 'd/m/Y',
+			'first_day' => 1,
+		),
+		array(
+			'key' => 'field_6715dff8ee904',
+			'label' => 'Apply Link',
+			'name' => 'apply_link',
+			'aria-label' => '',
+			'type' => 'url',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'default_value' => '',
+			'placeholder' => '',
+		),
 	),
 	'location' => array(
 		array(
@@ -419,6 +453,10 @@ add_action( 'acf/include_fields', function() {
 	'show_in_rest' => 0,
 ) );
 } );
+
+
+
+
 
 
 add_action( 'acf/include_fields', function() {

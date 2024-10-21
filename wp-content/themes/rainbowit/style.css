@@ -3524,3 +3524,31 @@ button.components-button.wc-block-components-button.wp-element-button.wc-block-c
 .single-post .comments-wrapper.section-inner {
     padding: 0 15px;
 }
+
+.rbt-career-card .title a:hover {
+    color: var(--color-red-1);
+}
+
+.jobs-post-single-content-area p {
+    color: var(--color-blue-1);
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-b1);
+    font-weight: var(--f-regular);
+    line-height: 166.667%;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.jobs-post-single-content-area h2,
+.jobs-post-single-content-area h4,
+.jobs-post-single-content-area h3 {
+    color: var(--color-dark-1);
+    font-family: var(--font-primary);
+    font-size: var(--h4);
+    font-weight: var(--f-extra-bold);
+    line-height: 120.833%;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+}

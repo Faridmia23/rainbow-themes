@@ -158,6 +158,8 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                     while ($job_query->have_posts()) {
                         $job_query->the_post();
                         global $post;
+
+                        $current_time = time();
                         if (class_exists('acf')) {
                             $address = get_field('address', $post->ID);
                             $job_status = get_field('job_status', $post->ID);
@@ -171,7 +173,7 @@ class Rainbowit_Open_Job_Position extends Widget_Base
                                     $formatted_date = date('F j, Y', $timestamp); 
                                 } 
 
-                                $current_time = time();
+                                
                             }
 
                         }

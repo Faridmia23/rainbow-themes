@@ -3552,3 +3552,15 @@ button.components-button.wc-block-components-button.wp-element-button.wc-block-c
     position: relative;
     z-index: 2;
 }
+
+.rainbowit-job-opening-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.single-page-apply-link {
+    margin-top: 40px;
+    align-items: flex-start;
+    justify-content: left;
+}

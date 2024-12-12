@@ -30,14 +30,20 @@ $rainbowit_blog_sidebar_class =  !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10
     <!-- Start Blog Area  -->
     <div class="rainbowit-blog-area mt--120 mb--120">
         <div class="container">
-            <div class="row row--40">
-                <div class="col-lg-12 col-md-12 col-xl-12 mb--25 jobs-post-single-content-area" >
+            <div class="row row--40 justify-content-center">
+                <div class="col-lg-8 col-md-8 col-xl-8 mb--25 jobs-post-single-content-area" >
                 <?php 
                     while ( have_posts() ) :
                         the_post();
+                        
+                        $apply_link = get_field('apply_link_single', get_the_ID() );
                 
-                        the_content();
-                
+                        the_content(); ?>
+
+                        <div class="rbt-btn-group single-page-apply-link">
+                            <a href="<?php echo esc_url( $apply_link);?>" class="rbt-btn rbt-btn-primary show-more">Apply Now</a>
+                        </div>
+                    <?php
                     endwhile; // End of the loop.
                 ?>
                 </div>

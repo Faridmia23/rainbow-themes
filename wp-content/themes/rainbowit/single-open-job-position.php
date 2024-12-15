@@ -41,7 +41,7 @@ $rainbowit_blog_sidebar_class =  !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10
                         the_content(); ?>
 
                         <div class="rbt-btn-group single-page-apply-link">
-                            <a href="<?php echo esc_url( $apply_link);?>" class="rbt-btn rbt-btn-primary show-more">Apply Now</a>
+                            <a href="<?php echo esc_url( $apply_link);?>" class="rbt-btn rbt-btn-primary show-more" target="_blank">Apply Now</a>
                         </div>
                     <?php
                     endwhile; // End of the loop.

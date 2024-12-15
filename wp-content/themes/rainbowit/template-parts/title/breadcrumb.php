@@ -62,7 +62,13 @@ function rainbowit_breadcrumbs() {
                 $post_type_object = get_post_type_object($post_type);
                 $post_type_archive = get_post_type_archive_link($post_type);
 
-                echo '<li class="rbt-breadcrumb-item item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . esc_url($post_type_archive) . '" title="' . esc_attr($post_type_object->labels->name) . '">' . esc_html($post_type_object->labels->name) . '</a></li>';
+                if('open-job-position' == $post_type ) {
+                    $post_job = 'Job';
+                } else {
+                    $post_job = esc_html($post_type_object->labels->name);
+                }
+
+                echo '<li class="rbt-breadcrumb-item item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . esc_url($post_type_archive) . '" title="' . esc_attr($post_type_object->labels->name) . '">' . esc_html($post_job) . '</a></li>';
                 echo '<li class="separator rbt-breadcrumb-item icon"> <i class="fa-regular fa-chevron-right"></i>' . esc_html($separator) . ' </li>';
 
             }

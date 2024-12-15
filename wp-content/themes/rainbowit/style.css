@@ -3564,3 +3564,17 @@ button.components-button.wc-block-components-button.wp-element-button.wc-block-c
     align-items: flex-start;
     justify-content: left;
 }
+
+.rbt-job-single-post-meta svg {
+    width: 19px;
+    height: 19px;
+    margin-bottom: 3px;
+}
+
+.job-post-breadcrumb {
+    margin-bottom: 25px;
+}
+
+.rbt-job-post-single-career {
+    
+}

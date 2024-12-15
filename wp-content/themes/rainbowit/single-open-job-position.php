@@ -93,7 +93,7 @@ $rainbowit_blog_sidebar_class =  !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10
                         $apply_link = get_field('apply_link', get_the_ID() );
                     ?>
                     <div class="single-page-apply-link">
-                        <a href="<?php echo esc_url( $apply_link);?>" class="rbt-btn rbt-btn-primary show-more rbt-btn-lg w-100" target="_blank">Apply Now</a>
+                        <a href="<?php echo esc_url( $apply_link);?>" class="rbt-btn rbt-btn-primary show-more rbt-btn-lg w-100" target="_blank">Apply Now <span><i class="fa-solid fa-arrow-right"></i></span></a>
                     </div>
 
                     <div class="social-area d-none d-xl-block">

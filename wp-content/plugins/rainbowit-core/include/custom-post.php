@@ -432,23 +432,6 @@ add_action( 'acf/include_fields', function() {
 			'default_value' => '',
 			'placeholder' => '',
 		),
-		array(
-			'key' => 'field_6715dff8ee904_single_page',
-			'label' => 'Apply Link Single Page',
-			'name' => 'apply_link_single',
-			'aria-label' => '',
-			'type' => 'url',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array(
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'default_value' => '',
-			'placeholder' => '',
-		),
 	),
 	'location' => array(
 		array(

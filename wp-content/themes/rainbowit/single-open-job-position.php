@@ -36,7 +36,7 @@ $rainbowit_blog_sidebar_class =  !is_active_sidebar( 'sidebar-1' )  ? 'col-lg-10
                     while ( have_posts() ) :
                         the_post();
                         
-                        $apply_link = get_field('apply_link_single', get_the_ID() );
+                        $apply_link = get_field('apply_link', get_the_ID() );
                 
                         the_content(); ?>
 
